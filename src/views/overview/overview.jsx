@@ -1,12 +1,12 @@
 import React from 'react';
 import './style.css';
 
-function App() {
+function overview() {
   return (
     <div className="overview">
-      <h1>Deine Favoriten</h1>
+      <h1>Los geht's mit deinen Favoriten</h1>
     </div>
   );
 }
 
-export default App;
+export default overview;
