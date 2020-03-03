@@ -1,23 +1,25 @@
-import React, { Component } from 'react';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import { Switch, Route, withRouter } from "react-router-dom";
 
-import overview from './overview/overview';
+import overview from "./overview/overview";
 
-import './App.css';
+import "./App.css";
+import Landingpage from "./landingpage/landingpage";
 
 class App extends Component {
   state = {
     hasError: false,
+    isLoggedIn: false
   };
 
   componentDidCatch(err) {
     this.setState({
-      hasError: true,
+      hasError: true
     });
   }
 
   render = () => {
-    const { hasError } = this.state;
+    const { hasError, isLoggedIn } = this.state;
     const { isLoading } = this.props;
     if (isLoading) {
       return null;
@@ -25,6 +27,10 @@ class App extends Component {
 
     if (hasError) {
       return null;
+    }
+
+    if (isLoggedIn) {
+      return <Landingpage />;
     }
 
     return (
