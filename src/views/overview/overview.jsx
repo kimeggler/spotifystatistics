@@ -6,7 +6,13 @@ function overview() {
   return (
     <div className="overview">
       <h1>Los geht's mit deinen Favoriten</h1>
-      <button onClick={() => authorizeUser()}>Authorize</button>
+      <button
+        onClick={() => {
+          window.location.replace(authorizeUser());
+        }}
+      >
+        Authorize
+      </button>
     </div>
   );
 }

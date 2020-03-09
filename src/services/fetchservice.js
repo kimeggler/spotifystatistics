@@ -9,15 +9,17 @@ const getDefaultHeaders = () => ({
   "Content-Type": "application/json"
 });
 
-const authorizeUser = async (headers = {}) => {
-  console.log(spotifyParams(config.authparams));
+const authorizeUser = () => {
+  console.log(`${config.authority}${spotifyParams(config.authparams)}`);
+  return `${config.authority}${spotifyParams(config.authparams)}`;
+};
 
-  const defaultHeaders = getDefaultHeaders();
-  console.log(defaultHeaders);
+const authorizeUserRequest_depricated = async (headers = {}) => {
+  console.log(spotifyParams(config.authparams));
   return fetch(`${config.authority}${spotifyParams(config.authparams)}`, {
     method: "GET",
+    mode: "no-cors",
     headers: {
-      ...defaultHeaders,
       ...headers
     }
   }).then(response => console.log(response));
