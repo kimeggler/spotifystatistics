@@ -5,6 +5,8 @@ import overview from "./overview/overview";
 
 import "./App.css";
 import Landingpage from "./landingpage/landingpage";
+import login from "./auth/login";
+import logincallback from "./auth/logincallback";
 
 class App extends Component {
   state = {
@@ -37,6 +39,8 @@ class App extends Component {
       <div className="router-section" id="router-element">
         <Switch>
           <Route exact path="/" component={overview} />
+          <Route exact path="/login" component={login} />
+          <Route exact path="/callback" component={logincallback} />
           <Route component={null} />
         </Switch>
       </div>
