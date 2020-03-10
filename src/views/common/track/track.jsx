@@ -1,5 +1,4 @@
-import React from 'react';
-import '_style.css';
+import React from "react";
 
 function track(img_alt, img, artist_name, track_name) {
   return (

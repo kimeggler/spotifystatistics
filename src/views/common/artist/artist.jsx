@@ -1,7 +1,6 @@
-import React from 'react';
-import '_style.css';
+import React from "react";
 
-function artist(img_alt, img, artist_name, track_name) {
+function Artist(img_alt, img, artist_name, track_name) {
   return (
     <div className="artist">
       <img alt={img_alt} src={img} className="card-image" />
@@ -11,4 +10,4 @@ function artist(img_alt, img, artist_name, track_name) {
   );
 }
 
-export default artist;
+export default Artist;

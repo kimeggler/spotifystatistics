@@ -1,5 +1,4 @@
-import React from 'react';
-import '_style.css';
+import React from "react";
 
 function button(text) {
   return (

@@ -10,10 +10,21 @@ body {
 
 button {
   height: 50px;
-  width: auto;
-  padding: 10px;
+  width: fit-content;
+  padding: 10px 20px;
   box-sizing: border-box;
   border: none;
   background-color: var(--button);
   color: var(--font-main-white);
+  border-radius: 25px;
+  margin: 20px 0;
+}
+
+button:hover {
+  box-shadow: #8e8d8d 2px 2px 8px 0px;
+}
+
+img {
+  height: 100%;
+  width: auto;
 }
