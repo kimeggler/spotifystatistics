@@ -2,7 +2,7 @@ import config from "../config";
 
 const validateToken = () => {
   if (getToken() !== null) {
-    if (new Date().getTime() - getTokenTimeStamp() >= 3600) {
+    if (Math.abs(new Date().getTime() / 1000 - getTokenTimeStamp()) >= 3600) {
       clearToken();
       return false;
     } else {
@@ -24,13 +24,12 @@ const getTokenTimeStamp = () => {
 const clearToken = () => {
   window.localStorage.removeItem("statify_identity");
   window.localStorage.removeItem("statify_timestamp");
-  window.location.replace(authorizeUser());
 };
 
 const setToken = () => {
   const timeStamp = new Date();
   window.localStorage.setItem("statify_identity", getTokenFromURL());
-  window.localStorage.setItem("statify_timestamp", timeStamp.getTime());
+  window.localStorage.setItem("statify_timestamp", timeStamp.getTime() / 1000);
 };
 
 const getTokenFromURL = () => {
@@ -50,17 +49,6 @@ const authorizeUser = () => {
   return `${config.authority}${spotifyParams(config.authparams)}`;
 };
 
-// const authorizeUserRequest_depricated = async (headers = {}) => {
-//   console.log(spotifyParams(config.authparams));
-//   return fetch(`${config.authority}${spotifyParams(config.authparams)}`, {
-//     method: "GET",
-//     mode: "no-cors",
-//     headers: {
-//       ...headers
-//     }
-//   }).then(response => console.log(response));
-// };
-
 const getData = async (path, headers = {}) => {
   const token = getToken();
   const defaultHeaders = getDefaultHeaders(token);
@@ -77,7 +65,7 @@ const getData = async (path, headers = {}) => {
 
 const spotifyParams = params =>
   params
-    ? `?client_id=${params.client_id}&redirect_uri=${params.redirect_uri}&scope=${params.scope}&response_type=token`
+    ? `?client_id=${params.client_id}&redirect_uri=${params.redirect_uri}&scope=${params.scope}&response_type=token&show_dialog=${params.show_dialog}`
     : "";
 
 export { getData, authorizeUser, validateToken, setToken };

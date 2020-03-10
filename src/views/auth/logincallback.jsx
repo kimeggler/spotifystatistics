@@ -1,12 +1,13 @@
-import React from "react";
+import { useEffect } from "react";
 import "./style.css";
+import { setToken } from "../../services/fetchservice";
 
-function logincallback() {
-  return (
-    <div className="logincallback">
-      <h1>Logincallback</h1>
-    </div>
-  );
+function Logincallback() {
+  useEffect(() => {
+    setToken();
+    window.location.replace(origin);
+  });
+  return null;
 }
 
-export default logincallback;
+export default Logincallback;

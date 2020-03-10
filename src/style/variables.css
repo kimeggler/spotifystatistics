@@ -1,12 +1,15 @@
 html {
   /*dark theme main colors*/
-  --main-1: #F55284;
-  --main-2: #D9499F;
-  --main-3: #B144B3;
-  --main-4: #793CDC;
-  --main-5: #6035F4;
+  --main-1: #ffffff;
+  --main-2: ;
+  --main-3: ;
+  --main-4: ;
+  --main-5: ;
 
   /*font colors*/
   --font-main: #1e3264;
-  --font-main-white: #FFFFFF;
+  --font-main-white: #ffffff;
+
+  /* others */
+  --button: #1db954;
 }

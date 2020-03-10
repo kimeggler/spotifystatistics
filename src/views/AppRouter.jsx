@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 
-import overview from "./overview/overview";
+import Overview from "./overview/overview";
 
 import "./App.css";
+import { validateToken } from "../services/fetchservice";
 import Landingpage from "./landingpage/landingpage";
-import login from "./auth/login";
-import logincallback from "./auth/logincallback";
 
-class App extends Component {
+class AppRouter extends Component {
   state = {
     hasError: false,
     isLoggedIn: false
@@ -21,7 +20,7 @@ class App extends Component {
   }
 
   render = () => {
-    const { hasError, isLoggedIn } = this.state;
+    const { hasError } = this.state;
     const { isLoading } = this.props;
     if (isLoading) {
       return null;
@@ -31,16 +30,14 @@ class App extends Component {
       return null;
     }
 
-    if (isLoggedIn) {
+    if (!validateToken()) {
       return <Landingpage />;
     }
 
     return (
       <div className="router-section" id="router-element">
         <Switch>
-          <Route exact path="/" component={overview} />
-          <Route exact path="/login" component={login} />
-          <Route exact path="/callback" component={logincallback} />
+          <Route exact path="/" component={Overview} />
           <Route component={null} />
         </Switch>
       </div>
@@ -48,4 +45,4 @@ class App extends Component {
   };
 }
 
-export default withRouter(App);
+export default withRouter(AppRouter);

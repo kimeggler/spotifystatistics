@@ -1,0 +1,14 @@
+.overview {
+  display: flex;
+  flex-direction: row;
+}
+
+.login-area {
+  width: 50vw;
+  position: relative;
+}
+
+.login-image-area {
+  width: 50vw;
+  position: relative;
+}
