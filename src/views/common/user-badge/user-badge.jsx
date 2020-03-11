@@ -1,10 +1,13 @@
 import React from 'react';
 
-function user_badge(img_alt, img, user_name) {
+function user_badge(user) {
+  if (user.user === undefined) {
+    return null;
+  }
   return (
     <div className='user_badge'>
-      <p className='user-name'>{user_name}</p>
-      <img alt={img_alt} src={img} className='user-image' />
+      <p className='user-name'>{user.user.display_name}</p>
+      <img alt={user.img_alt} src={user.img} className='user-image' />
     </div>
   );
 }

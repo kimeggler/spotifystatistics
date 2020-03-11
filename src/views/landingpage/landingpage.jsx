@@ -6,7 +6,7 @@ import { startscreen } from '../../assets';
 
 function Landingpage() {
   return (
-    <div className='overview'>
+    <div className='landingpage'>
       <div className='login-area'>
         <h3 className='logo'>Statify</h3>
         <h1>Do you really know what music you listen to?</h1>
