@@ -8,17 +8,17 @@ import { Header } from './common';
 
 import './App.css';
 
-import { validateToken } from '../services/fetchservice';
+import { validateToken } from '../helper/authenticationhelper';
 
 class AppRouter extends Component {
   state = {
     hasError: false,
-    isLoggedIn: false
+    isLoggedIn: false,
   };
 
   componentDidCatch(err) {
     this.setState({
-      hasError: true
+      hasError: true,
     });
   }
 

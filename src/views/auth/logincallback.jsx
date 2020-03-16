@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import './style.css';
-import { setToken } from '../../services/fetchservice';
+import { setToken } from '../../helper/authenticationhelper';
 
 function Logincallback() {
   useEffect(() => {
