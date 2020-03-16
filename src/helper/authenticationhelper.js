@@ -12,10 +12,13 @@ const validateToken = () => {
 };
 
 const getTokenFromURL = () => {
-  return window.location.href
-    .split('#')[1]
-    .split('&')[0]
-    .split('=')[1];
+  if (window.location.href.split('#')[1] !== undefined) {
+    return window.location.href
+      .split('#')[1]
+      .split('&')[0]
+      .split('=')[1];
+  }
+  return null;
 };
 
 const getToken = () => {
@@ -32,9 +35,11 @@ const clearToken = () => {
 };
 
 const setToken = () => {
-  const timeStamp = new Date();
-  window.localStorage.setItem('statify_identity', getTokenFromURL());
-  window.localStorage.setItem('statify_timestamp', timeStamp.getTime() / 1000);
+  if (getTokenFromURL()) {
+    const timeStamp = new Date();
+    window.localStorage.setItem('statify_identity', getTokenFromURL());
+    window.localStorage.setItem('statify_timestamp', timeStamp.getTime() / 1000);
+  }
 };
 
 const logout = () => {
