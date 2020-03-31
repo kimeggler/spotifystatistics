@@ -30,6 +30,7 @@
   background-position-x: -150px;
   border-radius: 50vh 0 0 50vh;
 }
+
 .login-image::after {
   content: '';
   position: absolute;
@@ -38,4 +39,21 @@
   background: linear-gradient(-40deg, blue, #c300ff);
   opacity: 0.3;
   border-radius: 50vh 0 0 50vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .login-area {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+    box-sizing: border-box;
+  }
+
+  .login-image-area {
+    visibility: hidden;
+  }
 }

@@ -6,7 +6,7 @@ function Logincallback() {
   useEffect(() => {
     setToken();
     window.location.replace(origin);
-  });
+  }, []);
   return null;
 }
 

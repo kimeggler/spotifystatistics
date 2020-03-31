@@ -3,17 +3,17 @@ export {
 }
 from './artist/artist';
 export {
-  default as artist_top
+  default as ArtistTop
 }
 from './artist-top/artist-top';
 
 export {
-  default as track
+  default as Track
 }
 from './track/track';
 
 export {
-  default as track_top
+  default as TrackTop
 }
 from './track-top/track-top';
 
@@ -26,3 +26,13 @@ export {
   default as Userbadge
 }
 from './user-badge/user-badge';
+
+export {
+  default as ShowAt
+}
+from './defaultscreens/ShowAt';
+
+export {
+  default as ScreenToSmall
+}
+from './errors/ScreenToSmall';

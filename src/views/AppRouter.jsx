@@ -4,7 +4,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import Overview from './overview/overview';
 import Landingpage from './landingpage/landingpage';
 import About from './about/About';
-import { Header } from './common';
+import { Header, ShowAt, ScreenToSmall } from './common';
 
 import './App.css';
 
@@ -40,11 +40,16 @@ class AppRouter extends Component {
     return (
       <div className='router-section' id='router-element'>
         <Header />
-        <Switch>
-          <Route exact path='/' component={Overview} />
-          <Route exact path='/about' component={About} />
-          <Route component={null} />
-        </Switch>
+        <ShowAt breakpoint='700AndBelow'>
+          <ScreenToSmall />
+        </ShowAt>
+        <ShowAt breakpoint='700AndAbove'>
+          <Switch>
+            <Route exact path='/' component={Overview} />
+            <Route exact path='/about' component={About} />
+            <Route component={null} />
+          </Switch>
+        </ShowAt>
       </div>
     );
   };

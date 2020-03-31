@@ -1,18 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
+import { getData } from '../../../services/fetchservice';
 
-function artist_top(img_alt, img, artist_name, track_name) {
+function ArtistTop() {
+  const [topartist, setTopartist] = useState();
+  useEffect(() => {
+    const fetchTopArtist = async () => {
+      let artist = await getData('me/top/artists', {}, '?limit=1');
+      setTopartist(artist.items[0]);
+    };
+    fetchTopArtist();
+  }, []);
+  if (topartist === undefined) {
+    return null;
+  }
+  console.log(topartist);
   return (
-    <div className="artist-top">
-      <p className="image-description text-background">Dein Top-Artist</p>
-      <p className="image-description bold artist-name text-background">
-        {artist_name}
-      </p>
-      <p className="image-description track-name text-background">
-        {track_name}
-      </p>
-      <img alt={img_alt} src={img} className="card-image" />
+    <div className='artist-top'>
+      <p className='image-description text-background'>Dein Top-Artist</p>
+      <p className='image-description bold artist-name text-background'>{topartist.name}</p>
+      <p className='image-description follower-count text-background'>{topartist.followers.total}</p>
+      <img alt={topartist.name} src={topartist.images[0].url} className='card-image' />
     </div>
   );
 }
 
-export default artist_top;
+export default ArtistTop;

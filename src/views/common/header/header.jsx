@@ -7,11 +7,11 @@ import { getData } from '../../../services/fetchservice';
 function Header() {
   const [user, setUser] = useState();
   useEffect(() => {
-    async function fetchUser() {
+    const fetchUser = async () => {
       // You can await here
       setUser(await getData('me'));
       // ...
-    }
+    };
     fetchUser();
   }, []);
   return (
