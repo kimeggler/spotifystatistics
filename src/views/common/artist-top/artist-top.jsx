@@ -13,9 +13,9 @@ function ArtistTop() {
   if (topartist === undefined) {
     return null;
   }
-  console.log(topartist);
   return (
     <div className='artist-top'>
+      <div className='top-card-background' />
       <p className='image-description text-background'>Dein Top-Artist</p>
       <p className='image-description bold artist-name text-background'>{topartist.name}</p>
       <p className='image-description follower-count text-background'>{topartist.followers.total}</p>
