@@ -1,0 +1,43 @@
+body {
+  background: linear-gradient(-20deg, rgb(15, 226, 103), rgb(180, 16, 206), rgb(249, 149, 18));
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: var(--main-1-trans);
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  height: 60px;
+  width: 400px;
+}
+
+.card-image {
+  height: 50px;
+  width: auto;
+  margin-right: 10px;
+}
+
+.track-index {
+  margin-top: 5px;
+  color: var(--font-main-white);
+}
+
+.highlight-circle {
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  background-color: var(--main-2-trans);
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+p {
+  color: var(--font-main-dark);
+}

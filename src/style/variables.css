@@ -6,6 +6,11 @@ html {
   --main-4: ;
   --main-5: ;
 
+  /* transparent colors */
+  --main-1-trans: #ffffff66;
+  --main-2-trans: #0c142a88;
+
+
   /*font colors*/
   --font-main: #1e3264;
   --font-main-white: #ffffff;

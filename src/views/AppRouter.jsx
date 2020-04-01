@@ -4,6 +4,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import Overview from './overview/overview';
 import Landingpage from './landingpage/landingpage';
 import About from './about/About';
+import Tracks from './tracks/tracks';
 import { Header, ShowAt, ScreenToSmall } from './common';
 
 import './App.css';
@@ -47,7 +48,7 @@ class AppRouter extends Component {
           <Switch>
             <Route exact path='/' component={Overview} />
             <Route exact path='/artists' component={null} />
-            <Route exact path='/tracks' component={null} />
+            <Route exact path='/tracks' component={Tracks} />
             <Route component={null} />
           </Switch>
         </ShowAt>

@@ -12,9 +12,7 @@ function TrackTop() {
     };
     fetchTopArtist();
   }, [timerange]);
-  if (toptrack === undefined) {
-    return null;
-  }
+  if (!toptrack) return null;
   console.log(toptrack);
   return (
     <div className='artist-top'>
