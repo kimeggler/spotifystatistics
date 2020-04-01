@@ -1,11 +1,17 @@
 import React from 'react';
+import './style.css';
 
-function Track(img_alt, img, artist_name, track_name) {
+function Track(track, index) {
   return (
-    <div className='track'>
-      <img alt={img_alt} src={img} className='card-image' />
-      <p className='image-description bold track-name'>{track_name}</p>
-      <p className='image-description artist-name'>{artist_name}</p>
+    <div key={track.id} className='track'>
+      <div className='highlight-circle'>
+        <p className='track-index'>{index+1}</p>
+      </div>
+      <img alt={track.name} src={track.album.images[0].url} className='card-image' />
+      <div className='top-section'>
+        <p className='image-description bold track-name'>{track.name}</p>
+        <p className='image-description artist-name'>{track.artists[0].name}</p>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getData } from '../../services/fetchservice';
+import Track from '../common/track/track';
 import './style.css';
 
 function Tracks() {
@@ -7,16 +8,22 @@ function Tracks() {
   const [timerange, setTimerange] = useState('medium_term');
   useEffect(() => {
     const fetchTopArtist = async () => {
-      let track = await getData('me/top/tracks', {}, `?time_range=${timerange}&limit=1`);
-      setToptracks(track.items[0]);
+      let tracks = await getData('me/top/tracks', {}, `?time_range=${timerange}&limit=50`);
+      setToptracks(tracks.items);
     };
     fetchTopArtist();
   }, [timerange]);
   if (!toptracks) return null;
-  console.log(toptracks);
+
+  const renderTracks = () => {
+    return toptracks.map((track, index) => {
+      return Track(track, index)
+    })
+  }
+
   return (
-    <div className='tracks'>
-      <div className='time-switch padding-left'>
+    <div className='tracks-container'>
+      <div className='time-switch'>
         <div
           onClick={() => {
             setTimerange('short_term');
@@ -38,6 +45,9 @@ function Tracks() {
           className={`time-button ${timerange === 'long_term' ? 'button-selected' : ''}`}>
           all
         </div>
+      </div>
+      <div className='tracks-content'>
+          {renderTracks()}
       </div>
     </div>
   );
