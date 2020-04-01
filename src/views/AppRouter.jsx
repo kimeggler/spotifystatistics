@@ -46,7 +46,8 @@ class AppRouter extends Component {
         <ShowAt breakpoint='700AndAbove'>
           <Switch>
             <Route exact path='/' component={Overview} />
-            <Route exact path='/about' component={About} />
+            <Route exact path='/artists' component={null} />
+            <Route exact path='/tracks' component={null} />
             <Route component={null} />
           </Switch>
         </ShowAt>
