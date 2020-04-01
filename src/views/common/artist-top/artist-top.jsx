@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getData } from '../../../services/fetchservice';
 import './style.css';
 
@@ -13,9 +13,7 @@ function ArtistTop() {
     };
     fetchTopArtist();
   }, [timerange]);
-  if (topartist === undefined) {
-    return null;
-  }
+  if (!topartist) return null;
   return (
     <div className='artist-top'>
       <div className='top-card-information'>
