@@ -1,0 +1,84 @@
+.artist-top {
+  max-width: 900px;
+  display: flex;
+  flex-direction: row;
+  background: var(--main-2);
+  padding: 50px;
+  margin: 30px 30px 60px 30px;
+  border-radius: 20px;
+}
+
+.top-card-information {
+  display: flex;
+  flex-direction: column;
+}
+
+.top-card-description {
+  width: fit-content;
+  height: 30px;
+  box-sizing: border-box;
+  font-size: 24px;
+  font-weight: 200;
+  color: var(--font-main-white);
+  margin-bottom: 50px;
+}
+
+.top-card-primary {
+  width: 450px;
+  height: 80px;
+  box-sizing: border-box;
+  font-size: 48px;
+  line-height: 40px;
+  color: var(--font-main-white);
+}
+
+.top-card-secondary {
+  width: fit-content;
+  height: 30px;
+  box-sizing: border-box;
+  font-size: 24px;
+  font-weight: 200;
+  color: var(--font-main-white);
+}
+
+.top-card-image {
+  height: 400px;
+  width: auto;
+  border-radius: 15px;
+}
+
+.time-switch {
+  display: flex;
+  flex-direction: row;
+  width: 150px;
+  justify-content: space-between;
+  margin-top: auto;
+  align-self: center;
+}
+
+.time-button {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border: 2px solid var(--font-main-white);
+  border-radius: 50%;
+  color: var(--font-main-white);
+}
+
+.button-selected {
+  color: var(--font-main-dark);
+  background: white;
+}
+
+.time-button:hover {
+  color: var(--font-main-dark);
+  background: white;
+  cursor: pointer;
+}
+
+.padding-right {
+  padding-right: 50px;
+}

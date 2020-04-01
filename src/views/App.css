@@ -1,9 +1,14 @@
 .disclaimer {
   font-size: 12px;
+  margin-bottom: 15px;
 }
 
 .logo {
   position: absolute;
   left: 50px;
   top: 50px;
+}
+
+.bold {
+  font-weight: 600;
 }

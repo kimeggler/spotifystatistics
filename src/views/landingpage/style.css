@@ -57,3 +57,20 @@
     visibility: hidden;
   }
 }
+
+@media only screen and (max-width: 1000px) {
+  .login-area {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+    box-sizing: border-box;
+  }
+
+  .login-image-area {
+    visibility: hidden;
+  }
+}
