@@ -21,14 +21,15 @@ html {
 html[dark] {
   /*dark theme main colors*/
   --main-1: #0c142a;
-  --main-2: #1e3264;
+  --main-2: #ffffff;
   --main-3: ;
   --main-4: ;
   --main-5: ;
 
   /*font colors*/
   --font-main: #fff;
-  --font-main-white: #ffffff;
+  --font-main-white: #0c142a;
+  --font-main-dark: #0c142a;
 
   /* others */
   --spotify_main: #1db954;
