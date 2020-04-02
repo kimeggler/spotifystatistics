@@ -1,5 +1,40 @@
 .navigation {
   display: flex;
   width: 50%;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.navigation-item {
+  text-decoration: none;
+  width: fit-content;
+}
+
+.navigation-inactive {
+  position: relative;
+}
+
+.navigation-inactive::after {
+  position: absolute;
+  content: "";
+  width: 120%;
+  height: 3px;
+  background: white;
+  top: 100%;
+  left: -10%;
+  transform: scaleX(0);
+  transform-origin: center;
+  -webkit-transition: -webkit-transform .3s;
+  transition: -webkit-transform .3s;
+  transition: transform .3s;
+  transition: transform .3s, -webkit-transform .3s;
+}
+
+.navigation-inactive:hover::after {
+  transform: scaleX(1);
+}
+
+.navigation-active {
+  font-weight: 600;
+  font-size: 32px;
 }
