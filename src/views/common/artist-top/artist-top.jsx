@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getData } from '../../../services/fetchservice';
+import { addThousendSeparator } from '../../../helper/stringOperationHelper';
 import './style.css';
 
 function ArtistTop() {
@@ -14,12 +15,13 @@ function ArtistTop() {
     fetchTopArtist();
   }, [timerange]);
   if (!topartist) return null;
+
   return (
     <div className='artist-top'>
       <div className='top-card-information'>
         <p className='top-card-description'>Dein Top-Artist</p>
         <p className='bold top-card-primary'>{topartist.name}</p>
-        <p className='top-card-secondary'>Followers: {topartist.followers.total}</p>
+        <p className='top-card-secondary'>Followers: {addThousendSeparator(topartist.followers.total)}</p>
         <div className='time-switch padding-right'>
           <div
             onClick={() => {
