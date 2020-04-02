@@ -22,7 +22,7 @@ const getTokenFromURL = () => {
 };
 
 const getToken = () => {
-  return window.localStorage.getItem('statify_identity');
+  return window.localStorage.getItem('statify_token');
 };
 
 const getTokenTimeStamp = () => {
@@ -30,14 +30,13 @@ const getTokenTimeStamp = () => {
 };
 
 const clearToken = () => {
-  window.localStorage.removeItem('statify_identity');
-  window.localStorage.removeItem('statify_timestamp');
+  window.localStorage.clear();
 };
 
 const setToken = () => {
   if (getTokenFromURL()) {
     const timeStamp = new Date();
-    window.localStorage.setItem('statify_identity', getTokenFromURL());
+    window.localStorage.setItem('statify_token', getTokenFromURL());
     window.localStorage.setItem('statify_timestamp', timeStamp.getTime() / 1000);
   }
 };
@@ -46,8 +45,6 @@ const logout = () => {
   clearToken();
   window.location.reload();
 }
-
-
 
 export {
   validateToken,

@@ -12,7 +12,7 @@ function user_badge(user) {
 
   return (
     <div className='user_badge'>
-      <img alt={user.img_alt} src={user.user.images[0] === undefined ? user_icon : user.user.images[0].url} className='user_image' />
+      <img alt={user.user.display_name} src={user.user.images[0] === undefined ? user_icon : user.user.images[0].url} className='user_image' />
       <div className='user_information'>
         <p className='user_name'>{user.user.display_name}</p>
         <p className='logout_button' onClick={() => logout()}>

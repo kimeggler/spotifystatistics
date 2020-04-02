@@ -9,7 +9,6 @@ function ArtistTop() {
   useEffect(() => {
     const fetchTopArtist = async () => {
       let artist = await getData('me/top/artists', {}, `?time_range=${timerange}&limit=1`);
-      console.log(artist);
       setTopartist(artist.items[0]);
     };
     fetchTopArtist();
