@@ -9,7 +9,7 @@
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  border: 3px solid var(--font-main);
+  border: 3px solid var(--font-main-white);
   box-sizing: border-box;
 }
 

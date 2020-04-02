@@ -1,20 +1,22 @@
 html {
   /*dark theme main colors*/
-  --main-1: #ffffff;
-  --main-2: #0c142a;
+  --main-1: #0c142a;
+  --main-2: #ffffff;
   --main-3: #0c142a;
   --main-4: ;
   --main-5: ;
+  --main-background: linear-gradient(-20deg, rgba(15, 226, 103, 0.9), rgba(180, 16, 206, 0.9), rgba(249, 149, 18, 0.9));
 
   /* transparent colors */
-  --main-1-trans: #ffffff66;
-  --main-2-trans: #0c142a88;
-
+  --main-1-trans: #0c142a88;
+  --main-2-trans: #ffffff55;
 
   /*font colors*/
-  --font-main: #1e3264;
+  --font-main: #ffffff;
+  --font-main-secondary: #0c142a;
   --font-main-white: #ffffff;
   --font-main-dark: #0c142a;
+
 
   /* others */
   --spotify_main: #1db954;
@@ -25,15 +27,15 @@ html {
 
 html[dark] {
   /*dark theme main colors*/
-  --main-1: #0c142a;
-  --main-2: #ffffff;
+  --main-1: #ffffff;
+  --main-2: #0c142a;
   --main-3: ;
   --main-4: ;
   --main-5: ;
 
   /*font colors*/
-  --font-main: #fff;
-  --font-main-white: #0c142a;
+  --font-main: #1e3264;
+  --font-main-white: #ffffff;
   --font-main-dark: #0c142a;
 
   /* others */

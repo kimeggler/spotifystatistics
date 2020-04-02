@@ -2,7 +2,7 @@ import React from 'react';
 
 import { user_icon } from '../../../assets';
 
-import './_style.css';
+import './style.css';
 import { logout } from '../../../helper/authenticationhelper';
 
 function user_badge(user) {

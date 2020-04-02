@@ -1,17 +1,17 @@
-body {
-  background: linear-gradient(-20deg, rgb(15, 226, 103), rgb(180, 16, 206), rgb(249, 149, 18));
-}
-
 .track {
   display: flex;
   align-items: center;
   position: relative;
-  background-color: var(--main-1-trans);
+  background-color: var(--main-2-trans);
   margin: 20px;
   padding: 10px;
   border-radius: 10px;
   height: 60px;
   width: 400px;
+}
+
+.top-section p {
+  margin: 5px 0;
 }
 
 .card-image {
@@ -26,18 +26,18 @@ body {
 }
 
 .highlight-circle {
-  border-radius: 15px;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 25px;
-  height: 25px;
-  background-color: var(--main-2-trans);
+  width: 30px;
+  height: 30px;
+  background-color: var(--main-1-trans);
   position: absolute;
   top: 5px;
   right: 5px;
 }
 
-p {
-  color: var(--font-main-dark);
+.highlight-circle p {
+  color: var(--font-main);
 }

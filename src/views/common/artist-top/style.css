@@ -2,7 +2,7 @@
   max-width: 900px;
   display: flex;
   flex-direction: row;
-  background: var(--main-2);
+  background: var(--main-2-trans);
   padding: 50px;
   margin: 30px 30px 60px 30px;
   border-radius: 20px;
@@ -63,19 +63,19 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  border: 2px solid var(--font-main-white);
+  border: 2px solid var(--main-2);
   border-radius: 50%;
-  color: var(--font-main-white);
+  color: var(--font-main);
 }
 
 .button-selected {
-  color: var(--font-main-dark);
-  background: white;
+  color: var(--font-main-secondary);
+  background: var(--main-2);
 }
 
 .time-button:hover {
-  color: var(--font-main-dark);
-  background: white;
+  color: var(--font-main-secondary);
+  background: var(--main-2);
   cursor: pointer;
 }
 
