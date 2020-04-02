@@ -36,3 +36,8 @@ export {
   default as ScreenToSmall
 }
 from './errors/ScreenToSmall';
+
+export {
+  default as Navigation
+}
+from './navigation/Navigation';
