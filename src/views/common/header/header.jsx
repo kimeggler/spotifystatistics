@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Userbadge } from '../';
+import { Userbadge, Navigation } from '../';
 
 import './_style.css';
 import { getData } from '../../../services/fetchservice';
@@ -17,7 +17,7 @@ function Header() {
   return (
     <div className='header'>
       <h3>Statify</h3>
-
+      <Navigation/>
       <Userbadge user={user} />
     </div>
   );
