@@ -13,10 +13,13 @@ function TrackTop() {
     fetchTopArtist();
   }, [timerange]);
   if (!toptrack) return null;
-  console.log(toptrack);
+  const background = {
+    backgroundImage: `url(${toptrack.album.images[0].url})`,
+  };
   return (
     <div className='artist-top'>
-      <img alt={toptrack.artists[0].name} src={toptrack.album.images[0].url} className='top-card-image' />
+      {/* <img alt={toptrack.artists[0].name} src={toptrack.album.images[0].url} className='top-card-image' /> */}
+      <div style={background} className='top-card-image'></div>
       <div className='top-card-information'>
         <p className='image-description padding-left top-card-description'>Dein Top-Song</p>
         <p className='image-description padding-left bold top-card-primary'>{toptrack.name}</p>

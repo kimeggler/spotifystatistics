@@ -1,11 +1,19 @@
-import React from "react";
+import React from 'react';
+import './style.css';
 
-function Artist(img_alt, img, artist_name, track_name) {
+function Artist(artist, index) {
+  const background = {
+    backgroundImage: `url(${artist.images[0].url})`,
+  };
+
   return (
-    <div className="artist">
-      <img alt={img_alt} src={img} className="card-image" />
-      <p className="image-description bold track-name">{track_name}</p>
-      <p className="image-description artist-name">{artist_name}</p>
+    <div key={artist.id} className='artist'>
+      <div className='img-container'>
+        {/* <img alt={artist.name} src={artist.images[0].url} className='artist-card-image' /> */}
+        <div style={background} className='artist-card-image'></div>
+        <p className='artist-rank'>{index + 1}</p>
+      </div>
+      <p className='artist-card-name bold'>{artist.name}</p>
     </div>
   );
 }

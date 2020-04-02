@@ -43,7 +43,8 @@
 
 .top-card-image {
   height: 400px;
-  width: auto;
+  width: 400px;
+  background-size: cover;
   border-radius: 15px;
 }
 

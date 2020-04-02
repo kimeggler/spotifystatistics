@@ -14,6 +14,9 @@ function ArtistTop() {
     fetchTopArtist();
   }, [timerange]);
   if (!topartist) return null;
+  const background = {
+    backgroundImage: `url(${topartist.images[0].url})`,
+  };
   return (
     <div className='artist-top'>
       <div className='top-card-information'>
@@ -44,7 +47,8 @@ function ArtistTop() {
           </div>
         </div>
       </div>
-      <img alt={topartist.name} src={topartist.images[0].url} className='top-card-image' />
+      {/* <img alt={topartist.name} src={topartist.images[0].url} className='top-card-image' /> */}
+      <div style={background} className='top-card-image'></div>
     </div>
   );
 }

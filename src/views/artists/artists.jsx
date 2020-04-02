@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { getData } from '../../services/fetchservice';
-import { Track } from '../common';
+import { Artist } from '../common';
 import './style.css';
 
-function Tracks() {
-  const [toptracks, setToptracks] = useState();
+function Artists() {
+  const [topartists, setTopartists] = useState();
   const [timerange, setTimerange] = useState('medium_term');
   useEffect(() => {
     const fetchTopArtist = async () => {
-      let tracks = await getData('me/top/tracks', {}, `?time_range=${timerange}&limit=50`);
-      setToptracks(tracks.items);
+      let tracks = await getData('me/top/artists', {}, `?time_range=${timerange}&limit=50`);
+      setTopartists(tracks.items);
     };
     fetchTopArtist();
   }, [timerange]);
-  if (!toptracks) return null;
+  if (!topartists) return null;
 
-  const renderTracks = () => {
-    return toptracks.map((track, index) => {
-      return Track(track, index);
+  const renderArtists = () => {
+    return topartists.map((artist, index) => {
+      return Artist(artist, index);
     });
   };
 
   return (
-    <div className='tracks-container'>
+    <div className='artists-container'>
       <div className='time-switch'>
         <div
           onClick={() => {
@@ -46,9 +46,9 @@ function Tracks() {
           all
         </div>
       </div>
-      <div className='tracks-content'>{renderTracks()}</div>
+      <div className='artists-content'>{renderArtists()}</div>
     </div>
   );
 }
 
-export default Tracks;
+export default Artists;
