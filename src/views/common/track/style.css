@@ -8,6 +8,7 @@
   border-radius: 10px;
   height: 60px;
   width: 400px;
+  flex: 0 1 33%;
 }
 
 .top-section p {
@@ -40,4 +41,10 @@
 
 .highlight-circle p {
   color: var(--font-main);
+}
+
+@media only screen and (max-width: 1185px) {
+  .track {
+    flex: 0 1 50%;
+  }
 }
