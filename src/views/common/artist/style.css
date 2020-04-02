@@ -16,7 +16,7 @@
   width: 300px;
   height: 300px;
   background-size: cover;
-  border-radius: 20px;
+  border-radius: 15px;
 }
 
 .artist-rank {
@@ -48,7 +48,7 @@
   height: 100%;
   z-index: 2;
   background-color: #000;
-  border-radius: 20px;
+  border-radius: 15px;
   -webkit-transition: -webkit-opacity .3s;
   transition: -webkit-opacity .3s;
   transition: opacity .3s;

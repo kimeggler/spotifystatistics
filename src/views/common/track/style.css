@@ -4,10 +4,10 @@
   position: relative;
   background-color: var(--main-2-trans);
   margin: 20px;
-  padding: 10px 15px;
+  padding: 5px 10px;
   border-radius: 10px;
   height: 60px;
-  width: 400px;
+  width: 450px;
   flex: 0 1 33%;
 }
 
@@ -36,8 +36,8 @@
   height: 30px;
   background-color: var(--main-1-trans);
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 10px;
+  right: 10px;
 }
 
 .highlight-circle p {
@@ -46,6 +46,6 @@
 
 @media only screen and (max-width: 1185px) {
   .track {
-    flex: 0 1 50%;
+    flex: 0 1 60%;
   }
 }
