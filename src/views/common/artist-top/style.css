@@ -54,6 +54,7 @@
   width: 300px;
   justify-content: space-between;
   margin-top: auto;
+  align-self: center;
 }
 
 .time-switch-detail {
