@@ -10,3 +10,27 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.create-playlist-button {
+  position: absolute;
+  top: 22px;
+  right: 155px;
+  border: 2px solid var(--main-2);
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 5px;
+  color: var(--font-main);
+  font-size: 16px;
+  padding: 7px;
+}
+
+.create-playlist-button:hover {
+  background-color: var(--main-2);
+  cursor: pointer;
+  color: var(--font-main-secondary);
+}

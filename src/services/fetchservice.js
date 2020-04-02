@@ -29,7 +29,7 @@ const getData = async (path, headers = {}, queryParams = '') => {
   }).then(response => response.json());
 };
 
-const postData = async (path, headers = {}, queryParams = '', data) => {
+const postData = async (path, data, headers = {}, queryParams = '') => {
   if (!validateToken()) {
     window.location.replace(authorizeUser())
   }
@@ -41,9 +41,7 @@ const postData = async (path, headers = {}, queryParams = '', data) => {
       ...defaultHeaders,
       ...headers,
     },
-    body: {
-      data
-    }
+    body: data
   }).then(response => response.json());
 };
 
