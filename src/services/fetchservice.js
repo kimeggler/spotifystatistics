@@ -1,5 +1,8 @@
 import config from '../config';
-import { getToken } from '../helper/authenticationhelper';
+import {
+  getToken,
+  validateToken
+} from '../helper/authenticationhelper';
 
 const getDefaultHeaders = () => ({
   Accept: 'application/json',
@@ -12,6 +15,9 @@ const authorizeUser = () => {
 };
 
 const getData = async (path, headers = {}, queryParams = '') => {
+  if (!validateToken()) {
+    window.location.replace(authorizeUser())
+  }
   const token = getToken();
   const defaultHeaders = getDefaultHeaders(token);
   return fetch(`${config.remoteUrl}${path}${queryParams !== '' ? queryParams : ''}`, {
@@ -24,8 +30,11 @@ const getData = async (path, headers = {}, queryParams = '') => {
 };
 
 const spotifyParams = params =>
-  params
-    ? `?client_id=${params.client_id}&redirect_uri=${params.redirect_uri}&scope=${params.scope}&response_type=token&show_dialog=${params.show_dialog}`
-    : '';
+  params ?
+  `?client_id=${params.client_id}&redirect_uri=${params.redirect_uri}&scope=${params.scope}&response_type=token&show_dialog=${params.show_dialog}` :
+  '';
 
-export { getData, authorizeUser };
+export {
+  getData,
+  authorizeUser
+};
