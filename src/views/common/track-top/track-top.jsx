@@ -30,21 +30,21 @@ function TrackTop() {
               setTimerange('short_term');
             }}
             className={`time-button ${timerange === 'short_term' ? 'button-selected' : ''}`}>
-            1
+            1 month
           </div>
           <div
             onClick={() => {
               setTimerange('medium_term');
             }}
             className={`time-button ${timerange === 'medium_term' ? 'button-selected' : ''}`}>
-            6
+            6 months
           </div>
           <div
             onClick={() => {
               setTimerange('long_term');
             }}
             className={`time-button ${timerange === 'long_term' ? 'button-selected' : ''}`}>
-            all
+            all time
           </div>
         </div>
       </div>
