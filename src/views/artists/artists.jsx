@@ -22,7 +22,7 @@ function Artists() {
   };
 
   return (
-    <div className='artists-container'>
+    <div className='artists'>
       <div className='time-switch time-switch-detail'>
         <div
           onClick={() => {
