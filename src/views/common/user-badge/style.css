@@ -44,7 +44,7 @@
     width: 100vw;
     top: 0;
     left: 0;
-    background: blue;
+    background: var(--font-main-dark);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -64,6 +64,7 @@
     font-size: 32px;
     margin: 15px;
     font-weight: 200;
+    color: var(--font-main-white);
   }
 
   .fullscreen-navigation-active {
