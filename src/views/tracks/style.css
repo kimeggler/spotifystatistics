@@ -34,3 +34,10 @@
   cursor: pointer;
   color: var(--font-main-secondary);
 }
+
+
+@media only screen and (max-width: 1000px) {
+  .create-playlist-button {
+    right: 80px;
+  }
+}

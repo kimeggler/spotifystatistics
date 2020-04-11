@@ -88,3 +88,44 @@
 .padding-right {
   padding-right: 50px;
 }
+
+.padding-left {
+  padding-left: 50px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .artist-top {
+    flex-direction: column;
+    margin: 30px;
+  }
+
+  .top-card-primary {
+    width: fit-content;
+  }
+
+  .top-card-image {
+    height: 250px;
+    width: 250px;
+  }
+
+  .time-switch {
+    width: 250px;
+  }
+
+  .top-card-information-artist {
+    margin-bottom: 50px;
+  }
+
+  .top-card-information-track {
+    margin-top: 50px;
+  }
+
+  .padding-right {
+    padding-right: 0px;
+  }
+
+  .padding-left {
+    padding-left: 0px;
+  }
+
+}

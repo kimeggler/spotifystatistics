@@ -12,3 +12,12 @@
 .bold {
   font-weight: 600;
 }
+
+.title {
+  z-index: 200;
+}
+
+.no-scroll {
+  height: 100vh;
+  overflow: hidden;
+}

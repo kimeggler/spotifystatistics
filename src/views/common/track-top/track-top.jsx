@@ -20,7 +20,7 @@ function TrackTop() {
     <div className='artist-top'>
       {/* <img alt={toptrack.artists[0].name} src={toptrack.album.images[0].url} className='top-card-image' /> */}
       <div style={background} className='top-card-image'></div>
-      <div className='top-card-information'>
+      <div className='top-card-information top-card-information-track'>
         <p className='image-description padding-left top-card-description'>Dein Top-Song</p>
         <p className='image-description padding-left bold top-card-primary'>{toptrack.name}</p>
         <p className='image-description padding-left top-card-secondary'>{toptrack.artists[0].name}</p>

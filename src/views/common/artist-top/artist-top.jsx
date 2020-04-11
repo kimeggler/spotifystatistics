@@ -19,7 +19,7 @@ function ArtistTop() {
   };
   return (
     <div className='artist-top'>
-      <div className='top-card-information'>
+      <div className='top-card-information top-card-information-artist'>
         <p className='top-card-description'>Dein Top-Artist</p>
         <p className='bold top-card-primary'>{topartist.name}</p>
         <p className='top-card-secondary'>Followers: {addThousendSeparator(topartist.followers.total)}</p>

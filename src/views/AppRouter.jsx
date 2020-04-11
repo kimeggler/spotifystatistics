@@ -5,7 +5,7 @@ import Overview from './overview/overview';
 import Landingpage from './landingpage/landingpage';
 import Tracks from './tracks/tracks';
 import Artists from './artists/artists';
-import { Header, ShowAt, ScreenToSmall } from './common';
+import { Header } from './common';
 
 import './App.css';
 
@@ -41,17 +41,12 @@ class AppRouter extends Component {
     return (
       <div className='router-section' id='router-element'>
         <Header />
-        <ShowAt breakpoint='700AndBelow'>
-          <ScreenToSmall />
-        </ShowAt>
-        <ShowAt breakpoint='700AndAbove'>
-          <Switch>
-            <Route exact path='/' component={Overview} />
-            <Route exact path='/artists' component={Artists} />
-            <Route exact path='/tracks' component={Tracks} />
-            <Route component={Overview} />
-          </Switch>
-        </ShowAt>
+        <Switch>
+          <Route exact path='/' component={Overview} />
+          <Route exact path='/artists' component={Artists} />
+          <Route exact path='/tracks' component={Tracks} />
+          <Route component={Overview} />
+        </Switch>
       </div>
     );
   };
