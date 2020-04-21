@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && copyfiles _redirects build/",
+    "build": "react-scripts build && copyfiles _redirects build/ && copyfiles sitemaps.xml build/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
