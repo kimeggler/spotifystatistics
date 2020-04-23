@@ -36,7 +36,6 @@
   color: var(--spotify_main);
 }
 
-
 @media only screen and (max-width: 1000px) {
   .fullscreen-menu {
     position: fixed;
@@ -52,10 +51,10 @@
     visibility: hidden;
     z-index: 199;
     transform: scaleY(0);
-    -webkit-transition: -webkit-transform .4s;
-    transition: -webkit-transform .4s;
-    transition: transform .4s;
-    transition: transform .4s, -webkit-transform .4s;
+    -webkit-transition: -webkit-transform 0.4s;
+    transition: -webkit-transform 0.4s;
+    transition: transform 0.4s;
+    transition: transform 0.4s, -webkit-transform 0.4s;
     transform-origin: top;
   }
 
@@ -65,6 +64,10 @@
     margin: 15px;
     font-weight: 200;
     color: var(--font-main-white);
+  }
+
+  .fullscreen-navigation-logout {
+    font-size: 20px;
   }
 
   .fullscreen-navigation-active {
