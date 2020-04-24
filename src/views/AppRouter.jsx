@@ -10,16 +10,17 @@ import { Header } from './common';
 import './App.css';
 
 import { validateToken } from '../helper/authenticationhelper';
+import Analyze from './analyze/Analyze';
 
 class AppRouter extends Component {
   state = {
     hasError: false,
-    isLoggedIn: false,
+    isLoggedIn: false
   };
 
   componentDidCatch(err) {
     this.setState({
-      hasError: true,
+      hasError: true
     });
   }
 
@@ -45,6 +46,7 @@ class AppRouter extends Component {
           <Route exact path='/' component={Overview} />
           <Route exact path='/artists' component={Artists} />
           <Route exact path='/tracks' component={Tracks} />
+          <Route exact path='/analyze' component={Analyze} />
           <Route component={Overview} />
         </Switch>
       </div>

@@ -4,10 +4,11 @@
   position: relative;
   background-color: var(--main-2-trans);
   margin: 20px;
-  padding: 5px 10px;
+  padding: 10px;
   border-radius: 10px;
-  height: 60px;
-  width: 450px;
+  height: 70px;
+  width: 350px;
+  box-sizing: border-box;
   flex: 0 1 33%;
 }
 
@@ -46,6 +47,7 @@
 
 @media only screen and (max-width: 1185px) {
   .track {
-    flex: 0 1 60%;
+    margin: 20px 20px 0 20px;
+    flex: 0 1 100%;
   }
 }

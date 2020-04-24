@@ -101,6 +101,8 @@
 
   .top-card-primary {
     width: fit-content;
+    height: fit-content;
+    margin-bottom: 40px;
   }
 
   .top-card-image {
@@ -127,5 +129,4 @@
   .padding-left {
     padding-left: 0px;
   }
-
 }
