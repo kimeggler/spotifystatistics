@@ -9,6 +9,7 @@
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 25px;
 }
 
 .button-container {
@@ -34,7 +35,6 @@
   cursor: pointer;
   color: var(--font-main-secondary);
 }
-
 
 @media only screen and (max-width: 1000px) {
   .create-playlist-button {
