@@ -11,3 +11,9 @@
   flex-wrap: wrap;
   margin-bottom: 25px;
 }
+
+.site-title {
+  font-weight: 600;
+  width: 100vw;
+  text-align: center;
+}

@@ -12,13 +12,31 @@ function Navigation() {
 
       <ShowAt breakpoint='1000AndAbove'>
         <div className='navigation'>
-          <a href='/' className={`navigation-item ${window.location.href.split('/')[3] === '' ? 'navigation-active' : 'navigation-inactive'}`}>
+          <a
+            href='/'
+            className={`navigation-item ${
+              window.location.href.split('/')[3] === ''
+                ? 'navigation-active'
+                : 'navigation-inactive'
+            }`}>
             Overview
           </a>
-          <a href='/artists' className={`navigation-item ${window.location.href.split('/')[3] === 'artists' ? 'navigation-active' : 'navigation-inactive'}`}>
+          <a
+            href='/artists'
+            className={`navigation-item ${
+              window.location.href.split('/')[3] === 'artists'
+                ? 'navigation-active'
+                : 'navigation-inactive'
+            }`}>
             Artists
           </a>
-          <a href='/tracks' className={`navigation-item ${window.location.href.split('/')[3] === 'tracks' ? 'navigation-active' : 'navigation-inactive'}`}>
+          <a
+            href='/tracks'
+            className={`navigation-item ${
+              window.location.href.split('/')[3] === 'tracks'
+                ? 'navigation-active'
+                : 'navigation-inactive'
+            }`}>
             Tracks
           </a>
         </div>

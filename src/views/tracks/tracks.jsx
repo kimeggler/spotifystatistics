@@ -67,6 +67,8 @@ function Tracks() {
         className='create-playlist-button'>
         Create Playlist
       </div>
+
+      <h1 className='site-title'>Favourite Tracks</h1>
       <div className='time-switch time-switch-detail time-switch-tracks'>
         <div
           onClick={() => {

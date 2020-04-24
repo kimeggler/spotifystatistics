@@ -5,7 +5,7 @@ import { ArtistTop, TrackTop } from '../common';
 function Overview() {
   return (
     <div className='overview'>
-      <h1>Los geht's mit deinen Favoriten</h1>
+      <h1 className='overview-title'>Let's start with your favourites</h1>
       <ArtistTop />
       <TrackTop />
     </div>
