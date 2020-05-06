@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getData } from '../../services/fetchservice';
-import { Artist } from '../common';
+import { getData } from '../../../services/fetchservice';
+import { Artist } from '../../common';
 import './style.css';
 
 function Artists() {

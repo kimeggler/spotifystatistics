@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import { ArtistTop, TrackTop } from '../common';
+import { ArtistTop, TrackTop } from '../../common';
 
 function Overview() {
   return (

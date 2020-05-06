@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getData, postData } from '../../services/fetchservice';
-import { Track } from '../common';
+import { getData, postData } from '../../../services/fetchservice';
+import { Track } from '../../common';
 import './style.css';
 import moment from 'moment';
 

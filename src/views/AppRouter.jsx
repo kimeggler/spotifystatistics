@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 
-import Overview from './overview/overview';
+import Overview from './spotify/overview/overview';
 import Landingpage from './landingpage/landingpage';
-import Tracks from './tracks/tracks';
-import Artists from './artists/artists';
+import Tracks from './spotify/tracks/tracks';
+import Artists from './spotify/artists/artists';
+import Analyze from './spotify/analyze/Analyze';
 import { Header } from './common';
 
 import './App.css';
 
 import { validateToken } from '../helper/authenticationhelper';
-import Analyze from './analyze/Analyze';
 
 class AppRouter extends Component {
   state = {

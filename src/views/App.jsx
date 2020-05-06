@@ -12,6 +12,8 @@ function App() {
       <Switch>
         <Route exact path='/about' component={About} />
         <Route exact path='/callback' component={Logincallback} />
+        <Route exact path='/deezercallback' component={Logincallback} />
+        <Route exact path='/applecallback' component={Logincallback} />
         <Route component={AppRouter} />
       </Switch>
     </div>
