@@ -6,6 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--main-background);
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 button {

@@ -1,15 +1,11 @@
-.overview {
+.analyze {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.overview-title {
-  width: 80%;
-  text-align: center;
-}
 
 @media only screen and (max-width: 1000px) {
-  .overview {
+  .analyze {
     text-align: center;
   }
 }

@@ -7,15 +7,17 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "copyfiles": "^2.2.0",
+    "history": "^4.10.1",
     "moment": "^2.24.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-ga": "^2.7.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && copyfiles _redirects build/",
+    "build": "react-scripts build && copyfiles _redirects build/ && copyfiles sitemaps.xml build/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

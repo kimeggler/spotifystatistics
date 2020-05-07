@@ -2,14 +2,14 @@ import React from 'react';
 import './style.css';
 import { ArtistTop, TrackTop } from '../common';
 
-function Overview() {
+function Analyze() {
   return (
-    <div className='overview'>
-      <h1 className='overview-title'>Let's start with your favourites</h1>
+    <div className='analyze'>
+      <h1>How funky are your playlists?</h1>
       <ArtistTop />
       <TrackTop />
     </div>
   );
 }
 
-export default Overview;
+export default Analyze;

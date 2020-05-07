@@ -16,8 +16,8 @@ function Header() {
   }, []);
   return (
     <div className='header'>
-      <h3>Statify</h3>
-      <Navigation/>
+      <h3 className='title'>Statify</h3>
+      <Navigation />
       <Userbadge user={user} />
     </div>
   );
