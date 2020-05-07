@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import React, { useEffect, useState } from 'react';
 import { getData, postData } from '../../services/fetchservice';
 import { Track } from '../common';
 import './style.css';
@@ -21,19 +21,27 @@ function Tracks() {
   }
 
   const createPlaylist = async () => {
+    const playlists = await getData('me/playlists');
     const date = moment(new Date()).format('DD-MM-YYYY');
     const timeRange = timerange === 'long_term' ? 'all time' : timerange === 'medium_term' ? '6 months' : '1 month'
-    const playlist = JSON.stringify({
-      name: 'Top songs of ' + timeRange + ' from ' + date,
-      public: false
-    });
-    const tracks = JSON.stringify({
-      uris: mapTrackUris()
-    });
-    const user = await getData('me');
-    const createdPlaylist = await postData(`users/${user.id}/playlists`, playlist);
-    const response = await postData(`playlists/${createdPlaylist.id}/tracks`, tracks);
-    return response;
+    const playlistName = 'Top songs of ' + timeRange + ' from ' + date
+    const filteredPlaylists = playlists.items.filter(playlist => playlist.name === playlistName);
+
+    if (filteredPlaylists.length === 0) {
+      const playlist = JSON.stringify({
+        name: playlistName,
+        public: false
+      });
+      const tracks = JSON.stringify({
+        uris: mapTrackUris()
+      });
+      const user = await getData('me');
+      const createdPlaylist = await postData(`users/${user.id}/playlists`, playlist);
+      const response = await postData(`playlists/${createdPlaylist.id}/tracks`, tracks);
+      
+      return response;
+    }
+      return false;
   };
   if (!toptracks) return null;
 

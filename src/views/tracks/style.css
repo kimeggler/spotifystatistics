@@ -17,6 +17,7 @@
 }
 
 .create-playlist-button {
+  display: block;
   position: absolute;
   top: 22px;
   right: 155px;
@@ -28,6 +29,15 @@
   font-size: 16px;
   padding: 7px;
 }
+
+/* .create-playlist-button::after {
+  border: 2px solid var(--spotify_main);
+  color: var(--spotify_main);
+}
+
+.create-playlist-button:active::after {
+  opacity: 0.6;
+} */
 
 .create-playlist-button:hover {
   background-color: var(--main-2);
