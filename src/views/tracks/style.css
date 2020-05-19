@@ -18,10 +18,8 @@
 }
 
 .create-playlist-button {
-  display: block;
-  position: absolute;
-  top: 22px;
-  right: 155px;
+  display: flex;
+  align-self: flex-end;
   border: 2px solid var(--main-2);
   width: -moz-fit-content;
   width: fit-content;
@@ -29,16 +27,23 @@
   color: var(--font-main);
   font-size: 16px;
   padding: 7px;
+  margin-right: 15px;
+  margin-top: -30px;
 }
 
-/* .create-playlist-button::after {
-  border: 2px solid var(--spotify_main);
+.hide {
+  display: none;
+}
+
+.done {
   color: var(--spotify_main);
+  border: 2px solid var(--spotify_main);
 }
 
-.create-playlist-button:active::after {
-  opacity: 0.6;
-} */
+.error {
+  color: var(--main-red);
+  border: 2px solid var(--main-red);
+}
 
 .create-playlist-button:hover {
   background-color: var(--main-2);

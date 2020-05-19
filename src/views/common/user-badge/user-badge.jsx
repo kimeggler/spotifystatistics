@@ -1,10 +1,8 @@
 import React, { Fragment, useState } from 'react';
-
-import { user_icon, close } from '../../../assets';
-
-import './style.css';
-import { logout } from '../../../helper/authenticationhelper';
 import { ShowAt } from '..';
+import { close, user_icon } from '../../../assets';
+import { logout } from '../../../helper/authenticationhelper';
+import './style.css';
 
 function Userbadge(user) {
   const [menuActive, setMenuActive] = useState('');
@@ -14,7 +12,6 @@ function Userbadge(user) {
   }
 
   const toggleScroll = () => {
-    console.log('hello');
     if (document.body.classList.contains('no-scroll')) {
       document.body.classList.remove('no-scroll');
       document.body.addEventListener(

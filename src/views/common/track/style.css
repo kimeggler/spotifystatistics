@@ -28,6 +28,10 @@
   color: var(--font-main-white);
 }
 
+.track-name {
+  margin-right: 30px !important;
+}
+
 .highlight-circle {
   border-radius: 50%;
   display: flex;

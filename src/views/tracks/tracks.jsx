@@ -5,6 +5,7 @@ import { Track } from "../common";
 import "./style.css";
 
 function Tracks() {
+  const [showNotification, setShowNotification] = useState();
   const [toptracks, setToptracks] = useState();
   const [timerange, setTimerange] = useState("medium_term");
   useEffect(() => {
@@ -29,11 +30,11 @@ function Tracks() {
     const date = moment(new Date()).format("DD-MM-YYYY");
     const timeRange =
       timerange === "long_term"
-        ? "all time"
+        ? "All time"
         : timerange === "medium_term"
-        ? "6 months"
-        : "1 month";
-    const playlistName = "Top songs of " + timeRange + " from " + date;
+        ? "Last 6 months"
+        : "Last month";
+    const playlistName = timeRange + " favorites - " + date;
     const filteredPlaylists = playlists.items.filter(
       (playlist) => playlist.name === playlistName
     );
@@ -56,8 +57,18 @@ function Tracks() {
         tracks
       );
 
+      setShowNotification('done');
+      setTimeout(() => {
+        setShowNotification('none');
+      }, 2000);
+
       return response;
     }
+    setShowNotification('error');
+    setTimeout(() => {
+      setShowNotification('none');
+    }, 2000);
+
     return false;
   };
   if (!toptracks) return null;
@@ -74,9 +85,15 @@ function Tracks() {
         onClick={() => {
           createPlaylist();
         }}
-        className="create-playlist-button"
+        className={`create-playlist-button ${showNotification === 'done' || showNotification === 'error' ? 'hide' : ''}`}
       >
         Create Playlist
+      </div>
+      <div className={`create-playlist-button done ${showNotification !== 'done' ? 'hide' : ''}`} >
+        Playlist successfully created
+      </div>
+      <div className={`create-playlist-button error ${showNotification !== 'error' ? 'hide' : ''}`} >
+        Playlist already exists 
       </div>
 
       <h1 className="site-title">Favourite Tracks</h1>
