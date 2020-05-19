@@ -13,16 +13,14 @@ function Analyze() {
       setUser(await getData('me'));
       // ...
     };
-    fetchUser();
-  }, []);
-  useEffect(() => {
     const fetchTopArtist = async () => {
-      if (!user) return null;
-      let tracks = await getData(`users/${user.id}/playlists`);
+      fetchUser();
+      if (!user) return;
+      let tracks = await getData(`users/${user.user.id}/playlists`);
       setPlaylists(tracks.items);
     };
     fetchTopArtist();
-  }, [user]);
+  }, [activePlaylist, user]);
   if (!playlists) return null;
 
   const renderPlaylists = () => {
@@ -34,7 +32,7 @@ function Analyze() {
   return (
     <div className='analyze'>
       <h1>How funky are your playlists?</h1>
-      <div className='analyze-content'>{renderPlaylists()}</div>
+      {renderPlaylists()}
     </div>
   );
 }

@@ -4,14 +4,6 @@
   align-items: center;
 }
 
-.analyze-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 25px;
-}
-
 @media only screen and (max-width: 1000px) {
   .analyze {
     text-align: center;

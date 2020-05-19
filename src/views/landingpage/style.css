@@ -42,6 +42,10 @@
   border-radius: 50vh 0 0 50vh;
 }
 
+.login-buttons {
+  display: flex;
+}
+
 @media only screen and (max-width: 600px) {
   .login-area {
     width: 100vw;

@@ -4,7 +4,10 @@ import { setToken } from '../../helper/authenticationhelper';
 
 function Logincallback() {
   useEffect(() => {
-    setToken();
+    const setCredentials = async () => {
+      await setToken();
+    };
+    setCredentials();
     window.location.replace(origin);
   }, []);
   return null;

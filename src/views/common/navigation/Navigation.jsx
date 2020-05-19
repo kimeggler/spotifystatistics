@@ -39,6 +39,15 @@ function Navigation() {
             }`}>
             Tracks
           </a>
+          <a
+            href='/analyze'
+            className={`navigation-item ${
+              window.location.href.split('/')[3] === 'analyze'
+                ? 'navigation-active'
+                : 'navigation-inactive'
+            }`}>
+            Analyze
+          </a>
         </div>
       </ShowAt>
     </Fragment>

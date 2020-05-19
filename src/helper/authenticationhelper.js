@@ -1,3 +1,5 @@
+import config from '../config';
+
 const validateToken = () => {
   if (getToken() !== null) {
     if (Math.abs(new Date().getTime() / 1000 - getTokenTimeStamp()) >= 3600) {
@@ -33,13 +35,33 @@ const clearToken = () => {
   window.localStorage.clear();
 };
 
-const setToken = () => {
+const getDefaultHeaders = () => ({
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+  Authorization: `Bearer ${getToken()}`
+});
+
+const getUserID = async token => {
+  const defaultHeaders = getDefaultHeaders(token);
+  return await fetch(`${config.remoteUrl}me`, {
+    method: 'GET',
+    headers: {
+      ...defaultHeaders
+    }
+  }).then(response => response.json());
+};
+
+const setToken = async () => {
   if (getTokenFromURL()) {
     const timeStamp = new Date();
     window.localStorage.setItem('statify_token', getTokenFromURL());
     window.localStorage.setItem(
       'statify_timestamp',
       timeStamp.getTime() / 1000
+    );
+    window.localStorage.setItem(
+      'statify_userid',
+      await getUserID(getTokenFromURL())
     );
   }
 };
