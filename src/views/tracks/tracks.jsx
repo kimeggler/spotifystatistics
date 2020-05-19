@@ -60,14 +60,14 @@ function Tracks() {
       setShowNotification('done');
       setTimeout(() => {
         setShowNotification('none');
-      }, 2000);
+      }, 1000);
 
       return response;
     }
     setShowNotification('error');
     setTimeout(() => {
       setShowNotification('none');
-    }, 2000);
+    }, 1000);
 
     return false;
   };
