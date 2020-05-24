@@ -53,5 +53,6 @@
   .track {
     margin: 25px 25px 0 25px;
     flex: 0 1 100%;
+    height: 80px;
   }
 }

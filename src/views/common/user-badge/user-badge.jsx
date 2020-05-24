@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { ShowAt } from '..';
-import { close, user_icon } from '../../../assets';
+import { close, user_icon, menu_icon } from '../../../assets';
 import { logout } from '../../../helper/authenticationhelper';
 import './style.css';
 
@@ -45,13 +45,9 @@ function Userbadge(user) {
       <ShowAt breakpoint='1000AndBelow'>
         <div className='user_badge' onClick={() => toggleMenu()}>
           <img
-            alt={user.user.display_name}
-            src={
-              user.user.images[0] === undefined
-                ? user_icon
-                : user.user.images[0].url
-            }
-            className='user_image'
+            alt="menu icon"
+            src={menu_icon}
+            className='user_image_mobile'
           />
         </div>
         <div className={`fullscreen-menu ${menuActive}`}>

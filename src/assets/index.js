@@ -12,3 +12,8 @@ export {
   default as close
 }
 from './close.svg';
+
+export {
+  default as menu_icon
+}
+from './menu.png';
