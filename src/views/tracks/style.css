@@ -38,11 +38,13 @@
 .done {
   color: var(--spotify_main);
   border: 2px solid var(--spotify_main);
+  background-color: transparent;
 }
 
 .error {
   color: var(--main-red);
   border: 2px solid var(--main-red);
+  background-color: transparent;
 }
 
 .create-playlist-button:hover {
