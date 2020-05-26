@@ -55,8 +55,8 @@
 
 @media only screen and (max-width: 1000px) {
   .create-playlist-button {
-    right: 75px;
+    right: 65px;
     position: absolute;
-    top: 55px;
+    top: 54px;
   }
 }

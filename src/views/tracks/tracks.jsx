@@ -90,10 +90,10 @@ function Tracks() {
         Create Playlist
       </div>
       <div className={`create-playlist-button done ${showNotification !== 'done' ? 'hide' : ''}`} >
-        Playlist successfully created
+        Done
       </div>
       <div className={`create-playlist-button error ${showNotification !== 'error' ? 'hide' : ''}`} >
-        Playlist already exists 
+        Already exists 
       </div>
 
       <h1 className="site-title">Favourite Tracks</h1>

@@ -46,7 +46,7 @@ function Userbadge(user) {
         <div className='user_badge' onClick={() => toggleMenu()}>
           <img
             alt="menu icon"
-            src={menu_icon}
+            src={!menuActive ? menu_icon : close}
             className='user_image_mobile'
           />
         </div>
