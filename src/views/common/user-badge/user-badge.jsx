@@ -78,12 +78,6 @@ function Userbadge(user) {
             }`}>
             Tracks
           </a>
-          <img
-            src={close}
-            alt='close'
-            className='close-menu'
-            onClick={() => toggleMenu()}
-          />
 
           <p
             onClick={() => logout()}
