@@ -14,6 +14,12 @@
   box-sizing: border-box;
 }
 
+.user_image_mobile {
+  height: 40px;
+  width: 40px;
+  box-sizing: border-box;
+}
+
 .user_information {
   display: flex;
   flex-direction: column;

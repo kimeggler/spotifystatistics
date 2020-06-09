@@ -15,6 +15,7 @@ function DeezerCallback() {
       await setToken();
     };
     getToken();
+    setCredentials();
     // window.location.replace(origin);
   }, []);
   return null;

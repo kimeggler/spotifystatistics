@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import moment from 'moment';
+import React, { useEffect, useState } from 'react';
 import { getData, postData } from '../../../services/fetchservice';
 import { Track } from '../../common';
 import './style.css';
-import moment from 'moment';
 
 function Tracks() {
+  const [showNotification, setShowNotification] = useState();
   const [toptracks, setToptracks] = useState();
   const [timerange, setTimerange] = useState('medium_term');
   useEffect(() => {
@@ -19,36 +20,56 @@ function Tracks() {
     fetchTopArtist();
   }, [timerange]);
   const mapTrackUris = () => {
-    return toptracks.map(track => {
+    return toptracks.map((track) => {
       return track.uri;
     });
   };
 
   const createPlaylist = async () => {
+    const playlists = await getData('me/playlists');
     const date = moment(new Date()).format('DD-MM-YYYY');
     const timeRange =
       timerange === 'long_term'
-        ? 'all time'
+        ? 'All time'
         : timerange === 'medium_term'
-        ? '6 months'
-        : '1 month';
-    const playlist = JSON.stringify({
-      name: `Top songs of ${timeRange} (${date})`,
-      public: false
-    });
-    const tracks = JSON.stringify({
-      uris: mapTrackUris()
-    });
-    const user = await getData('me');
-    const createdPlaylist = await postData(
-      `users/${user.id}/playlists`,
-      playlist
+        ? 'Last 6 months'
+        : 'Last month';
+    const playlistName = timeRange + ' favorites - ' + date;
+    const filteredPlaylists = playlists.items.filter(
+      (playlist) => playlist.name === playlistName
     );
-    const response = await postData(
-      `playlists/${createdPlaylist.id}/tracks`,
-      tracks
-    );
-    return response;
+
+    if (filteredPlaylists.length === 0) {
+      const playlist = JSON.stringify({
+        name: playlistName,
+        public: false,
+      });
+      const tracks = JSON.stringify({
+        uris: mapTrackUris(),
+      });
+      const user = await getData('me');
+      const createdPlaylist = await postData(
+        `users/${user.id}/playlists`,
+        playlist
+      );
+      const response = await postData(
+        `playlists/${createdPlaylist.id}/tracks`,
+        tracks
+      );
+
+      setShowNotification('done');
+      setTimeout(() => {
+        setShowNotification('none');
+      }, 1000);
+
+      return response;
+    }
+    setShowNotification('error');
+    setTimeout(() => {
+      setShowNotification('none');
+    }, 1000);
+
+    return false;
   };
   if (!toptracks) return null;
 
@@ -64,8 +85,24 @@ function Tracks() {
         onClick={() => {
           createPlaylist();
         }}
-        className='create-playlist-button'>
+        className={`create-playlist-button ${
+          showNotification === 'done' || showNotification === 'error'
+            ? 'hide'
+            : ''
+        }`}>
         Create Playlist
+      </div>
+      <div
+        className={`create-playlist-button done ${
+          showNotification !== 'done' ? 'hide' : ''
+        }`}>
+        Done
+      </div>
+      <div
+        className={`create-playlist-button error ${
+          showNotification !== 'error' ? 'hide' : ''
+        }`}>
+        Already exists
       </div>
 
       <h1 className='site-title'>Favourite Tracks</h1>

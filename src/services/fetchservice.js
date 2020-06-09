@@ -13,9 +13,9 @@ const authorizeSpotifyUser = () => {
 const authorizeDeezerUser = () => {
   return `${config.deezerAuthority}${deezerParams(config.deezerAuthparams)}`;
 };
-const getDeezerToken = () => {
-  return `${config.deezerAccess}${deezerAccessParams(config.deezerAuthparams)}`;
-};
+// const getDeezerToken = () => {
+//   return `${config.deezerAccess}${deezerAccessParams(config.deezerAuthparams)}`;
+// };
 
 const fetchDeezerToken = (code) => {
   return fetch(
@@ -73,10 +73,10 @@ const deezerParams = (params) =>
     ? `?app_id=${params.client_id}&redirect_uri=${params.redirect_uri}&perms=${params.scope}`
     : '';
 
-const deezerAccessParams = (params) =>
-  params
-    ? `?client_id=${params.client_id}&redirect_uri=${params.redirect_uri}&scope=${params.scope}&response_type=token&show_dialog=${params.show_dialog}`
-    : '';
+// const deezerAccessParams = (params) =>
+//   params
+//     ? `?client_id=${params.client_id}&redirect_uri=${params.redirect_uri}&scope=${params.scope}&response_type=token&show_dialog=${params.show_dialog}`
+//     : '';
 
 export {
   getData,

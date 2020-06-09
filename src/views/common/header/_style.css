@@ -7,3 +7,7 @@
   align-items: center;
   margin-bottom: 30px;
 }
+
+.header-link {
+  text-decoration: none;
+}

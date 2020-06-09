@@ -1,10 +1,8 @@
 import React, { Fragment, useState } from 'react';
-
-import { user_icon, close } from '../../../assets';
-
-import './style.css';
-import { logout } from '../../../helper/authenticationhelper';
 import { ShowAt } from '..';
+import { close, user_icon, menu_icon } from '../../../assets';
+import { logout } from '../../../helper/authenticationhelper';
+import './style.css';
 
 function Userbadge(user) {
   const [menuActive, setMenuActive] = useState('');
@@ -14,7 +12,6 @@ function Userbadge(user) {
   }
 
   const toggleScroll = () => {
-    console.log('hello');
     if (document.body.classList.contains('no-scroll')) {
       document.body.classList.remove('no-scroll');
       document.body.addEventListener(
@@ -48,13 +45,9 @@ function Userbadge(user) {
       <ShowAt breakpoint='1000AndBelow'>
         <div className='user_badge' onClick={() => toggleMenu()}>
           <img
-            alt={user.user.display_name}
-            src={
-              user.user.images[0] === undefined
-                ? user_icon
-                : user.user.images[0].url
-            }
-            className='user_image'
+            alt="menu icon"
+            src={!menuActive ? menu_icon : close}
+            className='user_image_mobile'
           />
         </div>
         <div className={`fullscreen-menu ${menuActive}`}>
@@ -85,12 +78,6 @@ function Userbadge(user) {
             }`}>
             Tracks
           </a>
-          <img
-            src={close}
-            alt='close'
-            className='close-menu'
-            onClick={() => toggleMenu()}
-          />
 
           <p
             onClick={() => logout()}

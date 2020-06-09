@@ -25,7 +25,7 @@
 
 .top-card-primary {
   width: 450px;
-  height: 80px;
+  height: fit-content;
   box-sizing: border-box;
   font-size: 48px;
   line-height: 40px;
@@ -38,6 +38,7 @@
   box-sizing: border-box;
   font-size: 24px;
   font-weight: 200;
+  margin-top: 20px;
   color: var(--font-main-white);
 }
 

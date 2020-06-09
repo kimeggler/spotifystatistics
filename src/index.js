@@ -13,7 +13,6 @@ import * as serviceWorker from './serviceWorker';
 const trackingId = 'UA-164134196-1';
 ReactGA.initialize(trackingId);
 
-console.log('hello');
 const history = createBrowserHistory();
 
 history.listen((location) => {

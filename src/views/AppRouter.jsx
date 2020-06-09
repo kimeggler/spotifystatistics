@@ -5,22 +5,22 @@ import Overview from './spotify/overview/overview';
 import Landingpage from './landingpage/landingpage';
 import Tracks from './spotify/tracks/tracks';
 import Artists from './spotify/artists/artists';
-import Analyze from './spotify/analyze/analyze';
 import { Header } from './common';
 
 import './App.css';
 
 import { validateToken } from '../helper/authenticationhelper';
+import Analyze from './spotify/analyze/analyze';
 
 class AppRouter extends Component {
   state = {
     hasError: false,
-    isLoggedIn: false
+    isLoggedIn: false,
   };
 
   componentDidCatch(err) {
     this.setState({
-      hasError: true
+      hasError: true,
     });
   }
 

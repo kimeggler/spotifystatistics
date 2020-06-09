@@ -69,7 +69,8 @@ function Playlist(playlist, activePlaylist, setActivePlaylist, analyse) {
         <div
           className='img-container'
           onClick={async () => {
-            setActivePlaylist(playlist.id);
+            // setActivePlaylist(playlist.id);
+            console.log('Analyse Playlist with id: ' + playlist.id);
           }}>
           {/* <img alt={artist.name} src={artist.images[0].url} className='artist-card-image' /> */}
           <div style={background} className='playlist-card-image'></div>

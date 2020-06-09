@@ -1,9 +1,6 @@
 import React from 'react';
 import './style.css';
-import {
-  authorizeSpotifyUser,
-  authorizeDeezerUser,
-} from '../../services/fetchservice';
+import { authorizeSpotifyUser } from '../../services/fetchservice';
 
 import { startscreen, spotify, deezer } from '../../assets';
 
@@ -37,7 +34,7 @@ function Landingpage() {
           </button>
           <button
             onClick={() => {
-              window.location.replace(authorizeDeezerUser());
+              window.location.replace(authorizeSpotifyUser());
             }}>
             <img className='login-button-image' src={deezer} alt='deezer' />
           </button>
