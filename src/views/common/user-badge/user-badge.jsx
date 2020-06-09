@@ -16,7 +16,7 @@ function Userbadge(user) {
       document.body.classList.remove('no-scroll');
       document.body.addEventListener(
         'touchmove',
-        function(event) {
+        function (event) {
           event.preventDefault();
           event.stopPropagation();
         },
@@ -26,7 +26,7 @@ function Userbadge(user) {
       document.body.classList.add('no-scroll');
       document.body.removeEventListener(
         'touchmove',
-        function(event) {
+        function (event) {
           event.preventDefault();
           event.stopPropagation();
         },
@@ -45,9 +45,15 @@ function Userbadge(user) {
       <ShowAt breakpoint='1000AndBelow'>
         <div className='user_badge' onClick={() => toggleMenu()}>
           <img
-            alt="menu icon"
-            src={!menuActive ? menu_icon : close}
-            className='user_image_mobile'
+            alt='menu icon'
+            src={
+              !menuActive
+                ? menu_icon
+                : user.user.images[0] === undefined
+                ? user_icon
+                : user.user.images[0].url
+            }
+            className={`user_image_mobile ${menuActive ? 'user_image' : null}`}
           />
         </div>
         <div className={`fullscreen-menu ${menuActive}`}>
@@ -78,7 +84,12 @@ function Userbadge(user) {
             }`}>
             Tracks
           </a>
-
+          <img
+            src={close}
+            alt='close'
+            className='close-menu'
+            onClick={() => toggleMenu()}
+          />
           <p
             onClick={() => logout()}
             className={`fullscreen-navigation-item fullscreen-navigation-logout`}>
