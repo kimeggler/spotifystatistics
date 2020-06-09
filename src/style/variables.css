@@ -5,7 +5,18 @@ html {
   --main-3: #0c142a;
   --main-4: ;
   --main-5: ;
-  --main-background: linear-gradient(-20deg, rgba(15, 226, 103, 0.9), rgba(180, 16, 206, 0.9), rgba(249, 149, 18, 0.9));
+  --main-background: linear-gradient(
+    -20deg,
+    rgba(15, 226, 103, 0.9),
+    rgba(180, 16, 206, 0.9),
+    rgba(249, 149, 18, 0.9)
+  );
+  --main-background-persistent: linear-gradient(
+    -20deg,
+    rgba(15, 226, 103, 1),
+    rgba(180, 16, 206, 1),
+    rgba(249, 149, 18, 1)
+  );
 
   /* transparent colors */
   --main-1-trans: #0c142a88;
@@ -17,13 +28,9 @@ html {
   --font-main-white: #ffffff;
   --font-main-dark: #0c142a;
 
-
   /* others */
   --spotify_main: #1db954;
 }
-
-
-
 
 html[dark] {
   /*dark theme main colors*/

@@ -1,16 +1,16 @@
 const { protocol, hostname, port } = window.location;
 
-const origin = `${protocol}//${hostname}${port ? `:${port}` : ""}`;
+const origin = `${protocol}//${hostname}${port ? `:${port}` : ''}`;
 
 const config = {
   protocol,
   hostname,
   port,
   origin,
-  authority: "https://accounts.spotify.com/authorize",
-  metadata: {
-    authorization_endpoint: "https://accounts.spotify.com/authorize"
-  }
+  spotifyAuthority: 'https://accounts.spotify.com/authorize',
+  deezerAuthority: 'https://connect.deezer.com/oauth/auth.php',
+  deezerAccess:
+    'https://cors-anywhere.herokuapp.com/https://connect.deezer.com/oauth/access_token.php',
 };
 
 export default config;

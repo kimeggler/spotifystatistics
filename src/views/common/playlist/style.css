@@ -1,3 +1,46 @@
+.playlist-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.playlist-analyse {
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: calc(100vw - 17px);
+  height: 100vh;
+  box-sizing: border-box;
+  justify-content: space-between;
+  background: var(--main-background-persistent);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.playlist-overlay {
+  height: 60vh;
+  width: 80vw;
+  background: rgba(30, 30, 30, 1);
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 50px;
+}
+
+.analyse-property {
+  display: flex;
+  justify-content: flex-start;
+  width: 50%;
+}
+
+.analyse-title {
+  font-size: 24px;
+  width: fit-content;
+}
+
 .playlist {
   display: flex;
   flex-direction: column;
@@ -22,6 +65,7 @@
 .playlist-rank {
   position: absolute;
   top: calc(50% - 10px);
+  cursor: pointer;
   font-size: 60px;
   font-weight: 400;
   opacity: 0;

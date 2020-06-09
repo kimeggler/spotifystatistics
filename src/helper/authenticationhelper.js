@@ -1,5 +1,3 @@
-import config from '../config';
-
 const validateToken = () => {
   if (getToken() !== null) {
     if (Math.abs(new Date().getTime() / 1000 - getTokenTimeStamp()) >= 3600) {
@@ -15,10 +13,14 @@ const validateToken = () => {
 
 const getTokenFromURL = () => {
   if (window.location.href.split('#')[1] !== undefined) {
-    return window.location.href
-      .split('#')[1]
-      .split('&')[0]
-      .split('=')[1];
+    return window.location.href.split('#')[1].split('&')[0].split('=')[1];
+  }
+  return null;
+};
+
+const getDeezerTokenFromURL = () => {
+  if (window.location.href.split('?')[1] !== undefined) {
+    return window.location.href.split('?')[1].split('=')[1];
   }
   return null;
 };
@@ -35,22 +37,6 @@ const clearToken = () => {
   window.localStorage.clear();
 };
 
-const getDefaultHeaders = () => ({
-  Accept: 'application/json',
-  'Content-Type': 'application/json',
-  Authorization: `Bearer ${getToken()}`
-});
-
-const getUserID = async token => {
-  const defaultHeaders = getDefaultHeaders(token);
-  return await fetch(`${config.remoteUrl}me`, {
-    method: 'GET',
-    headers: {
-      ...defaultHeaders
-    }
-  }).then(response => response.json());
-};
-
 const setToken = async () => {
   if (getTokenFromURL()) {
     const timeStamp = new Date();
@@ -58,10 +44,6 @@ const setToken = async () => {
     window.localStorage.setItem(
       'statify_timestamp',
       timeStamp.getTime() / 1000
-    );
-    window.localStorage.setItem(
-      'statify_userid',
-      await getUserID(getTokenFromURL())
     );
   }
 };
@@ -71,4 +53,4 @@ const logout = () => {
   window.location.reload();
 };
 
-export { validateToken, setToken, logout, getToken };
+export { validateToken, setToken, logout, getToken, getDeezerTokenFromURL };

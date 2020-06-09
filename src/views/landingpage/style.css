@@ -46,6 +46,23 @@
   display: flex;
 }
 
+.login-buttons button {
+  padding: 5px;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.login-button-image {
+  height: 50px;
+  width: 50px;
+}
+.spotify-image {
+  height: 47px;
+  width: 47px;
+}
+
 @media only screen and (max-width: 600px) {
   .login-area {
     width: 100vw;

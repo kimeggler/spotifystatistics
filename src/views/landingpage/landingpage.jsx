@@ -1,8 +1,11 @@
 import React from 'react';
 import './style.css';
-import { authorizeUser } from '../../services/fetchservice';
+import {
+  authorizeSpotifyUser,
+  authorizeDeezerUser,
+} from '../../services/fetchservice';
 
-import { startscreen } from '../../assets';
+import { startscreen, spotify, deezer } from '../../assets';
 
 function Landingpage() {
   return (
@@ -18,21 +21,25 @@ function Landingpage() {
           from Statify
         </p>
         <p className='disclaimer'>
-          *This app does not collect and will not store any personal data
+          *Some functionality may be exclusive for Spotify-Users
         </p>
         <a href='/about'>About this site</a>
         <div className='login-buttons'>
           <button
             onClick={() => {
-              window.location.replace(authorizeUser());
+              window.location.replace(authorizeSpotifyUser());
             }}>
-            Login with Spotify
+            <img
+              className='login-button-image spotify-image'
+              src={spotify}
+              alt='spotify'
+            />
           </button>
           <button
             onClick={() => {
-              window.location.replace(authorizeUser());
+              window.location.replace(authorizeDeezerUser());
             }}>
-            Login with Deezer
+            <img className='login-button-image' src={deezer} alt='deezer' />
           </button>
         </div>
       </div>

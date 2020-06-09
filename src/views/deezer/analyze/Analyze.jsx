@@ -23,9 +23,13 @@ function Analyze() {
   }, [activePlaylist, user]);
   if (!playlists) return null;
 
+  const changePlaylist = (index) => {
+    setActivePlaylist(index);
+  };
+
   const renderPlaylists = () => {
     return playlists.map((playlist, index) => {
-      return Playlist(playlist, index, setActivePlaylist);
+      return Playlist(playlist, index, activePlaylist, changePlaylist);
     });
   };
 
