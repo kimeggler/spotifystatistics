@@ -84,6 +84,15 @@ function Userbadge(user) {
             }`}>
             Tracks
           </a>
+          <a
+            href='/analyse'
+            className={`fullscreen-navigation-item ${
+              window.location.href.split('/')[3] === 'analyse'
+                ? 'fullscreen-navigation-active'
+                : 'fullscreen-navigation-inactive'
+            }`}>
+            Playlists
+          </a>
           <img
             src={close}
             alt='close'

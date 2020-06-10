@@ -46,7 +46,7 @@ function Navigation() {
                 ? 'navigation-active'
                 : 'navigation-inactive'
             }`}>
-            Analyze
+            Playlists
           </a>
         </div>
       </ShowAt>
