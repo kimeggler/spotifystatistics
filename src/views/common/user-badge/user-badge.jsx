@@ -85,9 +85,9 @@ function Userbadge(user) {
             Tracks
           </a>
           <a
-            href='/analyse'
+            href='/analyze'
             className={`fullscreen-navigation-item ${
-              window.location.href.split('/')[3] === 'analyse'
+              window.location.href.split('/')[3] === 'analyze'
                 ? 'fullscreen-navigation-active'
                 : 'fullscreen-navigation-inactive'
             }`}>
