@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import './style.css';
+import { getAudioAnalysis } from '../../../helper/analysationhelper';
 
 function Playlist(playlist, activePlaylist, setActivePlaylist, analyse) {
   const background = {
@@ -12,14 +13,10 @@ function Playlist(playlist, activePlaylist, setActivePlaylist, analyse) {
     }
     return (
       <div className='playlist-overlay'>
-        <p className='analyse-title'>
-          Based on Spotify's classification of the Songs in your Playlist
-        </p>
+        <p className='analyse-title'>Based on Spotify's classification of the Songs in your Playlist</p>
         {analyse.danceability * 100 >= 50 ? null : (
           <div className='analyse-property'>
-            <p className='analyse-property-title'>
-              {`the playlist is ${analyse.danceability * 100}% danceable`}
-            </p>
+            <p className='analyse-property-title'>{`the playlist is ${analyse.danceability * 100}% danceable`}</p>
           </div>
         )}
         {analyse.energy * 100 >= 60 ? null : (
@@ -29,9 +26,7 @@ function Playlist(playlist, activePlaylist, setActivePlaylist, analyse) {
         )}
         {analyse.instrumentalness * 100 >= 70 ? null : (
           <div className='analyse-property'>
-            <p className='analyse-property-title'>
-              {`most of the songs are instrumental`}
-            </p>
+            <p className='analyse-property-title'>{`most of the songs are instrumental`}</p>
           </div>
         )}
         {analyse.liveness * 100 <= 70 ? null : (
@@ -41,16 +36,12 @@ function Playlist(playlist, activePlaylist, setActivePlaylist, analyse) {
         )}
         {analyse.valence * 100 <= 40 ? null : (
           <div className='analyse-property'>
-            <p className='analyse-property-title'>
-              {`contains a lot of sad songs...need a hug?`}
-            </p>
+            <p className='analyse-property-title'>{`contains a lot of sad songs...need a hug?`}</p>
           </div>
         )}
         {analyse.valence * 100 >= 70 ? null : (
           <div className='analyse-property'>
-            <p className='analyse-property-title'>
-              {`contains a lot of euphoric songs!`}
-            </p>
+            <p className='analyse-property-title'>{`contains a lot of euphoric songs!`}</p>
           </div>
         )}
       </div>
@@ -58,9 +49,7 @@ function Playlist(playlist, activePlaylist, setActivePlaylist, analyse) {
   };
 
   const renderOverlay = (analyse, name) => {
-    return (
-      <div className='playlist-analyse'>{renderAnalysis(analyse, name)}</div>
-    );
+    return <div className='playlist-analyse'>{renderAnalysis(analyse, name)}</div>;
   };
 
   return (
@@ -71,6 +60,7 @@ function Playlist(playlist, activePlaylist, setActivePlaylist, analyse) {
           onClick={async () => {
             // setActivePlaylist(playlist.id);
             console.log('Analyse Playlist with id: ' + playlist.id);
+            console.log(await getAudioAnalysis(playlist.id));
           }}>
           {/* <img alt={artist.name} src={artist.images[0].url} className='artist-card-image' /> */}
           <div style={background} className='playlist-card-image'></div>
@@ -78,11 +68,7 @@ function Playlist(playlist, activePlaylist, setActivePlaylist, analyse) {
         </div>
         <p className='playlist-card-name bold'>{playlist.name}</p>
       </div>
-      <Fragment>
-        {activePlaylist === playlist.id
-          ? renderOverlay(analyse, playlist.name)
-          : null}
-      </Fragment>
+      <Fragment>{activePlaylist === playlist.id ? renderOverlay(analyse, playlist.name) : null}</Fragment>
     </div>
   );
 }

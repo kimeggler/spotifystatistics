@@ -1,4 +1,6 @@
-import { getData } from '../services/fetchservice';
+import {
+  getData
+} from '../services/fetchservice';
 
 const getAudioAnalysis = async (playlist_id) => {
   const songs_ids = await getSongs(playlist_id);
@@ -57,8 +59,9 @@ const formatData = (songs) => {
   const playlist_analysis = songs.reduce((prev, curr, i) => {
     return i === songs.length - 1 ? divideData(prev, i) : addData(prev, curr);
   });
-  console.log(playlist_analysis);
   return playlist_analysis;
 };
 
-export { getAudioAnalysis };
+export {
+  getAudioAnalysis
+};
