@@ -48,26 +48,22 @@ class AppRouter extends Component {
     return (
       <div className="router-section" id="router-element">
         <Header />
-        <Switch>
-          <Route exact path="/" component={Overview} />
-          <Route exact path="/artists" component={Artists} />
-          <Route exact path="/tracks" component={Tracks} />
-          <Route exact path="/analyze" component={Analyze} />
-          <Route component={Overview} />
-        </Switch>
+        <Route exact path="/" component={Overview} />
+        <Route exact path="/artists" component={Artists} />
+        <Route exact path="/tracks" component={Tracks} />
+        <Route exact path="/analyze" component={Analyze} />
+        <Route component={Overview} />
       </div>
     );
   }
 }
 
-
 AppRouter.propTypes = {
-  isLoading: PropTypes.bool.isRequired
-}
+  isLoading: PropTypes.bool.isRequired,
+};
 
 AppRouter.defaultProps = {
-  isLoading: false
-}
+  isLoading: false,
+};
 
-
-export default withRouter(AppRouter);
+export default AppRouter;

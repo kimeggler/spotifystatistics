@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
-import './style.css';
+import { Link, withRouter } from 'react-router-dom';
 
 import { ShowAt } from '../../common';
+
+import './style.css';
 
 function Navigation() {
   return (
@@ -12,8 +14,8 @@ function Navigation() {
 
       <ShowAt breakpoint="1000AndAbove">
         <div className="navigation">
-          <a
-            href="/"
+          <Link
+            to="/"
             className={`navigation-item ${
               window.location.href.split('/')[3] === ''
                 ? 'navigation-active'
@@ -21,9 +23,9 @@ function Navigation() {
             }`}
           >
             Overview
-          </a>
-          <a
-            href="/artists"
+          </Link>
+          <Link
+            to="/artists"
             className={`navigation-item ${
               window.location.href.split('/')[3] === 'artists'
                 ? 'navigation-active'
@@ -31,9 +33,9 @@ function Navigation() {
             }`}
           >
             Artists
-          </a>
-          <a
-            href="/tracks"
+          </Link>
+          <Link
+            to="/tracks"
             className={`navigation-item ${
               window.location.href.split('/')[3] === 'tracks'
                 ? 'navigation-active'
@@ -41,9 +43,9 @@ function Navigation() {
             }`}
           >
             Tracks
-          </a>
-          <a
-            href="/analyze"
+          </Link>
+          <Link
+            to="/analyze"
             className={`navigation-item ${
               window.location.href.split('/')[3] === 'analyze'
                 ? 'navigation-active'
@@ -51,7 +53,7 @@ function Navigation() {
             }`}
           >
             Playlists
-          </a>
+          </Link>
         </div>
       </ShowAt>
     </Fragment>
