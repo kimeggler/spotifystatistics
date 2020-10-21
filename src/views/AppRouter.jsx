@@ -40,13 +40,13 @@ class AppRouter extends Component {
     }
 
     return (
-      <div className='router-section' id='router-element'>
+      <div className="router-section" id="router-element">
         <Header />
         <Switch>
-          <Route exact path='/' component={Overview} />
-          <Route exact path='/artists' component={Artists} />
-          <Route exact path='/tracks' component={Tracks} />
-          <Route exact path='/analyze' component={Analyze} />
+          <Route exact path="/" component={Overview} />
+          <Route exact path="/artists" component={Artists} />
+          <Route exact path="/tracks" component={Tracks} />
+          <Route exact path="/analyze" component={Analyze} />
           <Route component={Overview} />
         </Switch>
       </div>

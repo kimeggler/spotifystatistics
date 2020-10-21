@@ -15,7 +15,7 @@ ReactGA.initialize(trackingId);
 
 const history = createBrowserHistory();
 
-history.listen((location) => {
+history.listen(location => {
   ReactGA.set({ page: location.pathname }); // Update the user's current page
   ReactGA.pageview(location.pathname); // Record a pageview for the given page
 });

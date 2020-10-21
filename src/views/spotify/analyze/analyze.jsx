@@ -20,11 +20,7 @@ function Analyze() {
   useEffect(() => {
     const fetchTopArtist = async () => {
       if (!user) return null;
-      let tracks = await getData(
-        `users/${user.id}/playlists`,
-        null,
-        '?limit=50'
-      );
+      let tracks = await getData(`users/${user.id}/playlists`, null, '?limit=50');
       setPlaylists(tracks.items);
     };
     fetchTopArtist();
@@ -39,26 +35,26 @@ function Analyze() {
   }, [activePlaylist]);
   if (!playlists) return null;
 
-  const changePlaylist = (id) => {
+  const changePlaylist = id => {
     setActivePlaylist(id);
     setAnalyse(null);
   };
 
   const renderPlaylists = () => {
-    return playlists.map((playlist) => {
+    return playlists.map(playlist => {
       return Playlist(
         playlist,
         activePlaylist,
         changePlaylist,
-        activePlaylist === playlist.id ? analyse : null
+        activePlaylist === playlist.id ? analyse : null,
       );
     });
   };
 
   return (
-    <div className='analyze'>
+    <div className="analyze">
       <h1>How funky are your playlists?</h1>
-      <div className='analyze-content'>{renderPlaylists()}</div>
+      <div className="analyze-content">{renderPlaylists()}</div>
     </div>
   );
 }

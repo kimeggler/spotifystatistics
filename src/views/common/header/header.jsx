@@ -14,8 +14,12 @@ function Header() {
     fetchUser();
   }, []);
   return (
-    <div className='header'>
-      <h3 className='title'><a className="header-link" href='/'>Statify</a></h3>
+    <div className="header">
+      <h3 className="title">
+        <a className="header-link" href="/">
+          Statify
+        </a>
+      </h3>
       <Navigation />
       <Userbadge user={user} />
     </div>

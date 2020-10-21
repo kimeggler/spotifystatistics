@@ -23,7 +23,7 @@ function Analyze() {
   }, [activePlaylist, user]);
   if (!playlists) return null;
 
-  const changePlaylist = (index) => {
+  const changePlaylist = index => {
     setActivePlaylist(index);
   };
 
@@ -34,7 +34,7 @@ function Analyze() {
   };
 
   return (
-    <div className='analyze'>
+    <div className="analyze">
       <h1>How funky are your playlists?</h1>
       {renderPlaylists()}
     </div>

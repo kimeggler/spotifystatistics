@@ -8,7 +8,7 @@ const breakpoints = (props, propName, componentName) => {
 
   if (!prop) {
     return new Error(
-      `Invalid prop \`${propName}\` supplied to \`${componentName}\`. Breakpoint is required. Given: ${prop}`
+      `Invalid prop \`${propName}\` supplied to \`${componentName}\`. Breakpoint is required. Given: ${prop}`,
     );
   }
 
@@ -16,7 +16,7 @@ const breakpoints = (props, propName, componentName) => {
 
   if (prop.length > 2) {
     return new Error(
-      `Invalid prop \`${propName}\` supplied to \`${componentName}\`. Maximum number of breakpoints is 2. Given: ${prop.length}`
+      `Invalid prop \`${propName}\` supplied to \`${componentName}\`. Maximum number of breakpoints is 2. Given: ${prop.length}`,
     );
   }
 
@@ -35,7 +35,7 @@ const breakpoints = (props, propName, componentName) => {
 
   if (!isValid) {
     return new Error(
-      `Invalid prop \`${propName}\` supplied to \`${componentName}\`. Invalid breakpoint name. Given: ${lastBreakpoint}`
+      `Invalid prop \`${propName}\` supplied to \`${componentName}\`. Invalid breakpoint name. Given: ${lastBreakpoint}`,
     );
   }
   return null;

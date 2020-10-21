@@ -56,9 +56,7 @@ function Playlist(playlist, activePlaylist, setActivePlaylist, analyse) {
   };
 
   const renderOverlay = (analyse, name) => {
-    return (
-      <div className="playlist-analyse">{renderAnalysis(analyse, name)}</div>
-    );
+    return <div className="playlist-analyse">{renderAnalysis(analyse, name)}</div>;
   };
 
   return (
@@ -79,9 +77,7 @@ function Playlist(playlist, activePlaylist, setActivePlaylist, analyse) {
         <p className="playlist-card-name bold">{playlist.name}</p>
       </div>
       <Fragment>
-        {activePlaylist === playlist.id
-          ? renderOverlay(analyse, playlist.name)
-          : null}
+        {activePlaylist === playlist.id ? renderOverlay(analyse, playlist.name) : null}
       </Fragment>
     </div>
   );

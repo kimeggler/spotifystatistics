@@ -17,13 +17,13 @@ const authorizeDeezerUser = () => {
 //   return `${config.deezerAccess}${deezerAccessParams(config.deezerAuthparams)}`;
 // };
 
-const fetchDeezerToken = (code) => {
+const fetchDeezerToken = code => {
   return fetch(
     `${config.deezerAccess}?app_id=${config.deezerAuthparams.client_id}&secret=${config.deezerAuthparams.client_secret}&code=${code}&output=json`,
     {
       method: 'GET',
-    }
-  ).then((response) => response.json);
+    },
+  ).then(response => response.json);
 };
 
 const getData = async (path, headers = {}, queryParams = '') => {
@@ -32,16 +32,13 @@ const getData = async (path, headers = {}, queryParams = '') => {
   }
   const token = getToken();
   const defaultHeaders = getDefaultHeaders(token);
-  return fetch(
-    `${config.remoteUrl}${path}${queryParams !== '' ? queryParams : ''}`,
-    {
-      method: 'GET',
-      headers: {
-        ...defaultHeaders,
-        ...headers,
-      },
-    }
-  ).then((response) => response.json());
+  return fetch(`${config.remoteUrl}${path}${queryParams !== '' ? queryParams : ''}`, {
+    method: 'GET',
+    headers: {
+      ...defaultHeaders,
+      ...headers,
+    },
+  }).then(response => response.json());
 };
 
 const postData = async (path, data, headers = {}, queryParams = '') => {
@@ -50,25 +47,22 @@ const postData = async (path, data, headers = {}, queryParams = '') => {
   }
   const token = getToken();
   const defaultHeaders = getDefaultHeaders(token);
-  return fetch(
-    `${config.remoteUrl}${path}${queryParams !== '' ? queryParams : ''}`,
-    {
-      method: 'POST',
-      headers: {
-        ...defaultHeaders,
-        ...headers,
-      },
-      body: data,
-    }
-  ).then((response) => response.json());
+  return fetch(`${config.remoteUrl}${path}${queryParams !== '' ? queryParams : ''}`, {
+    method: 'POST',
+    headers: {
+      ...defaultHeaders,
+      ...headers,
+    },
+    body: data,
+  }).then(response => response.json());
 };
 
-const spotifyParams = (params) =>
+const spotifyParams = params =>
   params
     ? `?client_id=${params.client_id}&redirect_uri=${params.redirect_uri}&scope=${params.scope}&response_type=token&show_dialog=${params.show_dialog}`
     : '';
 
-const deezerParams = (params) =>
+const deezerParams = params =>
   params
     ? `?app_id=${params.client_id}&redirect_uri=${params.redirect_uri}&perms=${params.scope}`
     : '';
@@ -78,10 +72,4 @@ const deezerParams = (params) =>
 //     ? `?client_id=${params.client_id}&redirect_uri=${params.redirect_uri}&scope=${params.scope}&response_type=token&show_dialog=${params.show_dialog}`
 //     : '';
 
-export {
-  getData,
-  postData,
-  authorizeSpotifyUser,
-  authorizeDeezerUser,
-  fetchDeezerToken,
-};
+export { getData, postData, authorizeSpotifyUser, authorizeDeezerUser, fetchDeezerToken };

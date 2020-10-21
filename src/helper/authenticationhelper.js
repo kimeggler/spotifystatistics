@@ -41,10 +41,7 @@ const setToken = async () => {
   if (getTokenFromURL()) {
     const timeStamp = new Date();
     window.localStorage.setItem('statify_token', getTokenFromURL());
-    window.localStorage.setItem(
-      'statify_timestamp',
-      timeStamp.getTime() / 1000
-    );
+    window.localStorage.setItem('statify_timestamp', timeStamp.getTime() / 1000);
   }
 };
 
