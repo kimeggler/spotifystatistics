@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
-import Overview from './spotify/overview/overview';
-import Landingpage from './landingpage/landingpage';
-import Tracks from './spotify/tracks/tracks';
-import Artists from './spotify/artists/artists';
-import Analyze from './spotify/analyze/analyze';
+import Overview from './spotify/overview/Overview';
+import Landingpage from './landingpage/Landingpage';
+import Tracks from './spotify/tracks/Tracks';
+import Artists from './spotify/artists/Artists';
+import Analyze from './spotify/analyze/Analyze';
 import { Header } from './common';
 
 import './App.css';

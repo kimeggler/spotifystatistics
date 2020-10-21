@@ -2,10 +2,10 @@ import React from 'react';
 
 import './App.css';
 import AppRouter from './AppRouter';
-import SpotifyCallback from './auth/spotifycallback';
-import DeezerCallback from './auth/deezercallback';
+import SpotifyCallback from './auth/SpotifyCallback';
+import DeezerCallback from './auth/DeezerCallback';
 import { Switch, Route, withRouter, BrowserRouter } from 'react-router-dom';
-import About from './about/about';
+import About from './about/About';
 
 const App = () => {
   return (

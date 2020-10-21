@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Userbadge, Navigation } from '../';
+import { UserBadge, NavBar } from '..';
 import { getData } from '../../../services/fetchservice';
 
 import './_style.css';
@@ -23,8 +23,8 @@ function Header() {
           Statify
         </a>
       </h3>
-      <Navigation />
-      <Userbadge user={user} />
+      <NavBar />
+      <UserBadge user={user} />
     </div>
   );
 }

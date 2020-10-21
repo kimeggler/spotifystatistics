@@ -5,7 +5,7 @@ import { addThousendSeparator } from '../../../helper/stringOperationHelper';
 
 import './style.css';
 
-function ArtistTop() {
+const TopArtist = () => {
   const [topartist, setTopartist] = useState();
   const [timerange, setTimerange] = useState('medium_term');
 
@@ -60,6 +60,6 @@ function ArtistTop() {
       <div style={background} className="top-card-image"></div>
     </div>
   );
-}
+};
 
-export default ArtistTop;
+export default TopArtist;
