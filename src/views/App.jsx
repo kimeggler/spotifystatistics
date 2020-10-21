@@ -7,7 +7,7 @@ import DeezerCallback from './auth/deezercallback';
 import { Switch, Route, withRouter, BrowserRouter } from 'react-router-dom';
 import About from './about/About';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
@@ -21,6 +21,6 @@ function App() {
       </BrowserRouter>
     </div>
   );
-}
+};
 
 export default withRouter(App);
