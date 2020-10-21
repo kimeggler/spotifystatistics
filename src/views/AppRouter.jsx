@@ -29,7 +29,6 @@ const AppRouter = ({ isLoading }) => {
       <Route exact path="/artists" component={Artists} />
       <Route exact path="/tracks" component={Tracks} />
       <Route exact path="/analyze" component={Analyze} />
-      <Route component={Overview} />
     </div>
   );
 };

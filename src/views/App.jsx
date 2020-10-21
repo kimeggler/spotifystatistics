@@ -5,7 +5,7 @@ import AppRouter from './AppRouter';
 import SpotifyCallback from './auth/spotifycallback';
 import DeezerCallback from './auth/deezercallback';
 import { Switch, Route, withRouter, BrowserRouter } from 'react-router-dom';
-import About from './about/About';
+import About from './about/about';
 
 const App = () => {
   return (
