@@ -6,6 +6,7 @@ import './style.css';
 function Artists() {
   const [topartists, setTopartists] = useState();
   const [timerange, setTimerange] = useState('medium_term');
+
   useEffect(() => {
     const fetchTopArtist = async () => {
       let tracks = await getData('me/top/artists', {}, `?time_range=${timerange}&limit=50`);
@@ -13,6 +14,7 @@ function Artists() {
     };
     fetchTopArtist();
   }, [timerange]);
+
   if (!topartists) return null;
 
   const renderArtists = () => {

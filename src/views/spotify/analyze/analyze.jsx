@@ -9,6 +9,7 @@ function Analyze() {
   const [playlists, setPlaylists] = useState();
   const [activePlaylist, setActivePlaylist] = useState();
   const [analyse, setAnalyse] = useState();
+
   useEffect(() => {
     const fetchUser = async () => {
       // You can await here
@@ -17,6 +18,7 @@ function Analyze() {
     };
     fetchUser();
   }, []);
+
   useEffect(() => {
     const fetchTopArtist = async () => {
       if (!user) return null;
@@ -25,6 +27,7 @@ function Analyze() {
     };
     fetchTopArtist();
   }, [user]);
+
   useEffect(() => {
     const fetchAnalyse = async () => {
       if (!activePlaylist) return null;
@@ -33,6 +36,7 @@ function Analyze() {
     };
     fetchAnalyse();
   }, [activePlaylist]);
+
   if (!playlists) return null;
 
   const changePlaylist = id => {

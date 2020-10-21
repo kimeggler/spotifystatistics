@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import './style.css';
 import { setToken, getDeezerTokenFromURL } from '../../helper/authenticationhelper';
 import { fetchDeezerToken } from '../../services/fetchservice';
+
+import './style.css';
 
 function DeezerCallback() {
   useEffect(() => {

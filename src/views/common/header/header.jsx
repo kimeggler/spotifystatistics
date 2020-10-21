@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+
 import { Userbadge, Navigation } from '../';
-import './_style.css';
 import { getData } from '../../../services/fetchservice';
+
+import './_style.css';
 
 function Header() {
   const [user, setUser] = useState();
+
   useEffect(() => {
     const fetchUser = async () => {
       // You can await here

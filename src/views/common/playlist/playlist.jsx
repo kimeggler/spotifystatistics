@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import './style.css';
 import { getAudioAnalysis } from '../../../helper/analysationhelper';
 
-function Playlist(playlist, activePlaylist, setActivePlaylist, analyse) {
+function Playlist(playlist, activePlaylist, analyse) {
   let background = {};
   if (playlist.images[0]) {
     background = {
@@ -10,14 +10,14 @@ function Playlist(playlist, activePlaylist, setActivePlaylist, analyse) {
     };
   }
 
-  const renderAnalysis = (analyse, name) => {
+  const renderAnalysis = analyse => {
     if (!analyse) {
       return null;
     }
     return (
       <div className="playlist-overlay">
         <p className="analyse-title">
-          Based on Spotify's classification of the Songs in your Playlist
+          Based on Spotify&apos;s classification of the Songs in your Playlist
         </p>
         {analyse.danceability * 100 >= 50 ? null : (
           <div className="analyse-property">

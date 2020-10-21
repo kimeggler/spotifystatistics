@@ -8,6 +8,7 @@ function Tracks() {
   const [showNotification, setShowNotification] = useState();
   const [toptracks, setToptracks] = useState();
   const [timerange, setTimerange] = useState('medium_term');
+
   useEffect(() => {
     const fetchTopArtist = async () => {
       let tracks = await getData('me/top/tracks', {}, `?time_range=${timerange}&limit=50`);
@@ -15,6 +16,7 @@ function Tracks() {
     };
     fetchTopArtist();
   }, [timerange]);
+
   const mapTrackUris = () => {
     return toptracks.map(track => {
       return track.uri;

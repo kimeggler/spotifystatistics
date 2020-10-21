@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
-import './style.css';
+
 import { setToken } from '../../helper/authenticationhelper';
+
+import './style.css';
 
 function SpotifyCallback() {
   useEffect(() => {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Switch, Route, withRouter } from 'react-router-dom';
 
 import Overview from './spotify/overview/overview';
@@ -13,20 +14,25 @@ import './App.css';
 import { validateToken } from '../helper/authenticationhelper';
 
 class AppRouter extends Component {
-  state = {
-    hasError: false,
-    isLoggedIn: false,
-  };
+  constructor() {
+    super();
 
-  componentDidCatch(err) {
+    this.state = {
+      hasError: false,
+      isLoggedIn: false,
+    };
+  }
+
+  componentDidCatch() {
     this.setState({
       hasError: true,
     });
   }
 
-  render = () => {
+  render() {
     const { hasError } = this.state;
     const { isLoading } = this.props;
+
     if (isLoading) {
       return null;
     }
@@ -51,7 +57,17 @@ class AppRouter extends Component {
         </Switch>
       </div>
     );
-  };
+  }
 }
+
+
+AppRouter.propTypes = {
+  isLoading: PropTypes.bool.isRequired
+}
+
+AppRouter.defaultProps = {
+  isLoading: false
+}
+
 
 export default withRouter(AppRouter);

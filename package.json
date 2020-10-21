@@ -3,24 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "copyfiles": "^2.2.0",
-    "history": "^4.10.1",
-    "moment": "^2.24.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-ga": "^2.7.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.1"
+    "copyfiles": "2.4.0",
+    "history": "5.0.0",
+    "moment": "2.29.1",
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
+    "react-ga": "3.2.0",
+    "react-router-dom": "5.2.0",
+    "react-scripts": "3.4.4"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "5.11.4",
+    "@testing-library/react": "11.1.0",
+    "@testing-library/user-event": "12.1.9",
+    "eslint-plugin-react": "7.21.5",
+    "prettier": "2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && copyfiles _redirects build/ && copyfiles sitemaps.xml build/",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
+    "lint": "eslint \"**/*.{js,jsx}\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -36,8 +41,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "prettier": "^2.1.2"
   }
 }
