@@ -5,11 +5,7 @@ const useDataHook = request => {
   const [isLoading, setIsLoading] = useState(null);
   const [hasError, setHasError] = useState(false);
 
-  console.log('hook');
-
   useEffect(() => {
-    if (isLoading) return;
-
     setIsLoading(true);
     setHasError(false);
 
