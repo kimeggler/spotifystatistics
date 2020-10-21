@@ -1,60 +1,54 @@
 import React, { useEffect, useState } from 'react';
-
-import { getData } from '../../../services/fetchservice';
-import { addThousendSeparator } from '../../../helper/stringOperationHelper';
+import cx from 'classnames';
 
 import './style.css';
+import FormattedNumber from '../formattednumber/FormattedNumber';
+
+import rangeOptions from './range-options';
+import Spinner from '../spinner/Spinner';
+import DefaultErrorMessage from '../errors/DefaultErrorMessage';
+import { fetchMyTopArtist } from '../../../services/spotifyservice';
+import useDataHook from '../../../hooks/useDataHook';
 
 const TopArtist = () => {
-  const [topartist, setTopartist] = useState();
   const [timerange, setTimerange] = useState('medium_term');
+  const [artistRequest, setArtistRequest] = useState(() => () => fetchMyTopArtist(timerange));
+  const { data: topArtist, isLoading, hasError } = useDataHook(artistRequest);
 
   useEffect(() => {
-    const fetchTopArtist = async () => {
-      let artist = await getData('me/top/artists', {}, `?time_range=${timerange}&limit=1`);
-      setTopartist(artist.items[0]);
-    };
-    fetchTopArtist();
+    setArtistRequest(() => () => fetchMyTopArtist(timerange));
   }, [timerange]);
 
-  if (!topartist) return null;
+  if (hasError) return <DefaultErrorMessage />;
+  if (!topArtist && isLoading !== false) return <Spinner />;
+
   const background = {
-    backgroundImage: `url(${topartist.images[0].url})`,
+    backgroundImage: `url(${topArtist.images[0].url})`,
   };
 
   return (
     <div className="artist-top">
+      {isLoading && <Spinner className="overlay" />}
       <div className="top-card-information top-card-information-artist">
-        <p className="top-card-description">Dein Top-Artist</p>
-        <p className="bold top-card-primary">{topartist.name}</p>
+        <p className="top-card-description">Your Top-Artist</p>
+        <p className="bold top-card-primary">{topArtist.name}</p>
         <p className="top-card-secondary">
-          Followers: {addThousendSeparator(topartist.followers.total)}
+          Followers: <FormattedNumber value={topArtist.followers.total} />
         </p>
         <div className="time-switch padding-right">
-          <div
-            onClick={() => {
-              setTimerange('short_term');
-            }}
-            className={`time-button ${timerange === 'short_term' ? 'button-selected' : ''}`}
-          >
-            1 month
-          </div>
-          <div
-            onClick={() => {
-              setTimerange('medium_term');
-            }}
-            className={`time-button ${timerange === 'medium_term' ? 'button-selected' : ''}`}
-          >
-            6 months
-          </div>
-          <div
-            onClick={() => {
-              setTimerange('long_term');
-            }}
-            className={`time-button ${timerange === 'long_term' ? 'button-selected' : ''}`}
-          >
-            all time
-          </div>
+          {rangeOptions.map((option, idx) => (
+            <div
+              key={idx}
+              onClick={() => !isLoading && setTimerange(option.value)}
+              className={cx(
+                'time-button',
+                option.value === timerange ? 'button-selected' : '',
+                isLoading && 'disabled',
+              )}
+            >
+              {option.label}
+            </div>
+          ))}
         </div>
       </div>
       <div style={background} className="top-card-image"></div>

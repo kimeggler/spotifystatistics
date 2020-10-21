@@ -5,9 +5,9 @@ import { getData } from '../../../services/fetchservice';
 import './style.css';
 
 function Analyze() {
+  const { profile } = useContext(UserContext);
   const [playlists, setPlaylists] = useState();
   const [activePlaylist, setActivePlaylist] = useState();
-  const { profile } = useContext(UserContext);
 
   useEffect(() => {
     const fetchTopArtist = async () => {

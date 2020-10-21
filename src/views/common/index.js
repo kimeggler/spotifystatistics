@@ -17,3 +17,7 @@ export { default as ShowAt } from './defaultscreens/ShowAt';
 export { default as ScreenToSmall } from './errors/ScreenToSmall';
 
 export { default as NavBar } from './navbar/NavBar';
+
+export  {default as Spinner } from './spinner/Spinner';
+
+export  {default as DefaultErrorMessage} from './errors/DefaultErrorMessage'

@@ -1,56 +1,51 @@
 import React, { useState, useEffect } from 'react';
-import { getData } from '../../../services/fetchservice';
-import './style.css';
+import cx from 'classnames';
+import useDataHook from '../../../hooks/useDataHook';
+import { fetchMyTopTrack } from '../../../services/spotifyservice';
+import DefaultErrorMessage from '../errors/DefaultErrorMessage';
+import Spinner from '../spinner/Spinner';
+import rangeOptions from './range-options';
 
 function TrackTop() {
-  const [toptrack, setToptrack] = useState();
   const [timerange, setTimerange] = useState('medium_term');
+  const [trackRequest, setTrackRequest] = useState(() => () => fetchMyTopTrack(timerange));
+  const { data: topTrack, isLoading, hasError } = useDataHook(trackRequest);
+
   useEffect(() => {
-    const fetchTopArtist = async () => {
-      let track = await getData('me/top/tracks', {}, `?time_range=${timerange}&limit=1`);
-      setToptrack(track.items[0]);
-    };
-    fetchTopArtist();
+    setTrackRequest(() => () => fetchMyTopTrack(timerange));
   }, [timerange]);
-  if (!toptrack) return null;
+
+  if (hasError) return <DefaultErrorMessage />;
+  if (!topTrack && isLoading !== false) return <Spinner />;
+
   const background = {
-    backgroundImage: `url(${toptrack.album.images[0].url})`,
+    backgroundImage: `url(${topTrack.album.images[0].url})`,
   };
+
   return (
     <div className="artist-top">
-      {/* <img alt={toptrack.artists[0].name} src={toptrack.album.images[0].url} className='top-card-image' /> */}
+      {isLoading && <Spinner className="overlay" />}
       <div style={background} className="top-card-image"></div>
       <div className="top-card-information top-card-information-track">
         <p className="image-description padding-left top-card-description">Dein Top-Song</p>
-        <p className="image-description padding-left bold top-card-primary">{toptrack.name}</p>
+        <p className="image-description padding-left bold top-card-primary">{topTrack.name}</p>
         <p className="image-description padding-left top-card-secondary">
-          {toptrack.artists[0].name}
+          {topTrack.artists[0].name}
         </p>
         <div className="time-switch padding-left">
-          <div
-            onClick={() => {
-              setTimerange('short_term');
-            }}
-            className={`time-button ${timerange === 'short_term' ? 'button-selected' : ''}`}
-          >
-            1 month
-          </div>
-          <div
-            onClick={() => {
-              setTimerange('medium_term');
-            }}
-            className={`time-button ${timerange === 'medium_term' ? 'button-selected' : ''}`}
-          >
-            6 months
-          </div>
-          <div
-            onClick={() => {
-              setTimerange('long_term');
-            }}
-            className={`time-button ${timerange === 'long_term' ? 'button-selected' : ''}`}
-          >
-            all time
-          </div>
+          {rangeOptions.map((option, idx) => (
+            <div
+              key={idx}
+              onClick={() => !isLoading && setTimerange(option.value)}
+              className={cx(
+                'time-button',
+                option.value === timerange ? 'button-selected' : '',
+                isLoading && 'disabled',
+              )}
+            >
+              {option.label}
+            </div>
+          ))}
         </div>
       </div>
     </div>
