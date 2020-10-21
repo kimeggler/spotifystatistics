@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
-import { ShowAt } from '../../common';
+import { ShowAt } from '..';
 
 import './style.css';
 

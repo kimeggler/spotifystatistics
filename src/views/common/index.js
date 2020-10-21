@@ -16,4 +16,4 @@ export { default as ShowAt } from './defaultscreens/ShowAt';
 
 export { default as ScreenToSmall } from './errors/ScreenToSmall';
 
-export { default as Navigation } from './navigation/Navigation';
+export { default as Navigation } from './navigation/navigation';
