@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { UserBadge, NavBar } from '..';
-import { getData } from '../../../services/fetchservice';
 
 import './_style.css';
 
-function Header() {
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      // You can await here
-      setUser(await getData('me'));
-      // ...
-    };
-    fetchUser();
-  }, []);
+const Header = () => {
   return (
     <div className="header">
       <h3 className="title">
@@ -24,9 +13,9 @@ function Header() {
         </a>
       </h3>
       <NavBar />
-      <UserBadge user={user} />
+      <UserBadge />
     </div>
   );
-}
+};
 
 export default Header;

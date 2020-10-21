@@ -1,32 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './style.css';
 import { Playlist } from '../../common';
 import { getData } from '../../../services/fetchservice';
 import { getAudioAnalysis } from '../../../helper/analysationhelper';
+import { UserContext } from '../../AppRouter';
 
 function Analyze() {
-  const [user, setUser] = useState();
+  const { profile } = useContext(UserContext);
   const [playlists, setPlaylists] = useState();
   const [activePlaylist, setActivePlaylist] = useState();
   const [analyse, setAnalyse] = useState();
 
   useEffect(() => {
-    const fetchUser = async () => {
-      // You can await here
-      setUser(await getData('me'));
-      // ...
-    };
-    fetchUser();
-  }, []);
-
-  useEffect(() => {
     const fetchTopArtist = async () => {
-      if (!user) return null;
-      let tracks = await getData(`users/${user.id}/playlists`, null, '?limit=50');
+      let tracks = await getData(`users/${profile.id}/playlists`, null, '?limit=50');
       setPlaylists(tracks.items);
     };
     fetchTopArtist();
-  }, [user]);
+  }, [profile]);
 
   useEffect(() => {
     const fetchAnalyse = async () => {

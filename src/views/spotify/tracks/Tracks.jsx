@@ -1,6 +1,7 @@
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getData, postData } from '../../../services/fetchservice';
+import { UserContext } from '../../AppRouter';
 import { Track } from '../../common';
 import './style.css';
 
@@ -8,6 +9,8 @@ function Tracks() {
   const [showNotification, setShowNotification] = useState();
   const [toptracks, setToptracks] = useState();
   const [timerange, setTimerange] = useState('medium_term');
+
+  const { profile } = useContext(UserContext);
 
   useEffect(() => {
     const fetchTopArtist = async () => {
@@ -43,8 +46,8 @@ function Tracks() {
       const tracks = JSON.stringify({
         uris: mapTrackUris(),
       });
-      const user = await getData('me');
-      const createdPlaylist = await postData(`users/${user.id}/playlists`, playlist);
+
+      const createdPlaylist = await postData(`users/${profile.id}/playlists`, playlist);
       const response = await postData(`playlists/${createdPlaylist.id}/tracks`, tracks);
 
       setShowNotification('done');

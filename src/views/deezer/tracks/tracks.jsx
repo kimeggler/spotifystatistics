@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { getData, postData } from '../../../services/fetchservice';
 import { Track } from '../../common';
 import './style.css';
 import moment from 'moment';
+import { UserContext } from '../../AppRouter';
 
 function Tracks() {
   const [toptracks, setToptracks] = useState();
   const [timerange, setTimerange] = useState('medium_term');
+
+  const { profile } = useContext(UserContext);
+
   useEffect(() => {
     const fetchTopArtist = async () => {
       let tracks = await getData('me/top/tracks', {}, `?time_range=${timerange}&limit=50`);
@@ -31,8 +35,7 @@ function Tracks() {
     const tracks = JSON.stringify({
       uris: mapTrackUris(),
     });
-    const user = await getData('me');
-    const createdPlaylist = await postData(`users/${user.id}/playlists`, playlist);
+    const createdPlaylist = await postData(`users/${profile.id}/playlists`, playlist);
     const response = await postData(`playlists/${createdPlaylist.id}/tracks`, tracks);
     return response;
   };

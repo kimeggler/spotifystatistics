@@ -1,15 +1,13 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import { ShowAt } from '..';
 import { close, user_icon, menu_icon } from '../../../assets';
 import { logout } from '../../../helper/authenticationhelper';
+import { UserContext } from '../../AppRouter';
 import './style.css';
 
 function Userbadge(user) {
+  const { profile } = useContext(UserContext);
   const [menuActive, setMenuActive] = useState('');
-
-  if (user.user === undefined) {
-    return null;
-  }
 
   const toggleScroll = () => {
     if (document.body.classList.contains('no-scroll')) {
@@ -49,9 +47,9 @@ function Userbadge(user) {
             src={
               !menuActive
                 ? menu_icon
-                : user.user.images[0] === undefined
+                : profile.images[0] === undefined
                 ? user_icon
-                : user.user.images[0].url
+                : profile.images[0].url
             }
             className={`user_image_mobile ${menuActive ? 'user_image' : null}`}
           />
@@ -110,12 +108,12 @@ function Userbadge(user) {
       <ShowAt breakpoint="1000AndAbove">
         <div className="user_badge">
           <img
-            alt={user.user.display_name}
-            src={user.user.images[0] === undefined ? user_icon : user.user.images[0].url}
+            alt={profile.display_name}
+            src={profile.images[0] === undefined ? user_icon : profile.images[0].url}
             className="user_image"
           />
           <div className="user_information">
-            <p className="user_name">{user.user.display_name}</p>
+            <p className="user_name">{profile.display_name}</p>
             <p className="logout_button" onClick={() => logout()}>
               Logout
             </p>

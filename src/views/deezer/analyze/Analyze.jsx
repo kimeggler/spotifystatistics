@@ -1,26 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import './style.css';
+import React, { useState, useEffect, useContext } from 'react';
 import { Playlist } from '../../common';
 import { getData } from '../../../services/fetchservice';
 
+import './style.css';
+
 function Analyze() {
-  const [user, setUser] = useState();
   const [playlists, setPlaylists] = useState();
   const [activePlaylist, setActivePlaylist] = useState();
+  const { profile } = useContext(UserContext);
+
   useEffect(() => {
-    const fetchUser = async () => {
-      // You can await here
-      setUser(await getData('me'));
-      // ...
-    };
     const fetchTopArtist = async () => {
-      fetchUser();
-      if (!user) return;
-      let tracks = await getData(`users/${user.user.id}/playlists`);
+      if (!profile) return;
+      let tracks = await getData(`users/${profile.id}/playlists`);
       setPlaylists(tracks.items);
     };
     fetchTopArtist();
-  }, [activePlaylist, user]);
+  }, [activePlaylist, profile]);
+
   if (!playlists) return null;
 
   const changePlaylist = index => {
