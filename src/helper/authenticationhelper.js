@@ -45,9 +45,4 @@ const setToken = async () => {
   }
 };
 
-const logout = () => {
-  clearToken();
-  window.location.reload();
-};
-
-export { validateToken, setToken, logout, getToken, getDeezerTokenFromURL };
+export { validateToken, setToken, getToken, getDeezerTokenFromURL, clearToken };

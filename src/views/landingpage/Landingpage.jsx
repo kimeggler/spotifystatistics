@@ -3,8 +3,16 @@ import './style.css';
 import { authorizeSpotifyUser } from '../../services/fetchservice';
 
 import { startscreen, spotify } from '../../assets';
+import { useHistory } from 'react-router-dom';
+import { validateToken } from '../../helper/authenticationhelper';
 
 function Landingpage() {
+  const history = useHistory();
+
+  if (validateToken()) {
+    history.push('/overview');
+  }
+
   return (
     <div className="landingpage">
       <div className="login-area">

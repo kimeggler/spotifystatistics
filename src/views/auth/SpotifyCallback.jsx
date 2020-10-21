@@ -1,17 +1,12 @@
-import { useEffect } from 'react';
-
+import { useHistory } from 'react-router-dom';
 import { setToken } from '../../helper/authenticationhelper';
 
 import './style.css';
 
 function SpotifyCallback() {
-  useEffect(() => {
-    const setCredentials = async () => {
-      await setToken();
-    };
-    setCredentials();
-    window.location.replace(origin);
-  }, []);
+  const history = useHistory();
+
+  setToken().then(() => history.push('/overview'));
   return null;
 }
 

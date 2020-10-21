@@ -1,13 +1,21 @@
 import React, { Fragment, useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { ShowAt } from '..';
 import { close, user_icon, menu_icon } from '../../../assets';
-import { logout } from '../../../helper/authenticationhelper';
+import { clearToken } from '../../../helper/authenticationhelper';
 import { UserContext } from '../../AppRouter';
+
 import './style.css';
 
-function Userbadge(user) {
+function Userbadge() {
+  const history = useHistory();
   const { profile } = useContext(UserContext);
   const [menuActive, setMenuActive] = useState('');
+
+  const logout = () => {
+    clearToken();
+    history.push('/');
+  };
 
   const toggleScroll = () => {
     if (document.body.classList.contains('no-scroll')) {

@@ -38,7 +38,7 @@ const AppRouter = ({ isLoading }) => {
     <UserContext.Provider value={{ profile }}>
       <div className="router-section" id="router-element">
         <Header />
-        <Route exact path="/" component={Overview} />
+        <Route exact path="/overview" component={Overview} />
         <Route exact path="/artists" component={Artists} />
         <Route exact path="/tracks" component={Tracks} />
         <Route exact path="/analyze" component={Analyze} />

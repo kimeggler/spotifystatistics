@@ -1,6 +1,6 @@
-export default  [
+export default [
   {
-    path: '/',
+    path: '/overview',
     label: 'Overview',
   },
   {
