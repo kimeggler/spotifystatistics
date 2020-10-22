@@ -1,28 +1,22 @@
-import {
-  getData
-} from '../services/fetchservice';
+import { getData } from '../services/fetchservice';
 
-const getAudioAnalysis = async (playlist_id) => {
+const getAudioAnalysis = async playlist_id => {
   const songs_ids = await getSongs(playlist_id);
   const songs_audio_features = await getSongFeatures(songs_ids);
   return formatData(songs_audio_features);
 };
 
-const getSongs = async (playlist_id) => {
-  const songs = await getData(
-    `playlists/${playlist_id}/tracks`,
-    null,
-    '?field=items(id)'
-  );
-  return songs.items.map((song) => song.track.id);
+const getSongs = async playlist_id => {
+  const songs = await getData(`playlists/${playlist_id}/tracks`, null, '?field=items(id)');
+  return songs.items.map(song => song.track.id);
 };
 
-const getSongFeatures = async (ids) => {
+const getSongFeatures = async ids => {
   const id_string = ids.reduce((prev, curr, i) => {
     return prev + curr + (i === ids.length - 1 ? '' : ',');
   }, '');
   return await getData('audio-features', null, `?ids=${id_string}`).then(
-    (result) => result.audio_features
+    result => result.audio_features,
   );
 };
 
@@ -55,13 +49,11 @@ const divideData = (prev, count) => {
   return prev;
 };
 
-const formatData = (songs) => {
+const formatData = songs => {
   const playlist_analysis = songs.reduce((prev, curr, i) => {
     return i === songs.length - 1 ? divideData(prev, i) : addData(prev, curr);
   });
   return playlist_analysis;
 };
 
-export {
-  getAudioAnalysis
-};
+export { getAudioAnalysis };

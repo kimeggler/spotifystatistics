@@ -1,57 +1,58 @@
-import React, { Component } from 'react';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import React, { createContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
 
-import Overview from './spotify/overview/overview';
-import Landingpage from './landingpage/landingpage';
-import Tracks from './spotify/tracks/tracks';
-import Artists from './spotify/artists/artists';
-import Analyze from './spotify/analyze/analyze';
+import Overview from './spotify/overview/Overview';
+import Landingpage from './landingpage/Landingpage';
+import Tracks from './spotify/tracks/Tracks';
+import Artists from './spotify/artists/Artists';
+import Analyze from './spotify/analyze/Analyze';
 import { Header } from './common';
 
 import './App.css';
 
 import { validateToken } from '../helper/authenticationhelper';
+import { getData } from '../services/fetchservice';
 
-class AppRouter extends Component {
-  state = {
-    hasError: false,
-    isLoggedIn: false,
-  };
+export const UserContext = createContext();
 
-  componentDidCatch(err) {
-    this.setState({
-      hasError: true,
-    });
+const AppRouter = ({ isLoading }) => {
+  const [profile, setProfile] = useState();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      setProfile(await getData('me'));
+    };
+    fetchUser();
+  }, []);
+
+  if (isLoading || !profile) {
+    return null;
   }
 
-  render = () => {
-    const { hasError } = this.state;
-    const { isLoading } = this.props;
-    if (isLoading) {
-      return null;
-    }
+  if (!validateToken()) {
+    return <Landingpage />;
+  }
 
-    if (hasError) {
-      return null;
-    }
-
-    if (!validateToken()) {
-      return <Landingpage />;
-    }
-
-    return (
-      <div className='router-section' id='router-element'>
+  return (
+    <UserContext.Provider value={{ profile }}>
+      <div className="router-section" id="router-element">
         <Header />
-        <Switch>
-          <Route exact path='/' component={Overview} />
-          <Route exact path='/artists' component={Artists} />
-          <Route exact path='/tracks' component={Tracks} />
-          <Route exact path='/analyze' component={Analyze} />
-          <Route component={Overview} />
-        </Switch>
+        <Route exact path="/overview" component={Overview} />
+        <Route exact path="/artists" component={Artists} />
+        <Route exact path="/tracks" component={Tracks} />
+        <Route exact path="/analyze" component={Analyze} />
       </div>
-    );
-  };
-}
+    </UserContext.Provider>
+  );
+};
 
-export default withRouter(AppRouter);
+AppRouter.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+};
+
+AppRouter.defaultProps = {
+  isLoading: false,
+};
+
+export default AppRouter;

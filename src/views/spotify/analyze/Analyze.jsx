@@ -1,34 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './style.css';
 import { Playlist } from '../../common';
 import { getData } from '../../../services/fetchservice';
 import { getAudioAnalysis } from '../../../helper/analysationhelper';
+import { UserContext } from '../../AppRouter';
 
 function Analyze() {
-  const [user, setUser] = useState();
+  const { profile } = useContext(UserContext);
   const [playlists, setPlaylists] = useState();
   const [activePlaylist, setActivePlaylist] = useState();
   const [analyse, setAnalyse] = useState();
-  useEffect(() => {
-    const fetchUser = async () => {
-      // You can await here
-      setUser(await getData('me'));
-      // ...
-    };
-    fetchUser();
-  }, []);
+
   useEffect(() => {
     const fetchTopArtist = async () => {
-      if (!user) return null;
-      let tracks = await getData(
-        `users/${user.id}/playlists`,
-        null,
-        '?limit=50'
-      );
+      let tracks = await getData(`users/${profile.id}/playlists`, null, '?limit=50');
       setPlaylists(tracks.items);
     };
     fetchTopArtist();
-  }, [user]);
+  }, [profile]);
+
   useEffect(() => {
     const fetchAnalyse = async () => {
       if (!activePlaylist) return null;
@@ -37,28 +27,29 @@ function Analyze() {
     };
     fetchAnalyse();
   }, [activePlaylist]);
+
   if (!playlists) return null;
 
-  const changePlaylist = (id) => {
+  const changePlaylist = id => {
     setActivePlaylist(id);
     setAnalyse(null);
   };
 
   const renderPlaylists = () => {
-    return playlists.map((playlist) => {
+    return playlists.map(playlist => {
       return Playlist(
         playlist,
         activePlaylist,
         changePlaylist,
-        activePlaylist === playlist.id ? analyse : null
+        activePlaylist === playlist.id ? analyse : null,
       );
     });
   };
 
   return (
-    <div className='analyze'>
+    <div className="analyze">
       <h1>How funky are your playlists?</h1>
-      <div className='analyze-content'>{renderPlaylists()}</div>
+      <div className="analyze-content">{renderPlaylists()}</div>
     </div>
   );
 }

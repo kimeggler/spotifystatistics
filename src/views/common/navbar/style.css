@@ -16,7 +16,7 @@
 
 .navigation-inactive::after {
   position: absolute;
-  content: "";
+  content: '';
   width: 120%;
   height: 3px;
   background: white;
@@ -24,10 +24,10 @@
   left: -10%;
   transform: scaleX(0);
   transform-origin: center;
-  -webkit-transition: -webkit-transform .3s;
-  transition: -webkit-transform .3s;
-  transition: transform .3s;
-  transition: transform .3s, -webkit-transform .3s;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
 }
 
 .navigation-inactive:hover::after {

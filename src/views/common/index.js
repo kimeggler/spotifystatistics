@@ -1,19 +1,23 @@
-export { default as Artist } from './artist/artist';
+export { default as Artist } from './artist/Artist';
 
-export { default as ArtistTop } from './artist-top/artist-top';
+export { default as TopArtist } from './top-artist/TopArtist';
 
-export { default as Track } from './track/track';
+export { default as Track } from './track/Track';
 
-export { default as TrackTop } from './track-top/track-top';
+export { default as TopTrack } from './top-track/TopTrack';
 
-export { default as Playlist } from './playlist/playlist';
+export { default as Playlist } from './playlist/Playlist';
 
-export { default as Header } from './header/header';
+export { default as Header } from './header/Header';
 
-export { default as Userbadge } from './user-badge/user-badge';
+export { default as UserBadge } from './user-badge/UserBadge';
 
 export { default as ShowAt } from './defaultscreens/ShowAt';
 
 export { default as ScreenToSmall } from './errors/ScreenToSmall';
 
-export { default as Navigation } from './navigation/Navigation';
+export { default as NavBar } from './navbar/NavBar';
+
+export  {default as Spinner } from './spinner/Spinner';
+
+export  {default as DefaultErrorMessage} from './errors/DefaultErrorMessage'

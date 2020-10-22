@@ -41,16 +41,8 @@ const setToken = async () => {
   if (getTokenFromURL()) {
     const timeStamp = new Date();
     window.localStorage.setItem('statify_token', getTokenFromURL());
-    window.localStorage.setItem(
-      'statify_timestamp',
-      timeStamp.getTime() / 1000
-    );
+    window.localStorage.setItem('statify_timestamp', timeStamp.getTime() / 1000);
   }
 };
 
-const logout = () => {
-  clearToken();
-  window.location.reload();
-};
-
-export { validateToken, setToken, logout, getToken, getDeezerTokenFromURL };
+export { validateToken, setToken, getToken, getDeezerTokenFromURL, clearToken };

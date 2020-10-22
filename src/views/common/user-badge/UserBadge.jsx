@@ -1,15 +1,21 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { ShowAt } from '..';
 import { close, user_icon, menu_icon } from '../../../assets';
-import { logout } from '../../../helper/authenticationhelper';
+import { clearToken } from '../../../helper/authenticationhelper';
+import { UserContext } from '../../AppRouter';
+
 import './style.css';
 
-function Userbadge(user) {
+function Userbadge() {
+  const history = useHistory();
+  const { profile } = useContext(UserContext);
   const [menuActive, setMenuActive] = useState('');
 
-  if (user.user === undefined) {
-    return null;
-  }
+  const logout = () => {
+    clearToken();
+    history.push('/');
+  };
 
   const toggleScroll = () => {
     if (document.body.classList.contains('no-scroll')) {
@@ -20,7 +26,7 @@ function Userbadge(user) {
           event.preventDefault();
           event.stopPropagation();
         },
-        false
+        false,
       );
     } else {
       document.body.classList.add('no-scroll');
@@ -30,7 +36,7 @@ function Userbadge(user) {
           event.preventDefault();
           event.stopPropagation();
         },
-        false
+        false,
       );
     }
   };
@@ -42,85 +48,81 @@ function Userbadge(user) {
 
   return (
     <Fragment>
-      <ShowAt breakpoint='1000AndBelow'>
-        <div className='user_badge' onClick={() => toggleMenu()}>
+      <ShowAt breakpoint="1000AndBelow">
+        <div className="user_badge" onClick={() => toggleMenu()}>
           <img
-            alt='menu icon'
+            alt="menu icon"
             src={
               !menuActive
                 ? menu_icon
-                : user.user.images[0] === undefined
+                : profile.images[0] === undefined
                 ? user_icon
-                : user.user.images[0].url
+                : profile.images[0].url
             }
             className={`user_image_mobile ${menuActive ? 'user_image' : null}`}
           />
         </div>
         <div className={`fullscreen-menu ${menuActive}`}>
           <a
-            href='/'
+            href="/"
             className={`fullscreen-navigation-item ${
               window.location.href.split('/')[3] === ''
                 ? 'fullscreen-navigation-active'
                 : 'fullscreen-navigation-inactive'
-            }`}>
+            }`}
+          >
             Overview
           </a>
           <a
-            href='/artists'
+            href="/artists"
             className={`fullscreen-navigation-item ${
               window.location.href.split('/')[3] === 'artists'
                 ? 'fullscreen-navigation-active'
                 : 'fullscreen-navigation-inactive'
-            }`}>
+            }`}
+          >
             Artists
           </a>
           <a
-            href='/tracks'
+            href="/tracks"
             className={`fullscreen-navigation-item ${
               window.location.href.split('/')[3] === 'tracks'
                 ? 'fullscreen-navigation-active'
                 : 'fullscreen-navigation-inactive'
-            }`}>
+            }`}
+          >
             Tracks
           </a>
           <a
-            href='/analyze'
+            href="/analyze"
             className={`fullscreen-navigation-item ${
               window.location.href.split('/')[3] === 'analyze'
                 ? 'fullscreen-navigation-active'
                 : 'fullscreen-navigation-inactive'
-            }`}>
+            }`}
+          >
             Playlists
           </a>
-          <img
-            src={close}
-            alt='close'
-            className='close-menu'
-            onClick={() => toggleMenu()}
-          />
+          <img src={close} alt="close" className="close-menu" onClick={() => toggleMenu()} />
           <p
             onClick={() => logout()}
-            className={`fullscreen-navigation-item fullscreen-navigation-logout`}>
+            className={`fullscreen-navigation-item fullscreen-navigation-logout`}
+          >
             Logout
           </p>
         </div>
       </ShowAt>
 
-      <ShowAt breakpoint='1000AndAbove'>
-        <div className='user_badge'>
+      <ShowAt breakpoint="1000AndAbove">
+        <div className="user_badge">
           <img
-            alt={user.user.display_name}
-            src={
-              user.user.images[0] === undefined
-                ? user_icon
-                : user.user.images[0].url
-            }
-            className='user_image'
+            alt={profile.display_name}
+            src={profile.images[0] === undefined ? user_icon : profile.images[0].url}
+            className="user_image"
           />
-          <div className='user_information'>
-            <p className='user_name'>{user.user.display_name}</p>
-            <p className='logout_button' onClick={() => logout()}>
+          <div className="user_information">
+            <p className="user_name">{profile.display_name}</p>
+            <p className="logout_button" onClick={() => logout()}>
               Logout
             </p>
           </div>

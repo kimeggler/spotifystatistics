@@ -15,7 +15,7 @@ class HideShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false
+      visible: false,
     };
 
     this.breakpoint = '';
@@ -39,7 +39,7 @@ class HideShow extends React.Component {
   componentDidMount() {
     if (!window.matchMedia) {
       throw new Error(
-        'Window.matchMedia is not supported by your Browser. Please update your Browser!'
+        'Window.matchMedia is not supported by your Browser. Please update your Browser!',
       );
     }
 
@@ -59,21 +59,17 @@ class HideShow extends React.Component {
 
     if (this.props.hide) {
       this.setState({
-        visible: !breakpointActive
+        visible: !breakpointActive,
       });
     } else {
       this.setState({
-        visible: breakpointActive
+        visible: breakpointActive,
       });
     }
   }
 
   render() {
-    return this.state.visible
-      ? <Fragment>
-        {this.props.children}
-      </Fragment>
-      : null;
+    return this.state.visible ? <Fragment>{this.props.children}</Fragment> : null;
   }
 }
 
@@ -81,11 +77,11 @@ HideShow.propTypes = {
   hide: PropTypes.bool.isRequired,
   breakpoint: breakpointValidation,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 HideShow.defaultProps = {
-  breakpoint: breakpointsConfig.default
+  breakpoint: breakpointsConfig.default,
 };
 
 export default HideShow;
