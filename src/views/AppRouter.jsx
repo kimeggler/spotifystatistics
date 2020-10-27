@@ -7,7 +7,7 @@ import Landingpage from './landingpage/Landingpage';
 import Tracks from './spotify/tracks/Tracks';
 import Artists from './spotify/artists/Artists';
 import Analyze from './spotify/analyze/Analyze';
-import { Header } from './common';
+import { Header, Footer } from './common';
 
 import './App.css';
 
@@ -42,6 +42,7 @@ const AppRouter = ({ isLoading }) => {
         <Route exact path="/artists" component={Artists} />
         <Route exact path="/tracks" component={Tracks} />
         <Route exact path="/analyze" component={Analyze} />
+        <Footer />
       </div>
     </UserContext.Provider>
   );

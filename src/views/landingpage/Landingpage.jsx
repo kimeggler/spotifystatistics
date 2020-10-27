@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import { authorizeSpotifyUser } from '../../services/fetchservice';
 
-import { startscreen, spotify } from '../../assets';
+import { startscreen } from '../../assets';
 import { useHistory } from 'react-router-dom';
 import { validateToken } from '../../helper/authenticationhelper';
 
@@ -30,14 +30,8 @@ function Landingpage() {
               window.location.replace(authorizeSpotifyUser());
             }}
           >
-            <img className="login-button-image spotify-image" src={spotify} alt="spotify" />
+            LOG IN WITH SPOTIFY
           </button>
-          {/* <button
-            onClick={() => {
-              window.location.replace(authorizeSpotifyUser());
-            }}>
-            <img className='login-button-image' src={deezer} alt='deezer' />
-          </button> */}
         </div>
       </div>
       <div className="login-image-area">

@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { getData } from '../../../services/fetchservice';
-import { Artist } from '../../common';
+import { fetchArtists } from '../../../services/spotifyservice';
+import { Artist, DefaultErrorMessage } from '../../common';
 import './style.css';
 
+import { Spinner } from '../../common';
+import useDataHook from '../../../hooks/useDataHook';
+
 function Artists() {
-  const [topartists, setTopartists] = useState();
   const [timerange, setTimerange] = useState('medium_term');
+  const [artistsRequest, setArtistsRequest] = useState(() => () => fetchArtists(timerange));
+  const { data: artists, isLoading, hasError } = useDataHook(artistsRequest);
 
   useEffect(() => {
-    const fetchTopArtist = async () => {
-      let tracks = await getData('me/top/artists', {}, `?time_range=${timerange}&limit=50`);
-      setTopartists(tracks.items);
-    };
-    fetchTopArtist();
+    setArtistsRequest(() => () => fetchArtists(timerange));
   }, [timerange]);
 
-  if (!topartists) return null;
+  if (hasError) return <DefaultErrorMessage />;
+  if (!artists > 0 && isLoading !== false) return <Spinner />;
 
   const renderArtists = () => {
-    return topartists.map((artist, index) => {
+    return artists.map((artist, index) => {
       return Artist(artist, index);
     });
   };

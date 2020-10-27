@@ -5,9 +5,19 @@ const fetchMyTopArtist = async timerange => {
   return response.items[0];
 };
 
+const fetchArtists = async timerange => {
+  const response = await getData(`me/top/artists`, {}, `?time_range=${timerange}&limit=50`);
+  return response.items;
+};
+
 const fetchMyTopTrack = async timerange => {
   const response = await getData(`me/top/tracks`, {}, `?time_range=${timerange}&limit=1`);
   return response.items[0];
 };
 
-export { fetchMyTopArtist, fetchMyTopTrack };
+const fetchTracks = async timerange => {
+  const response = await getData(`me/top/tracks`, {}, `?time_range=${timerange}&limit=50`);
+  return response.items;
+};
+
+export { fetchMyTopArtist, fetchArtists, fetchMyTopTrack, fetchTracks };

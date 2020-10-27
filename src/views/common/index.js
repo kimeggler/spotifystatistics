@@ -8,6 +8,8 @@ export { default as TopTrack } from './top-track/TopTrack';
 
 export { default as Playlist } from './playlist/Playlist';
 
+export { default as Footer } from './footer/Footer';
+
 export { default as Header } from './header/Header';
 
 export { default as UserBadge } from './user-badge/UserBadge';
@@ -18,6 +20,6 @@ export { default as ScreenToSmall } from './errors/ScreenToSmall';
 
 export { default as NavBar } from './navbar/NavBar';
 
-export  {default as Spinner } from './spinner/Spinner';
+export { default as Spinner } from './spinner/Spinner';
 
-export  {default as DefaultErrorMessage} from './errors/DefaultErrorMessage'
+export { default as DefaultErrorMessage } from './errors/DefaultErrorMessage';
