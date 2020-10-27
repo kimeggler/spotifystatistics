@@ -52,6 +52,7 @@
   width: fit-content;
   border-radius: 25px;
   margin-right: 10px;
+  font-weight: bold;
 }
 
 .login-button-image {

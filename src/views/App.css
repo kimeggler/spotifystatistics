@@ -21,3 +21,7 @@
   height: 100vh;
   overflow: hidden;
 }
+
+.opaque {
+  color: rgba(255, 255, 255, 0.5);
+}

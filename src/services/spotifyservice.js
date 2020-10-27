@@ -20,4 +20,9 @@ const fetchTracks = async timerange => {
   return response.items;
 };
 
-export { fetchMyTopArtist, fetchArtists, fetchMyTopTrack, fetchTracks };
+const fetchPlaylists = async profile => {
+  const response = await getData(`users/${profile.id}/playlists`, null, `?limit=50`);
+  return response.items;
+};
+
+export { fetchMyTopArtist, fetchArtists, fetchMyTopTrack, fetchTracks, fetchPlaylists };

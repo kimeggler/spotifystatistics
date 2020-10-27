@@ -32,7 +32,21 @@ const Footer = () => {
     });
   };
 
-  return <div className="footer">{mapCreators(creatorItems)}</div>;
+  return (
+    <div className="footer">
+      <h3>STATIFY</h3>
+      <div className="separator-short" />
+      <p className="opaque">PERSONALIZED STATISTICS</p>
+      {/* <div className="disclaimer">
+        <p>
+          This app was developed as part of a school project. The developers do not have any rights
+          on the trademarks shown on the page.
+        </p>
+      </div> */}
+      <div className="separator" />
+      <div className="creators">{mapCreators(creatorItems)}</div>
+    </div>
+  );
 };
 
 export default Footer;

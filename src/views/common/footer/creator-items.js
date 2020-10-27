@@ -2,37 +2,37 @@ import { github, instagram, twitter, kim, tobias } from '../../../assets';
 
 export default [
   {
-    name: 'Kim Eggler',
+    name: 'KIM EGGLER',
     image: kim,
     links: [
       {
-        name: 'Github',
+        name: 'GITHUB',
         href: 'https://github.com/kimeggler',
         image: github,
       },
       {
-        name: 'Instagram',
+        name: 'INSTAGRAM',
         href: 'https://instagram.com/kim.eggler',
         image: instagram,
       },
       {
-        name: 'Twitter',
+        name: 'TWITTER',
         href: 'https://twitter.com/kim_eggler',
         image: twitter,
       },
     ],
   },
   {
-    name: 'Tobias Blaser',
+    name: 'TOBIAS BLASER',
     image: tobias,
     links: [
       {
-        name: 'Github',
+        name: 'GITHUB',
         href: 'https://github.com/tobiasBlaser',
         image: github,
       },
       {
-        name: 'Instagram',
+        name: 'INSTAGRAM',
         href: 'https://instagram.com/_tobi_bl_',
         image: instagram,
       },
