@@ -1,27 +1,35 @@
 import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react';
+import useDataHook from '../../../hooks/useDataHook';
 import { getData, postData } from '../../../services/fetchservice';
+import { fetchTracks } from '../../../services/spotifyservice';
 import { UserContext } from '../../AppRouter';
-import { Track } from '../../common';
+import { DefaultErrorMessage, Spinner, Track } from '../../common';
 import './style.css';
 
 function Tracks() {
   const [showNotification, setShowNotification] = useState();
-  const [toptracks, setToptracks] = useState();
   const [timerange, setTimerange] = useState('medium_term');
+  const [tracksRequest, setTracksRequest] = useState(() => () => fetchTracks(timerange));
+  const { data: tracks, isLoading, hasError } = useDataHook(tracksRequest);
 
   const { profile } = useContext(UserContext);
 
   useEffect(() => {
-    const fetchTopArtist = async () => {
-      let tracks = await getData('me/top/tracks', {}, `?time_range=${timerange}&limit=50`);
-      setToptracks(tracks.items);
-    };
-    fetchTopArtist();
+    setTracksRequest(() => () => fetchTracks(timerange));
   }, [timerange]);
 
+  if (hasError) return <DefaultErrorMessage />;
+  if (!tracks > 0 && isLoading !== false) return <Spinner />;
+
+  const renderTracks = () => {
+    return tracks.map((track, index) => {
+      return Track(track, index);
+    });
+  };
+
   const mapTrackUris = () => {
-    return toptracks.map(track => {
+    return tracks.map(track => {
       return track.uri;
     });
   };
@@ -64,13 +72,6 @@ function Tracks() {
 
     return false;
   };
-  if (!toptracks) return null;
-
-  const renderTracks = () => {
-    return toptracks.map((track, index) => {
-      return Track(track, index);
-    });
-  };
 
   return (
     <div className="tracks">
@@ -88,7 +89,7 @@ function Tracks() {
         Done
       </div>
       <div className={`create-playlist-button error ${showNotification !== 'error' ? 'hide' : ''}`}>
-        Already exists
+        Existing
       </div>
 
       <h1 className="site-title">Favourite Tracks</h1>
