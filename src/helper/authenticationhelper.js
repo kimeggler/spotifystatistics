@@ -18,12 +18,6 @@ const getTokenFromURL = () => {
   return null;
 };
 
-const getDeezerTokenFromURL = () => {
-  if (window.location.href.split('?')[1] !== undefined) {
-    return window.location.href.split('?')[1].split('=')[1];
-  }
-  return null;
-};
 
 const getToken = () => {
   return window.localStorage.getItem('statify_token');
@@ -45,4 +39,4 @@ const setToken = async () => {
   }
 };
 
-export { validateToken, setToken, getToken, getDeezerTokenFromURL, clearToken };
+export { validateToken, setToken, getToken, clearToken };

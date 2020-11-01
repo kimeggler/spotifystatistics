@@ -1,4 +1,4 @@
-import { github, instagram, twitter, kim, tobias } from '../../../assets';
+import { github, instagram, twitter, kim, tobias, spotify } from '../../../assets';
 
 export default [
   {
@@ -20,6 +20,11 @@ export default [
         href: 'https://twitter.com/kim_eggler',
         image: twitter,
       },
+      {
+        name: 'SPOTIFY',
+        href: 'https://open.spotify.com/user/kim.eggler?si=ZbVUqNSdSrGYWQ0buNkw7Q',
+        image: spotify,
+      },
     ],
   },
   {
@@ -35,6 +40,11 @@ export default [
         name: 'INSTAGRAM',
         href: 'https://instagram.com/_tobi_bl_',
         image: instagram,
+      },
+      {
+        name: 'SPOTIFY',
+        href: 'https://open.spotify.com/user/toptob01?si=Tz-Iq0MjS9GXwiCQ_DkHNg',
+        image: spotify,
       },
     ],
   },
