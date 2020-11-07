@@ -13,6 +13,7 @@ import './App.css';
 
 import { validateToken } from '../helper/authenticationhelper';
 import { getData } from '../services/fetchservice';
+import Genres from './spotify/genres/Genres';
 
 export const UserContext = createContext();
 
@@ -42,6 +43,7 @@ const AppRouter = ({ isLoading }) => {
         <Route exact path="/artists" component={Artists} />
         <Route exact path="/tracks" component={Tracks} />
         <Route exact path="/analyze" component={Analyze} />
+        <Route exact path="/genres" component={Genres} />
         <Footer />
       </div>
     </UserContext.Provider>
