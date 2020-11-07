@@ -7,13 +7,13 @@ import Landingpage from './landingpage/Landingpage';
 import Tracks from './spotify/tracks/Tracks';
 import Artists from './spotify/artists/Artists';
 import Analyze from './spotify/analyze/Analyze';
+import Genres from './spotify/genres/Genres';
 import { Header, Footer } from './common';
 
 import './App.css';
 
 import { validateToken } from '../helper/authenticationhelper';
 import { getData } from '../services/fetchservice';
-import Genres from './spotify/genres/Genres';
 
 export const UserContext = createContext();
 
