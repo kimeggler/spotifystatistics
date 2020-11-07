@@ -15,4 +15,8 @@ export default [
     path: '/analyze',
     label: 'Playlists',
   },
+  {
+    path: '/genres',
+    label: 'Genres',
+  },
 ];
