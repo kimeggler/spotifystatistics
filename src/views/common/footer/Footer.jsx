@@ -6,16 +6,16 @@ import './_style.css';
 
 const Footer = () => {
   const mapCreators = creators => {
-    return creators.map(creator => {
+    return creators.map((creator, index) => {
       return (
-        <div className="creator-area">
+        <div key={index} className="creator-area">
           <div className="creator-info">
             <img src={creator.image} alt={creator.name} className="creator-image" />
             <p>{creator.name}</p>
           </div>
-          {creator.links.map(link => {
+          {creator.links.map((link, i) => {
             return (
-              <a href={link.href} className="footer-link">
+              <a key={`${index}_${i}`} href={link.href} className="footer-link">
                 <div className="creator-link">
                   <img
                     src={link.image}

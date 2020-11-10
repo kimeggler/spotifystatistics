@@ -8,6 +8,7 @@ import Tracks from './spotify/tracks/Tracks';
 import Artists from './spotify/artists/Artists';
 import Suggestions from './spotify/suggestions/Suggestions';
 import Analyze from './spotify/analyze/Analyze';
+import Genres from './spotify/genres/Genres';
 import { Header, Footer } from './common';
 
 import './App.css';
@@ -44,6 +45,7 @@ const AppRouter = ({ isLoading }) => {
         <Route exact path="/tracks" component={Tracks} />
         <Route exact path="/suggestions" component={Suggestions} />
         <Route exact path="/analyze" component={Analyze} />
+        <Route exact path="/genres" component={Genres} />
         <Footer />
       </div>
     </UserContext.Provider>
