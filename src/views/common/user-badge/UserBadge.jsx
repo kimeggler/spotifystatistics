@@ -65,10 +65,11 @@ function Userbadge() {
         <div className={`fullscreen-menu ${menuActive}`}>
           <a
             href="/"
-            className={`fullscreen-navigation-item ${window.location.href.split('/')[3] === ''
-              ? 'fullscreen-navigation-active'
-              : 'fullscreen-navigation-inactive'
-              }`}
+            className={`fullscreen-navigation-item ${
+              window.location.href.split('/')[3] === 'overview'
+                ? 'fullscreen-navigation-active'
+                : 'fullscreen-navigation-inactive'
+            }`}
           >
             Overview
           </a>
