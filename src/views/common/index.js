@@ -16,6 +16,8 @@ export { default as UserBadge } from './user-badge/UserBadge';
 
 export { default as ShowAt } from './defaultscreens/ShowAt';
 
+export { default as Suggestion } from './suggestion/Suggestion';
+
 export { default as ScreenToSmall } from './errors/ScreenToSmall';
 
 export { default as NavBar } from './navbar/NavBar';

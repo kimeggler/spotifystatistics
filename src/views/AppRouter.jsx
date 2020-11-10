@@ -6,6 +6,7 @@ import Overview from './spotify/overview/Overview';
 import Landingpage from './landingpage/Landingpage';
 import Tracks from './spotify/tracks/Tracks';
 import Artists from './spotify/artists/Artists';
+import Suggestions from './spotify/suggestions/Suggestions';
 import Analyze from './spotify/analyze/Analyze';
 import { Header, Footer } from './common';
 
@@ -41,6 +42,7 @@ const AppRouter = ({ isLoading }) => {
         <Route exact path="/overview" component={Overview} />
         <Route exact path="/artists" component={Artists} />
         <Route exact path="/tracks" component={Tracks} />
+        <Route exact path="/suggestions" component={Suggestions} />
         <Route exact path="/analyze" component={Analyze} />
         <Footer />
       </div>

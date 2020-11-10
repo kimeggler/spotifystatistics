@@ -66,7 +66,7 @@ function Userbadge() {
           <a
             href="/"
             className={`fullscreen-navigation-item ${
-              window.location.href.split('/')[3] === ''
+              window.location.href.split('/')[3] === 'overview'
                 ? 'fullscreen-navigation-active'
                 : 'fullscreen-navigation-inactive'
             }`}
