@@ -24,7 +24,7 @@ function Tracks() {
 
   const renderTracks = () => {
     return tracks.map((track, index) => {
-      return Track(track, index);
+      if (track.name) return Track(track, index);
     });
   };
 
