@@ -23,8 +23,9 @@ function Tracks() {
   if (!tracks > 0 && isLoading !== false) return <Spinner />;
 
   const renderTracks = () => {
-    return tracks.map((track, index) => {
-      if (track.name) return Track(track, index);
+    const filteredTacks = tracks.filter(track => track.name);
+    return filteredTacks.map((track, index) => {
+      return Track(track, index);
     });
   };
 
