@@ -41,8 +41,8 @@ function Tracks() {
       timerange === 'long_term'
         ? 'All time'
         : timerange === 'medium_term'
-        ? 'Last 6 months'
-        : 'Last month';
+          ? 'Last 6 months'
+          : 'Last month';
     const playlistName = timeRange + ' favorites - ' + date;
     const filteredPlaylists = playlists.items.filter(playlist => playlist.name === playlistName);
 
@@ -79,9 +79,8 @@ function Tracks() {
         onClick={() => {
           createPlaylist();
         }}
-        className={`create-playlist-button ${
-          showNotification === 'done' || showNotification === 'error' ? 'hide' : ''
-        }`}
+        className={`create-playlist-button ${showNotification === 'done' || showNotification === 'error' ? 'hide' : ''
+          }`}
       >
         Create Playlist
       </div>
