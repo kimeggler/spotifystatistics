@@ -50,7 +50,8 @@ function Tracks() {
     if (filteredPlaylists.length === 0) {
       const playlist = JSON.stringify({
         name: playlistName,
-        public: false,
+        public: true,
+        description: 'Generate your own playlist at https://statfy.xyz :)'
       });
       const tracks = JSON.stringify({
         uris: mapTrackUris(),
