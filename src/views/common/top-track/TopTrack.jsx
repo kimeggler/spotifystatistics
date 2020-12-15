@@ -27,7 +27,7 @@ function TrackTop() {
       {isLoading && <Spinner className="overlay" />}
       <div style={background} className="top-card-image"></div>
       <div className="top-card-information top-card-information-track">
-        <p className="image-description padding-left top-card-description">Dein Top-Song</p>
+        <p className="image-description padding-left top-card-description">Your Top Song</p>
         <p className="image-description padding-left bold top-card-primary">{topTrack.name}</p>
         <p className="image-description padding-left top-card-secondary">
           {topTrack.artists[0].name}
