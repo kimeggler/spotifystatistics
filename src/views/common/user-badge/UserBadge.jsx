@@ -65,11 +65,10 @@ function Userbadge() {
         <div className={`fullscreen-menu ${menuActive}`}>
           <a
             href="/"
-            className={`fullscreen-navigation-item ${
-              window.location.href.split('/')[3] === 'overview'
+            className={`fullscreen-navigation-item ${window.location.href.split('/')[3] === 'overview'
                 ? 'fullscreen-navigation-active'
                 : 'fullscreen-navigation-inactive'
-            }`}
+              }`}
           >
             Overview
           </a>
@@ -91,7 +90,7 @@ function Userbadge() {
           >
             Tracks
           </a>
-          <a
+          {/* <a
             href="/analyze"
             className={`fullscreen-navigation-item ${window.location.href.split('/')[3] === 'analyze'
               ? 'fullscreen-navigation-active'
@@ -99,7 +98,7 @@ function Userbadge() {
               }`}
           >
             Playlists
-          </a>
+          </a> */}
           <a
             href="/genres"
             className={`fullscreen-navigation-item ${window.location.href.split('/')[3] === 'genres'

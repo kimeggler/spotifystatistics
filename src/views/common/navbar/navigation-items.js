@@ -11,10 +11,10 @@ export default [
     path: '/tracks',
     label: 'Tracks',
   },
-  {
-    path: '/analyze',
-    label: 'Playlists',
-  },
+  // {
+  //   path: '/analyze',
+  //   label: 'Playlists',
+  // },
   {
     path: '/genres',
     label: 'Genres',

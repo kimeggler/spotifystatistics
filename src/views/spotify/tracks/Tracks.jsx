@@ -51,7 +51,7 @@ function Tracks() {
       const playlist = JSON.stringify({
         name: playlistName,
         public: true,
-        description: 'Go on https://statfy.xyz to crate your own playlist :)',
+        description: 'Generate your own playlist at https://statfy.xyz :)'
       });
       const tracks = JSON.stringify({
         uris: mapTrackUris(),
