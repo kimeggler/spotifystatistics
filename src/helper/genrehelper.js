@@ -1,9 +1,9 @@
-const mapGenres = (topGenres) => {
+const mapGenres = (topGenres, includedArtistRanking = false) => {
 
   return Array.from(new Set(topGenres))
     .map(genre => ({ name: genre, count: topGenres.filter(g => g === genre).length }))
     .sort((a, b) => b.count - a.count)
-    .filter(genre => genre.count > 1)
+    .filter(genre => genre.count > (includedArtistRanking ? 2 : 1))
     .slice(0, 50);
 }
 
@@ -24,5 +24,5 @@ export const calcTopGenresIncludingArtists = (topArtists) => {
     return arrayToReturn;
   }).flat();
 
-  return mapGenres(topGenres);
+  return mapGenres(topGenres, true);
 }

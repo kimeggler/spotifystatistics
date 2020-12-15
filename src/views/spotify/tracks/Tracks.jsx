@@ -42,15 +42,16 @@ function Tracks() {
       timerange === 'long_term'
         ? 'All time'
         : timerange === 'medium_term'
-          ? 'Last 6 months'
-          : 'Last month';
+        ? 'Last 6 months'
+        : 'Last month';
     const playlistName = timeRange + ' favorites - ' + date;
     const filteredPlaylists = playlists.items.filter(playlist => playlist.name === playlistName);
 
     if (filteredPlaylists.length === 0) {
       const playlist = JSON.stringify({
         name: playlistName,
-        public: false,
+        public: true,
+        description: 'Go on https://statfy.xyz to crate your own playlist :)',
       });
       const tracks = JSON.stringify({
         uris: mapTrackUris(),
@@ -80,8 +81,9 @@ function Tracks() {
         onClick={() => {
           createPlaylist();
         }}
-        className={`create-playlist-button ${showNotification === 'done' || showNotification === 'error' ? 'hide' : ''
-          }`}
+        className={`create-playlist-button ${
+          showNotification === 'done' || showNotification === 'error' ? 'hide' : ''
+        }`}
       >
         Create Playlist
       </div>
