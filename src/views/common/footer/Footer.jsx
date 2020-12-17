@@ -45,6 +45,14 @@ const Footer = () => {
       </div> */}
       <div className="separator" />
       <div className="creators">{mapCreators(creatorItems)}</div>
+
+      <div className="separator" />
+      <p>CONTACT</p>
+      <p className="opaque" style={{ textAlign: 'center' }}>
+        If you have questions or suggestions on how we could make our app more user friendly or if
+        you want to request a feature, feel free to contact us!
+      </p>
+      <a href="mailto:dev.statify@gmail.com">dev.statify@gmail.com</a>
     </div>
   );
 };
