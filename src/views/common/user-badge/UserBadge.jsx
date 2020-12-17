@@ -56,8 +56,8 @@ function Userbadge() {
               !menuActive
                 ? menu_icon
                 : profile.images[0] === undefined
-                  ? user_icon
-                  : profile.images[0].url
+                ? user_icon
+                : profile.images[0].url
             }
             className={`user_image_mobile ${menuActive ? 'user_image' : null}`}
           />
@@ -65,46 +65,51 @@ function Userbadge() {
         <div className={`fullscreen-menu ${menuActive}`}>
           <a
             href="/"
-            className={`fullscreen-navigation-item ${window.location.href.split('/')[3] === 'overview'
+            className={`fullscreen-navigation-item ${
+              window.location.href.split('/')[3] === 'overview'
                 ? 'fullscreen-navigation-active'
                 : 'fullscreen-navigation-inactive'
-              }`}
+            }`}
           >
             Overview
           </a>
           <a
             href="/artists"
-            className={`fullscreen-navigation-item ${window.location.href.split('/')[3] === 'artists'
-              ? 'fullscreen-navigation-active'
-              : 'fullscreen-navigation-inactive'
-              }`}
+            className={`fullscreen-navigation-item ${
+              window.location.href.split('/')[3] === 'artists'
+                ? 'fullscreen-navigation-active'
+                : 'fullscreen-navigation-inactive'
+            }`}
           >
             Artists
           </a>
           <a
             href="/tracks"
-            className={`fullscreen-navigation-item ${window.location.href.split('/')[3] === 'tracks'
-              ? 'fullscreen-navigation-active'
-              : 'fullscreen-navigation-inactive'
-              }`}
+            className={`fullscreen-navigation-item ${
+              window.location.href.split('/')[3] === 'tracks'
+                ? 'fullscreen-navigation-active'
+                : 'fullscreen-navigation-inactive'
+            }`}
           >
             Tracks
           </a>
-          {/* <a
+          <a
             href="/analyze"
-            className={`fullscreen-navigation-item ${window.location.href.split('/')[3] === 'analyze'
-              ? 'fullscreen-navigation-active'
-              : 'fullscreen-navigation-inactive'
-              }`}
+            className={`fullscreen-navigation-item ${
+              window.location.href.split('/')[3] === 'analyze'
+                ? 'fullscreen-navigation-active'
+                : 'fullscreen-navigation-inactive'
+            }`}
           >
             Playlists
-          </a> */}
+          </a>
           <a
             href="/genres"
-            className={`fullscreen-navigation-item ${window.location.href.split('/')[3] === 'genres'
-              ? 'fullscreen-navigation-active'
-              : 'fullscreen-navigation-inactive'
-              }`}
+            className={`fullscreen-navigation-item ${
+              window.location.href.split('/')[3] === 'genres'
+                ? 'fullscreen-navigation-active'
+                : 'fullscreen-navigation-inactive'
+            }`}
           >
             Genres
           </a>

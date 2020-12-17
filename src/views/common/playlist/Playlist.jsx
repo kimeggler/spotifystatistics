@@ -1,62 +1,133 @@
 import React, { Fragment } from 'react';
-import './style.css';
-import { getAudioAnalysis } from '../../../helper/analysationhelper';
+import ReactApexChart from 'react-apexcharts';
+import { ComponentSpinner } from '..';
 
-function Playlist(playlist, activePlaylist, analyse) {
+import { close } from '../../../assets';
+import './style.css';
+
+function Playlist(playlist, activePlaylist, changePlaylist, analyse, closePlaylist) {
   let background = {};
+  let chartoptions = {
+    tooltip: {
+      theme: 'dark',
+    },
+    chart: {
+      height: 200,
+      toolbar: {
+        show: false,
+      },
+    },
+    noData: {
+      text: 'Loading...',
+      align: 'center',
+      verticalAlign: 'middle',
+    },
+    stroke: {
+      curve: 'smooth',
+    },
+    plotOptions: {
+      radar: {
+        size: 150,
+        offsetX: 0,
+        offsetY: 0,
+        polygons: {
+          strokeColors: '#FFFFFF',
+          strokeWidth: 2,
+          connectorColors: '#FFFFFF',
+          fill: {
+            colors: ['#FFFFFF00'],
+          },
+        },
+      },
+    },
+    yaxis: {
+      show: false,
+      labels: {
+        rotate: -90,
+        rotateAlways: true,
+        style: {
+          fontSize: '14px',
+          colors: '#FFFFFF',
+        },
+      },
+    },
+    xaxis: {
+      labels: {
+        show: true,
+        style: {
+          fontSize: '14px',
+          colors: ['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'],
+        },
+      },
+      categories: [
+        'Acousticness',
+        'Danceability',
+        'Energy',
+        'Instrumentalness',
+        'Liveness',
+        'Speechiness',
+        'Happiness',
+      ],
+    },
+  };
+
   if (playlist.images[0]) {
     background = {
       backgroundImage: `url(${playlist.images[0].url})`,
     };
   }
 
-  const renderAnalysis = analyse => {
-    if (!analyse) {
-      return null;
+  const returnSeries = () => {
+    console.log(analyse);
+    if (analyse.length === 0) {
+      return [];
     }
+    return [
+      {
+        name: playlist.name,
+        data: analyse,
+      },
+    ];
+  };
+
+  const renderAnalysis = name => {
     return (
       <div className="playlist-overlay">
-        <p className="analyse-title">
-          Based on Spotify&apos;s classification of the Songs in your Playlist
-        </p>
-        {analyse.danceability * 100 >= 50 ? null : (
-          <div className="analyse-property">
-            <p className="analyse-property-title">{`the playlist is ${
-              analyse.danceability * 100
-            }% danceable`}</p>
+        <div className="analyse-info">
+          <div className="analyse-title-box">
+            <p className="analyse-title">About your Playlist</p>
+            <p className="analyse-name">{name}</p>
           </div>
-        )}
-        {analyse.energy * 100 >= 60 ? null : (
-          <div className="analyse-property">
-            <p className="analyse-property-title">{`are packed with energy`}</p>
-          </div>
-        )}
-        {analyse.instrumentalness * 100 >= 70 ? null : (
-          <div className="analyse-property">
-            <p className="analyse-property-title">{`most of the songs are instrumental`}</p>
-          </div>
-        )}
-        {analyse.liveness * 100 <= 70 ? null : (
-          <div className="analyse-property">
-            <p className="analyse-property-title">{`contain live songs`}</p>
-          </div>
-        )}
-        {analyse.valence * 100 <= 40 ? null : (
-          <div className="analyse-property">
-            <p className="analyse-property-title">{`contains a lot of sad songs...need a hug?`}</p>
-          </div>
-        )}
-        {analyse.valence * 100 >= 70 ? null : (
-          <div className="analyse-property">
-            <p className="analyse-property-title">{`contains a lot of euphoric songs!`}</p>
-          </div>
-        )}
+          <p>
+            The content of the playlist is analyzed by Spotify based on a couple of categories. The
+            assessment includes the calculation of the proportion of vocal and instrumental parts of
+            songs. Furthermore the average energy of each song is being calculated. Additionally
+            Spotify gives insights into how euphoric or dystrophic the songs in your playlist are.
+          </p>
+        </div>
+        <div className="analyse-chart">
+          {returnSeries().length === 0 && <ComponentSpinner />}
+          {returnSeries().length > 0 && (
+            <ReactApexChart
+              options={chartoptions}
+              series={returnSeries()}
+              height="400px"
+              width="500px"
+              type="radar"
+            />
+          )}
+        </div>
       </div>
     );
   };
 
-  const renderOverlay = (analyse, name) => {
-    return <div className="playlist-analyse">{renderAnalysis(analyse, name)}</div>;
+  const renderOverlay = name => {
+    return (
+      <div className="playlist-analyse">
+        {renderAnalysis(name)}
+        <img src={close} alt="close" onClick={() => closePlaylist()} className="close-analyse" />
+      </div>
+    );
   };
 
   return (
@@ -65,9 +136,7 @@ function Playlist(playlist, activePlaylist, analyse) {
         <div
           className="img-container"
           onClick={async () => {
-            // setActivePlaylist(playlist.id);
-            console.log('Analyse Playlist with id: ' + playlist.id);
-            console.log(await getAudioAnalysis(playlist.id));
+            changePlaylist(playlist.id);
           }}
         >
           {/* <img alt={artist.name} src={artist.images[0].url} className='artist-card-image' /> */}
@@ -76,9 +145,7 @@ function Playlist(playlist, activePlaylist, analyse) {
         </div>
         <p className="playlist-card-name bold">{playlist.name}</p>
       </div>
-      <Fragment>
-        {activePlaylist === playlist.id ? renderOverlay(analyse, playlist.name) : null}
-      </Fragment>
+      <Fragment>{activePlaylist === playlist.id ? renderOverlay(playlist.name) : null}</Fragment>
     </div>
   );
 }

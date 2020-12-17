@@ -10,7 +10,7 @@
   top: 0;
   left: 0;
   position: absolute;
-  width: calc(100vw - 17px);
+  width: 100vw;
   height: 100vh;
   box-sizing: border-box;
   justify-content: space-between;
@@ -24,21 +24,19 @@
 .playlist-overlay {
   height: 60vh;
   width: 80vw;
-  background: rgba(30, 30, 30, 1);
+  background: var(--main-2-trans);
   border-radius: 20px;
   box-sizing: border-box;
   padding: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .analyse-property {
   display: flex;
   justify-content: flex-start;
   width: 50%;
-}
-
-.analyse-title {
-  font-size: 24px;
-  width: fit-content;
 }
 
 .playlist {
@@ -117,4 +115,42 @@
   .playlist {
     margin: 25px 25px 0 25px;
   }
+}
+
+.analyse-title-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.analyse-title {
+  width: fit-content;
+}
+
+.analyse-name {
+  font-weight: 600;
+  font-size: 24px;
+  width: fit-content;
+  line-height: 30px;
+}
+
+.analyse-info {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.analyse-chart {
+  position: relative;
+  width: 50%;
+  height: 100%;
+}
+
+.close-analyse {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  height: 30px;
+  width: 30px;
 }

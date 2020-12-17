@@ -24,4 +24,6 @@ export { default as NavBar } from './navbar/NavBar';
 
 export { default as Spinner } from './spinner/Spinner';
 
+export { default as ComponentSpinner } from './componentspinner/ComponentSpinner';
+
 export { default as DefaultErrorMessage } from './errors/DefaultErrorMessage';
