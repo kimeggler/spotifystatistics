@@ -8,7 +8,7 @@ import './style.css';
 
 function Genres() {
   const [timerange, setTimerange] = useState('medium_term');
-  const [includeArtistRating, setIncludeArtistRating] = useState(false)
+  const [includeArtistRating, setIncludeArtistRating] = useState(false);
   const [artistsRequest, setArtistsRequest] = useState(() => () => fetchArtists(timerange));
   const { data: artists, isLoading, hasError } = useDataHook(artistsRequest);
   const [topGenres, setTopGenres] = useState();
@@ -18,12 +18,15 @@ function Genres() {
   }, [timerange]);
 
   useEffect(() => {
-    if (artists) setTopGenres(includeArtistRating ? calcTopGenresIncludingArtists(artists) : calcTopGenres(artists));
-  }, [artists, includeArtistRating])
+    if (artists)
+      setTopGenres(
+        includeArtistRating ? calcTopGenresIncludingArtists(artists) : calcTopGenres(artists),
+      );
+  }, [artists, includeArtistRating]);
 
   const renderGenres = () => {
-    return topGenres.map((genre, index) => Genre(genre, index))
-  }
+    return topGenres.map((genre, index) => Genre(genre, index));
+  };
 
   if (hasError) return <DefaultErrorMessage />;
   if (!artists > 0 && isLoading !== false) return <Spinner />;
@@ -59,11 +62,11 @@ function Genres() {
       </div>
       <div className="include-ranking-container">
         <p>Include artist ranking?</p>
-        <div className="button" onClick={() => setIncludeArtistRating(!includeArtistRating)}>{includeArtistRating ? 'turn off' : 'turn on'}</div>
+        <div className="genre-button" onClick={() => setIncludeArtistRating(!includeArtistRating)}>
+          {includeArtistRating ? 'turn off' : 'turn on'}
+        </div>
       </div>
-      <div className="genres-content">
-        {topGenres && renderGenres()}
-      </div>
+      <div className="genres-content">{topGenres && renderGenres()}</div>
     </div>
   );
 }
