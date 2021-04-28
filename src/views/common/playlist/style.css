@@ -4,12 +4,20 @@
   justify-content: center;
   align-items: center;
 }
+.chart-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  width: 50%;
+}
 
 .playlist-analyse {
   z-index: 1000;
   top: 0;
   left: 0;
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
@@ -115,6 +123,59 @@
   .playlist {
     margin: 25px 25px 0 25px;
   }
+  .playlist-overlay {
+    flex-direction: column;
+    align-items: center;
+  }
+  .analyse-serie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .chart-area {
+    width: 100% !important;
+    height: 80%;
+  }
+  .analyse-chart {
+    width: 100% !important;
+  }
+  .analyse-title-box {
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .playlist {
+    margin: 25px 25px 0 25px;
+  }
+  .playlist-overlay {
+    flex-direction: column;
+    align-items: center;
+    height: calc(100vh - 50px);
+    width: calc(100vw - 50px);
+  }
+  .analyse-serie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .chart-area {
+    width: 100% !important;
+    height: 80%;
+  }
+  .analyse-chart {
+    width: 100% !important;
+  }
+  .analyse-title-box {
+    align-items: center;
+  }
+  .close-analyse {
+    top: 50px !important;
+    right: 50px !important;
+  }
+  .analyse-chart-box {
+    width: 75vw !important;
+  }
 }
 
 .analyse-title-box {
@@ -144,7 +205,35 @@
 .analyse-chart {
   position: relative;
   width: 50%;
-  height: 100%;
+  height: fit-content;
+}
+
+.analyse-chart-box {
+  height: 10px;
+  margin-bottom: 5px;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.analyse-chart-background {
+  top: 0;
+  position: absolute;
+  border-radius: 5px;
+  background-color: var(--main-2-trans);
+  width: 100%;
+  height: 10px;
+}
+
+.analyse-chart-foreground {
+  top: 0;
+  position: absolute;
+  border-radius: 5px;
+  background-color: var(--main-3-trans);
+  height: 10px;
+  align-self: flex-start;
 }
 
 .close-analyse {
