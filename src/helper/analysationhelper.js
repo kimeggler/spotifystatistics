@@ -21,6 +21,9 @@ const getSongFeatures = async ids => {
 };
 
 const addData = (prev, curr) => {
+  if (curr === null) {
+    return prev;
+  }
   prev.danceability += curr.danceability;
   prev.energy += curr.energy;
   prev.speechiness += curr.speechiness;
