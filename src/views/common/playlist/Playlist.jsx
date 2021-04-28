@@ -1,6 +1,4 @@
 import React, { Fragment } from 'react';
-import ReactApexChart from 'react-apexcharts';
-import { ComponentSpinner } from '..';
 
 import { close } from '../../../assets';
 import './style.css';
@@ -77,18 +75,18 @@ function Playlist(playlist, activePlaylist, changePlaylist, analyse, closePlayli
     };
   }
 
-  const returnSeries = () => {
-    console.log(analyse);
-    if (analyse.length === 0) {
-      return null;
-    }
-    return [
-      {
-        name: playlist.name,
-        data: analyse,
-      },
-    ];
-  };
+  // const returnSeries = () => {
+  //   console.log(analyse);
+  //   if (analyse.length === 0) {
+  //     return null;
+  //   }
+  //   return [
+  //     {
+  //       name: playlist.name,
+  //       data: analyse,
+  //     },
+  //   ];
+  // };
 
   const renderAnalysis = name => {
     return (
