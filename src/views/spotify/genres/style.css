@@ -12,11 +12,11 @@
   flex-wrap: wrap;
 }
 
-.button {
+.genre-button {
   width: 160px;
   height: 40px;
   border: 2px solid var(--main-2);
-  border-radius: 3px;
+  border-radius: 5px;
   background: transparent;
   color: var(--main-2);
   font-size: 20px;
