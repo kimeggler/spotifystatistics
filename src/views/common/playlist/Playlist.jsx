@@ -93,7 +93,7 @@ function Playlist(playlist, activePlaylist, changePlaylist, analyse, closePlayli
       <div className="playlist-overlay">
         <div className="analyse-info">
           <div className="analyse-title-box">
-            <p className="analyse-title">About your Playlist</p>
+            <p className="analyse-title">About your playlist</p>
             <p className="analyse-name">{name}</p>
           </div>
           {/* <p>
@@ -104,6 +104,7 @@ function Playlist(playlist, activePlaylist, changePlaylist, analyse, closePlayli
           </p> */}
         </div>
         <div className="chart-area">
+          {analyse.empty && <p>This playlist appears to be empty</p>}
           {analyse.length > 0 && (
             <div className="analyse-chart">
               {analyse?.map(serie => {

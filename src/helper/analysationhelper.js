@@ -63,6 +63,11 @@ const getPercentageandCrop = analysis => {
 };
 
 const formatData = songs => {
+  if (songs[0] === null) {
+    return {
+      empty: true,
+    };
+  }
   const playlist_analysis = songs.reduce((prev, curr, i) => {
     return i === songs.length - 1 ? divideData(prev, songs.length) : addData(prev, curr);
   });
