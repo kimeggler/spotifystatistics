@@ -49,11 +49,29 @@ const divideData = (prev, count) => {
   return prev;
 };
 
+const getPercentageandCrop = analysis => {
+  const series = [];
+  series.push({ name: 'Acousticness', value: Math.round((analysis.acousticness *= 100)) });
+  series.push({ name: 'Danceability', value: Math.round((analysis.danceability *= 100)) });
+  series.push({ name: 'Energy', value: Math.round((analysis.energy *= 100)) });
+  series.push({ name: 'Instrumentalness', value: Math.round((analysis.instrumentalness *= 100)) });
+  series.push({ name: 'Liveness', value: Math.round((analysis.liveness *= 100)) });
+  series.push({ name: 'Speechiness', value: Math.round((analysis.speechiness *= 100)) });
+  series.push({ name: 'Happiness', value: Math.round((analysis.valence *= 100)) });
+  // series.push(Math.round(analysis.tempo));
+  return series;
+};
+
 const formatData = songs => {
+  if (songs[0] === null) {
+    return {
+      empty: true,
+    };
+  }
   const playlist_analysis = songs.reduce((prev, curr, i) => {
-    return i === songs.length - 1 ? divideData(prev, i) : addData(prev, curr);
+    return i === songs.length - 1 ? divideData(prev, songs.length) : addData(prev, curr);
   });
-  return playlist_analysis;
+  return getPercentageandCrop(playlist_analysis);
 };
 
 export { getAudioAnalysis };
