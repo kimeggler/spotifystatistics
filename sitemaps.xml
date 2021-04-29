@@ -1,20 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
   <url>
     <loc>http://statfy.xyz</loc>
-    <lastmod>2020-04-21</lastmod>
+    <lastmod>2021-04-21</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>http://statfy.xyz/about</loc>
-    <lastmod>2020-04-21</lastmod>
+    <lastmod>2021-04-21</lastmod>
   </url>
   <url>
     <loc>http://statfy.xyz/artists</loc>
-    <lastmod>2020-04-21</lastmod>
+    <lastmod>2021-04-21</lastmod>
   </url>
   <url>
-    <loc>http://statfy.xyz/tracks</loc>
-    <lastmod>2020-04-21</lastmod>
+    <loc>http://statfy.xyz/genres</loc>
+    <lastmod>2021-04-21</lastmod>
+  </url>
+    <url>
+    <loc>http://statfy.xyz/analyse</loc>
+    <lastmod>2021-04-21</lastmod>
   </url>
 </urlset>
