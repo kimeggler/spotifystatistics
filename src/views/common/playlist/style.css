@@ -234,6 +234,9 @@
   background-color: var(--main-3-trans);
   height: 10px;
   align-self: flex-start;
+  width: 0;
+  transition-property: width;
+  transition-duration: 0.3s;
 }
 
 .close-analyse {

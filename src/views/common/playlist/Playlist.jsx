@@ -88,6 +88,13 @@ function Playlist(playlist, activePlaylist, changePlaylist, analyse, closePlayli
   //   ];
   // };
 
+  const getWidth = width => {
+    if (typeof width === undefined) {
+      return { width: '0%' };
+    }
+    return { width: `${width}%` };
+  };
+
   const renderAnalysis = name => {
     return (
       <div className="playlist-overlay">
@@ -105,22 +112,94 @@ function Playlist(playlist, activePlaylist, changePlaylist, analyse, closePlayli
         </div>
         <div className="chart-area">
           {analyse.empty && <p>This playlist appears to be empty</p>}
-          {analyse.length > 0 && (
+          {!analyse.empty && (
+            // <div className="analyse-chart">
+            //   {analyse?.map(serie => {
+            //     return (
+            //       <div className="analyse-serie" key={serie.name}>
+            //         <p>{serie.name}</p>
+            //         <div className="analyse-chart-box">
+            //           <div className="analyse-chart-background"></div>
+            //           <div
+            //             style={{ width: `${serie.value}%` }}
+            //             className="analyse-chart-foreground"
+            //           ></div>
+            //         </div>
+            //       </div>
+            //     );
+            //   })}
+            // </div>
             <div className="analyse-chart">
-              {analyse?.map(serie => {
-                return (
-                  <div className="analyse-serie" key={serie.name}>
-                    <p>{serie.name}</p>
-                    <div className="analyse-chart-box">
-                      <div className="analyse-chart-background"></div>
-                      <div
-                        style={{ width: `${serie.value}%` }}
-                        className="analyse-chart-foreground"
-                      ></div>
-                    </div>
-                  </div>
-                );
-              })}
+              <div className="analyse-serie">
+                <p>Acousticness</p>
+                <div className="analyse-chart-box">
+                  <div className="analyse-chart-background"></div>
+                  <div
+                    style={getWidth(analyse[0]?.value)}
+                    className="analyse-chart-foreground"
+                  ></div>
+                </div>
+              </div>
+              <div className="analyse-serie">
+                <p>Danceability</p>
+                <div className="analyse-chart-box">
+                  <div className="analyse-chart-background"></div>
+                  <div
+                    style={getWidth(analyse[1]?.value)}
+                    className="analyse-chart-foreground"
+                  ></div>
+                </div>
+              </div>
+              <div className="analyse-serie">
+                <p>Energy</p>
+                <div className="analyse-chart-box">
+                  <div className="analyse-chart-background"></div>
+                  <div
+                    style={getWidth(analyse[2]?.value)}
+                    className="analyse-chart-foreground"
+                  ></div>
+                </div>
+              </div>
+              <div className="analyse-serie">
+                <p>Instrumentalness</p>
+                <div className="analyse-chart-box">
+                  <div className="analyse-chart-background"></div>
+                  <div
+                    style={getWidth(analyse[3]?.value)}
+                    className="analyse-chart-foreground"
+                  ></div>
+                </div>
+              </div>
+              <div className="analyse-serie">
+                <p>Liveness</p>
+                <div className="analyse-chart-box">
+                  <div className="analyse-chart-background"></div>
+                  <div
+                    style={getWidth(analyse[4]?.value)}
+                    className="analyse-chart-foreground"
+                  ></div>
+                </div>
+              </div>
+              <div className="analyse-serie">
+                <p>Speechiness</p>
+                <div className="analyse-chart-box">
+                  <div className="analyse-chart-background"></div>
+                  <div
+                    style={getWidth(analyse[5]?.value)}
+                    className="analyse-chart-foreground"
+                  ></div>
+                </div>
+              </div>
+              <div className="analyse-serie">
+                <p>Happiness</p>
+                <div className="analyse-chart-box">
+                  <div className="analyse-chart-background"></div>
+                  <div
+                    style={getWidth(analyse[6]?.value)}
+                    className="analyse-chart-foreground"
+                  ></div>
+                </div>
+              </div>
             </div>
           )}
         </div>
