@@ -118,12 +118,14 @@
     flex-direction: column;
     align-items: center;
     margin: 30px;
+    max-width: 250px;
   }
 
   .top-card-primary {
     width: fit-content;
     height: fit-content;
     margin-bottom: 40px;
+    overflow-wrap: anywhere;
   }
 
   .top-card-image {
