@@ -6,7 +6,7 @@
   margin: 20px;
   padding: 10px;
   border-radius: 10px;
-  height: 70px;
+  height: fit-content;
   width: 350px;
   box-sizing: border-box;
   flex: 0 1 33%;
