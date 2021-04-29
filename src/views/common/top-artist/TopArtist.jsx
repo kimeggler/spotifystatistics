@@ -30,7 +30,7 @@ const TopArtist = () => {
     <div className="artist-top">
       {isLoading && <Spinner className="overlay" />}
       <div className="top-card-information top-card-information-artist">
-        <p className="top-card-description">Your Top Artist</p>
+        <p className="top-card-description">Your favourite artist</p>
         <p className="bold top-card-primary">{topArtist.name}</p>
         <p className="top-card-secondary">
           Followers: <FormattedNumber value={topArtist.followers.total} />

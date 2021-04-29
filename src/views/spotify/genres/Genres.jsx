@@ -75,7 +75,8 @@ function Genres() {
         {hovered && (
           <div className="info-card">
             <p>
-              If this option is turned on, the genres of your higher artists will be weighted more.
+              If this option is turned on, the ranks of your favorite artists will be included into
+              the calculation.
             </p>
           </div>
         )}
