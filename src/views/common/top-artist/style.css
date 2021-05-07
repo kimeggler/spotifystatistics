@@ -151,10 +151,12 @@
   }
 
   .top-card-information-artist {
+    align-items: center;
     margin-bottom: 50px;
   }
 
   .top-card-information-track {
+    align-items: center;
     margin-top: 50px;
   }
 
