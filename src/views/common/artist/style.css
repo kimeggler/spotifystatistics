@@ -5,7 +5,6 @@
   width: 350px;
   margin: 25px;
   position: relative;
-  padding: 25px;
   box-sizing: border-box;
   background: var(--main-2-trans);
   border-radius: 20px;
@@ -13,10 +12,10 @@
 
 .artist-card-image {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 325px;
   background-size: cover;
-  border-radius: 15px;
+  border-radius: 15px 15px 0 0;
 }
 
 .artist-rank {
@@ -48,7 +47,7 @@
   height: 100%;
   z-index: 2;
   background-color: #000;
-  border-radius: 15px;
+  border-radius: 15px 15px 0 0;
   -webkit-transition: -webkit-opacity 0.3s;
   transition: -webkit-opacity 0.3s;
   transition: opacity 0.3s;
@@ -66,6 +65,8 @@
 
 .artist-card-name {
   font-size: 18px;
+  margin-bottom: 25px;
+  text-align: center;
 }
 
 @media only screen and (max-width: 1185px) {
