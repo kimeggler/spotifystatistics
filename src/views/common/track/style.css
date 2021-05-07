@@ -4,8 +4,7 @@
   position: relative;
   background-color: var(--main-2-trans);
   margin: 20px;
-  padding: 10px;
-  border-radius: 10px;
+  border-radius: 15px;
   height: fit-content;
   width: 350px;
   box-sizing: border-box;
@@ -17,32 +16,39 @@
 }
 
 .card-image {
-  height: 50px;
+  height: 350px;
   width: auto;
   margin-right: 10px;
-  border-radius: 5px;
+  border-radius: 15px 0 0 15px;
 }
 
 .track-index {
   margin-top: 5px;
+  font-size: 20px;
   color: var(--font-main-white);
 }
 
 .track-name {
-  margin-right: 30px !important;
+  margin-right: 50px !important;
+  font-size: 18px;
+}
+
+.artist-name {
+  margin-right: 50px !important;
+  font-size: 18px;
 }
 
 .highlight-circle {
-  border-radius: 50%;
+  border-radius: 0 15px 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   background-color: var(--main-1-trans);
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 0;
+  right: 0;
 }
 
 .highlight-circle p {
@@ -53,7 +59,12 @@
   .track {
     margin: 25px 25px 0 25px;
     flex: 0 1 100%;
-    padding-left: 15px;
     height: fit-content;
+  }
+  .card-image {
+    height: 100px;
+    width: auto;
+    margin-right: 10px;
+    border-radius: 15px 0 0 15px;
   }
 }
