@@ -22,24 +22,25 @@
   display: flex;
   flex-direction: row;
   background: var(--main-2-trans);
-  padding: 50px;
   margin: 30px 30px 60px 30px;
   border-radius: 20px;
 }
 
 .top-card-information {
+  margin: 50px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
 }
 
 .top-card-description {
   width: fit-content;
-  height: 30px;
+  height: fit-content;
+  margin-bottom: 20px;
   box-sizing: border-box;
   font-size: 24px;
   font-weight: 200;
   color: var(--font-main-white);
-  margin-bottom: 50px;
 }
 
 .top-card-primary {
@@ -53,7 +54,7 @@
 
 .top-card-secondary {
   width: fit-content;
-  height: 30px;
+  height: fit-content;
   box-sizing: border-box;
   font-size: 24px;
   font-weight: 200;
@@ -65,7 +66,15 @@
   height: 400px;
   width: 400px;
   background-size: cover;
-  border-radius: 15px;
+  background-position: center;
+}
+
+.top-card-image-artist {
+  border-radius: 0px 15px 15px 0px;
+}
+
+.top-card-image-track {
+  border-radius: 15px 0px 0px 15px;
 }
 
 .time-switch {
@@ -117,8 +126,8 @@
   .artist-top {
     flex-direction: column;
     align-items: center;
-    margin: 30px;
-    max-width: 250px;
+    margin: 25px 25px 0 25px;
+    max-width: 350px;
   }
 
   .top-card-primary {
@@ -128,9 +137,13 @@
     overflow-wrap: anywhere;
   }
 
+  .top-card-primary {
+    align-items: center;
+  }
+
   .top-card-image {
-    height: 250px;
-    width: 250px;
+    height: 325px;
+    width: 350px;
   }
 
   .time-switch {
@@ -143,6 +156,14 @@
 
   .top-card-information-track {
     margin-top: 50px;
+  }
+
+  .top-card-image-artist {
+    border-radius: 0px 0px 15px 15px;
+  }
+
+  .top-card-image-track {
+    border-radius: 15px 15px 0px 0px;
   }
 
   .padding-right {
