@@ -3,12 +3,11 @@
   align-items: center;
   position: relative;
   background-color: var(--main-2-trans);
-  margin: 20px;
+  margin: 25px 25px 0 25px;
   border-radius: 15px;
   height: fit-content;
-  width: 350px;
+  width: 1000px;
   box-sizing: border-box;
-  flex: 0 1 33%;
 }
 
 .top-section p {
@@ -16,7 +15,7 @@
 }
 
 .card-image {
-  height: 350px;
+  height: 100px;
   width: auto;
   margin-right: 10px;
   border-radius: 15px 0 0 15px;
@@ -57,14 +56,12 @@
 
 @media only screen and (max-width: 1185px) {
   .track {
-    margin: 25px 25px 0 25px;
-    flex: 0 1 100%;
-    height: fit-content;
+    width: 80vw;
   }
-  .card-image {
-    height: 100px;
-    width: auto;
-    margin-right: 10px;
-    border-radius: 15px 0 0 15px;
+}
+
+@media only screen and (max-width: 600px) {
+  .track {
+    width: 350px;
   }
 }
