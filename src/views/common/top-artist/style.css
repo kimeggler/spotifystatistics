@@ -22,13 +22,14 @@
   display: flex;
   flex-direction: row;
   background: var(--main-2-trans);
-  padding: 50px;
   margin: 30px 30px 60px 30px;
   border-radius: 20px;
 }
 
 .top-card-information {
+  margin: 50px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
 }
 
@@ -39,7 +40,6 @@
   font-size: 24px;
   font-weight: 200;
   color: var(--font-main-white);
-  margin-bottom: 50px;
 }
 
 .top-card-primary {
@@ -65,7 +65,15 @@
   height: 400px;
   width: 400px;
   background-size: cover;
-  border-radius: 15px;
+  background-position: center;
+}
+
+.top-card-image-artist {
+  border-radius: 0px 15px 15px 0px;
+}
+
+.top-card-image-track {
+  border-radius: 15px 0px 0px 15px;
 }
 
 .time-switch {
@@ -143,6 +151,14 @@
 
   .top-card-information-track {
     margin-top: 50px;
+  }
+
+  .top-card-image-artist {
+    border-radius: 0px 0px 15px 15px;
+  }
+
+  .top-card-image-track {
+    border-radius: 15px 15px 0px 0px;
   }
 
   .padding-right {
