@@ -19,11 +19,10 @@
 .create-playlist-button {
   display: flex;
   align-self: flex-end;
-  border: 2px solid var(--main-2);
   width: -moz-fit-content;
   width: fit-content;
   border-radius: 5px;
-  color: var(--font-main);
+  background: var(--main-2-trans);
   font-size: 16px;
   padding: 7px;
   margin-right: 15px;
@@ -35,9 +34,8 @@
 }
 
 .done {
-  color: var(--spotify_main);
-  border: 2px solid var(--spotify_main);
-  background-color: transparent;
+  color: var(--font-main);
+  background-color: var(--spotify_main);
 }
 
 .error {
