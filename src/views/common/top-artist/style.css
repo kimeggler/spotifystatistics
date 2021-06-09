@@ -92,6 +92,7 @@
 }
 
 .time-button {
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,9 +100,9 @@
   background: var(--main-2-trans);
   border-radius: 5px;
   color: var(--font-main);
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
-  padding: 7px;
+  padding: 7px 10px;
 }
 
 .button-selected {
