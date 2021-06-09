@@ -12,7 +12,7 @@ function Genres() {
   const [artistsRequest, setArtistsRequest] = useState(() => () => fetchArtists(timerange));
   const { data: artists, isLoading, hasError } = useDataHook(artistsRequest);
   const [topGenres, setTopGenres] = useState();
-  const [hovered, setHovered] = useState();
+  const [artistsIncluded, setArtistsIncluded] = useState(false);
 
   useEffect(() => {
     setArtistsRequest(() => () => fetchArtists(timerange));
@@ -62,26 +62,26 @@ function Genres() {
         </div>
       </div>
       <div className="include-ranking-container">
-        <div className="flex">
-          <p>Include artist ranking?</p>
+        <div className="flex ranking-container">
+          <p>Calculate based on artist ranking</p>
           <div
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            className="info-icon"
+            className={`artists-weighting`}
+            style={{
+              backgroundColor: artistsIncluded ? '#1db954' : '',
+            }}
+            onClick={() => {
+              setArtistsIncluded(!artistsIncluded);
+              setIncludeArtistRating(!includeArtistRating);
+            }}
           >
-            i
+            {' '}
+            <div
+              className="artists-weighting-switch"
+              style={{
+                left: artistsIncluded ? '30px' : '',
+              }}
+            ></div>
           </div>
-        </div>
-        {hovered && (
-          <div className="info-card">
-            <p>
-              If this option is turned on, the ranks of your favorite artists will be included into
-              the calculation.
-            </p>
-          </div>
-        )}
-        <div className="genre-button" onClick={() => setIncludeArtistRating(!includeArtistRating)}>
-          {includeArtistRating ? 'turn off' : 'turn on'}
         </div>
       </div>
       <div className="genres-content">{topGenres && renderGenres()}</div>
