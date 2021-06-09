@@ -92,7 +92,7 @@
 }
 
 .time-button {
-  height: 30px;
+  height: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -103,6 +103,7 @@
   font-size: 16px;
   text-align: center;
   padding: 7px 10px;
+  margin: 7px;
 }
 
 .button-selected {
