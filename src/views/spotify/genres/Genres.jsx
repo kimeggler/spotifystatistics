@@ -12,7 +12,6 @@ function Genres() {
   const [artistsRequest, setArtistsRequest] = useState(() => () => fetchArtists(timerange));
   const { data: artists, isLoading, hasError } = useDataHook(artistsRequest);
   const [topGenres, setTopGenres] = useState();
-  const [hovered, setHovered] = useState();
   const [artistsIncluded, setArtistsIncluded] = useState(false);
 
   useEffect(() => {
