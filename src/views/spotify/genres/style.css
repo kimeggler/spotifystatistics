@@ -12,46 +12,39 @@
   flex-wrap: wrap;
 }
 
-.genre-button {
-  width: fit-content;
-  height: 30px;
-  border-radius: 5px;
-  background: var(--main-2-trans);
-  color: var(--main-2);
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  box-sizing: border-box;
-  align-items: center;
-  cursor: pointer;
-  padding: 7px 10px;
-  margin-top: 10px;
-}
-
-.button:hover {
-  background-color: var(--main-2);
-  color: var(--font-main-dark);
-}
-
 .include-ranking-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px;
+  margin: 40px 20px 20px 20px;
 }
 
-.info-icon {
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  font-size: 14px;
-  font-weight: bold;
-  border: 2px solid var(--main-2);
-  display: flex;
-  justify-content: center;
+.ranking-container {
   align-items: center;
-  cursor: pointer;
-  margin-left: 5px;
+}
+.ranking-container p {
+  margin: 0;
+}
+
+.artists-weighting {
+  margin-left: 10px;
+  transition: background-color 0.2s ease;
+  height: 30px;
+  width: 60px;
+  border-radius: 15px;
+  background-color: var(--main-2-trans);
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.artists-weighting-switch {
+  left: 0px;
+  transition: left 0.2s ease;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  position: relative;
+  background-color: var(--main-2);
 }
 
 .info-card {
