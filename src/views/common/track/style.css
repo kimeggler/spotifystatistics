@@ -1,67 +1,65 @@
 .track {
-  display: flex;
-  align-items: center;
-  position: relative;
   background-color: var(--main-2-trans);
-  margin: 25px 25px 0 25px;
-  border-radius: 15px;
+  padding: 20px;
+  margin: 20px 40px;
+  border-radius: 10px;
   height: fit-content;
-  width: 1000px;
-  box-sizing: border-box;
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  flex-basis: 100%;
 }
 
-.top-section p {
-  margin: 5px 0;
+.track-card-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-right: 35px;
+  word-break: break-word;
 }
 
 .card-image {
-  height: 100px;
-  width: auto;
-  margin-right: 10px;
-  border-radius: 15px 0 0 15px;
+  width: 128px;
+  height: 128px;
+  margin: 20px 0;
 }
 
-.track-index {
-  margin-top: 5px;
-  font-size: 20px;
-  color: var(--font-main-white);
-}
-
-.track-name {
-  margin-right: 50px !important;
-  font-size: 18px;
-}
-
-.artist-name {
-  margin-right: 50px !important;
-  font-size: 18px;
-}
-
-.highlight-circle {
-  border-radius: 0 15px 0 0;
+.track-rating {
+  background-color: var(--main-1-trans);
+  color: var(--font-main);
+  width: 50px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
-  background-color: var(--main-1-trans);
+  font-size: 24px;
+  font-weight: bold;
+  border-top-right-radius: 10px;
   position: absolute;
   top: 0;
   right: 0;
 }
 
-.highlight-circle p {
-  color: var(--font-main);
+.track-text-column {
+  flex-basis: 100%;
+  margin-bottom: 5px;
 }
 
-@media only screen and (max-width: 1185px) {
-  .track {
-    width: 80vw;
+.track-text-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media only screen and (min-width: 600px) {
+  .track-top-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-bottom: 20px;
   }
-}
 
-@media only screen and (max-width: 600px) {
-  .track {
-    width: 350px;
+  .card-image {
+    margin: 0;
+    margin-right: 20px;
   }
 }
