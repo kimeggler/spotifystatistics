@@ -22,11 +22,11 @@
   height: 100vh;
   box-sizing: border-box;
   justify-content: space-between;
-  background: var(--main-background-persistent);
   padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-size: cover;
 }
 
 .playlist-overlay {

@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 
-import { close } from '../../../assets';
+import { background, close } from '../../../assets';
 import './style.css';
 
 function Playlist(playlist, activePlaylist, changePlaylist, analyse, closePlaylist) {
-  let background = {};
+  let playlistImage = {};
   // let chartoptions = {
   //   tooltip: {
   //     theme: 'dark',
@@ -70,7 +70,7 @@ function Playlist(playlist, activePlaylist, changePlaylist, analyse, closePlayli
   // };
 
   if (playlist.images[0]) {
-    background = {
+    playlistImage = {
       backgroundImage: `url(${playlist.images[0].url})`,
     };
   }
@@ -221,7 +221,7 @@ function Playlist(playlist, activePlaylist, changePlaylist, analyse, closePlayli
 
   const renderOverlay = name => {
     return (
-      <div className="playlist-analyse">
+      <div className="playlist-analyse" style={{ backgroundImage: `url(${background})` }}>
         {renderAnalysis(name)}
         <img src={close} alt="close" onClick={() => closePlaylist()} className="close-analyse" />
       </div>
@@ -238,7 +238,7 @@ function Playlist(playlist, activePlaylist, changePlaylist, analyse, closePlayli
           }}
         >
           {/* <img alt={artist.name} src={artist.images[0].url} className='artist-card-image' /> */}
-          <div style={background} className="playlist-card-image"></div>
+          <div style={playlistImage} className="playlist-card-image"></div>
           <p className="playlist-rank">Analyze</p>
         </div>
         <p className="playlist-card-name bold">{playlist.name}</p>
