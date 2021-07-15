@@ -1,4 +1,4 @@
-# STATIFY
+# STATFY
 
 ### About
 
@@ -8,8 +8,7 @@ As there raising interest in our project, we decided to further develop and supp
 
 ## Developers
 
-The app was built by two software engineering apprentices. 
-
+The app was built by two software engineering apprentices.
 
 ## Contact
 

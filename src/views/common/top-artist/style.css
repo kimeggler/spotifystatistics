@@ -31,6 +31,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  max-width: 450px;
 }
 
 .top-card-description {
@@ -141,7 +142,10 @@
   }
 
   .top-card-information {
+    height: 250px;
     align-items: center;
+    max-width: 300px;
+    margin: 25px;
   }
 
   .top-card-image {

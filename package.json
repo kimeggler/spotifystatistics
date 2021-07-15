@@ -1,6 +1,6 @@
 {
-  "name": "spotify-wrapper",
-  "version": "0.1.0",
+  "name": "statfy",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "apexcharts": "^3.24.0",

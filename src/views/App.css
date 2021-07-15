@@ -29,3 +29,19 @@
 .flex {
   display: flex;
 }
+
+.button-primary {
+  background-color: var(--spotify_main);
+  color: var(--font-main-white);
+  font-weight: bold;
+}
+
+.button-secondary {
+  border: 2px solid white;
+  color: var(--font-main-white);
+  background: none;
+}
+
+.paragraph {
+  max-width: 600px;
+}
