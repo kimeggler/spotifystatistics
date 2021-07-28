@@ -8,30 +8,18 @@
 .navigation-item {
   text-decoration: none;
   width: fit-content;
+  -webkit-transition: -webkit-font-size 0.3s;
+  transition: -webkit-font-size 0.3s;
+  transition: font-size 0.3s;
+  transition: font-size 0.3s, -webkit-font-size 0.3s;
 }
 
 .navigation-inactive {
   position: relative;
 }
 
-.navigation-inactive::after {
-  position: absolute;
-  content: '';
-  width: 120%;
-  height: 3px;
-  background: white;
-  top: 100%;
-  left: -10%;
-  transform: scaleX(0);
-  transform-origin: center;
-  -webkit-transition: -webkit-transform 0.3s;
-  transition: -webkit-transform 0.3s;
-  transition: transform 0.3s;
-  transition: transform 0.3s, -webkit-transform 0.3s;
-}
-
-.navigation-inactive:hover::after {
-  transform: scaleX(1);
+.navigation-inactive:hover {
+  font-size: 24px;
 }
 
 .navigation-active {
