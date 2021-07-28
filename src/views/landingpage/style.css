@@ -1,10 +1,11 @@
 .landingpage {
   display: flex;
   flex-direction: row;
+  background-size: cover;
 }
 
 .login-area {
-  width: 50vw;
+  width: 100vw;
   height: 100vh;
   position: relative;
   display: flex;
@@ -12,47 +13,12 @@
   justify-content: center;
   padding: 50px;
   box-sizing: border-box;
-}
-
-.login-image-area {
-  width: 50vw;
-  height: 100vh;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.login-image {
-  position: relative;
-  height: 150vh;
-  background-size: cover;
-  background-position-x: -150px;
-  border-radius: 50vh 0 0 50vh;
-}
-
-.login-image::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  /*background: linear-gradient(-40deg, blue, #c300ff);*/
-  background: linear-gradient(-40deg, rgb(76, 18, 78), #175223);
-  opacity: 0.3;
-  border-radius: 50vh 0 0 50vh;
+  background: none;
 }
 
 .login-buttons {
   display: flex;
-}
-
-.login-buttons button {
-  padding: 0 15px 0 15px;
-  height: 50px;
-  width: fit-content;
-  border-radius: 25px;
-  margin-right: 10px;
-  font-weight: bold;
+  flex-wrap: wrap;
 }
 
 .login-button-image {
@@ -64,36 +30,5 @@
   width: 47px;
 }
 
-@media only screen and (max-width: 600px) {
-  .login-area {
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 50px;
-    box-sizing: border-box;
-  }
-
-  .login-image-area {
-    visibility: hidden;
-  }
-}
-
 @media only screen and (max-width: 1000px) {
-  .login-area {
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 50px;
-    box-sizing: border-box;
-  }
-
-  .login-image-area {
-    visibility: hidden;
-  }
 }

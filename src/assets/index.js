@@ -14,6 +14,10 @@ export { default as twitter } from './twitter.svg';
 
 export { default as github } from './github.svg';
 
+export { default as arrow_right } from './right.svg';
+
+export { default as background } from './Rainbow-Vortex.svg';
+
 // creators
 
 export { default as kim } from './kim.jpg';

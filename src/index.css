@@ -8,7 +8,7 @@ body {
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--main-background);
+  background: black;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -19,15 +19,13 @@ button {
   padding: 10px 20px;
   box-sizing: border-box;
   border: none;
-  background-color: var(--spotify_main);
-  color: var(--font-main-white);
   border-radius: 25px;
-  margin: 20px 0;
+  margin: 20px 20px 0 0;
 }
 
-button:hover {
+/* button:hover {
   box-shadow: #8e8d8d 2px 2px 8px 0px;
-}
+} */
 
 img {
   height: 100%;

@@ -31,6 +31,26 @@
   transition: opacity 0.3s, -webkit-opacity 0.3s;
 }
 
+.artist-about {
+  text-decoration: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 15px;
+  margin: 10px;
+  font-weight: 400;
+  opacity: 0;
+  z-index: 3;
+  -webkit-transition: -webkit-opacity 0.3s;
+  transition: -webkit-opacity 0.3s;
+  transition: opacity 0.3s;
+  transition: opacity 0.3s, -webkit-opacity 0.3s;
+}
+
+.artist-about-arrow {
+  width: 15px;
+}
+
 .img-container {
   height: fit-content;
   position: relative;
@@ -60,6 +80,10 @@
 }
 
 .img-container:hover .artist-rank {
+  opacity: 0.8;
+}
+
+.img-container:hover .artist-about {
   opacity: 0.8;
 }
 
