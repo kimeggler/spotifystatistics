@@ -142,7 +142,7 @@
   }
 
   .top-card-information {
-    height: 250px;
+    min-height: 250px;
     align-items: center;
     max-width: 300px;
     margin: 25px;
