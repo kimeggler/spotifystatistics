@@ -6,10 +6,11 @@ import SpotifyCallback from './auth/SpotifyCallback';
 import { Switch, Route, withRouter, BrowserRouter } from 'react-router-dom';
 import About from './about/About';
 import Landingpage from './landingpage/Landingpage';
+import { background } from '../assets';
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundImage: `url(${background})` }}>
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Landingpage} />
