@@ -32,13 +32,15 @@
 
 .roadmap {
   margin-top: 80px;
-  width: 100vh;
   position: relative;
   display: flex;
+  overflow-x: auto;
+  height: 300px;
+  max-width: 950vw;
 }
 
 .roadmap-element {
-  height: 250px;
+  height: 280px;
   width: 250px;
   display: flex;
   flex-direction: column;
@@ -71,8 +73,7 @@
 
 .roadmap-divider {
   height: 4px;
-  border-radius: 2px;
-  width: 190px;
+  width: 220px;
   background-color: var(--main-3-trans);
   margin: 20px 0;
 }
@@ -81,7 +82,6 @@
   height: 30px;
   width: 30px;
   border-radius: 15px;
-  margin-left: 15px;
   box-sizing: border-box;
 }
 
