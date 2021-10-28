@@ -34,6 +34,14 @@ function Landingpage() {
           <button
             className="button-secondary"
             onClick={() => {
+              window.location.replace('/roadmap');
+            }}
+          >
+            Development
+          </button>
+          <button
+            className="button-secondary"
+            onClick={() => {
               window.location.replace('/about');
             }}
           >

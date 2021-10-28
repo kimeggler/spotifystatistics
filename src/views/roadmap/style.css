@@ -1,0 +1,102 @@
+.landingpage {
+  display: flex;
+  flex-direction: row;
+  background-size: cover;
+}
+
+.login-area {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px;
+  box-sizing: border-box;
+  background: none;
+}
+
+.login-buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.login-button-image {
+  height: 50px;
+  width: 50px;
+}
+.spotify-image {
+  height: 47px;
+  width: 47px;
+}
+
+.roadmap {
+  margin-top: 80px;
+  width: 100vh;
+  position: relative;
+  display: flex;
+}
+
+.roadmap-element {
+  height: 250px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.roadmap-element-title {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.roadmap-element-date {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.roadmap-element-paragraph {
+  text-align: center;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  padding: 15px;
+}
+
+.roadmap-progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.roadmap-divider {
+  height: 4px;
+  border-radius: 2px;
+  width: 190px;
+  background-color: var(--main-3-trans);
+  margin: 20px 0;
+}
+
+.roadmap-state {
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  margin-left: 15px;
+  box-sizing: border-box;
+}
+
+.inactive {
+  background-color: var(--main-2-trans);
+}
+
+.roadmap-state-completed {
+  background-color: var(--spotify_main);
+}
+.roadmap-state-active {
+  border: 4px solid var(--spotify_main);
+}
+.roadmap-state-inactive {
+  border: 4px solid var(--main-2-trans);
+}
+@media only screen and (max-width: 1000px) {
+}
