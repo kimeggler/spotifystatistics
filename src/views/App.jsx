@@ -17,8 +17,7 @@ const App = () => {
           <Route exact path="/" component={Landingpage} />
           <Route exact path="/about" component={About} />
           <Route exact path="/roadmap" component={Roadmap} />
-          <Route exact path="/spotifycallback" component={SpotifyCallback} />
-          <Route exact path="/applecallback" component={SpotifyCallback} />
+          <Route exact path="/callback" component={SpotifyCallback} />
           <Route component={AppRouter} />
         </Switch>
       </BrowserRouter>

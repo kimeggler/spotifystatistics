@@ -3,7 +3,7 @@ const config = {
   remoteUrl: 'https://api.spotify.com/v1/',
   spotifyAuthparams: {
     client_id: process.env.REACT_APP_CLIENT_ID,
-    redirect_uri: `${origin}/spotifycallback`,
+    redirect_uri: `${origin}/callback`,
     scope:
       'user-read-private user-top-read user-read-recently-played user-read-currently-playing playlist-modify-public playlist-modify-private playlist-read-collaborative user-read-play-history',
     show_dialog: true,
