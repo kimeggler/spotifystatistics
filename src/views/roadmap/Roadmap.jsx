@@ -1,6 +1,5 @@
 import React from 'react';
 import './style.css';
-import { authorizeSpotifyUser } from '../../services/fetchservice';
 
 import { background } from '../../assets';
 import { useHistory } from 'react-router-dom';
