@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const TopTrack = ({ background, topTrack }) => {
   return (
@@ -13,6 +14,11 @@ const TopTrack = ({ background, topTrack }) => {
       </div>
     </div>
   );
+};
+
+TopTrack.propTypes = {
+  background: PropTypes.object,
+  topTrack: PropTypes.object,
 };
 
 export default TopTrack;
