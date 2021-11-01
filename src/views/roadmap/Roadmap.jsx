@@ -14,7 +14,7 @@ function Roadmap() {
 
   return (
     <div className="landingpage" style={{ backgroundImage: `url(${background})` }}>
-      <div className="login-area">
+      <div className="roadmap-area">
         <h3
           className="logo"
           onClick={() => {
@@ -76,7 +76,7 @@ function Roadmap() {
               All users on statfy can customize the style of the app to their own taste.
             </p>
           </div>
-          <div className="roadmap-element">
+          <div className="roadmap-element margin-right-100">
             <p className="roadmap-element-title">More to come...</p>
             <div className="roadmap-progress">
               <div className="roadmap-divider inactive" />
