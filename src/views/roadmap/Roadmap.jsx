@@ -14,7 +14,7 @@ function Roadmap() {
 
   return (
     <div className="landingpage" style={{ backgroundImage: `url(${background})` }}>
-      <div className="login-area">
+      <div className="roadmap-area">
         <h3
           className="logo"
           onClick={() => {
@@ -25,7 +25,8 @@ function Roadmap() {
         </h3>
         <h1 className="intro-text">Roadmap</h1>
         <p className="paragraph">
-          What features are we currently developing and when you can expect their release
+          We want to provide you with information about our current plans for the development of
+          features
         </p>
 
         <div className="roadmap">

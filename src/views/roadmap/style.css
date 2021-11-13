@@ -1,42 +1,26 @@
-.landingpage {
-  display: flex;
-  flex-direction: row;
-  background-size: cover;
-}
-
-.login-area {
+.roadmap-area {
   width: 100vw;
   height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 50px;
+  justify-content: flex-start;
+  padding: 120px 50px 50px 50px;
   box-sizing: border-box;
   background: none;
-}
-
-.login-buttons {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.login-button-image {
-  height: 50px;
-  width: 50px;
-}
-.spotify-image {
-  height: 47px;
-  width: 47px;
+  overflow-y: scroll;
 }
 
 .roadmap {
   margin-top: 80px;
+  box-sizing: border-box;
   position: relative;
   display: flex;
   overflow-x: auto;
   height: 300px;
-  max-width: 950vw;
+  width: calc(100vw - 50px);
+  padding-right: 50px;
+  /* width: 100vw; */
 }
 
 .roadmap-element {
@@ -60,8 +44,6 @@
 
 .roadmap-element-paragraph {
   text-align: center;
-  line-height: 20px;
-  letter-spacing: 0.5px;
   padding: 15px;
 }
 
@@ -83,6 +65,10 @@
   width: 30px;
   border-radius: 15px;
   box-sizing: border-box;
+}
+
+.margin-right-100 {
+  margin-right: 100px;
 }
 
 .inactive {

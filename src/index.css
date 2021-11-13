@@ -31,3 +31,8 @@ img {
   height: 100%;
   width: auto;
 }
+
+p {
+  line-height: 20px;
+  letter-spacing: 0.5px;
+}

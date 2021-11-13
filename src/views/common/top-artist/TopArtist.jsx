@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './style.css';
 import FormattedNumber from '../formattednumber/FormattedNumber';
 
-const TopArtist = ({background, topArtist}) => {
+const TopArtist = ({ background, topArtist }) => {
   return (
     <div className="artist-top">
       <div className="top-card-information top-card-information-artist">
@@ -16,6 +17,11 @@ const TopArtist = ({background, topArtist}) => {
       <div style={background} className="top-card-image top-card-image-artist"></div>
     </div>
   );
+};
+
+TopArtist.propTypes = {
+  background: PropTypes.object,
+  topArtist: PropTypes.object,
 };
 
 export default TopArtist;
