@@ -8,15 +8,19 @@
   padding: 120px 50px 50px 50px;
   box-sizing: border-box;
   background: none;
+  overflow-y: scroll;
 }
 
 .roadmap {
   margin-top: 80px;
+  box-sizing: border-box;
   position: relative;
   display: flex;
   overflow-x: auto;
   height: 300px;
-  width: 100vw;
+  width: calc(100vw - 50px);
+  padding-right: 50px;
+  /* width: 100vw; */
 }
 
 .roadmap-element {

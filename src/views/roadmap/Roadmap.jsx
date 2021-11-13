@@ -25,7 +25,8 @@ function Roadmap() {
         </h3>
         <h1 className="intro-text">Roadmap</h1>
         <p className="paragraph">
-          What features are we currently developing and when you can expect their release
+          We want to provide you with information about our current plans for the development of
+          features
         </p>
 
         <div className="roadmap">
@@ -76,7 +77,7 @@ function Roadmap() {
               All users on statfy can customize the style of the app to their own taste.
             </p>
           </div>
-          <div className="roadmap-element margin-right-100">
+          <div className="roadmap-element">
             <p className="roadmap-element-title">More to come...</p>
             <div className="roadmap-progress">
               <div className="roadmap-divider inactive" />
