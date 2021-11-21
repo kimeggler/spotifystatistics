@@ -18,8 +18,7 @@
   display: flex;
   overflow-x: auto;
   height: 300px;
-  width: calc(100vw - 50px);
-  padding-right: 50px;
+  width: calc(100vw - 100px);
   /* width: 100vw; */
 }
 
