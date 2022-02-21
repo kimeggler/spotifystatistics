@@ -2015,10 +2015,10 @@ anymatch@~3.1.1:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-apexcharts@^3.24.0:
-  version "3.26.1"
-  resolved "https://registry.yarnpkg.com/apexcharts/-/apexcharts-3.26.1.tgz#2094ec0cfd00ed8129d93e73e75018716d55ef5b"
-  integrity sha512-Z/pfGTsL4YUm1tHd6a0d0G2hX4XUmhEI0b/5BxVK69dEB/XXvVMX9hKCkcIx+kPyVqVFCuo91ZjCdqjMcmSVBA==
+apexcharts@^3.33.0:
+  version "3.33.1"
+  resolved "https://registry.yarnpkg.com/apexcharts/-/apexcharts-3.33.1.tgz#7159f45e7d726a548e5135a327c03e7894d0bf13"
+  integrity sha512-5aVzrgJefd8EH4w7oRmuOhA3+cxJxQg27cYg3ANVGvPCOB4AY3mVVNtFHRFaIq7bv8ws4GRaA9MWfzoWQw3MPQ==
   dependencies:
     svg.draggable.js "^2.2.2"
     svg.easing.js "^2.0.0"
