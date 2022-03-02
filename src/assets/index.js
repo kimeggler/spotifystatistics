@@ -1,5 +1,7 @@
 export { default as startscreen } from './startscreen.jpg';
 
+export { default as stars } from './stars.jpg';
+
 export { default as spotify } from './spotify.png';
 
 export { default as user_icon } from './user_icon.svg';

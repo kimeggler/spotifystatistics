@@ -67,7 +67,7 @@ function Genres() {
           <div
             className={`artists-weighting`}
             style={{
-              backgroundColor: artistsIncluded ? '#1db954' : '',
+              background: artistsIncluded ? 'linear-gradient(-35deg, #d300ff, #8300ff)' : '',
             }}
             onClick={() => {
               setArtistsIncluded(!artistsIncluded);

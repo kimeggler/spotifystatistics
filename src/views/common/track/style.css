@@ -19,6 +19,7 @@
   width: auto;
   margin-right: 10px;
   border-radius: 15px 0 0 15px;
+  filter: grayscale(1);
 }
 
 .track-index {

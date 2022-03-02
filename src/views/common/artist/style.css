@@ -16,6 +16,7 @@
   height: 325px;
   background-size: cover;
   border-radius: 15px 15px 0 0;
+  filter: grayscale(1);
 }
 
 .artist-rank {

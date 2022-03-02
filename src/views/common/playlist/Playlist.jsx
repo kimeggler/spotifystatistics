@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import { background, close } from '../../../assets';
+import { close } from '../../../assets';
 import './style.css';
 
 function Playlist(playlist, activePlaylist, changePlaylist, analyse, closePlaylist) {
@@ -90,7 +90,7 @@ function Playlist(playlist, activePlaylist, changePlaylist, analyse, closePlayli
 
   const getWidth = width => {
     if (typeof width === undefined) {
-      return { width: '0%' };
+      return { width: '0%', display: 'none' };
     }
     return { width: `${width}%` };
   };
@@ -221,7 +221,7 @@ function Playlist(playlist, activePlaylist, changePlaylist, analyse, closePlayli
 
   const renderOverlay = name => {
     return (
-      <div className="playlist-analyse" style={{ backgroundImage: `url(${background})` }}>
+      <div className="playlist-analyse">
         {renderAnalysis(name)}
         <img src={close} alt="close" onClick={() => closePlaylist()} className="close-analyse" />
       </div>

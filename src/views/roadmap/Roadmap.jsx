@@ -1,9 +1,9 @@
 import React from 'react';
 import './style.css';
 
-import { background } from '../../assets';
 import { useHistory } from 'react-router-dom';
 import { validateToken } from '../../helper/authenticationhelper';
+import { stars } from '../../assets';
 
 function Roadmap() {
   const history = useHistory();
@@ -13,7 +13,8 @@ function Roadmap() {
   }
 
   return (
-    <div className="landingpage" style={{ backgroundImage: `url(${background})` }}>
+    <div className="landingpage">
+      <div className="landingpage-image" style={{ backgroundImage: `url(${stars})` }}></div>
       <div className="roadmap-area">
         <h3
           className="logo"
@@ -21,9 +22,11 @@ function Roadmap() {
             window.location.replace('/');
           }}
         >
-          STATIFY
+          STATFY
         </h3>
-        <h1 className="intro-text">Roadmap</h1>
+        <h1 className="landing-page-title">
+          DEVELOPMENT <span className="landing-page-title-span">ROADMAP</span>
+        </h1>
         <p className="paragraph">
           We want to provide you with information about our current plans for the development of
           features
@@ -38,20 +41,30 @@ function Roadmap() {
             </div>
             <p className="roadmap-element-date">TODAY</p>
             <p className="roadmap-element-paragraph">
-              Statify allows users to view their listening behaviours. Users can create playlists
+              Statfy allows users to view their listening behaviours. Users can create playlists
               with their favorite songs over different periods of time
             </p>
           </div>
           <div className="roadmap-element">
-            <p className="roadmap-element-title">Playlist analyse</p>
+            <p className="roadmap-element-title">Major redesign</p>
+            <div className="roadmap-progress">
+              <div className="roadmap-divider" />
+              <div className="roadmap-state roadmap-state-completed" />
+            </div>
+            <p className="roadmap-element-date">MAR 2022</p>
+            <p className="roadmap-element-paragraph">
+              Statfy will recieve major a overhaul and redesign.
+            </p>
+          </div>
+          <div className="roadmap-element">
+            <p className="roadmap-element-title">Playlist Stats</p>
             <div className="roadmap-progress">
               <div className="roadmap-divider" />
               <div className="roadmap-state roadmap-state-active" />
             </div>
-            <p className="roadmap-element-date">JAN 2022</p>
+            <p className="roadmap-element-date">APR 2022</p>
             <p className="roadmap-element-paragraph">
-              The feature to analyse playlists will recieve major a overhaul and redesign.
-              Additionally more stats will become available.
+              The statistics page will recieve a new look and new stats will become available
             </p>
           </div>
           <div className="roadmap-element">
@@ -60,21 +73,10 @@ function Roadmap() {
               <div className="roadmap-divider inactive" />
               <div className="roadmap-state roadmap-state-inactive" />
             </div>
-            <p className="roadmap-element-date">MAR 2022</p>
+            <p className="roadmap-element-date">MAY 2022</p>
             <p className="roadmap-element-paragraph">
               Some statistics can be exported and published as stories or posts on all major social
               platforms.
-            </p>
-          </div>
-          <div className="roadmap-element">
-            <p className="roadmap-element-title">Customizable theme</p>
-            <div className="roadmap-progress">
-              <div className="roadmap-divider inactive" />
-              <div className="roadmap-state roadmap-state-inactive" />
-            </div>
-            <p className="roadmap-element-date">~ JUN 2022</p>
-            <p className="roadmap-element-paragraph">
-              All users on statfy can customize the style of the app to their own taste.
             </p>
           </div>
           <div className="roadmap-element">
@@ -89,6 +91,14 @@ function Roadmap() {
             </p>
           </div>
         </div>
+        <button
+          className="button-secondary roadmap-button"
+          onClick={() => {
+            window.location.replace('/');
+          }}
+        >
+          Back to home
+        </button>
       </div>
     </div>
   );

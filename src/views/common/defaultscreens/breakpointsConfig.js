@@ -66,7 +66,7 @@ export default {
     },
     {
       name: 'largeAndBelow',
-      breakpoint: '(max-width: 1399px)',
+      breakpoint: '(max-width: 80099px)',
     },
     {
       name: 'largeAndAbove',

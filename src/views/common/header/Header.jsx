@@ -9,7 +9,7 @@ const Header = () => {
     <div className="header">
       <h3 className="title">
         <a className="header-link" href="/">
-          STATIFY
+          STATFY
         </a>
       </h3>
       <NavBar />

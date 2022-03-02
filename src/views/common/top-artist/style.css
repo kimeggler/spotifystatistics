@@ -69,6 +69,7 @@
   width: 400px;
   background-size: cover;
   background-position: center;
+  filter: grayscale(1);
 }
 
 .top-card-image-artist {
@@ -108,8 +109,8 @@
 }
 
 .button-selected {
-  color: var(--font-main-secondary);
-  background: var(--main-2);
+  color: var(--font-main-white);
+  background: var(--main-accent-gradient);
 }
 
 .time-button:hover {

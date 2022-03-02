@@ -27,6 +27,7 @@
   justify-content: center;
   align-items: center;
   background-size: cover;
+  background: var(--main-background);
 }
 
 .playlist-overlay {
@@ -65,6 +66,7 @@
   height: 325px;
   background-size: cover;
   border-radius: 15px 15px 0 0;
+  filter: grayscale(1);
 }
 
 .playlist-rank {
@@ -212,7 +214,7 @@
   top: 0;
   position: absolute;
   border-radius: 5px;
-  background-color: var(--main-3-trans);
+  background: var(--main-accent-gradient-analyse);
   height: 10px;
   align-self: flex-start;
   width: 0;

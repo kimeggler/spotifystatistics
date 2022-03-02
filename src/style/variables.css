@@ -3,14 +3,10 @@ html {
   --main-1: #0c142a;
   --main-2: #ffffff;
   --main-3: #0c142a;
-  --main-4: ;
-  --main-5: ;
-  --main-background: linear-gradient(
-    -20deg,
-    rgba(15, 226, 103, 0.9),
-    rgba(180, 16, 206, 0.9),
-    rgba(249, 149, 18, 0.9)
-  );
+  --main-accent: #d300ff;
+  --main-accent-gradient: linear-gradient(-35deg, #d300ff, #8300ff);
+  --main-accent-gradient-analyse: linear-gradient(-35deg, #d300ff 0px, #8300ff 400px);
+  --main-background: #0b001b;
   --main-background-persistent: linear-gradient(
     -20deg,
     rgba(15, 226, 103, 1),
@@ -18,10 +14,13 @@ html {
     rgba(249, 149, 18, 1)
   );
 
+  --background-footer: linear-gradient(180deg, #0b001b, #4f006e);
+
   /* transparent colors */
   --main-1-trans: #0c142a88;
-  --main-2-trans: #ffffff44;
+  --main-2-trans: #ffffff22;
   --main-3-trans: #ffffffbb;
+  --main-accent-trans: #d300ff77;
 
   /*font colors*/
   --font-main: #ffffff;

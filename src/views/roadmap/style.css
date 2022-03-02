@@ -1,6 +1,6 @@
 .roadmap-area {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -8,7 +8,7 @@
   padding: 120px 50px 50px 50px;
   box-sizing: border-box;
   background: none;
-  overflow-y: scroll;
+  overflow: hidden;
 }
 
 .roadmap {
@@ -20,6 +20,10 @@
   height: 300px;
   width: calc(100vw - 100px);
   /* width: 100vw; */
+}
+
+.roadmap-button {
+  margin-top: 40px;
 }
 
 .roadmap-element {
@@ -44,6 +48,8 @@
 .roadmap-element-paragraph {
   text-align: center;
   padding: 15px;
+  color: var(--main-3-trans);
+  line-height: 30px;
 }
 
 .roadmap-progress {
@@ -75,13 +81,13 @@
 }
 
 .roadmap-state-completed {
-  background-color: var(--spotify_main);
+  background-color: var(--main-accent);
 }
 .roadmap-state-active {
-  border: 4px solid var(--spotify_main);
+  border: 3px solid var(--main-accent);
 }
 .roadmap-state-inactive {
-  border: 4px solid var(--main-2-trans);
+  border: 3px solid var(--main-2-trans);
 }
 @media only screen and (max-width: 1000px) {
 }
