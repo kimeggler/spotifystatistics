@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { loader, wrapper } from './ComponentSpinner.module.css';
+import './ComponentSpinner.css';
 
 const ComponentSpinner = ({ className }) => {
   return (
-    <div className={cx(wrapper, className)}>
-      <div className={loader}>Loading...</div>
+    <div className={cx('wrapper', className)}>
+      <div className="loader">Loading...</div>
     </div>
   );
 };
