@@ -4,9 +4,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 50px;
+  padding: 120px 50px 50px 50px;
   box-sizing: border-box;
   overflow: hidden;
+}
+
+.purple-outline {
+  -webkit-text-stroke: 1px var(--main-accent);
 }
 
 @media only screen and (max-width: 600px) {
@@ -16,7 +20,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 50px;
+    padding: 120px 50px 50px 50px;
     box-sizing: border-box;
   }
 }

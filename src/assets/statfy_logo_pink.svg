@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <clipPath id="clip-Web_1920_1">
+      <rect width="100" height="100"/>
+    </clipPath>
+  </defs>
+  <g id="Web_1920_1" data-name="Web 1920 – 1" clip-path="url(#clip-Web_1920_1)">
+    <g id="Ellipse_1" data-name="Ellipse 1" fill="none" stroke="#e402ff" stroke-width="2">
+      <circle cx="35" cy="35" r="35" stroke="none"/>
+      <circle cx="35" cy="35" r="34" fill="none"/>
+    </g>
+    <g id="Ellipse_2" data-name="Ellipse 2" transform="translate(65 5) rotate(90)" fill="none" stroke="#e402ff" stroke-linecap="round" stroke-width="2" stroke-dasharray="170 100">
+      <circle cx="29.5" cy="29.5" r="29.5" stroke="none"/>
+      <circle cx="29.5" cy="29.5" r="28.5" fill="none"/>
+    </g>
+    <path id="Spotify-Icon-Black-Logo.wine" d="M35.112,19.558C28,15.335,16.27,14.947,9.482,17.007a2.063,2.063,0,0,1-1.2-3.949c7.793-2.365,20.748-1.909,28.935,2.951a2.064,2.064,0,0,1-2.106,3.549m-.233,6.255a1.721,1.721,0,0,1-2.366.566c-5.928-3.644-14.969-4.7-21.983-2.571a1.72,1.72,0,1,1-1-3.291c8.013-2.432,17.974-1.254,24.783,2.931a1.72,1.72,0,0,1,.566,2.365m-2.7,6.007a1.374,1.374,0,0,1-1.891.458c-5.181-3.166-11.7-3.881-19.381-2.127a1.375,1.375,0,1,1-.612-2.68c8.4-1.921,15.612-1.094,21.427,2.459a1.375,1.375,0,0,1,.456,1.891M22.061,0A22.062,22.062,0,1,0,44.123,22.061,22.062,22.062,0,0,0,22.061,0" transform="translate(13.438 12.438)" fill="#e402ff"/>
+    <g id="Rechteck_1" data-name="Rechteck 1" transform="translate(59.574 70.18) rotate(-45)" fill="none" stroke="#e402ff" stroke-width="2">
+      <rect width="15" height="42.172" rx="2" stroke="none"/>
+      <rect x="1" y="1" width="13" height="40.172" rx="1" fill="none"/>
+    </g>
+  </g>
+</svg>

@@ -15,6 +15,7 @@ import './App.css';
 
 import { validateToken } from '../helper/authenticationhelper';
 import { getData } from '../services/fetchservice';
+import User from './user/User';
 
 export const UserContext = createContext();
 
@@ -40,6 +41,7 @@ const AppRouter = ({ isLoading }) => {
     <UserContext.Provider value={{ profile }}>
       <div className="router-section" id="router-element">
         <Header />
+        <Route exact path="/user" component={User} />
         <Route exact path="/overview" component={Overview} />
         <Route exact path="/artists" component={Artists} />
         <Route exact path="/tracks" component={Tracks} />

@@ -4,7 +4,7 @@ html {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Montserrat', 'Roboto', 'Oxygen', 'Ubuntu',
+  font-family: 'Poppins', 'Roboto', 'Oxygen', 'Ubuntu', -apple-system, BlinkMacSystemFont,
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -19,8 +19,9 @@ button {
   padding: 10px 20px;
   box-sizing: border-box;
   border: none;
-  border-radius: 25px;
+  border-radius: 8px;
   margin: 20px 20px 0 0;
+  z-index: 20;
 }
 
 /* button:hover {
@@ -30,4 +31,9 @@ button {
 img {
   height: 100%;
   width: auto;
+}
+
+p {
+  line-height: 20px;
+  letter-spacing: 0.5px;
 }

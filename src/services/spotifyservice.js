@@ -1,5 +1,10 @@
 import { getData } from './fetchservice';
 
+const fetchMyProfile = async () => {
+  const response = await getData(`me`);
+  return response;
+};
+
 const fetchMyTopArtist = async timerange => {
   const response = await getData(`me/top/artists`, {}, `?time_range=${timerange}&limit=1`);
   return response.items[0];
@@ -25,4 +30,11 @@ const fetchPlaylists = async profile => {
   return response.items;
 };
 
-export { fetchMyTopArtist, fetchArtists, fetchMyTopTrack, fetchTracks, fetchPlaylists };
+export {
+  fetchMyProfile,
+  fetchMyTopArtist,
+  fetchArtists,
+  fetchMyTopTrack,
+  fetchTracks,
+  fetchPlaylists,
+};
