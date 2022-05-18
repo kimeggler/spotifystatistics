@@ -19,6 +19,41 @@
   filter: grayscale(1);
 }
 
+.artist-card-genres {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: flex-end;
+  bottom: 0;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.artist-card-genres-background {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(0deg, #000000ff, #00000033, #00000000);
+}
+
+.artist-card-genre-tag {
+  height: fit-content;
+  width: fit-content;
+  padding: 2px 6px;
+  border: 1px solid white;
+  background-color: #ffffff55;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.artist-card-genre-tag p {
+  width: fit-content;
+  height: fit-content;
+  margin: 0;
+  font-size: 10px;
+}
+
 .artist-rank {
   position: absolute;
   top: calc(50% - 10px);
