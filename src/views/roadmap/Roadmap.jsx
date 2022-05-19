@@ -62,7 +62,7 @@ function Roadmap() {
               <div className="roadmap-divider" />
               <div className="roadmap-state roadmap-state-active" />
             </div>
-            <p className="roadmap-element-date">APR 2022</p>
+            <p className="roadmap-element-date">JUN 2022</p>
             <p className="roadmap-element-paragraph">
               The statistics page will recieve a new look and new stats will become available
             </p>
@@ -73,7 +73,7 @@ function Roadmap() {
               <div className="roadmap-divider inactive" />
               <div className="roadmap-state roadmap-state-inactive" />
             </div>
-            <p className="roadmap-element-date">MAY 2022</p>
+            <p className="roadmap-element-date">DEZ 2022</p>
             <p className="roadmap-element-paragraph">
               Some statistics can be exported and published as stories or posts on all major social
               platforms.
