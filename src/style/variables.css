@@ -4,6 +4,21 @@ html {
   --main-2: #ffffff;
   --main-3: #0c142a;
   --main-accent: #d300ff;
+
+  --main-accent-pride: linear-gradient(
+    90deg,
+    #fe0000 16.66%,
+    #fd8c00 16.66%,
+    33.32%,
+    #ffe500 33.32%,
+    49.98%,
+    #119f0b 49.98%,
+    66.64%,
+    #0644b3 66.64%,
+    83.3%,
+    #c22edc 83.3%
+  );
+
   --main-accent-gradient: linear-gradient(-35deg, #d300ff, #8300ff);
   --main-accent-gradient-analyse: linear-gradient(-35deg, #d300ff 0px, #8300ff 400px);
   --main-background: #0b001b;

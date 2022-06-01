@@ -110,7 +110,8 @@
 
 .button-selected {
   color: var(--font-main-white);
-  background: var(--main-accent-gradient);
+  box-shadow: black 1px 1px 5px;
+  background: var(--main-accent-pride);
 }
 
 .time-button:hover {
