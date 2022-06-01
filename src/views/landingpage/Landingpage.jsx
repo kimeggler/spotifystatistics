@@ -53,7 +53,7 @@ function Landingpage() {
           </button>
         </div>
       </div>
-      <div className="color-circle"></div>
+      {/* <div className="color-circle"></div> */}
     </div>
   );
 }
