@@ -110,7 +110,7 @@
 
 .button-selected {
   color: var(--font-main-white);
-  box-shadow: black 1px 1px 5px;
+  text-shadow: black 1px 1px 5px;
   background: var(--main-accent-pride);
 }
 
