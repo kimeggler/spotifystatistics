@@ -45,7 +45,7 @@
 }
 
 .button-primary {
-  background: var(--main-accent-pride);
+  background: var(--main-accent-gradient);
   text-shadow: black 1px 1px 10px;
   color: var(--font-main-white);
   font-weight: bold;
