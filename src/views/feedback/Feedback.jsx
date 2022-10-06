@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
 import './style.css';
 
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 import { stars } from '../../assets';
+import toastHook from '../../hooks/toastHook';
 import saveFeedback from '../../services/firebaseService';
 import { ShowAt } from '../common';
 
 function Feedback() {
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [feedback, setFeedback] = useState('');
+  const [disabled, setDisabled] = useState(false);
+
+  const { addToast, toast } = toastHook();
+
+  const disableButton = () => {
+    setDisabled(true);
+  };
 
   return (
     <div className="landingpage">
       <div className="landingpage-image" style={{ backgroundImage: `url(${stars})` }}></div>
+      {toast && <div className="toast-element">{toast}</div>}
       <div className="roadmap-area">
         <h3
           className="logo"
@@ -49,10 +60,19 @@ function Feedback() {
         <div className="button-group">
           <button
             className="button-primary roadmap-button"
-            disabled={feedback.length === 0}
+            disabled={(feedback.length === 0) | disabled}
             onClick={async () => {
-              await saveFeedback({ email, feedback, creation_date: new Date() });
-              window.location.replace('/');
+              disableButton();
+              try {
+                await saveFeedback({ email, feedback, creation_date: new Date() });
+                addToast('Thanks for your feedback!');
+              } catch {
+                addToast('Something went wrong. Try again later.');
+              }
+              setTimeout(() => {
+                addToast(null);
+                history.push('/');
+              }, 3000);
             }}
           >
             Send feedback
