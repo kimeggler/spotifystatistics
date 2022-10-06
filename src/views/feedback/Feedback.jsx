@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
 import './style.css';
 
-import { useHistory } from 'react-router-dom';
 import { stars } from '../../assets';
-import { validateToken } from '../../helper/authenticationhelper';
 import saveFeedback from '../../services/firebaseService';
+import { ShowAt } from '../common';
 
 function Feedback() {
-  const history = useHistory();
-
   const [email, setEmail] = useState('');
   const [feedback, setFeedback] = useState('');
-
-  if (validateToken()) {
-    history.push('/overview');
-  }
 
   return (
     <div className="landingpage">
@@ -31,9 +24,11 @@ function Feedback() {
         <h1 className="landing-page-title">
           YOUR <span className="landing-page-title-span">FEEDBACK</span>
         </h1>
-        <p className="paragraph">
-          What do we need to know? What do you want in the next version of Statfy?
-        </p>
+        <ShowAt breakpoint="smallAndAbove">
+          <p className="paragraph">
+            What do we need to know? What do you want in the next version of Statfy?
+          </p>
+        </ShowAt>
 
         <label>
           Enter email if you want to be updated when the new version of Statfy is online.

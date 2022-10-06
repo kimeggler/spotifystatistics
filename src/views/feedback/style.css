@@ -1,3 +1,4 @@
 .paragraph {
-  max-width: 500px;
+  max-width: fit-content;
+  margin-bottom: 50px;
 }
