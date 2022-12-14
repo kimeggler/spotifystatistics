@@ -6,14 +6,18 @@ import { addDoc, collection, getFirestore } from 'firebase/firestore';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyA4jr51WOs1U3FgSfCcDsD5eTpvgKWGQPs',
+  // eslint-disable-next-line no-undef
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: 'statfy.firebaseapp.com',
   databaseURL: 'https://statfy-default-rtdb.firebaseio.com',
   projectId: 'statfy',
   storageBucket: 'statfy.appspot.com',
-  messagingSenderId: '414085849004',
-  appId: '1:414085849004:web:0ce4a55acbccfa807d6409',
-  measurementId: 'G-4YF4E1EZB6',
+  // eslint-disable-next-line no-undef
+  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
+  // eslint-disable-next-line no-undef
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  // eslint-disable-next-line no-undef
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
