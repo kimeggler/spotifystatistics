@@ -62,10 +62,11 @@ function Roadmap() {
               <div className="roadmap-divider" />
               <div className="roadmap-state roadmap-state-active" />
             </div>
-            <p className="roadmap-element-date">END OF 2022</p>
+            <p className="roadmap-element-date">Q1 2022</p>
             <p className="roadmap-element-paragraph">
-              Statfy will be shut down by the end of the year. We are currently working on a
-              solution to replace statfy. Feel free to leave us feedback and wishes for Statfy 2.0.
+              Statfy will be shut down in Q1 of 2023. We are currently working on a solution to
+              replace statfy. Feel free to leave us feedback and wishes for the new version of
+              Statfy.
             </p>
             <a href="/feedback">Leave feedback</a>
           </div>

@@ -22,6 +22,7 @@ const db = getFirestore(app);
 const feedbackCollection = collection(db, 'feedback');
 
 const saveFeedback = async payload => {
+  console.log(payload);
   await addDoc(feedbackCollection, payload);
 };
 

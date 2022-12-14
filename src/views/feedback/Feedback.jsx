@@ -19,6 +19,10 @@ function Feedback() {
     setDisabled(true);
   };
 
+  const enableButton = () => {
+    setDisabled(false);
+  };
+
   return (
     <div className="landingpage">
       <div className="landingpage-image" style={{ backgroundImage: `url(${stars})` }}></div>
@@ -66,12 +70,16 @@ function Feedback() {
               try {
                 await saveFeedback({ email, feedback, creation_date: new Date() });
                 addToast('Thanks for your feedback!');
+                setTimeout(() => {
+                  addToast(null);
+                  history.push('/');
+                }, 3000);
               } catch {
                 addToast('Something went wrong. Try again later.');
+                enableButton();
               }
               setTimeout(() => {
                 addToast(null);
-                history.push('/');
               }, 3000);
             }}
           >
