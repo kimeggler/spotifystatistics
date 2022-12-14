@@ -64,3 +64,15 @@
   line-height: 30px;
   z-index: 20;
 }
+
+.toast-element {
+  position: absolute;
+  right: 25px;
+  top: 80px;
+  background-color: var(--main-2-trans);
+  border: 1px solid var(--main-accent);
+  padding: 10px;
+  border-radius: 8px;
+  height: fit-content;
+  width: fit-content;
+}

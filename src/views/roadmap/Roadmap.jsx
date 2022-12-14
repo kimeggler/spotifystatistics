@@ -2,8 +2,8 @@ import React from 'react';
 import './style.css';
 
 import { useHistory } from 'react-router-dom';
-import { validateToken } from '../../helper/authenticationhelper';
 import { stars } from '../../assets';
+import { validateToken } from '../../helper/authenticationhelper';
 
 function Roadmap() {
   const history = useHistory();
@@ -57,38 +57,18 @@ function Roadmap() {
             </p>
           </div>
           <div className="roadmap-element">
-            <p className="roadmap-element-title">Playlist Stats</p>
+            <p className="roadmap-element-title">Phaseout</p>
             <div className="roadmap-progress">
               <div className="roadmap-divider" />
               <div className="roadmap-state roadmap-state-active" />
             </div>
-            <p className="roadmap-element-date">JUN 2022</p>
+            <p className="roadmap-element-date">Q1 2022</p>
             <p className="roadmap-element-paragraph">
-              The statistics page will recieve a new look and new stats will become available
+              Statfy will be shut down in Q1 of 2023. We are currently working on a solution to
+              replace statfy. Feel free to leave us feedback and wishes for the new version of
+              Statfy.
             </p>
-          </div>
-          <div className="roadmap-element">
-            <p className="roadmap-element-title">Instagram stories</p>
-            <div className="roadmap-progress">
-              <div className="roadmap-divider inactive" />
-              <div className="roadmap-state roadmap-state-inactive" />
-            </div>
-            <p className="roadmap-element-date">DEZ 2022</p>
-            <p className="roadmap-element-paragraph">
-              Some statistics can be exported and published as stories or posts on all major social
-              platforms.
-            </p>
-          </div>
-          <div className="roadmap-element">
-            <p className="roadmap-element-title">More to come...</p>
-            <div className="roadmap-progress">
-              <div className="roadmap-divider inactive" />
-              <div className="roadmap-state roadmap-state-inactive" />
-            </div>
-            <p className="roadmap-element-date">TBD</p>
-            <p className="roadmap-element-paragraph">
-              More features will be added to the roadmap over the next few months. STAY TUNED.
-            </p>
+            <a href="/feedback">Leave feedback</a>
           </div>
         </div>
         <button

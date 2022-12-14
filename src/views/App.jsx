@@ -1,10 +1,11 @@
 import React from 'react';
 
+import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
+import About from './about/About';
 import './App.css';
 import AppRouter from './AppRouter';
 import SpotifyCallback from './auth/SpotifyCallback';
-import { Switch, Route, withRouter, BrowserRouter } from 'react-router-dom';
-import About from './about/About';
+import Feedback from './feedback/Feedback';
 import Landingpage from './landingpage/Landingpage';
 import Roadmap from './roadmap/Roadmap';
 
@@ -17,6 +18,7 @@ const App = () => {
           <Route exact path="/about" component={About} />
           <Route exact path="/roadmap" component={Roadmap} />
           <Route exact path="/callback" component={SpotifyCallback} />
+          <Route exact path="/feedback" component={Feedback} />
           <Route component={AppRouter} />
         </Switch>
       </BrowserRouter>
