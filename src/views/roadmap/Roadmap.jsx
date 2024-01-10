@@ -1,9 +1,8 @@
 import React from 'react';
-import './style.css';
-
 import { useHistory } from 'react-router-dom';
-import { validateToken } from '../../helper/authenticationhelper';
 import { stars } from '../../assets';
+import { validateToken } from '../../helper/authenticationhelper';
+import './style.css';
 
 function Roadmap() {
   const history = useHistory();
@@ -57,37 +56,25 @@ function Roadmap() {
             </p>
           </div>
           <div className="roadmap-element">
-            <p className="roadmap-element-title">Playlist Stats</p>
+            <p className="roadmap-element-title line-trough text-inactive">Playlist Stats</p>
             <div className="roadmap-progress">
               <div className="roadmap-divider" />
-              <div className="roadmap-state roadmap-state-active" />
+              <div className="roadmap-state roadmap-state-canceled" />
             </div>
-            <p className="roadmap-element-date">JUN 2022</p>
-            <p className="roadmap-element-paragraph">
+            <p className="roadmap-element-date line-trough text-inactive">JUN 2022</p>
+            <p className="roadmap-element-paragraph line-trough text-inactive">
               The statistics page will recieve a new look and new stats will become available
             </p>
           </div>
           <div className="roadmap-element">
-            <p className="roadmap-element-title">Instagram stories</p>
+            <p className="roadmap-element-title">Phaseout</p>
             <div className="roadmap-progress">
-              <div className="roadmap-divider inactive" />
-              <div className="roadmap-state roadmap-state-inactive" />
+              <div className="roadmap-divider active" />
+              <div className="roadmap-state roadmap-state-active" />
             </div>
-            <p className="roadmap-element-date">DEZ 2022</p>
+            <p className="roadmap-element-date">DEZ 2024</p>
             <p className="roadmap-element-paragraph">
-              Some statistics can be exported and published as stories or posts on all major social
-              platforms.
-            </p>
-          </div>
-          <div className="roadmap-element">
-            <p className="roadmap-element-title">More to come...</p>
-            <div className="roadmap-progress">
-              <div className="roadmap-divider inactive" />
-              <div className="roadmap-state roadmap-state-inactive" />
-            </div>
-            <p className="roadmap-element-date">TBD</p>
-            <p className="roadmap-element-paragraph">
-              More features will be added to the roadmap over the next few months. STAY TUNED.
+              Due to high maintenance efforts, Statfy will cease operations at the end of the year.
             </p>
           </div>
         </div>

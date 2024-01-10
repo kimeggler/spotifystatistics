@@ -76,6 +76,14 @@
   margin-right: 100px;
 }
 
+.line-trough {
+  text-decoration: line-through;
+}
+
+.text-inactive {
+  color: var(--main-2-trans);
+}
+
 .inactive {
   background-color: var(--main-2-trans);
 }
@@ -85,6 +93,9 @@
 }
 .roadmap-state-active {
   border: 3px solid var(--main-accent);
+}
+.roadmap-state-canceled {
+  border: 3px solid var(--main-3-trans);
 }
 .roadmap-state-inactive {
   border: 3px solid var(--main-2-trans);
