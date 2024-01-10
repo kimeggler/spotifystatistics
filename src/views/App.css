@@ -65,6 +65,16 @@
   z-index: 20;
 }
 
+.paragraph-important {
+  margin: 20px 0;
+  max-width: 600px;
+  color: var(--main-3-trans);
+  line-height: 30px;
+  z-index: 20;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .toast-element {
   position: absolute;
   right: 25px;

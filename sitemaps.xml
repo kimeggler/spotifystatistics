@@ -1,19 +1,14 @@
-<?xml version='1.2' encoding='UTF-8'?>
+<?xml version='1.3' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'> 
   <url>
-    <loc>http://statfy.xyz</loc>
+    <loc>https://statfy.xyz</loc>
     <lastmod>2021-11-05</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1</priority>
+    <priority>0.9</priority>
   </url>  
   <url>
-    <loc>http://statfy.xyz</loc>
-    <lastmod>2021-07-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>http://statfy.xyz/about</loc>
+    <loc>https://statfy.xyz/about</loc>
     <lastmod>2021-11-05</lastmod>
+    <priority>0.3</priority>
   </url>
 </urlset>

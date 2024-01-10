@@ -1,9 +1,8 @@
 import React from 'react';
-import './style.css';
-
 import { useHistory } from 'react-router-dom';
 import { stars } from '../../assets';
 import { validateToken } from '../../helper/authenticationhelper';
+import './style.css';
 
 function Roadmap() {
   const history = useHistory();
@@ -57,18 +56,27 @@ function Roadmap() {
             </p>
           </div>
           <div className="roadmap-element">
-            <p className="roadmap-element-title">Phaseout</p>
+            <p className="roadmap-element-title line-trough text-inactive">Playlist Stats</p>
             <div className="roadmap-progress">
               <div className="roadmap-divider" />
-              <div className="roadmap-state roadmap-state-active" />
+              <div className="roadmap-state roadmap-state-canceled" />
             </div>
-            <p className="roadmap-element-date">Q1 2022</p>
-            <p className="roadmap-element-paragraph">
-              Statfy will be shut down in Q1 of 2023. We are currently working on a solution to
-              replace statfy. Feel free to leave us feedback and wishes for the new version of
-              Statfy.
+            <p className="roadmap-element-date line-trough text-inactive">JUN 2022</p>
+            <p className="roadmap-element-paragraph line-trough text-inactive">
+              The statistics page will recieve a new look and new stats will become available
             </p>
             <a href="/feedback">Leave feedback</a>
+          </div>
+          <div className="roadmap-element">
+            <p className="roadmap-element-title">Phaseout</p>
+            <div className="roadmap-progress">
+              <div className="roadmap-divider active" />
+              <div className="roadmap-state roadmap-state-active" />
+            </div>
+            <p className="roadmap-element-date">DEZ 2024</p>
+            <p className="roadmap-element-paragraph">
+              Due to high maintenance efforts, Statfy will cease operations at the end of the year.
+            </p>
           </div>
         </div>
         <button

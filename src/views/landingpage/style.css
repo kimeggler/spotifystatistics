@@ -4,6 +4,7 @@
   background-size: cover;
   /* filter: blur(1px); */
   background-color: var(--main-background);
+  overflow: hidden;
 }
 
 .landingpage-image {
@@ -54,8 +55,17 @@
   -webkit-text-stroke: 1px white;
 }
 
+.scroll {
+  overflow-y: scroll !important;
+}
+.maring-top {
+  margin-top: 100px;
+  height: fit-content !important;
+}
+
 .login-area {
   width: 100vw;
+  overflow-y: scroll;
   height: 100vh;
   position: relative;
   display: flex;
@@ -80,6 +90,13 @@
   width: 47px;
 }
 
+.warning-pulsing {
+  height: 50px;
+  width: auto;
+  margin: 20px 20px 0 0;
+  cursor: pointer;
+}
+
 @keyframes circle {
   from {
     transform: scale(0.97);
@@ -101,4 +118,15 @@
     font-size: 40px;
     line-height: 40px;
   }
+}
+
+.warning-container {
+  height: 100vh;
+  overflow: hidden;
+  width: 100vw;
+  padding: 20px;
+  z-index: 19999999;
+  background-color: blue;
+  box-sizing: border-box;
+  position: absolute;
 }
