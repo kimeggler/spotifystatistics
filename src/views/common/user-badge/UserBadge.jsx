@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ShowAt } from '..';
-import { close, user_icon, menu_icon } from '../../../assets';
+import { close, menu_icon, user_icon } from '../../../assets';
 import { clearToken } from '../../../helper/authenticationhelper';
 import { UserContext } from '../../AppRouter';
 
@@ -112,6 +112,16 @@ function Userbadge() {
             }`}
           >
             Genres
+          </a>
+          <a
+            href="/feedback"
+            className={`fullscreen-navigation-item ${
+              window.location.href.split('/')[3] === 'geedback'
+                ? 'fullscreen-navigation-active'
+                : 'fullscreen-navigation-inactive'
+            }`}
+          >
+            Feedback
           </a>
           <img src={close} alt="close" className="close-menu" onClick={() => toggleMenu()} />
           <p

@@ -17,7 +17,7 @@
   position: relative;
   display: flex;
   overflow-x: auto;
-  height: 300px;
+  height: 400px;
   width: calc(100vw - 100px);
   /* width: 100vw; */
 }

@@ -19,4 +19,8 @@ export default [
     path: '/genres',
     label: 'Genres',
   },
+  {
+    path: '/feedback',
+    label: 'Feedback',
+  },
 ];

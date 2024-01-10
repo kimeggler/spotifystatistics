@@ -65,6 +65,7 @@ function Roadmap() {
             <p className="roadmap-element-paragraph line-trough text-inactive">
               The statistics page will recieve a new look and new stats will become available
             </p>
+            <a href="/feedback">Leave feedback</a>
           </div>
           <div className="roadmap-element">
             <p className="roadmap-element-title">Phaseout</p>

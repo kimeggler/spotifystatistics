@@ -46,6 +46,7 @@
 
 .button-primary {
   background: var(--main-accent-gradient);
+  text-shadow: black 1px 1px 10px;
   color: var(--font-main-white);
   font-weight: bold;
 }
@@ -72,4 +73,16 @@
   z-index: 20;
   font-size: 20px;
   font-weight: bold;
+}
+
+.toast-element {
+  position: absolute;
+  right: 25px;
+  top: 80px;
+  background-color: var(--main-2-trans);
+  border: 1px solid var(--main-accent);
+  padding: 10px;
+  border-radius: 8px;
+  height: fit-content;
+  width: fit-content;
 }

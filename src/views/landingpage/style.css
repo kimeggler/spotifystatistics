@@ -33,6 +33,10 @@
 
 .langing-page-tag-title {
   color: var(--main-accent);
+  background: var(--main-accent-gradient);
+  width: fit-content;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   letter-spacing: 5px;
   z-index: 20;
 }

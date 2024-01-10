@@ -1,15 +1,15 @@
-import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { createContext, useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
 
-import Overview from './spotify/overview/Overview';
+import { Footer, Header } from './common';
 import Landingpage from './landingpage/Landingpage';
-import Tracks from './spotify/tracks/Tracks';
-import Artists from './spotify/artists/Artists';
-import Suggestions from './spotify/suggestions/Suggestions';
 import Analyze from './spotify/analyze/Analyze';
+import Artists from './spotify/artists/Artists';
 import Genres from './spotify/genres/Genres';
-import { Header, Footer } from './common';
+import Overview from './spotify/overview/Overview';
+import Suggestions from './spotify/suggestions/Suggestions';
+import Tracks from './spotify/tracks/Tracks';
 
 import './App.css';
 
