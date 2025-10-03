@@ -1,72 +1,104 @@
-html {
-  overflow-y: scroll;
-  overflow-x: hidden;
+@import "tailwindcss";
+@import './modern-styles.css';
+
+@theme {
+  --color-statfy-purple-50: #f3e8ff;
+  --color-statfy-purple-100: #e9d5ff;
+  --color-statfy-purple-200: #d946ef;
+  --color-statfy-purple-300: #d300ff;
+  --color-statfy-purple-400: #c026d3;
+  --color-statfy-purple-500: #a21caf;
+  --color-statfy-purple-600: #86198f;
+  --color-statfy-purple-700: #701a75;
+  --color-statfy-purple-800: #581c87;
+  --color-statfy-purple-900: #4c1d95;
+  
+  --color-statfy-dark-50: #f8fafc;
+  --color-statfy-dark-100: #f1f5f9;
+  --color-statfy-dark-200: #e2e8f0;
+  --color-statfy-dark-300: #cbd5e1;
+  --color-statfy-dark-400: #94a3b8;
+  --color-statfy-dark-500: #64748b;
+  --color-statfy-dark-600: #475569;
+  --color-statfy-dark-700: #334155;
+  --color-statfy-dark-800: #1e293b;
+  --color-statfy-dark-900: #0f172a;
+  --color-statfy-dark-950: #0b001b;
+  
+  --color-spotify-green: #1db954;
+  
+  --font-family-sans: 'Poppins', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
 }
 
-body {
-  margin: 0;
-  font-family: 'Poppins', 'Roboto', 'Oxygen', 'Ubuntu', -apple-system, BlinkMacSystemFont,
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: black;
-  min-height: 100vh;
-  overflow-x: hidden;
+@layer base {
+  html {
+    @apply overflow-y-scroll overflow-x-hidden;
+  }
+
+  body {
+    @apply m-0 font-sans antialiased bg-statfy-dark-950 min-h-screen overflow-x-hidden text-white;
+  }
+
+  h1 {
+    @apply text-4xl font-semibold leading-tight mb-8 w-fit;
+  }
+
+  h2 {
+    @apply text-5xl;
+  }
+
+  h3 {
+    @apply text-3xl font-semibold;
+  }
+
+  h4 {
+    @apply text-2xl;
+  }
+
+  p {
+    @apply text-base leading-5 tracking-wide mb-1;
+  }
+
+  img {
+    @apply h-full w-auto;
+  }
 }
 
-button {
-  height: 50px;
-  width: fit-content;
-  padding: 10px 20px;
-  box-sizing: border-box;
-  border: none;
-  border-radius: 8px;
-  margin: 20px 20px 0 0;
-  z-index: 20;
-  transition: all 0.5s;
-}
+@layer components {
+  .btn-primary {
+    @apply h-12 w-fit px-5 py-2 border-none rounded-lg my-5 mr-5 z-20 transition-all duration-500 bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 text-white hover:from-statfy-purple-600 hover:to-statfy-purple-500 disabled:cursor-not-allowed disabled:grayscale;
+  }
 
-button:disabled {
-  cursor: not-allowed;
-  filter: grayscale(1);
-}
+  .input-primary {
+    @apply max-w-lg rounded-lg border border-white/20 text-white bg-white/10 my-2 mb-8 px-5 box-border placeholder:text-white/70;
+  }
 
-input {
-  height: 50px;
-  max-width: 500px;
-  border-radius: 8px;
-  border: 1px solid var(--main-2-trans);
-  color: white;
-  background-color: var(--main-2-trans);
-  margin: 10px 0 30px 0;
-  padding: 20px;
-  box-sizing: border-box;
-}
+  .textarea-primary {
+    @apply max-w-lg rounded-lg border border-white/20 text-white bg-white/10 my-2 mb-8 py-3 px-5 min-h-24 box-border font-sans placeholder:text-white/70;
+  }
 
-textarea {
-  max-width: 500px;
-  border-radius: 8px;
-  border: 1px solid var(--main-2-trans);
-  color: white;
-  background-color: var(--main-2-trans);
-  margin: 10px 0 30px 0;
-  padding: 12px 20px;
-  min-height: 100px;
-  box-sizing: border-box;
-  font-family: 'Poppins', 'Roboto', 'Oxygen', 'Ubuntu', -apple-system, BlinkMacSystemFont,
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-}
+  /* Text truncation utilities to prevent layout shift */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+  }
 
-/* button:hover {
-  box-shadow: #8e8d8d 2px 2px 8px 0px;
-} */
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
 
-img {
-  height: 100%;
-  width: auto;
-}
-
-p {
-  line-height: 20px;
-  letter-spacing: 0.5px;
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
 }

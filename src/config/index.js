@@ -6,7 +6,7 @@ import production from './config';
 // It's copied over the config.js
 
 const getConfig = () => {
-  const env = process.env.NODE_ENV;
+  const env = import.meta.env.MODE;
   if (env === 'production') {
     return { ...common, ...production };
   }
