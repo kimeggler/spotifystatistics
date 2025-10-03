@@ -1,6 +1,6 @@
-import React from 'react';
 import { Card, CardBody } from '@heroui/react';
 import { motion } from 'framer-motion';
+import React from 'react';
 
 const ScreenToSmall: React.FC = () => {
   return (
@@ -12,12 +12,10 @@ const ScreenToSmall: React.FC = () => {
       <Card className="bg-white/5 backdrop-blur-md border-white/10 max-w-md w-full">
         <CardBody className="text-center p-8">
           <div className="text-6xl mb-6">📱</div>
-          <h2 className="text-white text-2xl font-bold mb-4">
-            Mobile Version Coming Soon
-          </h2>
+          <h2 className="text-white text-2xl font-bold mb-4">Mobile Version Coming Soon</h2>
           <p className="text-white/70 leading-relaxed">
-            We're currently working on a mobile version of this application. 
-            For the best experience, please visit us on a desktop or tablet.
+            We're currently working on a mobile version of this application. For the best
+            experience, please visit us on a desktop or tablet.
           </p>
           <div className="mt-6 text-statfy-purple-300 text-sm">
             A mobile app is planned for Q2 2026 📅

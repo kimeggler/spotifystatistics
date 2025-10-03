@@ -1,5 +1,5 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import React from 'react';
 import creatorItems, { Creator } from './creator-items';
 
 const Footer: React.FC = () => {
@@ -22,11 +22,9 @@ const Footer: React.FC = () => {
               whileHover={{ scale: 1.1 }}
               transition={{ type: 'spring', stiffness: 300 }}
             />
-            <p className="text-white font-semibold text-sm tracking-wide">
-              {creator.name}
-            </p>
+            <p className="text-white font-semibold text-sm tracking-wide">{creator.name}</p>
           </div>
-          
+
           <div className="flex space-x-3">
             {creator.links.map((link, i) => (
               <motion.a
@@ -77,9 +75,7 @@ const Footer: React.FC = () => {
 
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-12" />
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          {mapCreators(creatorItems)}
-        </div>
+        <div className="grid md:grid-cols-2 gap-8 mb-12">{mapCreators(creatorItems)}</div>
 
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-12" />
 
@@ -92,8 +88,8 @@ const Footer: React.FC = () => {
         >
           <h4 className="text-white text-xl font-semibold">CONTACT</h4>
           <p className="text-white/70 max-w-2xl mx-auto leading-relaxed">
-            If you have questions or suggestions on how we could make our app more user friendly or if
-            you want to request a feature, feel free to contact us!
+            If you have questions or suggestions on how we could make our app more user friendly or
+            if you want to request a feature, feel free to contact us!
           </p>
           <motion.a
             href="mailto:dev.statify@gmail.com"

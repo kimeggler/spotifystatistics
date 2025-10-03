@@ -1,7 +1,7 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import FormattedNumber from '../formattednumber/FormattedNumber';
+import React from 'react';
 import { SpotifyArtist } from '../../../types/spotify';
+import FormattedNumber from '../formattednumber/FormattedNumber';
 
 interface TopArtistProps {
   background: React.CSSProperties;
@@ -20,7 +20,7 @@ const TopArtist: React.FC<TopArtistProps> = ({ background, topArtist }) => {
       <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden shadow-2xl hover:shadow-statfy-purple-500/20 transition-all duration-300 group h-[460px] md:h-[520px]">
         {/* Dark background */}
         <div className="absolute inset-0 bg-statfy-dark-950"></div>
-        
+
         {/* Background Image - 60% width with blend effect */}
         <div className="absolute inset-0 md:left-[40%] overflow-hidden">
           <div
@@ -52,7 +52,7 @@ const TopArtist: React.FC<TopArtistProps> = ({ background, topArtist }) => {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="mb-8"
             >
-              <h2 
+              <h2
                 className="text-white text-3xl md:text-4xl lg:text-5xl font-black leading-none mb-3 drop-shadow-lg truncate group-hover:animate-pulse"
                 title={topArtist.name}
               >
@@ -68,8 +68,18 @@ const TopArtist: React.FC<TopArtistProps> = ({ background, topArtist }) => {
               className="mb-8"
             >
               <div className="flex items-center gap-3">
-                <svg className="w-5 h-5 text-statfy-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 115.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                <svg
+                  className="w-5 h-5 text-statfy-purple-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 115.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
                 </svg>
                 <p className="text-white text-lg md:text-xl font-medium">
                   <FormattedNumber value={topArtist.followers.total} /> followers
@@ -104,7 +114,7 @@ const TopArtist: React.FC<TopArtistProps> = ({ background, topArtist }) => {
           </div>
 
           {/* Play Button - Bottom right corner */}
-          <motion.div 
+          <motion.div
             className="absolute bottom-6 right-6 w-12 h-12 bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 rounded-full flex items-center justify-center backdrop-blur-sm shadow-lg cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}

@@ -1,5 +1,5 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import React from 'react';
 
 const Suggestions: React.FC = () => {
   return (
@@ -24,8 +24,8 @@ const Suggestions: React.FC = () => {
         className="text-center text-white/70 max-w-2xl"
       >
         <p className="text-lg">
-          This feature is currently under development. Soon, we'll be able to recommend 
-          personalized songs based on your listening habits and preferences!
+          This feature is currently under development. Soon, we'll be able to recommend personalized
+          songs based on your listening habits and preferences!
         </p>
       </motion.div>
     </motion.div>

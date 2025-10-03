@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
 import { Button, Card, CardBody, Chip } from '@heroui/react';
 import { motion } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { stars } from '../../assets';
 import { validateToken } from '../../helper/authenticationhelper';
 
@@ -24,50 +24,62 @@ const Roadmap: React.FC = () => {
 
   const roadmapItems: RoadmapItem[] = [
     {
-      title: "Modern Redesign Complete",
-      date: "OCTOBER 2025",
-      status: "completed",
-      description: "Statfy has received a complete modern overhaul with Tailwind CSS, HeroUI components, and smooth animations for a better user experience.",
-      icon: "🎨"
+      title: 'Modern Redesign Complete',
+      date: 'OCTOBER 2025',
+      status: 'completed',
+      description:
+        'Statfy has received a complete modern overhaul with Tailwind CSS, HeroUI components, and smooth animations for a better user experience.',
+      icon: '🎨',
     },
     {
-      title: "Enhanced Analytics",
-      date: "Q4 2025",
-      status: "active",
-      description: "Advanced listening statistics with beautiful visualizations, genre analysis, and personalized music insights.",
-      icon: "📊"
+      title: 'Enhanced Analytics',
+      date: 'Q4 2025',
+      status: 'active',
+      description:
+        'Advanced listening statistics with beautiful visualizations, genre analysis, and personalized music insights.',
+      icon: '📊',
     },
     {
-      title: "Social Features",
-      date: "Q1 2026",
-      status: "planned",
-      description: "Share your music statistics with friends, compare listening habits, and discover new music through social connections.",
-      icon: "👥"
+      title: 'Social Features',
+      date: 'Q1 2026',
+      status: 'planned',
+      description:
+        'Share your music statistics with friends, compare listening habits, and discover new music through social connections.',
+      icon: '👥',
     },
     {
-      title: "Mobile App",
-      date: "Q2 2026",
-      status: "planned",
-      description: "Native mobile applications for iOS and Android with all the features of the web app and more.",
-      icon: "📱"
-    }
+      title: 'Mobile App',
+      date: 'Q2 2026',
+      status: 'planned',
+      description:
+        'Native mobile applications for iOS and Android with all the features of the web app and more.',
+      icon: '📱',
+    },
   ];
 
-  const getStatusColor = (status: RoadmapItem['status']): "success" | "primary" | "default" => {
+  const getStatusColor = (status: RoadmapItem['status']): 'success' | 'primary' | 'default' => {
     switch (status) {
-      case 'completed': return 'success';
-      case 'active': return 'primary';
-      case 'planned': return 'default';
-      default: return 'default';
+      case 'completed':
+        return 'success';
+      case 'active':
+        return 'primary';
+      case 'planned':
+        return 'default';
+      default:
+        return 'default';
     }
   };
 
   const getStatusIcon = (status: RoadmapItem['status']): string => {
     switch (status) {
-      case 'completed': return '✅';
-      case 'active': return '🚀';
-      case 'planned': return '⏳';
-      default: return '⏳';
+      case 'completed':
+        return '✅';
+      case 'active':
+        return '🚀';
+      case 'planned':
+        return '⏳';
+      default:
+        return '⏳';
     }
   };
 
@@ -77,9 +89,9 @@ const Roadmap: React.FC = () => {
       opacity: 1,
       transition: {
         delayChildren: 0.3,
-        staggerChildren: 0.2
-      }
-    }
+        staggerChildren: 0.2,
+      },
+    },
   };
 
   const itemVariants = {
@@ -88,24 +100,24 @@ const Roadmap: React.FC = () => {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring" as const,
-        stiffness: 100
-      }
-    }
+        type: 'spring' as const,
+        stiffness: 100,
+      },
+    },
   };
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-statfy-dark-950 via-statfy-dark-900 to-statfy-purple-900">
       {/* Animated Background */}
-      <div 
+      <div
         className="absolute inset-0 opacity-20 blur-sm"
-        style={{ 
+        style={{
           backgroundImage: `url(${stars})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          backgroundPosition: 'center',
         }}
       />
-      
+
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-statfy-dark-950/90 via-transparent to-statfy-purple-900/60" />
 
@@ -143,8 +155,8 @@ const Roadmap: React.FC = () => {
               <Card className="bg-white/5 backdrop-blur-md border-white/10 max-w-2xl mx-auto">
                 <CardBody className="p-6">
                   <p className="text-white/80 text-lg">
-                    Discover our exciting plans for the future of Statfy and see how we&apos;re continuously 
-                    improving your music analytics experience.
+                    Discover our exciting plans for the future of Statfy and see how we&apos;re
+                    continuously improving your music analytics experience.
                   </p>
                 </CardBody>
               </Card>
@@ -169,7 +181,11 @@ const Roadmap: React.FC = () => {
                   <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 rounded-full transform md:-translate-x-1/2 z-10 shadow-lg shadow-statfy-purple-500/50"></div>
 
                   {/* Content Card */}
-                  <div className={`w-full md:w-5/12 ml-12 md:ml-0 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
+                  <div
+                    className={`w-full md:w-5/12 ml-12 md:ml-0 ${
+                      index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'
+                    }`}
+                  >
                     <Card className="bg-white/5 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all duration-300">
                       <CardBody className="p-6">
                         <div className="flex items-start justify-between mb-4">
@@ -177,12 +193,14 @@ const Roadmap: React.FC = () => {
                             <span className="text-2xl">{item.icon}</span>
                             <div>
                               <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                              <p className="text-statfy-purple-300 font-semibold text-sm">{item.date}</p>
+                              <p className="text-statfy-purple-300 font-semibold text-sm">
+                                {item.date}
+                              </p>
                             </div>
                           </div>
                           <div className="flex items-center gap-2">
                             <span>{getStatusIcon(item.status)}</span>
-                            <Chip 
+                            <Chip
                               color={getStatusColor(item.status)}
                               size="sm"
                               className="capitalize font-semibold"
@@ -204,7 +222,10 @@ const Roadmap: React.FC = () => {
           </motion.div>
 
           {/* Action Buttons */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-16">
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-16"
+          >
             <Button
               size="lg"
               className="bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 text-white font-bold px-8 py-6"
@@ -212,7 +233,7 @@ const Roadmap: React.FC = () => {
             >
               Back to Home
             </Button>
-            
+
             <Button
               variant="bordered"
               size="lg"

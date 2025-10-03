@@ -1,6 +1,6 @@
+import { Button, Card, CardBody, Image } from '@heroui/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
-import { Card, CardBody, Image, Button } from '@heroui/react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 interface AnalyseData {
   name: string;
@@ -21,12 +21,12 @@ interface PlaylistProps {
   closePlaylist: () => void;
 }
 
-const Playlist: React.FC<PlaylistProps> = ({ 
-  playlist, 
-  activePlaylist, 
-  changePlaylist, 
-  analyse, 
-  closePlaylist 
+const Playlist: React.FC<PlaylistProps> = ({
+  playlist,
+  activePlaylist,
+  changePlaylist,
+  analyse,
+  closePlaylist,
 }) => {
   const getAnalyseValue = (index: number): number => {
     if (Array.isArray(analyse) && analyse[index]) {
@@ -36,11 +36,7 @@ const Playlist: React.FC<PlaylistProps> = ({
   };
 
   const renderAnalysisBar = (name: string, value: number) => (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      className="mb-4"
-    >
+    <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="mb-4">
       <div className="flex justify-between items-center mb-2">
         <span className="text-white font-medium">{name}</span>
         <span className="text-statfy-purple-300 text-sm">{value}%</span>
@@ -85,18 +81,17 @@ const Playlist: React.FC<PlaylistProps> = ({
             <h2 className="text-white/80 text-lg mb-2">About your playlist</h2>
             <h3 className="text-white text-2xl font-bold">{name}</h3>
           </motion.div>
-          
+
           <motion.p
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4 }}
             className="text-white/70 leading-relaxed"
           >
-            The content of the playlist is analyzed by Spotify based on a couple of categories. 
-            The assessment includes the calculation of the proportion of vocal and instrumental 
-            parts of songs. Furthermore the average energy of each song is being calculated. 
-            Additionally Spotify gives insights into how euphoric or dystrophic the songs in 
-            your playlist are.
+            The content of the playlist is analyzed by Spotify based on a couple of categories. The
+            assessment includes the calculation of the proportion of vocal and instrumental parts of
+            songs. Furthermore the average energy of each song is being calculated. Additionally
+            Spotify gives insights into how euphoric or dystrophic the songs in your playlist are.
           </motion.p>
         </div>
 
@@ -117,8 +112,8 @@ const Playlist: React.FC<PlaylistProps> = ({
               transition={{ delay: 0.6 }}
               className="space-y-4"
             >
-              {analysisCategories.map((category) => 
-                renderAnalysisBar(category.name, getAnalyseValue(category.index))
+              {analysisCategories.map(category =>
+                renderAnalysisBar(category.name, getAnalyseValue(category.index)),
               )}
             </motion.div>
           )}
@@ -135,7 +130,7 @@ const Playlist: React.FC<PlaylistProps> = ({
       className="fixed inset-0 z-50 bg-gradient-to-br from-statfy-dark-950/95 via-statfy-dark-900/95 to-statfy-purple-900/95 backdrop-blur-sm flex items-center justify-center p-4"
     >
       {renderAnalysis(name)}
-      
+
       {/* Close Button */}
       <Button
         isIconOnly
@@ -144,7 +139,12 @@ const Playlist: React.FC<PlaylistProps> = ({
         onClick={closePlaylist}
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M6 18L18 6M6 6l12 12"
+          />
         </svg>
       </Button>
     </motion.div>
@@ -156,13 +156,13 @@ const Playlist: React.FC<PlaylistProps> = ({
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         whileHover={{ scale: 1.05, y: -10 }}
-        transition={{ type: "spring", stiffness: 300 }}
+        transition={{ type: 'spring', stiffness: 300 }}
         className="w-full max-w-sm"
       >
         <Card className="bg-white/5 backdrop-blur-md border-white/10 hover:bg-white/10 hover:border-statfy-purple-500/20 transition-all duration-500 group rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-statfy-purple-500/10">
           <CardBody className="p-0">
             {/* Playlist Image */}
-            <div 
+            <div
               className="relative overflow-hidden rounded-t-3xl cursor-pointer"
               onClick={() => changePlaylist(playlist.id)}
             >
@@ -172,7 +172,7 @@ const Playlist: React.FC<PlaylistProps> = ({
                 className="w-full h-56 object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
                 fallbackSrc="/api/placeholder/350/325"
               />
-              
+
               {/* Overlay with Analyze Button */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                 <motion.div
@@ -183,8 +183,18 @@ const Playlist: React.FC<PlaylistProps> = ({
                 >
                   <div className="text-white text-3xl font-bold mb-4 tracking-wide">Analyze</div>
                   <div className="w-16 h-16 mx-auto bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 rounded-full flex items-center justify-center backdrop-blur-sm shadow-2xl">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    <svg
+                      className="w-7 h-7 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                      />
                     </svg>
                   </div>
                 </motion.div>

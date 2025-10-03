@@ -1,5 +1,5 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import React from 'react';
 import { SpotifyTrack } from '../../../types/spotify';
 
 interface TrackProps {
@@ -10,15 +10,15 @@ interface TrackProps {
 const Track: React.FC<TrackProps> = ({ track, index }) => {
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: {
-        type: "spring" as const,
+        type: 'spring' as const,
         stiffness: 100,
-        delay: index * 0.05
-      }
-    }
+        delay: index * 0.05,
+      },
+    },
   };
 
   const formatDuration = (ms: number): string => {
@@ -33,19 +33,23 @@ const Track: React.FC<TrackProps> = ({ track, index }) => {
       initial="hidden"
       animate="visible"
       whileHover={{ scale: 1.02, y: -4 }}
-      transition={{ type: "spring", stiffness: 300 }}
+      transition={{ type: 'spring', stiffness: 300 }}
     >
       {/* TopTrack mobile style - full-width image with content overlay */}
       <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden shadow-xl hover:shadow-statfy-purple-500/20 transition-all duration-300 group h-[140px] md:h-[160px]">
         {/* Dark background */}
         <div className="absolute inset-0 bg-statfy-dark-950"></div>
-        
+
         {/* Background Image - Full width like TopTrack mobile */}
         <div className="absolute inset-0 overflow-hidden">
           <div
             className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-all duration-700"
             style={{
-              backgroundImage: `url(${track.album.images[1]?.url || track.album.images[0]?.url || '/api/placeholder/300/300'})`
+              backgroundImage: `url(${
+                track.album.images[1]?.url ||
+                track.album.images[0]?.url ||
+                '/api/placeholder/300/300'
+              })`,
             }}
           />
           {/* Gradient overlay like TopTrack mobile */}
@@ -65,27 +69,50 @@ const Track: React.FC<TrackProps> = ({ track, index }) => {
             {/* Track Info */}
             <div className="space-y-2 md:space-y-3">
               {/* Track Name */}
-              <h3 
+              <h3
                 className="text-white font-bold text-lg md:text-xl leading-tight truncate group-hover:text-statfy-purple-300 transition-colors duration-300 drop-shadow-lg"
                 title={track.name}
               >
                 {track.name}
               </h3>
-              
+
               {/* Artist */}
               <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-statfy-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                <svg
+                  className="w-4 h-4 text-statfy-purple-400 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
                 </svg>
-                <p className="text-white text-sm md:text-base font-medium truncate" title={track.artists[0].name}>
+                <p
+                  className="text-white text-sm md:text-base font-medium truncate"
+                  title={track.artists[0].name}
+                >
                   {track.artists[0].name}
                 </p>
               </div>
-              
+
               {/* Album */}
               <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-white/60 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                <svg
+                  className="w-4 h-4 text-white/60 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+                  />
                 </svg>
                 <p className="text-white/80 text-sm font-light truncate" title={track.album.name}>
                   {track.album.name}
@@ -97,19 +124,26 @@ const Track: React.FC<TrackProps> = ({ track, index }) => {
             <div className="absolute bottom-4 right-4 flex flex-wrap gap-2 justify-end">
               <span className="px-2 md:px-3 py-1 bg-gradient-to-r from-statfy-purple-500/30 to-statfy-purple-400/30 text-statfy-purple-200 text-xs font-medium rounded-full border border-statfy-purple-500/30 backdrop-blur-sm flex items-center gap-1">
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
                 </svg>
                 <span className="md:hidden">{formatDuration(track.duration_ms)}</span>
-                <span className="hidden md:inline">{formatDuration(track.duration_ms)} duration</span>
+                <span className="hidden md:inline">
+                  {formatDuration(track.duration_ms)} duration
+                </span>
               </span>
-              
+
               {track.explicit && (
                 <span className="px-2 md:px-3 py-1 bg-red-500/30 text-red-300 text-xs font-medium rounded-full border border-red-500/30 backdrop-blur-sm">
                   <span className="md:hidden">E</span>
                   <span className="hidden md:inline">Explicit</span>
                 </span>
               )}
-              
+
               {track.popularity > 70 && (
                 <span className="px-2 md:px-3 py-1 bg-gradient-to-r from-orange-500/30 to-yellow-500/30 text-orange-200 text-xs font-medium rounded-full border border-orange-500/30 backdrop-blur-sm flex items-center gap-1">
                   <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -122,7 +156,7 @@ const Track: React.FC<TrackProps> = ({ track, index }) => {
             </div>
 
             {/* Play Button - Center of the card on hover */}
-            <motion.div 
+            <motion.div
               className="absolute top-1/2 right-6 transform -translate-y-1/2 w-12 h-12 bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 rounded-full flex items-center justify-center backdrop-blur-sm shadow-lg cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}

@@ -1,4 +1,4 @@
-import { github, instagram, twitter, kim, tobias, spotify } from '../../../assets';
+import { github, instagram, kim, spotify, tobias, twitter } from '../../../assets';
 
 interface CreatorLink {
   name: string;

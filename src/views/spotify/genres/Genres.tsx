@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
 import { Card, CardBody, Switch } from '@heroui/react';
 import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
 
 import { calcTopGenres, calcTopGenresIncludingArtists } from '../../../helper/genrehelper';
 import useDataHook from '../../../hooks/useDataHook';
 import { fetchArtists } from '../../../services/spotifyservice';
+import { SpotifyArtist } from '../../../types/spotify';
 import { DefaultErrorMessage, Spinner, TimeRangeSelector } from '../../common';
 import Genre from '../../common/genre/Genre';
 import { RangeOption } from '../../common/top-track/range-options';
-import { SpotifyArtist } from '../../../types/spotify';
 
 interface GenreData {
   name: string;
@@ -28,8 +28,8 @@ const Genres: React.FC = () => {
 
   useEffect(() => {
     if (artists) {
-      const genres = includeArtistRating 
-        ? calcTopGenresIncludingArtists(artists) 
+      const genres = includeArtistRating
+        ? calcTopGenresIncludingArtists(artists)
         : calcTopGenres(artists);
       setTopGenres(genres);
     }
@@ -44,9 +44,9 @@ const Genres: React.FC = () => {
       opacity: 1,
       transition: {
         delayChildren: 0.2,
-        staggerChildren: 0.05
-      }
-    }
+        staggerChildren: 0.05,
+      },
+    },
   };
 
   const itemVariants = {
@@ -55,10 +55,10 @@ const Genres: React.FC = () => {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring" as const,
-        stiffness: 100
-      }
-    }
+        type: 'spring' as const,
+        stiffness: 100,
+      },
+    },
   };
 
   return (
@@ -94,8 +94,18 @@ const Genres: React.FC = () => {
             <div className="flex items-center justify-between space-x-6">
               <div className="text-white flex-grow">
                 <div className="flex items-center gap-3 mb-2">
-                  <svg className="w-5 h-5 text-statfy-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  <svg
+                    className="w-5 h-5 text-statfy-purple-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    />
                   </svg>
                   <h3 className="font-semibold">Calculate based on artist ranking</h3>
                 </div>
@@ -110,7 +120,8 @@ const Genres: React.FC = () => {
                   color="secondary"
                   size="lg"
                   classNames={{
-                    wrapper: "group-data-[selected=true]:bg-gradient-to-r group-data-[selected=true]:from-statfy-purple-500 group-data-[selected=true]:to-statfy-purple-400",
+                    wrapper:
+                      'group-data-[selected=true]:bg-gradient-to-r group-data-[selected=true]:from-statfy-purple-500 group-data-[selected=true]:to-statfy-purple-400',
                   }}
                 />
                 <span className="text-white/70 text-xs font-medium">
@@ -123,25 +134,33 @@ const Genres: React.FC = () => {
       </motion.div>
 
       {/* Genres List */}
-      <motion.div 
-        variants={itemVariants}
-        className="w-full max-w-4xl space-y-3"
-      >
+      <motion.div variants={itemVariants} className="w-full max-w-4xl space-y-3">
         {topGenres.map((genre, index) => (
           <Genre key={`${genre.name}-${index}`} genre={genre} index={index} />
         ))}
       </motion.div>
-      
+
       {/* Stats Footer */}
       <motion.div variants={itemVariants}>
         <Card className="bg-gradient-to-r from-white/5 to-white/10 backdrop-blur-md border-white/10 rounded-2xl shadow-lg">
           <CardBody className="p-6">
             <div className="flex items-center justify-center gap-3">
-              <svg className="w-5 h-5 text-statfy-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+              <svg
+                className="w-5 h-5 text-statfy-purple-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+                />
               </svg>
               <p className="text-white/80 text-center font-medium">
-                Showing your top {topGenres.length} genres {includeArtistRating ? 'weighted by artist ranking' : 'by track count'}
+                Showing your top {topGenres.length} genres{' '}
+                {includeArtistRating ? 'weighted by artist ranking' : 'by track count'}
               </p>
             </div>
           </CardBody>

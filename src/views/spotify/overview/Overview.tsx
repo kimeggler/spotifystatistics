@@ -1,23 +1,27 @@
-import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
 
-import { DefaultErrorMessage, Spinner, TopArtist, TopTrack, TimeRangeSelector } from '../../common';
 import useDataHook from '../../../hooks/useDataHook';
 import { fetchMyTopArtist, fetchMyTopTrack } from '../../../services/spotifyservice';
-import { RangeOption } from '../../common/top-track/range-options';
 import { SpotifyArtist, SpotifyTrack } from '../../../types/spotify';
+import { DefaultErrorMessage, Spinner, TimeRangeSelector, TopArtist, TopTrack } from '../../common';
+import { RangeOption } from '../../common/top-track/range-options';
 
 const Overview: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
   const [artistRequest, setArtistRequest] = useState(() => () => fetchMyTopArtist(timerange));
   const [trackRequest, setTrackRequest] = useState(() => () => fetchMyTopTrack(timerange));
-  
-  const { data: topArtist, isLoading: artistIsLoading, hasError: artistError } = useDataHook<SpotifyArtist>(
-    artistRequest,
-  );
-  const { data: topTrack, isLoading: trackIsLoading, hasError: trackError } = useDataHook<SpotifyTrack>(
-    trackRequest,
-  );
+
+  const {
+    data: topArtist,
+    isLoading: artistIsLoading,
+    hasError: artistError,
+  } = useDataHook<SpotifyArtist>(artistRequest);
+  const {
+    data: topTrack,
+    isLoading: trackIsLoading,
+    hasError: trackError,
+  } = useDataHook<SpotifyTrack>(trackRequest);
 
   const isLoading = Boolean(artistIsLoading || trackIsLoading);
 
@@ -41,9 +45,9 @@ const Overview: React.FC = () => {
       opacity: 1,
       transition: {
         delayChildren: 0.2,
-        staggerChildren: 0.3
-      }
-    }
+        staggerChildren: 0.3,
+      },
+    },
   };
 
   const itemVariants = {
@@ -52,10 +56,10 @@ const Overview: React.FC = () => {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring" as const,
-        stiffness: 100
-      }
-    }
+        type: 'spring' as const,
+        stiffness: 100,
+      },
+    },
   };
 
   return (
@@ -89,17 +93,17 @@ const Overview: React.FC = () => {
       <div className="w-full max-w-7xl mx-auto space-y-12">
         {/* Top Artist */}
         <motion.div variants={itemVariants} className="w-full">
-          <TopArtist 
-            background={background(topArtist.images[0]?.url || '')} 
-            topArtist={topArtist} 
+          <TopArtist
+            background={background(topArtist.images[0]?.url || '')}
+            topArtist={topArtist}
           />
         </motion.div>
 
         {/* Top Track */}
         <motion.div variants={itemVariants} className="w-full">
-          <TopTrack 
-            background={background(topTrack.album.images[0]?.url || '')} 
-            topTrack={topTrack} 
+          <TopTrack
+            background={background(topTrack.album.images[0]?.url || '')}
+            topTrack={topTrack}
           />
         </motion.div>
       </div>

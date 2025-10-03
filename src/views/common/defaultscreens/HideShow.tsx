@@ -1,4 +1,4 @@
-import React, { useEffect, useState, ReactNode } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import breakpointsConfig from './breakpointsConfig';
 
 interface HideShowProps {
@@ -21,7 +21,7 @@ const HideShow: React.FC<HideShowProps> = ({ hide, breakpoint, children, classNa
     // Build media query string
     let mediaQuery = '';
     const breakpointParts = breakpoint.split(' ');
-    
+
     breakpointParts.forEach((bp, index) => {
       const breakpointConfig = breakpointsConfig.breakpoints.find(b => b.name === bp);
       if (breakpointConfig) {
@@ -34,7 +34,7 @@ const HideShow: React.FC<HideShowProps> = ({ hide, breakpoint, children, classNa
     });
 
     const mql = window.matchMedia(mediaQuery);
-    
+
     const updateVisibility = (mql: MediaQueryList) => {
       const breakpointActive = !!mql.matches;
       setVisible(hide ? !breakpointActive : breakpointActive);

@@ -104,7 +104,10 @@ const Artist: React.FC<ArtistProps> = ({ artist, index }) => {
                 .sort((f, s) => f.length - s.length)
                 .map(genre => {
                   const formattedGenre = genre.charAt(0).toUpperCase() + genre.slice(1);
-                  const truncatedGenre = formattedGenre.length > 10 ? formattedGenre.slice(0, 10) + '...' : formattedGenre;
+                  const truncatedGenre =
+                    formattedGenre.length > 10
+                      ? formattedGenre.slice(0, 10) + '...'
+                      : formattedGenre;
                   return (
                     <span
                       key={`${artist.id}-${genre}`}

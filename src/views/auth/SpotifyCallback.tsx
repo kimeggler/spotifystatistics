@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Card, CardBody, Spinner } from '@heroui/react';
 import { motion } from 'framer-motion';
-import { setToken } from '../../helper/authenticationhelper';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { stars } from '../../assets';
+import { setToken } from '../../helper/authenticationhelper';
 
 const SpotifyCallback: React.FC = () => {
   const navigate = useNavigate();
@@ -25,15 +25,15 @@ const SpotifyCallback: React.FC = () => {
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-statfy-dark-950 via-statfy-dark-900 to-statfy-purple-900">
       {/* Animated Background */}
-      <div 
+      <div
         className="absolute inset-0 opacity-20 blur-sm"
-        style={{ 
+        style={{
           backgroundImage: `url(${stars})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          backgroundPosition: 'center',
         }}
       />
-      
+
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-statfy-dark-950/90 via-transparent to-statfy-purple-900/60" />
 
@@ -49,7 +49,7 @@ const SpotifyCallback: React.FC = () => {
             <motion.div
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
+              transition={{ delay: 0.2, type: 'spring', stiffness: 100 }}
               className="mb-6"
             >
               <h1 className="text-4xl font-bold bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text text-transparent">
@@ -64,12 +64,12 @@ const SpotifyCallback: React.FC = () => {
               transition={{ delay: 0.4 }}
               className="mb-6"
             >
-              <Spinner 
-                size="lg" 
+              <Spinner
+                size="lg"
                 color="secondary"
                 classNames={{
-                  circle1: "border-b-statfy-purple-500",
-                  circle2: "border-b-statfy-purple-400",
+                  circle1: 'border-b-statfy-purple-500',
+                  circle2: 'border-b-statfy-purple-400',
                 }}
               />
             </motion.div>
@@ -80,9 +80,7 @@ const SpotifyCallback: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
             >
-              <h2 className="text-white text-xl font-semibold mb-2">
-                Logging you in...
-              </h2>
+              <h2 className="text-white text-xl font-semibold mb-2">Logging you in...</h2>
               <p className="text-white/70">
                 We're connecting to your Spotify account and preparing your music stats.
               </p>
@@ -95,7 +93,7 @@ const SpotifyCallback: React.FC = () => {
               transition={{ delay: 0.8 }}
               className="flex justify-center space-x-1 mt-6"
             >
-              {[0, 1, 2].map((i) => (
+              {[0, 1, 2].map(i => (
                 <motion.div
                   key={i}
                   animate={{

@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
-import { DefaultErrorMessage, Playlist, Spinner } from '../../common';
+import React, { useContext, useEffect, useState } from 'react';
 import { getAudioAnalysis } from '../../../helper/analysationhelper';
-import { UserContext } from '../../AppRouter';
-import { fetchPlaylists } from '../../../services/spotifyservice';
 import useDataHook from '../../../hooks/useDataHook';
+import { fetchPlaylists } from '../../../services/spotifyservice';
+import { UserContext } from '../../AppRouter';
+import { DefaultErrorMessage, Playlist, Spinner } from '../../common';
 
 interface PlaylistData {
   id: string;
@@ -100,7 +100,7 @@ const Analyze: React.FC = () => {
       >
         How funky are your playlists?
       </motion.h1>
-      
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -1,6 +1,6 @@
+import production from './config';
 import common from './config.default';
 import local from './config.local';
-import production from './config';
 
 // The config file for the required environment will be copied with the build-scripts
 // It's copied over the config.js

@@ -2,10 +2,7 @@
 const { heroui } = require('@heroui/react');
 
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./src/**/*.{js,jsx,ts,tsx}', './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -39,7 +36,8 @@ module.exports = {
       },
       backgroundImage: {
         'gradient-purple': 'linear-gradient(-35deg, #d300ff, #8300ff)',
-        'gradient-main': 'linear-gradient(-20deg, rgba(15, 226, 103, 1), rgba(180, 16, 206, 1), rgba(249, 149, 18, 1))',
+        'gradient-main':
+          'linear-gradient(-20deg, rgba(15, 226, 103, 1), rgba(180, 16, 206, 1), rgba(249, 149, 18, 1))',
         'gradient-footer': 'linear-gradient(180deg, #0b001b, #4f006e)',
       },
       fontFamily: {
@@ -67,45 +65,45 @@ module.exports = {
         'gradient-x': {
           '0%, 100%': {
             'background-size': '200% 200%',
-            'background-position': 'left center'
+            'background-position': 'left center',
           },
           '50%': {
             'background-size': '200% 200%',
-            'background-position': 'right center'
+            'background-position': 'right center',
           },
         },
       },
     },
   },
-  darkMode: "class",
+  darkMode: 'class',
   plugins: [
     heroui({
       themes: {
         dark: {
           colors: {
-            background: "#0b001b",
-            foreground: "#ffffff",
+            background: '#0b001b',
+            foreground: '#ffffff',
             primary: {
-              50: "#f3e8ff",
-              100: "#e9d5ff",
-              200: "#d946ef",
-              300: "#d300ff",
-              400: "#c026d3",
-              500: "#a21caf",
-              600: "#86198f",
-              700: "#701a75",
-              800: "#581c87",
-              900: "#4c1d95",
-              DEFAULT: "#d300ff",
-              foreground: "#ffffff",
+              50: '#f3e8ff',
+              100: '#e9d5ff',
+              200: '#d946ef',
+              300: '#d300ff',
+              400: '#c026d3',
+              500: '#a21caf',
+              600: '#86198f',
+              700: '#701a75',
+              800: '#581c87',
+              900: '#4c1d95',
+              DEFAULT: '#d300ff',
+              foreground: '#ffffff',
             },
             secondary: {
-              DEFAULT: "#8300ff",
-              foreground: "#ffffff",
+              DEFAULT: '#8300ff',
+              foreground: '#ffffff',
             },
           },
         },
       },
     }),
   ],
-}
+};

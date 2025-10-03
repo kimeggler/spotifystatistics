@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 export type NotificationStatus = 'idle' | 'loading' | 'success' | 'error';
 
@@ -16,19 +16,18 @@ interface UseNotificationResult {
 const useNotification = (): UseNotificationResult => {
   const [notification, setNotification] = useState<Notification>({ status: 'idle' });
 
-  const showNotification = useCallback((
-    status: NotificationStatus, 
-    message?: string, 
-    duration: number = 3000
-  ) => {
-    setNotification({ status, message });
-    
-    if (duration > 0 && status !== 'loading') {
-      setTimeout(() => {
-        setNotification({ status: 'idle' });
-      }, duration);
-    }
-  }, []);
+  const showNotification = useCallback(
+    (status: NotificationStatus, message?: string, duration: number = 3000) => {
+      setNotification({ status, message });
+
+      if (duration > 0 && status !== 'loading') {
+        setTimeout(() => {
+          setNotification({ status: 'idle' });
+        }, duration);
+      }
+    },
+    [],
+  );
 
   const clearNotification = useCallback(() => {
     setNotification({ status: 'idle' });

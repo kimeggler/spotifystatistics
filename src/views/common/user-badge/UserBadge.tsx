@@ -1,7 +1,7 @@
+import { Button } from '@heroui/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { Fragment, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from '@heroui/react';
 import { ShowAt } from '..';
 import { close, menu_icon, user_icon } from '../../../assets';
 import { clearToken } from '../../../helper/authenticationhelper';
@@ -50,18 +50,10 @@ const UserBadge: React.FC<UserBadgeProps> = () => {
   return (
     <Fragment>
       <ShowAt breakpoint="1000AndBelow">
-        <motion.div 
-          className="cursor-pointer"
-          whileTap={{ scale: 0.95 }}
-          onClick={toggleMenu}
-        >
+        <motion.div className="cursor-pointer" whileTap={{ scale: 0.95 }} onClick={toggleMenu}>
           <img
             alt="menu icon"
-            src={
-              !menuActive
-                ? menu_icon
-                : profile.images?.[0]?.url || user_icon
-            }
+            src={!menuActive ? menu_icon : profile.images?.[0]?.url || user_icon}
             className={`w-10 h-10 rounded-full object-cover transition-all duration-300 ${
               menuActive ? 'border-2 border-statfy-purple-400' : ''
             }`}
@@ -128,7 +120,7 @@ const UserBadge: React.FC<UserBadgeProps> = () => {
       </ShowAt>
 
       <ShowAt breakpoint="1000AndAbove">
-        <motion.div 
+        <motion.div
           className="flex items-center space-x-3 p-3 rounded-2xl bg-white/5 backdrop-blur-md hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-statfy-purple-500/20"
           whileHover={{ scale: 1.05 }}
         >
@@ -148,7 +140,12 @@ const UserBadge: React.FC<UserBadgeProps> = () => {
               className="text-xs text-white/60 hover:text-red-400 transition-colors duration-300 p-0 h-auto min-w-0 rounded-xl hover:bg-red-500/10"
             >
               <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                />
               </svg>
               Logout
             </Button>

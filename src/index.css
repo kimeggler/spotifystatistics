@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @import './modern-styles.css';
 
 @theme {
@@ -12,7 +12,7 @@
   --color-statfy-purple-700: #701a75;
   --color-statfy-purple-800: #581c87;
   --color-statfy-purple-900: #4c1d95;
-  
+
   --color-statfy-dark-50: #f8fafc;
   --color-statfy-dark-100: #f1f5f9;
   --color-statfy-dark-200: #e2e8f0;
@@ -24,9 +24,9 @@
   --color-statfy-dark-800: #1e293b;
   --color-statfy-dark-900: #0f172a;
   --color-statfy-dark-950: #0b001b;
-  
+
   --color-spotify-green: #1db954;
-  
+
   --font-family-sans: 'Poppins', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
 }
 

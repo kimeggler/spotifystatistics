@@ -1,5 +1,5 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import React from 'react';
 import { SpotifyTrack } from '../../../types/spotify';
 
 interface TopTrackProps {
@@ -25,7 +25,7 @@ const TopTrack: React.FC<TopTrackProps> = ({ background, topTrack }) => {
       <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden shadow-2xl hover:shadow-statfy-purple-500/20 transition-all duration-300 group h-[460px] md:h-[520px]">
         {/* Dark background */}
         <div className="absolute inset-0 bg-statfy-dark-950"></div>
-        
+
         {/* Background Image - 60% width with blend effect */}
         <div className="absolute inset-0 md:right-[40%] overflow-hidden">
           <div
@@ -57,7 +57,7 @@ const TopTrack: React.FC<TopTrackProps> = ({ background, topTrack }) => {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="mb-8 text-left md:text-right"
             >
-              <h2 
+              <h2
                 className="text-white text-3xl md:text-4xl lg:text-5xl font-black leading-none mb-3 drop-shadow-lg truncate group-hover:animate-pulse"
                 title={topTrack.name}
               >
@@ -74,20 +74,46 @@ const TopTrack: React.FC<TopTrackProps> = ({ background, topTrack }) => {
             >
               {/* Artist */}
               <div className="flex items-center gap-3 justify-start md:justify-end">
-                <svg className="w-5 h-5 text-statfy-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                <svg
+                  className="w-5 h-5 text-statfy-purple-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
                 </svg>
-                <p className="text-white text-lg md:text-xl font-medium truncate" title={topTrack.artists[0].name}>
+                <p
+                  className="text-white text-lg md:text-xl font-medium truncate"
+                  title={topTrack.artists[0].name}
+                >
                   {topTrack.artists[0].name}
                 </p>
               </div>
-              
+
               {/* Album */}
               <div className="flex items-center gap-3 justify-start md:justify-end">
-                <svg className="w-5 h-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                <svg
+                  className="w-5 h-5 text-white/60"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+                  />
                 </svg>
-                <p className="text-white/80 text-lg md:text-xl font-light truncate" title={topTrack.album.name}>
+                <p
+                  className="text-white/80 text-lg md:text-xl font-light truncate"
+                  title={topTrack.album.name}
+                >
                   {topTrack.album.name}
                 </p>
               </div>
@@ -102,19 +128,26 @@ const TopTrack: React.FC<TopTrackProps> = ({ background, topTrack }) => {
             >
               <span className="px-3 py-1 bg-gradient-to-r from-statfy-purple-500/30 to-statfy-purple-400/30 text-statfy-purple-200 text-xs font-medium rounded-full border border-statfy-purple-500/30 backdrop-blur-sm flex items-center gap-1">
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
                 </svg>
                 <span className="md:hidden">{formatDuration(topTrack.duration_ms)}</span>
-                <span className="hidden md:inline">{formatDuration(topTrack.duration_ms)} duration</span>
+                <span className="hidden md:inline">
+                  {formatDuration(topTrack.duration_ms)} duration
+                </span>
               </span>
-              
+
               {topTrack.explicit && (
                 <span className="px-3 py-1 bg-red-500/30 text-red-300 text-xs font-medium rounded-full border border-red-500/30 backdrop-blur-sm">
                   <span className="md:hidden">E</span>
                   <span className="hidden md:inline">Explicit</span>
                 </span>
               )}
-              
+
               <span className="px-3 py-1 bg-gradient-to-r from-orange-500/30 to-yellow-500/30 text-orange-200 text-xs font-medium rounded-full border border-orange-500/30 backdrop-blur-sm flex items-center gap-1">
                 <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -126,7 +159,7 @@ const TopTrack: React.FC<TopTrackProps> = ({ background, topTrack }) => {
           </div>
 
           {/* Play Button - Bottom right corner */}
-          <motion.div 
+          <motion.div
             className="absolute bottom-6 right-6 w-12 h-12 bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 rounded-full flex items-center justify-center backdrop-blur-sm shadow-lg cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}

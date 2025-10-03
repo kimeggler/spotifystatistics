@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
 import { Button, Card, CardBody } from '@heroui/react';
-import { motion, AnimatePresence } from 'framer-motion';
 import cx from 'classnames';
+import { AnimatePresence, motion } from 'framer-motion';
 import moment from 'moment';
+import React, { useContext, useEffect, useState } from 'react';
 
 import useDataHook from '../../../hooks/useDataHook';
 import useNotification from '../../../hooks/useNotification';
 import { getData, postData } from '../../../services/fetchservice';
 import { fetchTracks } from '../../../services/spotifyservice';
-import { UserContext } from '../../AppRouter';
-import { DefaultErrorMessage, Spinner, Track, TimeRangeSelector } from '../../common';
-import { RangeOption } from '../../common/top-track/range-options';
 import { SpotifyTrack, SpotifyUser } from '../../../types/spotify';
+import { UserContext } from '../../AppRouter';
+import { DefaultErrorMessage, Spinner, TimeRangeSelector, Track } from '../../common';
+import { RangeOption } from '../../common/top-track/range-options';
 
 interface UserContextType {
   profile: SpotifyUser;
@@ -22,7 +22,7 @@ const Tracks: React.FC = () => {
   const [tracksRequest, setTracksRequest] = useState(() => () => fetchTracks(timerange));
   const { data: tracks, isLoading, hasError } = useDataHook<SpotifyTrack[]>(tracksRequest);
   const { notification, showNotification } = useNotification();
-  
+
   const { profile } = useContext(UserContext) as UserContextType;
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const Tracks: React.FC = () => {
   const createPlaylist = async (): Promise<void> => {
     try {
       showNotification('loading', 'Creating playlist...');
-      
+
       const playlists = await getData('me/playlists');
       const date = moment(new Date()).format('DD-MM-YYYY');
       const timeRange =
@@ -49,18 +49,18 @@ const Tracks: React.FC = () => {
           ? 'Last 6 months'
           : 'Last month';
       const playlistName = `${timeRange} favorites - ${date}`;
-      
+
       const filteredPlaylists = playlists.items.filter(
-        (playlist: any) => playlist.name === playlistName
+        (playlist: any) => playlist.name === playlistName,
       );
 
       if (filteredPlaylists.length === 0) {
         const playlistData = JSON.stringify({
           name: playlistName,
           public: true,
-          description: 'Generate your own playlist at https://statfy.xyz :)'
+          description: 'Generate your own playlist at https://statfy.xyz :)',
         });
-        
+
         const tracksData = JSON.stringify({
           uris: mapTrackUris(),
         });
@@ -84,9 +84,9 @@ const Tracks: React.FC = () => {
       opacity: 1,
       transition: {
         delayChildren: 0.2,
-        staggerChildren: 0.05
-      }
-    }
+        staggerChildren: 0.05,
+      },
+    },
   };
 
   const itemVariants = {
@@ -95,18 +95,22 @@ const Tracks: React.FC = () => {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring" as const,
-        stiffness: 100
-      }
-    }
+        type: 'spring' as const,
+        stiffness: 100,
+      },
+    },
   };
 
   const getTimeRangeLabel = (): string => {
     switch (timerange) {
-      case 'short_term': return 'from the last month';
-      case 'medium_term': return 'from the last 6 months';
-      case 'long_term': return 'of all time';
-      default: return '';
+      case 'short_term':
+        return 'from the last month';
+      case 'medium_term':
+        return 'from the last 6 months';
+      case 'long_term':
+        return 'of all time';
+      default:
+        return '';
     }
   };
 
@@ -126,12 +130,15 @@ const Tracks: React.FC = () => {
             exit={{ opacity: 0, y: -50 }}
             className="fixed top-4 right-4 z-50"
           >
-            <Card 
+            <Card
               className={cx(
-                "border-0 shadow-2xl rounded-2xl backdrop-blur-md",
-                notification.status === 'success' && "bg-green-500/90 text-white border border-green-400/30",
-                notification.status === 'error' && "bg-red-500/90 text-white border border-red-400/30",
-                notification.status === 'loading' && "bg-statfy-purple-500/90 text-white border border-statfy-purple-400/30"
+                'border-0 shadow-2xl rounded-2xl backdrop-blur-md',
+                notification.status === 'success' &&
+                  'bg-green-500/90 text-white border border-green-400/30',
+                notification.status === 'error' &&
+                  'bg-red-500/90 text-white border border-red-400/30',
+                notification.status === 'loading' &&
+                  'bg-statfy-purple-500/90 text-white border border-statfy-purple-400/30',
               )}
             >
               <CardBody className="p-6">
@@ -140,13 +147,33 @@ const Tracks: React.FC = () => {
                     <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
                   )}
                   {notification.status === 'success' && (
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg
+                      className="w-5 h-5 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                   )}
                   {notification.status === 'error' && (
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    <svg
+                      className="w-5 h-5 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     </svg>
                   )}
                   <span className="font-semibold">{notification.message}</span>
@@ -165,7 +192,7 @@ const Tracks: React.FC = () => {
             tracks
           </span>
         </h1>
-        
+
         <Button
           size="lg"
           className="bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-statfy-purple-500/40 transition-all duration-300 hover:scale-105"
@@ -174,7 +201,12 @@ const Tracks: React.FC = () => {
         >
           <span className="flex items-center gap-3">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+              />
             </svg>
             Create Playlist
           </span>
@@ -194,24 +226,31 @@ const Tracks: React.FC = () => {
       {/* Content Container - Full width with max-width constraint */}
       <div className="w-full max-w-7xl mx-auto space-y-12">
         {/* Tracks List */}
-        <motion.div 
-          variants={itemVariants}
-          className="w-full max-w-4xl mx-auto space-y-3"
-        >
+        <motion.div variants={itemVariants} className="w-full max-w-4xl mx-auto space-y-3">
           {tracks
             .filter(track => track.name)
             .map((track, index) => (
               <Track key={track.id} track={track} index={index} />
             ))}
         </motion.div>
-        
+
         {/* Stats Footer */}
         <motion.div variants={itemVariants} className="flex justify-center">
           <Card className="bg-gradient-to-r from-white/5 to-white/10 backdrop-blur-md border-white/10 rounded-2xl shadow-lg">
             <CardBody className="p-6">
               <div className="flex items-center justify-center gap-3">
-                <svg className="w-5 h-5 text-statfy-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                <svg
+                  className="w-5 h-5 text-statfy-purple-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+                  />
                 </svg>
                 <p className="text-white/80 text-center font-medium">
                   Showing your top {tracks.length} tracks {getTimeRangeLabel()}

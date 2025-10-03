@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import React, { createContext, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { motion } from 'framer-motion';
 
 import { Footer, Header } from './common';
 import Landingpage from './landingpage/Landingpage';
@@ -38,7 +38,7 @@ const AppRouter: React.FC<AppRouterProps> = ({ isLoading = false }) => {
         console.error('Error fetching user data:', error);
       }
     };
-    
+
     if (validateToken()) {
       fetchUser();
     }

@@ -1,6 +1,6 @@
-import React from 'react';
 import { Spinner as HeroSpinner } from '@heroui/react';
 import { motion } from 'framer-motion';
+import React from 'react';
 
 interface SpinnerProps {
   className?: string;
@@ -14,12 +14,12 @@ const Spinner: React.FC<SpinnerProps> = ({ className }) => {
       className={`flex items-center justify-center min-h-[200px] ${className || ''}`}
     >
       <div className="flex flex-col items-center space-y-4">
-        <HeroSpinner 
-          size="lg" 
+        <HeroSpinner
+          size="lg"
           color="secondary"
           classNames={{
-            circle1: "border-b-statfy-purple-500",
-            circle2: "border-b-statfy-purple-400",
+            circle1: 'border-b-statfy-purple-500',
+            circle2: 'border-b-statfy-purple-400',
           }}
         />
         <motion.p
