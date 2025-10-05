@@ -74,7 +74,7 @@ const Landingpage: React.FC = () => {
           </motion.div>
 
           {/* Main Title */}
-          <motion.div variants={titleVariants} className="mb-8">
+          <motion.div variants={titleVariants} className="mb-8 flex justify-center">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight text-center">
               <span className="text-white">SPOTIFY </span>
               <span className="text-transparent bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text">
@@ -87,9 +87,9 @@ const Landingpage: React.FC = () => {
           <motion.div variants={itemVariants} className="mb-12">
             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl max-w-2xl mx-auto p-8">
               <p className="text-white/80 text-lg leading-relaxed text-center">
-                Discover your musical journey with detailed insights into your most listened
-                artists and tracks. Create personalized playlists and explore your unique music
-                taste with beautiful visualizations.
+                Discover your musical journey with detailed insights into your most listened artists
+                and tracks. Create personalized playlists and explore your unique music taste with
+                beautiful visualizations.
               </p>
             </div>
           </motion.div>

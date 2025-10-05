@@ -1,9 +1,8 @@
 import { motion } from 'framer-motion';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { getAudioAnalysis } from '../../../helper/analysationhelper';
 import useDataHook from '../../../hooks/useDataHook';
-import { fetchPlaylists } from '../../../services/spotifyservice';
-import { UserContext } from '../../AppRouter';
+import { fetchMyPlaylists } from '../../../services/spotifyservice';
 import { DefaultErrorMessage, Playlist, Spinner } from '../../common';
 
 interface PlaylistData {
@@ -18,20 +17,23 @@ interface AnalyseData {
 }
 
 const Analyze: React.FC = () => {
-  const userContext = useContext(UserContext);
-  const profile = userContext?.profile;
   const [activePlaylist, setActivePlaylist] = useState<string | null>(null);
   const [analyse, setAnalyse] = useState<AnalyseData[] | { empty: boolean } | null>(null);
-
-  const [playlistsRequest, setPlaylistsRequest] = useState(() => () => fetchPlaylists(profile));
+  
+  // Simple data fetching like Artists/Tracks - no need for UserContext
+  const [playlistsRequest] = useState(() => fetchMyPlaylists);
   const { data: playlists, isLoading, hasError } = useDataHook<PlaylistData[]>(playlistsRequest);
 
-  useEffect(() => {
-    setPlaylistsRequest(() => () => fetchPlaylists(profile));
-  }, [profile]);
-
   if (hasError) return <DefaultErrorMessage />;
-  if (!playlists && isLoading !== false) return <Spinner />;
+  if (isLoading) return <Spinner />;
+  if (!playlists || playlists.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen text-center">
+        <h1 className="text-3xl font-bold text-white mb-4">No Playlists Found</h1>
+        <p className="text-white/70">You don't have any playlists to analyze.</p>
+      </div>
+    );
+  }
 
   const fetchAnalyse = async (playlist_id: string): Promise<void> => {
     if (!playlist_id) return;
@@ -68,21 +70,14 @@ const Analyze: React.FC = () => {
 
   const renderPlaylists = () => {
     return playlists.map((playlist: PlaylistData) => (
-      <motion.div
+      <Playlist
         key={playlist.id}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="p-4"
-      >
-        <Playlist
-          playlist={playlist}
-          activePlaylist={activePlaylist}
-          changePlaylist={changePlaylist}
-          analyse={activePlaylist === playlist.id ? analyse : null}
-          closePlaylist={closePlaylist}
-        />
-      </motion.div>
+        playlist={playlist}
+        activePlaylist={activePlaylist}
+        changePlaylist={changePlaylist}
+        analyse={activePlaylist === playlist.id ? (analyse || { empty: true }) : { empty: true }}
+        closePlaylist={closePlaylist}
+      />
     ));
   };
 
@@ -96,19 +91,27 @@ const Analyze: React.FC = () => {
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="text-4xl md:text-5xl font-bold text-white mb-12 text-center bg-gradient-to-r from-statfy-purple-400 to-statfy-purple-300 bg-clip-text text-transparent"
+        className="text-4xl md:text-5xl font-bold mb-12 text-center bg-gradient-to-r from-statfy-purple-400 to-statfy-purple-300 bg-clip-text text-transparent"
       >
         How funky are your playlists?
       </motion.h1>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="flex flex-row justify-center flex-wrap gap-6 mb-6 max-w-7xl w-full lg:text-left text-center"
-      >
-        {renderPlaylists()}
-      </motion.div>
+      {/* Content Container - Full width with max-width constraint */}
+      <div className="w-full max-w-7xl mx-auto space-y-12">
+        {/* Playlists Grid */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="w-full"
+        >
+          <div className="grid gap-6 justify-items-center" style={{
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))'
+          }}>
+            {renderPlaylists()}
+          </div>
+        </motion.div>
+      </div>
     </motion.div>
   );
 };

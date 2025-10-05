@@ -12,37 +12,39 @@ const Footer: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1, duration: 0.5 }}
           viewport={{ once: true }}
-          className="flex flex-col items-center space-y-4 p-8 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-statfy-purple-500/20 transition-all duration-300 shadow-lg hover:shadow-statfy-purple-500/10"
+          className="flex flex-col items-center space-y-4 p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 w-full max-w-sm mx-auto"
         >
           <div className="flex flex-col items-center space-y-3">
             <motion.img
               src={creator.image}
               alt={creator.name}
-              className="w-20 h-20 rounded-3xl object-cover border-2 border-statfy-purple-400 shadow-lg"
-              whileHover={{ scale: 1.1 }}
+              className="w-16 h-16 md:w-20 md:h-20 rounded-2xl object-cover border-2 border-statfy-purple-400"
+              whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 300 }}
             />
-            <p className="text-white font-semibold text-sm tracking-wide">{creator.name}</p>
+            <p className="text-white font-semibold text-sm tracking-wide text-center">
+              {creator.name}
+            </p>
           </div>
 
-          <div className="flex space-x-3">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3 w-full">
             {creator.links.map((link, i) => (
               <motion.a
                 key={`${index}_${i}`}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group"
-                whileHover={{ scale: 1.1 }}
+                className="group flex-shrink-0"
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <div className="flex flex-col items-center space-y-1 p-3 rounded-2xl hover:bg-white/10 transition-colors duration-300">
+                <div className="flex flex-col items-center space-y-1 p-2 md:p-3 rounded-xl hover:bg-white/10 transition-colors duration-300 min-w-[60px]">
                   <img
                     src={link.image}
                     alt={`${creator.name} ${link.name}`}
-                    className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                    className="w-4 h-4 md:w-5 md:h-5 opacity-70 group-hover:opacity-100 transition-opacity duration-300"
                   />
-                  <span className="text-xs text-white/60 group-hover:text-statfy-purple-300 transition-colors duration-300">
+                  <span className="text-xs text-white/60 group-hover:text-statfy-purple-300 transition-colors duration-300 text-center">
                     {link.name}
                   </span>
                 </div>
@@ -56,7 +58,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-gradient-to-t from-statfy-dark-950 to-statfy-dark-900 border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-6 py-16">
+      <div className="max-w-7xl mx-auto px-4 py-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, Image } from '@heroui/react';
+import { Button } from '@heroui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
 
@@ -35,8 +35,8 @@ const Playlist: React.FC<PlaylistProps> = ({
     return 0;
   };
 
-  const renderAnalysisBar = (name: string, value: number) => (
-    <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="mb-4">
+  const renderAnalysisBar = (name: string, value: number, key: string) => (
+    <motion.div key={key} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="mb-4">
       <div className="flex justify-between items-center mb-2">
         <span className="text-white font-medium">{name}</span>
         <span className="text-statfy-purple-300 text-sm">{value}%</span>
@@ -112,8 +112,8 @@ const Playlist: React.FC<PlaylistProps> = ({
               transition={{ delay: 0.6 }}
               className="space-y-4"
             >
-              {analysisCategories.map(category =>
-                renderAnalysisBar(category.name, getAnalyseValue(category.index)),
+              {analysisCategories.map(category => 
+                renderAnalysisBar(category.name, getAnalyseValue(category.index), category.name)
               )}
             </motion.div>
           )}
@@ -151,71 +151,58 @@ const Playlist: React.FC<PlaylistProps> = ({
   );
 
   return (
-    <div className="flex flex-col items-center">
+    <>
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        whileHover={{ scale: 1.05, y: -10 }}
         transition={{ type: 'spring', stiffness: 300 }}
         className="w-full max-w-sm"
       >
-        <Card className="bg-white/5 backdrop-blur-md border-white/10 hover:bg-white/10 hover:border-statfy-purple-500/20 transition-all duration-500 group rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-statfy-purple-500/10">
-          <CardBody className="p-0">
-            {/* Playlist Image */}
-            <div
-              className="relative overflow-hidden rounded-t-3xl cursor-pointer"
-              onClick={() => changePlaylist(playlist.id)}
-            >
-              <Image
-                src={playlist.images[0]?.url}
-                alt={playlist.name}
-                className="w-full h-56 object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
-                fallbackSrc="/api/placeholder/350/325"
-              />
-
-              {/* Overlay with Analyze Button */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="text-center"
-                >
-                  <div className="text-white text-3xl font-bold mb-4 tracking-wide">Analyze</div>
-                  <div className="w-16 h-16 mx-auto bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 rounded-full flex items-center justify-center backdrop-blur-sm shadow-2xl">
-                    <svg
-                      className="w-7 h-7 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                      />
-                    </svg>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-
+        {/* TopTrack mobile style - full-width image with content overlay */}
+        <div 
+          className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden transition-all duration-300 group aspect-square md:h-[320px] md:aspect-auto cursor-pointer bg-cover bg-center group-hover:scale-105"
+          onClick={() => changePlaylist(playlist.id)}
+          style={{
+            backgroundImage: `linear-gradient(to top, rgba(15, 15, 23, 1) 0%, rgba(15, 15, 23, 0.6) 60%, rgba(15, 15, 23, 0.2) 100%), url(${playlist.images[0]?.url || '/api/placeholder/300/300'})`,
+          }}
+        >
+          {/* Content */}
+          <div className="relative z-10 p-4 md:p-6 h-full flex flex-col justify-end space-y-3 md:space-y-4">
             {/* Playlist Name */}
-            <div className="p-6">
-              <h3 className="text-white font-bold text-lg text-center truncate group-hover:text-statfy-purple-300 transition-colors duration-300">
-                {playlist.name}
-              </h3>
+            <h3
+              className="text-white font-black text-xl md:text-2xl leading-tight truncate group-hover:text-statfy-purple-300 transition-colors duration-300 drop-shadow-lg"
+              title={playlist.name}
+            >
+              {playlist.name}
+            </h3>
+
+            {/* Playlist label */}
+            <div className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-statfy-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+              </svg>
+              <p className="text-white text-sm md:text-base font-medium">Playlist</p>
             </div>
-          </CardBody>
-        </Card>
+          </div>
+
+          {/* Analyze Button - Top right on hover */}
+          <motion.div
+            className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 rounded-full flex items-center justify-center backdrop-blur-sm shadow-lg cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </motion.div>
+        </div>
       </motion.div>
 
-      {/* Analysis Overlay */}
+      {/* Analysis Overlay - separate from card structure */}
       <AnimatePresence>
         {activePlaylist === playlist.id && renderOverlay(playlist.name)}
       </AnimatePresence>
-    </div>
+    </>
   );
 };
 

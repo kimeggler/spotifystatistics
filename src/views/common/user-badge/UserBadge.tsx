@@ -11,8 +11,14 @@ interface UserBadgeProps {}
 
 const UserBadge: React.FC<UserBadgeProps> = () => {
   const navigate = useNavigate();
-  const { profile } = useContext(UserContext);
+  const context = useContext(UserContext);
   const [menuActive, setMenuActive] = useState<boolean>(false);
+  
+  if (!context) {
+    return null;
+  }
+  
+  const { profile } = context;
 
   const logout = (): void => {
     clearToken();

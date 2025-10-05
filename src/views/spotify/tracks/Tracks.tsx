@@ -8,22 +8,16 @@ import useDataHook from '../../../hooks/useDataHook';
 import useNotification from '../../../hooks/useNotification';
 import { getData, postData } from '../../../services/fetchservice';
 import { fetchTracks } from '../../../services/spotifyservice';
-import { SpotifyTrack, SpotifyUser } from '../../../types/spotify';
+import { SpotifyTrack } from '../../../types/spotify';
 import { UserContext } from '../../AppRouter';
 import { DefaultErrorMessage, Spinner, TimeRangeSelector, Track } from '../../common';
 import { RangeOption } from '../../common/top-track/range-options';
-
-interface UserContextType {
-  profile: SpotifyUser;
-}
 
 const Tracks: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
   const [tracksRequest, setTracksRequest] = useState(() => () => fetchTracks(timerange));
   const { data: tracks, isLoading, hasError } = useDataHook<SpotifyTrack[]>(tracksRequest);
   const { notification, showNotification } = useNotification();
-
-  const { profile } = useContext(UserContext) as UserContextType;
 
   useEffect(() => {
     setTracksRequest(() => () => fetchTracks(timerange));
@@ -39,6 +33,14 @@ const Tracks: React.FC = () => {
   const createPlaylist = async (): Promise<void> => {
     try {
       showNotification('loading', 'Creating playlist...');
+
+      // Get user profile from context only when needed
+      const context = useContext(UserContext);
+      if (!context) {
+        showNotification('error', 'User profile not available');
+        return;
+      }
+      const { profile } = context;
 
       const playlists = await getData('me/playlists');
       const date = moment(new Date()).format('DD-MM-YYYY');

@@ -30,6 +30,11 @@ const fetchPlaylists = async profile => {
   return response.items;
 };
 
+const fetchMyPlaylists = async () => {
+  const response = await getData(`me/playlists`, null, `?limit=50`);
+  return response.items;
+};
+
 export {
   fetchMyProfile,
   fetchMyTopArtist,
@@ -37,4 +42,5 @@ export {
   fetchMyTopTrack,
   fetchTracks,
   fetchPlaylists,
+  fetchMyPlaylists,
 };
