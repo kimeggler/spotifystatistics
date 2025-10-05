@@ -36,7 +36,12 @@ const Playlist: React.FC<PlaylistProps> = ({
   };
 
   const renderAnalysisBar = (name: string, value: number, key: string) => (
-    <motion.div key={key} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="mb-4">
+    <motion.div
+      key={key}
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      className="mb-4"
+    >
       <div className="flex justify-between items-center mb-2">
         <span className="text-white font-medium">{name}</span>
         <span className="text-statfy-purple-300 text-sm">{value}%</span>
@@ -112,8 +117,8 @@ const Playlist: React.FC<PlaylistProps> = ({
               transition={{ delay: 0.6 }}
               className="space-y-4"
             >
-              {analysisCategories.map(category => 
-                renderAnalysisBar(category.name, getAnalyseValue(category.index), category.name)
+              {analysisCategories.map(category =>
+                renderAnalysisBar(category.name, getAnalyseValue(category.index), category.name),
               )}
             </motion.div>
           )}
@@ -159,8 +164,8 @@ const Playlist: React.FC<PlaylistProps> = ({
         className="w-full max-w-sm"
       >
         {/* TopTrack mobile style - full-width image with content overlay */}
-        <div 
-          className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden transition-all duration-300 group aspect-square md:h-[320px] md:aspect-auto cursor-pointer bg-cover bg-center group-hover:scale-105"
+        <div
+          className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden transition-all duration-300 group aspect-square cursor-pointer bg-cover bg-center group-hover:scale-105 box-border"
           onClick={() => changePlaylist(playlist.id)}
           style={{
             backgroundImage: `linear-gradient(to top, rgba(15, 15, 23, 1) 0%, rgba(15, 15, 23, 0.6) 60%, rgba(15, 15, 23, 0.2) 100%), url(${playlist.images[0]?.url || '/api/placeholder/300/300'})`,
@@ -178,8 +183,18 @@ const Playlist: React.FC<PlaylistProps> = ({
 
             {/* Playlist label */}
             <div className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-statfy-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+              <svg
+                className="w-4 h-4 text-statfy-purple-400 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+                />
               </svg>
               <p className="text-white text-sm md:text-base font-medium">Playlist</p>
             </div>
@@ -191,8 +206,18 @@ const Playlist: React.FC<PlaylistProps> = ({
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            <svg
+              className="w-5 h-5 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              />
             </svg>
           </motion.div>
         </div>

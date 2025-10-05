@@ -36,11 +36,11 @@ const fetchMyPlaylists = async () => {
 };
 
 export {
+  fetchArtists,
+  fetchMyPlaylists,
   fetchMyProfile,
   fetchMyTopArtist,
-  fetchArtists,
   fetchMyTopTrack,
-  fetchTracks,
   fetchPlaylists,
-  fetchMyPlaylists,
+  fetchTracks,
 };

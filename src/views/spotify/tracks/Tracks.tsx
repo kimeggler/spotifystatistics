@@ -48,8 +48,8 @@ const Tracks: React.FC = () => {
         timerange === 'long_term'
           ? 'All time'
           : timerange === 'medium_term'
-          ? 'Last 6 months'
-          : 'Last month';
+            ? 'Last 6 months'
+            : 'Last month';
       const playlistName = `${timeRange} favorites - ${date}`;
 
       const filteredPlaylists = playlists.items.filter(

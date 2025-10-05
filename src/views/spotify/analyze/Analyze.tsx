@@ -19,7 +19,7 @@ interface AnalyseData {
 const Analyze: React.FC = () => {
   const [activePlaylist, setActivePlaylist] = useState<string | null>(null);
   const [analyse, setAnalyse] = useState<AnalyseData[] | { empty: boolean } | null>(null);
-  
+
   // Simple data fetching like Artists/Tracks - no need for UserContext
   const [playlistsRequest] = useState(() => fetchMyPlaylists);
   const { data: playlists, isLoading, hasError } = useDataHook<PlaylistData[]>(playlistsRequest);
@@ -75,7 +75,7 @@ const Analyze: React.FC = () => {
         playlist={playlist}
         activePlaylist={activePlaylist}
         changePlaylist={changePlaylist}
-        analyse={activePlaylist === playlist.id ? (analyse || { empty: true }) : { empty: true }}
+        analyse={activePlaylist === playlist.id ? analyse || { empty: true } : { empty: true }}
         closePlaylist={closePlaylist}
       />
     ));
@@ -105,9 +105,13 @@ const Analyze: React.FC = () => {
           transition={{ delay: 0.4 }}
           className="w-full"
         >
-          <div className="grid gap-6 justify-items-center" style={{
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))'
-          }}>
+          <div
+            className="grid gap-6 justify-items-center"
+            style={{
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gridAutoRows: '1fr'
+            }}
+          >
             {renderPlaylists()}
           </div>
         </motion.div>
