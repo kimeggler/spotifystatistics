@@ -28,23 +28,28 @@ export const UserContext = createContext<UserContextType | null>(null);
 
 const AppRouter: React.FC<AppRouterProps> = ({ isLoading = false }) => {
   const [profile, setProfile] = useState<SpotifyUser | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const fetchUser = async (): Promise<void> => {
+    const checkAuthAndFetchUser = async (): Promise<void> => {
       try {
-        const userData = await getData('me');
-        setProfile(userData);
+        const authenticated = await validateToken();
+        setIsAuthenticated(authenticated);
+        
+        if (authenticated) {
+          const userData = await getData('me');
+          setProfile(userData);
+        }
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error('Error during authentication check or fetching user data:', error);
+        setIsAuthenticated(false);
       }
     };
 
-    if (validateToken()) {
-      fetchUser();
-    }
+    checkAuthAndFetchUser();
   }, []);
 
-  if (isLoading || (validateToken() && !profile)) {
+  if (isLoading || isAuthenticated === null || (isAuthenticated && !profile)) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-statfy-dark-950 via-statfy-dark-900 to-statfy-purple-900 flex items-center justify-center">
         <motion.div
@@ -61,7 +66,7 @@ const AppRouter: React.FC<AppRouterProps> = ({ isLoading = false }) => {
     );
   }
 
-  if (!validateToken()) {
+  if (!isAuthenticated) {
     return <Landingpage />;
   }
 

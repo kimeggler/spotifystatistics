@@ -68,13 +68,14 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      if (validateToken()) {
-        try {
+      try {
+        const isAuthenticated = await validateToken();
+        if (isAuthenticated) {
           const userData = await getData('me');
           setProfile(userData);
-        } catch (error) {
-          console.error('Failed to fetch user data:', error);
         }
+      } catch (error) {
+        console.error('Failed to fetch user data:', error);
       }
       setIsLoading(false);
     };
@@ -90,7 +91,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     );
   }
 
-  if (!validateToken() || !profile) {
+  if (!profile) {
     return <Landingpage />;
   }
 

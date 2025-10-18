@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { stars } from '../../assets';
-import { setToken } from '../../helper/authenticationhelper';
+import { handleSignInCallback } from '../../helper/authenticationhelper';
 
 const SpotifyCallback: React.FC = () => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const SpotifyCallback: React.FC = () => {
   useEffect(() => {
     const handleCallback = async (): Promise<void> => {
       try {
-        await setToken();
+        await handleSignInCallback();
         navigate('/overview');
       } catch (error) {
         console.error('Error during authentication:', error);

@@ -8,7 +8,7 @@ interface HideShowProps {
   className?: string;
 }
 
-const HideShow: React.FC<HideShowProps> = ({ hide, breakpoint, children, className }) => {
+const HideShow: React.FC<HideShowProps> = ({ hide, breakpoint, children }) => {
   const [visible, setVisible] = useState<boolean>(false);
 
   useEffect(() => {

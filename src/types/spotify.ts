@@ -104,6 +104,37 @@ export interface SpotifyPlayHistory {
   } | null;
 }
 
+export interface SpotifyPlaylist {
+  collaborative: boolean;
+  description: string | null;
+  external_urls: SpotifyExternalUrls;
+  followers: {
+    href: string | null;
+    total: number;
+  };
+  href: string;
+  id: string;
+  images: SpotifyImage[];
+  name: string;
+  owner: {
+    external_urls: SpotifyExternalUrls;
+    followers: SpotifyFollowers;
+    href: string;
+    id: string;
+    type: string;
+    uri: string;
+    display_name: string;
+  };
+  public: boolean | null;
+  snapshot_id: string;
+  tracks: {
+    href: string;
+    total: number;
+  };
+  type: string;
+  uri: string;
+}
+
 export interface SpotifyTopItem {
   items: (SpotifyTrack | SpotifyArtist)[];
   total: number;

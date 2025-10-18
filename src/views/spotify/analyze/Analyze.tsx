@@ -3,13 +3,8 @@ import React, { useState } from 'react';
 import { getAudioAnalysis } from '../../../helper/analysationhelper';
 import useDataHook from '../../../hooks/useDataHook';
 import { fetchMyPlaylists } from '../../../services/spotifyservice';
+import { SpotifyPlaylist } from '../../../types/spotify';
 import { DefaultErrorMessage, Playlist, Spinner } from '../../common';
-
-interface PlaylistData {
-  id: string;
-  name: string;
-  images: Array<{ url: string }>;
-}
 
 interface AnalyseData {
   name: string;
@@ -22,7 +17,7 @@ const Analyze: React.FC = () => {
 
   // Simple data fetching like Artists/Tracks - no need for UserContext
   const [playlistsRequest] = useState(() => fetchMyPlaylists);
-  const { data: playlists, isLoading, hasError } = useDataHook<PlaylistData[]>(playlistsRequest);
+  const { data: playlists, isLoading, hasError } = useDataHook<SpotifyPlaylist[]>(playlistsRequest);
 
   if (hasError) return <DefaultErrorMessage />;
   if (isLoading) return <Spinner />;
@@ -69,7 +64,7 @@ const Analyze: React.FC = () => {
   };
 
   const renderPlaylists = () => {
-    return playlists.map((playlist: PlaylistData) => (
+    return playlists.map((playlist: SpotifyPlaylist) => (
       <Playlist
         key={playlist.id}
         playlist={playlist}

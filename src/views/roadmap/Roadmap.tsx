@@ -17,9 +17,13 @@ const Roadmap: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (validateToken()) {
-      navigate('/overview');
-    }
+    const checkAuth = async () => {
+      const isAuthenticated = await validateToken();
+      if (isAuthenticated) {
+        navigate('/overview');
+      }
+    };
+    checkAuth();
   }, [navigate]);
 
   const roadmapItems: RoadmapItem[] = [

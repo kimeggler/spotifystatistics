@@ -1,8 +1,16 @@
+interface LocationConfig {
+  protocol: string;
+  hostname: string;
+  port: string;
+  origin: string;
+  spotifyAuthority: string;
+}
+
 const { protocol, hostname, port } = window.location;
 
 const origin = `${protocol}//${hostname}${port ? `:${port}` : ''}`;
 
-const config = {
+const config: LocationConfig = {
   protocol,
   hostname,
   port,
@@ -11,3 +19,4 @@ const config = {
 };
 
 export default config;
+export type { LocationConfig };

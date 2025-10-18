@@ -1,16 +1,19 @@
 import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { validateToken } from '../../helper/authenticationhelper';
-import { authorizeSpotifyUser } from '../../services/fetchservice';
+import { validateToken, signIn } from '../../helper/authenticationhelper';
 
 const Landingpage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (validateToken()) {
-      navigate('/overview');
-    }
+    const checkAuth = async () => {
+      const isAuthenticated = await validateToken();
+      if (isAuthenticated) {
+        navigate('/overview');
+      }
+    };
+    checkAuth();
   }, [navigate]);
 
   const containerVariants = {
@@ -101,8 +104,12 @@ const Landingpage: React.FC = () => {
           >
             <button
               className="bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 text-white font-bold text-lg px-10 py-4 rounded-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-1 flex items-center gap-3"
-              onClick={() => {
-                window.location.href = authorizeSpotifyUser();
+              onClick={async () => {
+                try {
+                  await signIn();
+                } catch (error) {
+                  console.error('Failed to initiate sign in:', error);
+                }
               }}
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">

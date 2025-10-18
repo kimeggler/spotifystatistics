@@ -4,7 +4,7 @@ import React, { Fragment, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShowAt } from '..';
 import { close, menu_icon, user_icon } from '../../../assets';
-import { clearToken } from '../../../helper/authenticationhelper';
+import { signOut } from '../../../helper/authenticationhelper';
 import { UserContext } from '../../App';
 
 interface UserBadgeProps {}
@@ -20,9 +20,15 @@ const UserBadge: React.FC<UserBadgeProps> = () => {
 
   const { profile } = context;
 
-  const logout = (): void => {
-    clearToken();
-    navigate('/');
+  const logout = async (): Promise<void> => {
+    try {
+      await signOut();
+      navigate('/');
+    } catch (error) {
+      console.error('Error during logout:', error);
+      // Still navigate even if logout fails
+      navigate('/');
+    }
   };
 
   const toggleScroll = (): void => {
