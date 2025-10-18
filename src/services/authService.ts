@@ -1,4 +1,4 @@
-import { UserManager, User, UserManagerSettings } from 'oidc-client-ts';
+import { User, UserManager, UserManagerSettings } from 'oidc-client-ts';
 
 class AuthService {
   private userManager: UserManager;
@@ -8,7 +8,8 @@ class AuthService {
       authority: 'https://accounts.spotify.com',
       client_id: import.meta.env.VITE_CLIENT_ID,
       redirect_uri: `${window.location.origin}/callback`,
-      scope: 'user-read-private user-top-read user-read-recently-played user-read-currently-playing playlist-modify-public playlist-modify-private playlist-read-collaborative user-read-play-history',
+      scope:
+        'user-read-private user-top-read user-read-recently-played user-read-currently-playing playlist-modify-public playlist-modify-private playlist-read-collaborative user-read-play-history',
       response_type: 'code',
       automaticSilentRenew: false,
       includeIdTokenInSilentRenew: false,

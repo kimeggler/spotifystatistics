@@ -41,13 +41,15 @@ interface AccumulatedAudioFeatures {
   id?: string;
 }
 
-const getAudioAnalysis = async (playlist_id: string): Promise<AnalysisResult[] | EmptyAnalysisResult> => {
+const getAudioAnalysis = async (
+  playlist_id: string,
+): Promise<AnalysisResult[] | EmptyAnalysisResult> => {
   try {
     const songs_ids = await getSongs(playlist_id);
     if (!songs_ids || songs_ids.length === 0) {
       return { empty: true };
     }
-    
+
     const songs_audio_features = await getSongFeatures(songs_ids);
     return formatData(songs_audio_features);
   } catch (error) {
@@ -61,13 +63,13 @@ const getSongs = async (playlist_id: string): Promise<string[]> => {
     const songs = await getData<PlaylistTracksResponse>(
       `playlists/${playlist_id}/tracks`,
       {},
-      '?field=items(id)'
+      '?field=items(id)',
     );
-    
+
     if (!songs?.items) {
       return [];
     }
-    
+
     return songs.items.map(song => song.track.id).filter(id => id); // Filter out null/undefined ids
   } catch (error) {
     console.error('Error fetching playlist songs:', error);
@@ -80,14 +82,10 @@ const getSongFeatures = async (ids: string[]): Promise<(SpotifyAudioFeatures | n
     if (ids.length === 0) {
       return [];
     }
-    
+
     const id_string = ids.join(',');
-    const result = await getData<AudioFeaturesResponse>(
-      'audio-features',
-      {},
-      `?ids=${id_string}`
-    );
-    
+    const result = await getData<AudioFeaturesResponse>('audio-features', {}, `?ids=${id_string}`);
+
     return result?.audio_features || [];
   } catch (error) {
     console.error('Error fetching song features:', error);
@@ -95,11 +93,14 @@ const getSongFeatures = async (ids: string[]): Promise<(SpotifyAudioFeatures | n
   }
 };
 
-const addData = (prev: AccumulatedAudioFeatures, curr: SpotifyAudioFeatures | null): AccumulatedAudioFeatures => {
+const addData = (
+  prev: AccumulatedAudioFeatures,
+  curr: SpotifyAudioFeatures | null,
+): AccumulatedAudioFeatures => {
   if (curr === null) {
     return prev;
   }
-  
+
   return {
     ...prev,
     danceability: prev.danceability + curr.danceability,
@@ -134,7 +135,7 @@ const divideData = (prev: AccumulatedAudioFeatures, count: number): AccumulatedA
 
 const getPercentageandCrop = (analysis: AccumulatedAudioFeatures): AnalysisResult[] => {
   const series: AnalysisResult[] = [];
-  
+
   series.push({ name: 'Acousticness', value: Math.round(analysis.acousticness * 100) });
   series.push({ name: 'Danceability', value: Math.round(analysis.danceability * 100) });
   series.push({ name: 'Energy', value: Math.round(analysis.energy * 100) });
@@ -142,21 +143,23 @@ const getPercentageandCrop = (analysis: AccumulatedAudioFeatures): AnalysisResul
   series.push({ name: 'Liveness', value: Math.round(analysis.liveness * 100) });
   series.push({ name: 'Speechiness', value: Math.round(analysis.speechiness * 100) });
   series.push({ name: 'Happiness', value: Math.round(analysis.valence * 100) });
-  
+
   return series;
 };
 
-const formatData = (songs: (SpotifyAudioFeatures | null)[]): AnalysisResult[] | EmptyAnalysisResult => {
+const formatData = (
+  songs: (SpotifyAudioFeatures | null)[],
+): AnalysisResult[] | EmptyAnalysisResult => {
   if (!songs || songs.length === 0 || songs[0] === null) {
     return { empty: true };
   }
-  
+
   const validSongs = songs.filter(song => song !== null) as SpotifyAudioFeatures[];
-  
+
   if (validSongs.length === 0) {
     return { empty: true };
   }
-  
+
   const initialData: AccumulatedAudioFeatures = {
     danceability: 0,
     energy: 0,
@@ -168,14 +171,14 @@ const formatData = (songs: (SpotifyAudioFeatures | null)[]): AnalysisResult[] | 
     tempo: 0,
     duration_ms: 0,
   };
-  
+
   const playlist_analysis = validSongs.reduce((prev, curr, i) => {
     const accumulated = addData(prev, curr);
     return i === validSongs.length - 1 ? divideData(accumulated, validSongs.length) : accumulated;
   }, initialData);
-  
+
   return getPercentageandCrop(playlist_analysis);
 };
 
 export { getAudioAnalysis };
-export type { AnalysisResult, EmptyAnalysisResult, AccumulatedAudioFeatures };
+export type { AccumulatedAudioFeatures, AnalysisResult, EmptyAnalysisResult };

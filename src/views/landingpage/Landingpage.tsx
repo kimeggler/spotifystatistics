@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { validateToken, signIn } from '../../helper/authenticationhelper';
+import { signIn, validateToken } from '../../helper/authenticationhelper';
 
 const Landingpage: React.FC = () => {
   const navigate = useNavigate();

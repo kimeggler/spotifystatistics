@@ -1,5 +1,5 @@
+import { SpotifyArtist, SpotifyPlaylist, SpotifyTrack, SpotifyUser } from '../types/spotify';
 import { getData } from './fetchservice';
-import { SpotifyUser, SpotifyArtist, SpotifyTrack, SpotifyPlaylist } from '../types/spotify';
 
 // Time range type for Spotify API
 export type TimeRange = 'short_term' | 'medium_term' | 'long_term';
@@ -32,7 +32,7 @@ const fetchMyTopArtist = async (timerange: TimeRange): Promise<SpotifyArtist> =>
     const response = await getData<SpotifyApiResponse<SpotifyArtist>>(
       'me/top/artists',
       {},
-      `?time_range=${timerange}&limit=1`
+      `?time_range=${timerange}&limit=1`,
     );
     if (!response?.items || response.items.length === 0) {
       throw new Error('No top artist data available');
@@ -49,7 +49,7 @@ const fetchArtists = async (timerange: TimeRange): Promise<SpotifyArtist[]> => {
     const response = await getData<SpotifyApiResponse<SpotifyArtist>>(
       'me/top/artists',
       {},
-      `?time_range=${timerange}&limit=50`
+      `?time_range=${timerange}&limit=50`,
     );
     return response?.items || [];
   } catch (error) {
@@ -63,7 +63,7 @@ const fetchMyTopTrack = async (timerange: TimeRange): Promise<SpotifyTrack> => {
     const response = await getData<SpotifyApiResponse<SpotifyTrack>>(
       'me/top/tracks',
       {},
-      `?time_range=${timerange}&limit=1`
+      `?time_range=${timerange}&limit=1`,
     );
     if (!response?.items || response.items.length === 0) {
       throw new Error('No top track data available');
@@ -80,7 +80,7 @@ const fetchTracks = async (timerange: TimeRange): Promise<SpotifyTrack[]> => {
     const response = await getData<SpotifyApiResponse<SpotifyTrack>>(
       'me/top/tracks',
       {},
-      `?time_range=${timerange}&limit=50`
+      `?time_range=${timerange}&limit=50`,
     );
     return response?.items || [];
   } catch (error) {
@@ -94,7 +94,7 @@ const fetchPlaylists = async (profile: SpotifyUser): Promise<SpotifyPlaylist[]> 
     const response = await getData<SpotifyApiResponse<SpotifyPlaylist>>(
       `users/${profile.id}/playlists`,
       {},
-      `?limit=50`
+      `?limit=50`,
     );
     return response?.items || [];
   } catch (error) {
@@ -108,7 +108,7 @@ const fetchMyPlaylists = async (): Promise<SpotifyPlaylist[]> => {
     const response = await getData<SpotifyApiResponse<SpotifyPlaylist>>(
       'me/playlists',
       {},
-      `?limit=50`
+      `?limit=50`,
     );
     return response?.items || [];
   } catch (error) {

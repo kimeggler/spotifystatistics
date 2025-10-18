@@ -1,5 +1,5 @@
 import config from '../config';
-import { getToken, validateToken, signIn } from '../helper/authenticationhelper';
+import { getToken, signIn, validateToken } from '../helper/authenticationhelper';
 
 interface RequestHeaders {
   [key: string]: string;
@@ -23,14 +23,14 @@ const getDefaultHeaders = async (): Promise<DefaultHeaders> => {
 const getData = async <T = any>(
   path: string,
   headers: RequestHeaders = {},
-  queryParams: string = ''
+  queryParams: string = '',
 ): Promise<T | undefined> => {
   const isAuthenticated = await validateToken();
   if (!isAuthenticated) {
     await signIn();
     return;
   }
-  
+
   const defaultHeaders = await getDefaultHeaders();
   const response = await fetch(
     `${config.remoteUrl}${path}${queryParams !== '' ? queryParams : ''}`,
@@ -40,13 +40,13 @@ const getData = async <T = any>(
         ...defaultHeaders,
         ...headers,
       },
-    }
+    },
   );
-  
+
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-  
+
   return response.json();
 };
 
@@ -54,14 +54,14 @@ const postData = async <T = any>(
   path: string,
   data: string | FormData | null = null,
   headers: RequestHeaders = {},
-  queryParams: string = ''
+  queryParams: string = '',
 ): Promise<T | undefined> => {
   const isAuthenticated = await validateToken();
   if (!isAuthenticated) {
     await signIn();
     return;
   }
-  
+
   const defaultHeaders = await getDefaultHeaders();
   const response = await fetch(
     `${config.remoteUrl}${path}${queryParams !== '' ? queryParams : ''}`,
@@ -72,15 +72,15 @@ const postData = async <T = any>(
         ...headers,
       },
       body: data,
-    }
+    },
   );
-  
+
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-  
+
   return response.json();
 };
 
 export { getData, postData };
-export type { RequestHeaders, DefaultHeaders };
+export type { DefaultHeaders, RequestHeaders };

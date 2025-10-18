@@ -35,7 +35,7 @@ const AppRouter: React.FC<AppRouterProps> = ({ isLoading = false }) => {
       try {
         const authenticated = await validateToken();
         setIsAuthenticated(authenticated);
-        
+
         if (authenticated) {
           const userData = await getData('me');
           setProfile(userData);

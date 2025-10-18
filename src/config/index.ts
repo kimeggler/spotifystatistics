@@ -9,7 +9,7 @@ type CombinedConfig = LocationConfig & (Config | LocalConfig);
 
 const getConfig = (): CombinedConfig => {
   const env = import.meta.env.MODE;
-  
+
   if (env === 'production') {
     return { ...common, ...production };
   }

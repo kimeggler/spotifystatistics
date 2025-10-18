@@ -8,11 +8,11 @@ interface GenreData {
 
 const mapGenres = (topGenres: string[], includedArtistRanking: boolean = false): GenreData[] => {
   const uniqueGenres = Array.from(new Set(topGenres));
-  
+
   return uniqueGenres
     .map(genre => ({
       name: genre,
-      count: topGenres.filter(g => g === genre).length
+      count: topGenres.filter(g => g === genre).length,
     }))
     .sort((a, b) => b.count - a.count)
     .filter(genre => genre.count > (includedArtistRanking ? 2 : 1))
@@ -23,7 +23,7 @@ export const calcTopGenres = (topArtists: SpotifyArtist[]): GenreData[] => {
   if (!topArtists || topArtists.length === 0) {
     return [];
   }
-  
+
   const topGenres = topArtists
     .map(artist => artist.genres || [])
     .flat()
@@ -36,17 +36,17 @@ export const calcTopGenresIncludingArtists = (topArtists: SpotifyArtist[]): Genr
   if (!topArtists || topArtists.length === 0) {
     return [];
   }
-  
+
   const topGenres = topArtists
     .map((artist, index) => {
       const multiplier = Math.abs(Math.ceil((index + 1) / (topArtists.length / 5)) - 6);
       const genres = artist.genres || [];
       let arrayToReturn: string[] = [];
-      
+
       for (let i = 0; i < multiplier; i++) {
         arrayToReturn.push(...genres);
       }
-      
+
       return arrayToReturn;
     })
     .flat()

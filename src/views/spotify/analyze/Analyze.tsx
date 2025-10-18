@@ -104,7 +104,7 @@ const Analyze: React.FC = () => {
             className="grid gap-6 justify-items-center"
             style={{
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gridAutoRows: '1fr'
+              gridAutoRows: '1fr',
             }}
           >
             {renderPlaylists()}

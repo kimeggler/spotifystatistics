@@ -1,5 +1,12 @@
-import { initializeApp, FirebaseApp } from 'firebase/app';
-import { addDoc, collection, getFirestore, Firestore, CollectionReference, DocumentData } from 'firebase/firestore';
+import { FirebaseApp, initializeApp } from 'firebase/app';
+import {
+  addDoc,
+  collection,
+  CollectionReference,
+  DocumentData,
+  Firestore,
+  getFirestore,
+} from 'firebase/firestore';
 
 // Firebase configuration interface
 interface FirebaseConfig {
