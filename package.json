@@ -6,7 +6,7 @@
     "apexcharts": "^3.33.0",
     "classnames": "^2.3.1",
     "copyfiles": "2.4.1",
-    "firebase": "^9.10.0",
+    "firebase": "^10.2.0",
     "history": "5.2.0",
     "moment": "2.29.1",
     "oidc-client-ts": "^3.4.1",
