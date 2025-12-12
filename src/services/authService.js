@@ -12,10 +12,10 @@ const oidcConfig = {
   response_type: 'code',
   scope: config.spotifyAuthparams.scope,
   post_logout_redirect_uri: origin,
-  
+
   // PKCE settings
   response_mode: 'query',
-  
+
   // Spotify-specific metadata
   metadata: {
     issuer: 'https://accounts.spotify.com',
@@ -23,14 +23,14 @@ const oidcConfig = {
     token_endpoint: 'https://accounts.spotify.com/api/token',
     userinfo_endpoint: 'https://api.spotify.com/v1/me',
   },
-  
+
   // Storage
   userStore: new WebStorageStateStore({ store: window.localStorage }),
-  
+
   // Additional settings
   automaticSilentRenew: false,
   loadUserInfo: false,
-  
+
   // PKCE
   extraQueryParams: {
     show_dialog: config.spotifyAuthparams.show_dialog,
@@ -102,7 +102,7 @@ export const authService = {
     try {
       const user = await userManager.getUser();
       if (!user) return true;
-      
+
       const currentTime = Math.floor(Date.now() / 1000);
       return user.expires_at ? user.expires_at < currentTime : true;
     } catch (error) {

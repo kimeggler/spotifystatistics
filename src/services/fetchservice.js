@@ -1,5 +1,5 @@
 import config from '../config';
-import { getToken, validateToken, signIn } from '../helper/authenticationhelper';
+import { getToken, signIn, validateToken } from '../helper/authenticationhelper';
 
 const getDefaultHeaders = async () => {
   const token = await getToken();
@@ -20,7 +20,7 @@ const getData = async (path, headers = {}, queryParams = '') => {
     await authorizeSpotifyUser();
     return;
   }
-  
+
   const defaultHeaders = await getDefaultHeaders();
   return fetch(`${config.remoteUrl}${path}${queryParams !== '' ? queryParams : ''}`, {
     method: 'GET',
@@ -37,7 +37,7 @@ const postData = async (path, data, headers = {}, queryParams = '') => {
     await authorizeSpotifyUser();
     return;
   }
-  
+
   const defaultHeaders = await getDefaultHeaders();
   return fetch(`${config.remoteUrl}${path}${queryParams !== '' ? queryParams : ''}`, {
     method: 'POST',
@@ -49,4 +49,4 @@ const postData = async (path, data, headers = {}, queryParams = '') => {
   }).then(response => response.json());
 };
 
-export { getData, postData, authorizeSpotifyUser };
+export { authorizeSpotifyUser, getData, postData };

@@ -6,13 +6,13 @@ const validateToken = async () => {
     if (!user) {
       return false;
     }
-    
+
     const isExpired = await authService.isTokenExpired();
     if (isExpired) {
       await authService.signOut();
       return false;
     }
-    
+
     return true;
   } catch (error) {
     console.error('Error validating token:', error);
@@ -56,5 +56,4 @@ const handleSignInCallback = async () => {
   }
 };
 
-export { validateToken, getToken, clearToken, signIn, handleSignInCallback };
-
+export { clearToken, getToken, handleSignInCallback, signIn, validateToken };

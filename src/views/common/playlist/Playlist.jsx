@@ -89,7 +89,7 @@ function Playlist(playlist, activePlaylist, changePlaylist, analyse, closePlayli
   // };
 
   const getWidth = width => {
-    if (typeof width === undefined) {
+    if (!width) {
       return { width: '0%', display: 'none' };
     }
     return { width: `${width}%` };
