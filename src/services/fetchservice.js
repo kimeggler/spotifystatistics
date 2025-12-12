@@ -1,22 +1,27 @@
 import config from '../config';
-import { getToken, validateToken } from '../helper/authenticationhelper';
+import { getToken, validateToken, signIn } from '../helper/authenticationhelper';
 
-const getDefaultHeaders = () => ({
-  Accept: 'application/json',
-  'Content-Type': 'application/json',
-  Authorization: `Bearer ${getToken()}`,
-});
+const getDefaultHeaders = async () => {
+  const token = await getToken();
+  return {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  };
+};
 
-const authorizeSpotifyUser = () => {
-  return `${config.spotifyAuthority}${spotifyParams(config.spotifyAuthparams)}`;
+const authorizeSpotifyUser = async () => {
+  await signIn();
 };
 
 const getData = async (path, headers = {}, queryParams = '') => {
-  if (!validateToken()) {
-    window.location.replace(authorizeSpotifyUser());
+  const isValid = await validateToken();
+  if (!isValid) {
+    await authorizeSpotifyUser();
+    return;
   }
-  const token = getToken();
-  const defaultHeaders = getDefaultHeaders(token);
+  
+  const defaultHeaders = await getDefaultHeaders();
   return fetch(`${config.remoteUrl}${path}${queryParams !== '' ? queryParams : ''}`, {
     method: 'GET',
     headers: {
@@ -27,11 +32,13 @@ const getData = async (path, headers = {}, queryParams = '') => {
 };
 
 const postData = async (path, data, headers = {}, queryParams = '') => {
-  if (!validateToken()) {
-    window.location.replace(authorizeSpotifyUser());
+  const isValid = await validateToken();
+  if (!isValid) {
+    await authorizeSpotifyUser();
+    return;
   }
-  const token = getToken();
-  const defaultHeaders = getDefaultHeaders(token);
+  
+  const defaultHeaders = await getDefaultHeaders();
   return fetch(`${config.remoteUrl}${path}${queryParams !== '' ? queryParams : ''}`, {
     method: 'POST',
     headers: {
@@ -41,11 +48,5 @@ const postData = async (path, data, headers = {}, queryParams = '') => {
     body: data,
   }).then(response => response.json());
 };
-
-const spotifyParams = params =>
-  params
-    ? `?client_id=${params.client_id}&redirect_uri=${params.redirect_uri}&scope=${params.scope}&response_type=token&show_dialog=${params.show_dialog}`
-    : '';
-
 
 export { getData, postData, authorizeSpotifyUser };

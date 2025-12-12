@@ -1,13 +1,32 @@
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { setToken } from '../../helper/authenticationhelper';
+import { handleSignInCallback } from '../../helper/authenticationhelper';
 
 import './style.css';
 
 function SpotifyCallback() {
   const history = useHistory();
 
-  setToken().then(() => history.push('/overview'));
-  return null;
+  useEffect(() => {
+    const processCallback = async () => {
+      try {
+        await handleSignInCallback();
+        history.push('/overview');
+      } catch (error) {
+        console.error('Error processing callback:', error);
+        history.push('/');
+      }
+    };
+
+    processCallback();
+  }, [history]);
+
+  return (
+    <div className="callback-container">
+      <div className="callback-spinner"></div>
+      <p>Completing sign in...</p>
+    </div>
+  );
 }
 
 export default SpotifyCallback;

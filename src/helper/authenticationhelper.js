@@ -1,42 +1,60 @@
-const validateToken = () => {
-  if (getToken() !== null) {
-    if (Math.abs(new Date().getTime() / 1000 - getTokenTimeStamp()) >= 3600) {
-      clearToken();
+import authService from '../services/authService';
+
+const validateToken = async () => {
+  try {
+    const user = await authService.getUser();
+    if (!user) {
       return false;
-    } else {
-      return true;
     }
-  }
-  clearToken();
-  return false;
-};
-
-const getTokenFromURL = () => {
-  if (window.location.href.split('#')[1] !== undefined) {
-    return window.location.href.split('#')[1].split('&')[0].split('=')[1];
-  }
-  return null;
-};
-
-
-const getToken = () => {
-  return window.localStorage.getItem('statify_token');
-};
-
-const getTokenTimeStamp = () => {
-  return window.localStorage.getItem('statify_timestamp');
-};
-
-const clearToken = () => {
-  window.localStorage.clear();
-};
-
-const setToken = async () => {
-  if (getTokenFromURL()) {
-    const timeStamp = new Date();
-    window.localStorage.setItem('statify_token', getTokenFromURL());
-    window.localStorage.setItem('statify_timestamp', timeStamp.getTime() / 1000);
+    
+    const isExpired = await authService.isTokenExpired();
+    if (isExpired) {
+      await authService.signOut();
+      return false;
+    }
+    
+    return true;
+  } catch (error) {
+    console.error('Error validating token:', error);
+    return false;
   }
 };
 
-export { validateToken, setToken, getToken, clearToken };
+const getToken = async () => {
+  try {
+    return await authService.getAccessToken();
+  } catch (error) {
+    console.error('Error getting token:', error);
+    return null;
+  }
+};
+
+const clearToken = async () => {
+  try {
+    await authService.signOut();
+  } catch (error) {
+    console.error('Error clearing token:', error);
+  }
+};
+
+const signIn = async () => {
+  try {
+    await authService.signIn();
+  } catch (error) {
+    console.error('Error signing in:', error);
+    throw error;
+  }
+};
+
+const handleSignInCallback = async () => {
+  try {
+    const user = await authService.signInCallback();
+    return user;
+  } catch (error) {
+    console.error('Error handling sign in callback:', error);
+    throw error;
+  }
+};
+
+export { validateToken, getToken, clearToken, signIn, handleSignInCallback };
+

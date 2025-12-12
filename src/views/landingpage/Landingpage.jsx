@@ -1,16 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { stars } from '../../assets';
-import { validateToken } from '../../helper/authenticationhelper';
-import { authorizeSpotifyUser } from '../../services/fetchservice';
+import { validateToken, signIn } from '../../helper/authenticationhelper';
 import { ShowAt } from '../common';
 import './style.css';
 
 function Landingpage() {
   const history = useHistory();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  if (validateToken()) {
-    history.push('/overview');
+  useEffect(() => {
+    const checkAuth = async () => {
+      const isValid = await validateToken();
+      if (isValid) {
+        setIsAuthenticated(true);
+        history.push('/overview');
+      }
+    };
+    checkAuth();
+  }, [history]);
+
+  const handleLogin = async () => {
+    try {
+      await signIn();
+    } catch (error) {
+      console.error('Error logging in:', error);
+    }
+  };
+
+  if (isAuthenticated) {
+    return null;
   }
 
   return (
@@ -37,9 +56,7 @@ function Landingpage() {
           <div className="login-buttons">
             <button
               className="button-primary"
-              onClick={() => {
-                window.location.replace(authorizeSpotifyUser());
-              }}
+              onClick={handleLogin}
             >
               LOG IN WITH SPOTIFY
             </button>

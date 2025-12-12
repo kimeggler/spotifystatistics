@@ -12,8 +12,8 @@ function Userbadge() {
   const { profile } = useContext(UserContext);
   const [menuActive, setMenuActive] = useState('');
 
-  const logout = () => {
-    clearToken();
+  const logout = async () => {
+    await clearToken();
     history.push('/');
   };
 
