@@ -1,24 +1,34 @@
 import { Card, CardBody } from '@heroui/react';
 import { motion } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
-import useDataHook from '../../../hooks/useDataHook';
+import useGlobalDataHook from '../../../hooks/useGlobalDataHook';
 import { fetchArtists } from '../../../services/spotifyservice';
 import { SpotifyArtist } from '../../../types/spotify';
-import { Artist, DefaultErrorMessage, Spinner, TimeRangeSelector } from '../../common';
+import { Artist, DefaultErrorMessage, TimeRangeSelector } from '../../common';
 import { RangeOption } from '../../common/top-track/range-options';
 
 const Artists: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
-  const [artistsRequest, setArtistsRequest] = useState(() => () => fetchArtists(timerange));
-  const { data: artists, isLoading, hasError } = useDataHook<SpotifyArtist[]>(artistsRequest);
+  
+  const artistsRequest = useCallback(() => fetchArtists(timerange), [timerange]);
+  const { data: artists, isLoading, hasError } = useGlobalDataHook<SpotifyArtist[]>(
+    artistsRequest,
+    `Loading your top artists ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`
+  );
 
-  useEffect(() => {
-    setArtistsRequest(() => () => fetchArtists(timerange));
-  }, [timerange]);
+  console.log(`[Artists] Component state - isLoading: ${isLoading}, hasError: ${hasError}, artists:`, artists);
 
-  if (hasError) return <DefaultErrorMessage />;
-  if (!artists || artists.length === 0 || isLoading) return <Spinner className="" />;
+  if (hasError) {
+    console.log(`[Artists] Returning error component`);
+    return <DefaultErrorMessage />;
+  }
+  if (!artists || artists.length === 0 || isLoading) {
+    console.log(`[Artists] Returning null - isLoading: ${isLoading}, artists: ${!artists ? 'null' : artists.length}`);
+    return null; // Global loader will handle loading state
+  }
+  
+  console.log(`[Artists] Rendering component with ${artists.length} artists`);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -75,7 +85,7 @@ const Artists: React.FC = () => {
         {/* Artists Grid */}
         <motion.div variants={itemVariants} className="w-full">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
-            {artists.map((artist, index) => (
+            {artists.map((artist: SpotifyArtist, index: number) => (
               <Artist key={artist.id} artist={artist} index={index} />
             ))}
           </div>

@@ -1,12 +1,12 @@
 import { Card, CardBody, Switch } from '@heroui/react';
 import { motion } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { calcTopGenres, calcTopGenresIncludingArtists } from '../../../helper/genrehelper';
-import useDataHook from '../../../hooks/useDataHook';
+import useGlobalDataHook from '../../../hooks/useGlobalDataHook';
 import { fetchArtists } from '../../../services/spotifyservice';
 import { SpotifyArtist } from '../../../types/spotify';
-import { DefaultErrorMessage, Spinner, TimeRangeSelector } from '../../common';
+import { DefaultErrorMessage, TimeRangeSelector } from '../../common';
 import Genre from '../../common/genre/Genre';
 import { RangeOption } from '../../common/top-track/range-options';
 
@@ -18,13 +18,13 @@ interface GenreData {
 const Genres: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
   const [includeArtistRating, setIncludeArtistRating] = useState<boolean>(false);
-  const [artistsRequest, setArtistsRequest] = useState(() => () => fetchArtists(timerange));
-  const { data: artists, isLoading, hasError } = useDataHook<SpotifyArtist[]>(artistsRequest);
+  
+  const artistsRequest = useCallback(() => fetchArtists(timerange), [timerange]);
+  const { data: artists, isLoading, hasError } = useGlobalDataHook<SpotifyArtist[]>(
+    artistsRequest,
+    `Analyzing your music genres ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`
+  );
   const [topGenres, setTopGenres] = useState<GenreData[]>([]);
-
-  useEffect(() => {
-    setArtistsRequest(() => () => fetchArtists(timerange));
-  }, [timerange]);
 
   useEffect(() => {
     if (artists) {
@@ -36,7 +36,7 @@ const Genres: React.FC = () => {
   }, [artists, includeArtistRating]);
 
   if (hasError) return <DefaultErrorMessage />;
-  if (!artists || artists.length === 0 || isLoading) return <Spinner className="" />;
+  if (!artists || artists.length === 0 || isLoading) return null; // Global loader will handle loading state
 
   const containerVariants = {
     hidden: { opacity: 0 },

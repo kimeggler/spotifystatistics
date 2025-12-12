@@ -18,6 +18,10 @@ import Suggestions from './spotify/suggestions/Suggestions';
 import Tracks from './spotify/tracks/Tracks';
 import User from './user/User';
 
+// Context and Loading
+import { LoadingProvider, useLoading } from '../contexts/LoadingContext';
+import GlobalLoader from '../components/GlobalLoader';
+
 // Types
 interface UserProfile {
   id: string;
@@ -114,125 +118,137 @@ const AnimatedRoute: React.FC<AnimatedRouteProps> = ({ children }) => (
   </motion.div>
 );
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const { isGlobalLoading, loadingMessage } = useLoading();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-slate-900 to-purple-900">
-      <UserContext.Provider value={{ profile, setProfile }}>
-        <Header />
-        <main className="relative">
-          <Routes>
-            {/* Public routes */}
-            <Route
-              path="/"
-              element={
-                <AnimatedRoute>
-                  <Landingpage />
-                </AnimatedRoute>
-              }
-            />
-            <Route
-              path="/callback"
-              element={
-                <AnimatedRoute>
-                  <SpotifyCallback />
-                </AnimatedRoute>
-              }
-            />
-            <Route
-              path="/about"
-              element={
-                <AnimatedRoute>
-                  <About />
-                </AnimatedRoute>
-              }
-            />
-            <Route
-              path="/roadmap"
-              element={
-                <AnimatedRoute>
-                  <Roadmap />
-                </AnimatedRoute>
-              }
-            />
+    <>
+      <GlobalLoader isLoading={isGlobalLoading} message={loadingMessage} />
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-slate-900 to-purple-900">
+        <UserContext.Provider value={{ profile, setProfile }}>
+          <Header />
+          <main className="relative">
+            <Routes>
+              {/* Public routes */}
+              <Route
+                path="/"
+                element={
+                  <AnimatedRoute>
+                    <Landingpage />
+                  </AnimatedRoute>
+                }
+              />
+              <Route
+                path="/callback"
+                element={
+                  <AnimatedRoute>
+                    <SpotifyCallback />
+                  </AnimatedRoute>
+                }
+              />
+              <Route
+                path="/about"
+                element={
+                  <AnimatedRoute>
+                    <About />
+                  </AnimatedRoute>
+                }
+              />
+              <Route
+                path="/roadmap"
+                element={
+                  <AnimatedRoute>
+                    <Roadmap />
+                  </AnimatedRoute>
+                }
+              />
 
-            {/* Protected routes */}
-            <Route
-              path="/user"
-              element={
-                <ProtectedRoute>
-                  <AnimatedRoute>
-                    <User />
-                  </AnimatedRoute>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/overview"
-              element={
-                <ProtectedRoute>
-                  <AnimatedRoute>
-                    <Overview />
-                  </AnimatedRoute>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/artists"
-              element={
-                <ProtectedRoute>
-                  <AnimatedRoute>
-                    <Artists />
-                  </AnimatedRoute>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/tracks"
-              element={
-                <ProtectedRoute>
-                  <AnimatedRoute>
-                    <Tracks />
-                  </AnimatedRoute>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/suggestions"
-              element={
-                <ProtectedRoute>
-                  <AnimatedRoute>
-                    <Suggestions />
-                  </AnimatedRoute>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/analyze"
-              element={
-                <ProtectedRoute>
-                  <AnimatedRoute>
-                    <Analyze />
-                  </AnimatedRoute>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/genres"
-              element={
-                <ProtectedRoute>
-                  <AnimatedRoute>
-                    <Genres />
-                  </AnimatedRoute>
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </main>
-        <Footer />
-      </UserContext.Provider>
-    </div>
+              {/* Protected routes */}
+              <Route
+                path="/user"
+                element={
+                  <ProtectedRoute>
+                    <AnimatedRoute>
+                      <User />
+                    </AnimatedRoute>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/overview"
+                element={
+                  <ProtectedRoute>
+                    <AnimatedRoute>
+                      <Overview />
+                    </AnimatedRoute>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/artists"
+                element={
+                  <ProtectedRoute>
+                    <AnimatedRoute>
+                      <Artists />
+                    </AnimatedRoute>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/tracks"
+                element={
+                  <ProtectedRoute>
+                    <AnimatedRoute>
+                      <Tracks />
+                    </AnimatedRoute>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/suggestions"
+                element={
+                  <ProtectedRoute>
+                    <AnimatedRoute>
+                      <Suggestions />
+                    </AnimatedRoute>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/analyze"
+                element={
+                  <ProtectedRoute>
+                    <AnimatedRoute>
+                      <Analyze />
+                    </AnimatedRoute>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/genres"
+                element={
+                  <ProtectedRoute>
+                    <AnimatedRoute>
+                      <Genres />
+                    </AnimatedRoute>
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </main>
+          {!isGlobalLoading && <Footer />}
+        </UserContext.Provider>
+      </div>
+    </>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <LoadingProvider>
+      <AppContent />
+    </LoadingProvider>
   );
 };
 

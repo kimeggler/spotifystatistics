@@ -1,37 +1,39 @@
 import { motion } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
-import useDataHook from '../../../hooks/useDataHook';
+import useGlobalDataHook from '../../../hooks/useGlobalDataHook';
 import { fetchMyTopArtist, fetchMyTopTrack } from '../../../services/spotifyservice';
 import { SpotifyArtist, SpotifyTrack } from '../../../types/spotify';
-import { DefaultErrorMessage, Spinner, TimeRangeSelector, TopArtist, TopTrack } from '../../common';
+import { DefaultErrorMessage, TimeRangeSelector, TopArtist, TopTrack } from '../../common';
 import { RangeOption } from '../../common/top-track/range-options';
 
 const Overview: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
-  const [artistRequest, setArtistRequest] = useState(() => () => fetchMyTopArtist(timerange));
-  const [trackRequest, setTrackRequest] = useState(() => () => fetchMyTopTrack(timerange));
+
+  const artistRequest = useCallback(() => fetchMyTopArtist(timerange), [timerange]);
+  const trackRequest = useCallback(() => fetchMyTopTrack(timerange), [timerange]);
 
   const {
     data: topArtist,
     isLoading: artistIsLoading,
     hasError: artistError,
-  } = useDataHook<SpotifyArtist>(artistRequest);
+  } = useGlobalDataHook<SpotifyArtist>(
+    artistRequest,
+    `Loading your top artist ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`
+  );
   const {
     data: topTrack,
     isLoading: trackIsLoading,
     hasError: trackError,
-  } = useDataHook<SpotifyTrack>(trackRequest);
+  } = useGlobalDataHook<SpotifyTrack>(
+    trackRequest,
+    `Loading your top track ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`
+  );
 
   const isLoading = Boolean(artistIsLoading || trackIsLoading);
 
-  useEffect(() => {
-    setArtistRequest(() => () => fetchMyTopArtist(timerange));
-    setTrackRequest(() => () => fetchMyTopTrack(timerange));
-  }, [timerange]);
-
   if (artistError || trackError) return <DefaultErrorMessage />;
-  if (!topArtist || !topTrack || isLoading) return <Spinner className="" />;
+  if (!topArtist || !topTrack || isLoading) return null; // Global loader will handle loading state
 
   const background = (imgUrl: string): React.CSSProperties => {
     return {

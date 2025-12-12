@@ -21,7 +21,8 @@ const useDataHook = <T>(request: () => Promise<T>): UseDataHookResult<T> => {
         setHasError(false);
         setIsLoading(false);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error('Data fetch error:', error);
         setData(null);
         setHasError(true);
         setIsLoading(false);

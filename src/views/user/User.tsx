@@ -1,21 +1,20 @@
 import { Avatar, Card, CardBody, Chip } from '@heroui/react';
 import { motion } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
-import useDataHook from '../../hooks/useDataHook';
+import React, { useCallback } from 'react';
+import useGlobalDataHook from '../../hooks/useGlobalDataHook';
 import { fetchMyProfile } from '../../services/spotifyservice';
 import { SpotifyUser } from '../../types/spotify';
-import { DefaultErrorMessage, Spinner } from '../common';
+import { DefaultErrorMessage } from '../common';
 
 const User: React.FC = () => {
-  const [userRequest, setUserRequest] = useState(() => () => fetchMyProfile());
-  const { data: user, isLoading, hasError } = useDataHook<SpotifyUser>(userRequest);
-
-  useEffect(() => {
-    setUserRequest(() => () => fetchMyProfile());
-  }, []);
+  const userRequest = useCallback(() => fetchMyProfile(), []);
+  const { data: user, isLoading, hasError } = useGlobalDataHook<SpotifyUser>(
+    userRequest,
+    'Loading your profile information...'
+  );
 
   if (hasError) return <DefaultErrorMessage />;
-  if (!user || isLoading) return <Spinner className="" />;
+  if (!user || isLoading) return null; // Global loader will handle loading state
 
   const containerVariants = {
     hidden: { opacity: 0 },

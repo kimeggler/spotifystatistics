@@ -2,29 +2,29 @@ import { Button, Card, CardBody } from '@heroui/react';
 import cx from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import moment from 'moment';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 
-import useDataHook from '../../../hooks/useDataHook';
+import useGlobalDataHook from '../../../hooks/useGlobalDataHook';
 import useNotification from '../../../hooks/useNotification';
 import { getData, postData } from '../../../services/fetchservice';
 import { fetchTracks } from '../../../services/spotifyservice';
 import { SpotifyTrack } from '../../../types/spotify';
 import { UserContext } from '../../AppRouter';
-import { DefaultErrorMessage, Spinner, TimeRangeSelector, Track } from '../../common';
+import { DefaultErrorMessage, TimeRangeSelector, Track } from '../../common';
 import { RangeOption } from '../../common/top-track/range-options';
 
 const Tracks: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
-  const [tracksRequest, setTracksRequest] = useState(() => () => fetchTracks(timerange));
-  const { data: tracks, isLoading, hasError } = useDataHook<SpotifyTrack[]>(tracksRequest);
+  
+  const tracksRequest = useCallback(() => fetchTracks(timerange), [timerange]);
+  const { data: tracks, isLoading, hasError } = useGlobalDataHook<SpotifyTrack[]>(
+    tracksRequest,
+    `Loading your top tracks ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`
+  );
   const { notification, showNotification } = useNotification();
 
-  useEffect(() => {
-    setTracksRequest(() => () => fetchTracks(timerange));
-  }, [timerange]);
-
   if (hasError) return <DefaultErrorMessage />;
-  if (!tracks || tracks.length === 0 || isLoading) return <Spinner className="" />;
+  if (!tracks || tracks.length === 0 || isLoading) return null; // Global loader will handle loading state
 
   const mapTrackUris = (): string[] => {
     return tracks.map(track => track.uri);
