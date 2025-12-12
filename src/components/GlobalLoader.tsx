@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
 
 interface GlobalLoaderProps {
@@ -7,10 +7,10 @@ interface GlobalLoaderProps {
   className?: string;
 }
 
-const GlobalLoader: React.FC<GlobalLoaderProps> = ({ 
-  isLoading, 
-  message = 'Loading your music...', 
-  className = '' 
+const GlobalLoader: React.FC<GlobalLoaderProps> = ({
+  isLoading,
+  message = 'Loading your music...',
+  className = '',
 }) => {
   return (
     <AnimatePresence>
@@ -95,7 +95,7 @@ const GlobalLoader: React.FC<GlobalLoaderProps> = ({
               className="text-center space-y-2"
             >
               <p className="text-white text-lg font-semibold">{message}</p>
-              
+
               {/* Animated Dots */}
               <div className="flex justify-center space-x-1">
                 {[0, 1, 2].map(i => (

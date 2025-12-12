@@ -10,24 +10,33 @@ import { RangeOption } from '../../common/top-track/range-options';
 
 const Artists: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
-  
+
   const artistsRequest = useCallback(() => fetchArtists(timerange), [timerange]);
-  const { data: artists, isLoading, hasError } = useGlobalDataHook<SpotifyArtist[]>(
+  const {
+    data: artists,
+    isLoading,
+    hasError,
+  } = useGlobalDataHook<SpotifyArtist[]>(
     artistsRequest,
-    `Loading your top artists ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`
+    `Loading your top artists ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`,
   );
 
-  console.log(`[Artists] Component state - isLoading: ${isLoading}, hasError: ${hasError}, artists:`, artists);
+  console.log(
+    `[Artists] Component state - isLoading: ${isLoading}, hasError: ${hasError}, artists:`,
+    artists,
+  );
 
   if (hasError) {
     console.log(`[Artists] Returning error component`);
     return <DefaultErrorMessage />;
   }
   if (!artists || artists.length === 0 || isLoading) {
-    console.log(`[Artists] Returning null - isLoading: ${isLoading}, artists: ${!artists ? 'null' : artists.length}`);
+    console.log(
+      `[Artists] Returning null - isLoading: ${isLoading}, artists: ${!artists ? 'null' : artists.length}`,
+    );
     return null; // Global loader will handle loading state
   }
-  
+
   console.log(`[Artists] Rendering component with ${artists.length} artists`);
 
   const containerVariants = {

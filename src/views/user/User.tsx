@@ -8,10 +8,11 @@ import { DefaultErrorMessage } from '../common';
 
 const User: React.FC = () => {
   const userRequest = useCallback(() => fetchMyProfile(), []);
-  const { data: user, isLoading, hasError } = useGlobalDataHook<SpotifyUser>(
-    userRequest,
-    'Loading your profile information...'
-  );
+  const {
+    data: user,
+    isLoading,
+    hasError,
+  } = useGlobalDataHook<SpotifyUser>(userRequest, 'Loading your profile information...');
 
   if (hasError) return <DefaultErrorMessage />;
   if (!user || isLoading) return null; // Global loader will handle loading state

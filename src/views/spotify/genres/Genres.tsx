@@ -18,11 +18,15 @@ interface GenreData {
 const Genres: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
   const [includeArtistRating, setIncludeArtistRating] = useState<boolean>(false);
-  
+
   const artistsRequest = useCallback(() => fetchArtists(timerange), [timerange]);
-  const { data: artists, isLoading, hasError } = useGlobalDataHook<SpotifyArtist[]>(
+  const {
+    data: artists,
+    isLoading,
+    hasError,
+  } = useGlobalDataHook<SpotifyArtist[]>(
     artistsRequest,
-    `Analyzing your music genres ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`
+    `Analyzing your music genres ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`,
   );
   const [topGenres, setTopGenres] = useState<GenreData[]>([]);
 

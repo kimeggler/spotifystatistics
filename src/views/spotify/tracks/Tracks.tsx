@@ -15,11 +15,15 @@ import { RangeOption } from '../../common/top-track/range-options';
 
 const Tracks: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
-  
+
   const tracksRequest = useCallback(() => fetchTracks(timerange), [timerange]);
-  const { data: tracks, isLoading, hasError } = useGlobalDataHook<SpotifyTrack[]>(
+  const {
+    data: tracks,
+    isLoading,
+    hasError,
+  } = useGlobalDataHook<SpotifyTrack[]>(
     tracksRequest,
-    `Loading your top tracks ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`
+    `Loading your top tracks ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`,
   );
   const { notification, showNotification } = useNotification();
 

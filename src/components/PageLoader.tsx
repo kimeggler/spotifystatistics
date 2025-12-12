@@ -8,10 +8,10 @@ interface PageLoaderProps {
   className?: string;
 }
 
-const PageLoader: React.FC<PageLoaderProps> = ({ 
-  isLoading, 
-  message = 'Loading...', 
-  className = '' 
+const PageLoader: React.FC<PageLoaderProps> = ({
+  isLoading,
+  message = 'Loading...',
+  className = '',
 }) => {
   if (!isLoading) return null;
 

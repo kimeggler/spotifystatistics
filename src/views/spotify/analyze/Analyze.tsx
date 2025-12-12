@@ -17,9 +17,13 @@ const Analyze: React.FC = () => {
 
   // Simple data fetching like Artists/Tracks - no need for UserContext
   const playlistsRequest = useCallback(() => fetchMyPlaylists(), []);
-  const { data: playlists, isLoading, hasError } = useGlobalDataHook<SpotifyPlaylist[]>(
+  const {
+    data: playlists,
+    isLoading,
+    hasError,
+  } = useGlobalDataHook<SpotifyPlaylist[]>(
     playlistsRequest,
-    'Loading your playlists for analysis...'
+    'Loading your playlists for analysis...',
   );
 
   if (hasError) return <DefaultErrorMessage />;

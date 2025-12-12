@@ -19,7 +19,7 @@ const Overview: React.FC = () => {
     hasError: artistError,
   } = useGlobalDataHook<SpotifyArtist>(
     artistRequest,
-    `Loading your top artist ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`
+    `Loading your top artist ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`,
   );
   const {
     data: topTrack,
@@ -27,7 +27,7 @@ const Overview: React.FC = () => {
     hasError: trackError,
   } = useGlobalDataHook<SpotifyTrack>(
     trackRequest,
-    `Loading your top track ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`
+    `Loading your top track ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`,
   );
 
   const isLoading = Boolean(artistIsLoading || trackIsLoading);

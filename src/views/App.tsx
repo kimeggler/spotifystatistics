@@ -19,8 +19,8 @@ import Tracks from './spotify/tracks/Tracks';
 import User from './user/User';
 
 // Context and Loading
-import { LoadingProvider, useLoading } from '../contexts/LoadingContext';
 import GlobalLoader from '../components/GlobalLoader';
+import { LoadingProvider, useLoading } from '../contexts/LoadingContext';
 
 // Types
 interface UserProfile {
