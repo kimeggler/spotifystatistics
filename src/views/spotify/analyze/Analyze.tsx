@@ -83,30 +83,50 @@ const Analyze: React.FC = () => {
     ));
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.2,
+        staggerChildren: 0.05,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: 'spring' as const,
+        stiffness: 100,
+      },
+    },
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="flex flex-col items-center min-h-screen bg-gradient-to-br from-statfy-dark-950 via-statfy-dark-900 to-statfy-purple-900 p-8"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="min-h-screen px-4 md:px-6 lg:px-8 py-12 w-full"
     >
-      <motion.h1
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="text-4xl md:text-5xl font-bold mb-12 text-center bg-gradient-to-r from-statfy-purple-400 to-statfy-purple-300 bg-clip-text text-transparent"
-      >
-        How funky are your playlists?
-      </motion.h1>
+      {/* Header */}
+      <motion.div variants={itemVariants} className="text-center mb-8 flex flex-col items-center">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-6 max-w-4xl">
+          How funky are your{' '}
+          <span className="text-transparent bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text">
+            playlists?
+          </span>
+        </h1>
+      </motion.div>
 
       {/* Content Container - Full width with max-width constraint */}
       <div className="w-full max-w-7xl mx-auto space-y-12">
         {/* Playlists Grid */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="w-full"
-        >
+        <motion.div variants={itemVariants} className="w-full">
           <div
             className="grid gap-6 justify-items-center"
             style={{

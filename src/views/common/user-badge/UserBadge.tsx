@@ -79,15 +79,15 @@ const UserBadge: React.FC<UserBadgeProps> = () => {
   return (
     <Fragment>
       <ShowAt breakpoint="1000AndBelow">
-        <motion.div className="cursor-pointer" whileTap={{ scale: 0.95 }} onClick={toggleMenu}>
-          <img
-            alt="menu icon"
-            src={!menuActive ? menu_icon : profile.images?.[0]?.url || user_icon}
-            className={`w-10 h-10 rounded-full object-cover transition-all duration-300 ${
-              menuActive ? 'border-2 border-statfy-purple-400' : ''
-            }`}
-          />
-        </motion.div>
+        {!menuActive && (
+          <motion.div className="cursor-pointer" whileTap={{ scale: 0.95 }} onClick={toggleMenu}>
+            <img
+              alt="menu icon"
+              src={menu_icon}
+              className="w-10 h-10 object-cover transition-all duration-300"
+            />
+          </motion.div>
+        )}
 
         <AnimatePresence>
           {menuActive && (
@@ -96,7 +96,8 @@ const UserBadge: React.FC<UserBadgeProps> = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-50 bg-gradient-to-br from-statfy-dark-950 via-statfy-dark-900 to-statfy-purple-950 flex flex-col items-center justify-center"
+              className="fixed top-0 left-0 right-0 bottom-0 z-50 bg-black/80 backdrop-blur-md flex flex-col items-center justify-start pt-24 min-h-screen w-screen"
+              style={{ position: 'fixed' }}
             >
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
@@ -106,9 +107,12 @@ const UserBadge: React.FC<UserBadgeProps> = () => {
                 className="space-y-8"
               >
                 {navigationItems.map((item, index) => (
-                  <motion.a
+                  <motion.button
                     key={item.path}
-                    href={item.href}
+                    onClick={() => {
+                      navigate(item.href);
+                      toggleMenu();
+                    }}
                     initial={{ y: 50, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.1 + index * 0.05, duration: 0.3 }}
@@ -119,7 +123,7 @@ const UserBadge: React.FC<UserBadgeProps> = () => {
                     }`}
                   >
                     {item.label}
-                  </motion.a>
+                  </motion.button>
                 ))}
 
                 <motion.button

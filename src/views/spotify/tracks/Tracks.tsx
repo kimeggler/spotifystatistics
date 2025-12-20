@@ -1,4 +1,4 @@
-import { Button, Card, CardBody } from '@heroui/react';
+import { Card, CardBody } from '@heroui/react';
 import cx from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import moment from 'moment';
@@ -18,6 +18,7 @@ const Tracks: React.FC = () => {
 
   const { isLoading, error, getTracks } = useSpotify();
   const { notification, showNotification } = useNotification();
+  const context = useContext(UserContext);
 
   useEffect(() => {
     const loadData = async () => {
@@ -29,18 +30,16 @@ const Tracks: React.FC = () => {
   }, [timerange, getTracks]);
 
   if (error) return <DefaultErrorMessage />;
-  if (!tracks || tracks.length === 0 || isLoading) return null; // Global loader will handle loading state
 
   const mapTrackUris = (): string[] => {
-    return tracks.map(track => track.uri);
+    return tracks?.map(track => track.uri) || [];
   };
 
   const createPlaylist = async (): Promise<void> => {
     try {
       showNotification('loading', 'Creating playlist...');
 
-      // Get user profile from context only when needed
-      const context = useContext(UserContext);
+      // Get user profile from context
       if (!context) {
         showNotification('error', 'User profile not available');
         return;
@@ -196,7 +195,7 @@ const Tracks: React.FC = () => {
       </AnimatePresence>
 
       {/* Header with Create Playlist Button */}
-      <motion.div variants={itemVariants} className="text-center mb-12 flex flex-col items-center">
+      <motion.div variants={itemVariants} className="text-center mb-8 flex flex-col items-center">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-6 max-w-4xl">
           Your favourite{' '}
           <span className="text-transparent bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text">
@@ -204,13 +203,12 @@ const Tracks: React.FC = () => {
           </span>
         </h1>
 
-        <Button
-          size="lg"
-          className="bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-statfy-purple-500/40 transition-all duration-300 hover:scale-105"
+        <button
+          className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-medium px-6 py-3 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={createPlaylist}
-          isDisabled={notification.status === 'loading'}
+          disabled={notification.status === 'loading'}
         >
-          <span className="flex items-center gap-3">
+          <span className="flex items-center gap-2">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
@@ -221,11 +219,11 @@ const Tracks: React.FC = () => {
             </svg>
             Create Playlist
           </span>
-        </Button>
+        </button>
       </motion.div>
 
       {/* Time Range Selector */}
-      <motion.div variants={itemVariants} className="w-full max-w-7xl mx-auto mb-12">
+      <motion.div variants={itemVariants} className="w-full max-w-7xl mx-auto mb-8">
         <TimeRangeSelector
           timerange={timerange}
           onTimerangeChange={setTimerange}
@@ -240,7 +238,7 @@ const Tracks: React.FC = () => {
         <motion.div variants={itemVariants} className="w-full">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
             {tracks
-              .filter(track => track.name)
+              ?.filter(track => track.name)
               .map((track, index) => (
                 <Track key={track.id} track={track} index={index} />
               ))}
@@ -266,7 +264,7 @@ const Tracks: React.FC = () => {
                   />
                 </svg>
                 <p className="text-white/80 text-center font-medium">
-                  Showing your top {tracks.length} tracks {getTimeRangeLabel()}
+                  Showing your top {tracks?.length} tracks {getTimeRangeLabel()}
                 </p>
               </div>
             </CardBody>

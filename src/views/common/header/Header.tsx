@@ -12,7 +12,7 @@ const Header: React.FC = () => {
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="sticky top-0 z-50 bg-statfy-dark-950/80 backdrop-blur-xl border-b border-white/5"
+      className="sticky top-0 z-50"
     >
       <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
         <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
