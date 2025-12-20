@@ -108,10 +108,10 @@ const Genres: React.FC = () => {
                 isSelected={includeArtistRating}
                 onValueChange={setIncludeArtistRating}
                 size="sm"
-                // classNames={{
-                //   wrapper: 'bg-white/10 group-data-[selected=true]:bg-white/30',
-                //   thumb: 'bg-white',
-                // }}
+                classNames={{
+                  wrapper: 'bg-white/10 group-data-[selected=true]:bg-white/30',
+                  thumb: 'bg-white',
+                }}
               />
               <span className="text-white/60 text-xs font-medium whitespace-nowrap">Weighted</span>
             </div>
