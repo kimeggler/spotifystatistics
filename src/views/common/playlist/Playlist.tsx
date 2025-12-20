@@ -73,7 +73,7 @@ const Playlist: React.FC<PlaylistProps> = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="flex flex-col lg:flex-row items-center w-full max-w-6xl mx-auto p-10 bg-white/5 backdrop-blur-md border-white/10 rounded-3xl shadow-2xl"
+        className="flex flex-col lg:flex-row items-center w-full max-w-6xl mx-auto p-10 bg-white/5 backdrop-blur-md rounded-3xl shadow-2xl"
       >
         {/* Info Section */}
         <div className="flex-1 mb-8 lg:mb-0 lg:mr-8">
@@ -165,7 +165,7 @@ const Playlist: React.FC<PlaylistProps> = ({
       >
         {/* TopTrack mobile style - full-width image with content overlay */}
         <div
-          className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden transition-all duration-300 group aspect-square cursor-pointer bg-cover bg-center group-hover:scale-105 box-border"
+          className="relative bg-white/5 backdrop-blur-md rounded-3xl overflow-hidden transition-all duration-300 group aspect-square cursor-pointer bg-cover bg-center group-hover:scale-105"
           onClick={() => changePlaylist(playlist.id)}
           style={{
             backgroundImage: `linear-gradient(to top, rgba(15, 15, 23, 1) 0%, rgba(15, 15, 23, 0.6) 60%, rgba(15, 15, 23, 0.2) 100%), url(${playlist.images[0]?.url || '/api/placeholder/300/300'})`,

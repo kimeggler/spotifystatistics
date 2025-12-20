@@ -1,7 +1,7 @@
 import { Button, Card, CardBody, Chip } from '@heroui/react';
 import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { stars } from '../../assets';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -233,16 +233,6 @@ const Roadmap: React.FC = () => {
               onClick={() => navigate('/')}
             >
               Back to Home
-            </Button>
-
-            <Button
-              variant="bordered"
-              size="lg"
-              className="border-white/20 text-white/80 hover:bg-white/5 hover:text-white transition-all duration-300"
-              as={Link}
-              to="/feedback"
-            >
-              Leave Feedback
             </Button>
           </motion.div>
         </div>

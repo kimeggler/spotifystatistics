@@ -17,7 +17,7 @@ const TopArtist: React.FC<TopArtistProps> = ({ background, topArtist }) => {
       className="w-full"
     >
       {/* Clean layout that uses appropriate space */}
-      <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden shadow-2xl hover:shadow-statfy-purple-500/20 transition-all duration-300 group h-[460px] md:h-[520px]">
+      <div className="relative bg-white/5 backdrop-blur-md  rounded-3xl overflow-hidden shadow-2xl hover:shadow-statfy-purple-500/20 transition-all duration-300 group h-[460px] md:h-[520px]">
         {/* Dark background */}
         <div className="absolute inset-0 bg-statfy-dark-950"></div>
 
@@ -40,7 +40,7 @@ const TopArtist: React.FC<TopArtistProps> = ({ background, topArtist }) => {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="mb-6"
             >
-              <p className="text-statfy-purple-300 text-sm font-semibold tracking-wider uppercase">
+              <p className="text-white/80 text-sm font-semibold tracking-wider uppercase">
                 Top Artist
               </p>
             </motion.div>
@@ -69,7 +69,7 @@ const TopArtist: React.FC<TopArtistProps> = ({ background, topArtist }) => {
             >
               <div className="flex items-center gap-3">
                 <svg
-                  className="w-5 h-5 text-statfy-purple-400"
+                  className="w-5 h-5 text-white/80"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -98,13 +98,13 @@ const TopArtist: React.FC<TopArtistProps> = ({ background, topArtist }) => {
                   {topArtist.genres.slice(0, 2).map((genre, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 bg-gradient-to-r from-statfy-purple-500/30 to-statfy-purple-400/30 text-statfy-purple-200 text-xs font-medium rounded-full border border-statfy-purple-500/30 backdrop-blur-sm"
+                      className="px-3 py-1 bg-white/20 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/30"
                     >
                       {genre}
                     </span>
                   ))}
                   {topArtist.genres.length > 2 && (
-                    <span className="px-3 py-1 bg-white/20 text-white/70 text-xs font-medium rounded-full border border-white/20 backdrop-blur-sm">
+                    <span className="px-3 py-1 bg-white/20 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/30">
                       +{topArtist.genres.length - 2}
                     </span>
                   )}
@@ -115,8 +115,8 @@ const TopArtist: React.FC<TopArtistProps> = ({ background, topArtist }) => {
 
           {/* Play Button - Bottom right corner */}
           <motion.div
-            className="absolute bottom-6 right-6 w-12 h-12 bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 rounded-full flex items-center justify-center backdrop-blur-sm shadow-lg cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            whileHover={{ scale: 1.1 }}
+            className="absolute bottom-6 right-6 w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            whileHover={{ scale: 1.1, rotate: 15 }}
             whileTap={{ scale: 0.95 }}
           >
             <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 20 20">

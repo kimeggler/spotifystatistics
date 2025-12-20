@@ -18,7 +18,7 @@ export const useSpotify = () => {
   const { setGlobalLoading, setLoadingMessage } = useLoading();
 
   const handleRequest = useCallback(
-    async <T,>(request: () => Promise<T>, loadingMessage: string): Promise<T | null> => {
+    async <T>(request: () => Promise<T>, loadingMessage: string): Promise<T | null> => {
       try {
         setIsLoading(true);
         setError(null);
@@ -87,16 +87,12 @@ export const useSpotify = () => {
 
   const getPlaylists = useCallback(
     (profile: SpotifyUser) =>
-      handleRequest<SpotifyPlaylist[]>(
-        () => fetchPlaylists(profile),
-        'Loading your playlists...',
-      ),
+      handleRequest<SpotifyPlaylist[]>(() => fetchPlaylists(profile), 'Loading your playlists...'),
     [handleRequest],
   );
 
   const getMyPlaylists = useCallback(
-    () =>
-      handleRequest<SpotifyPlaylist[]>(() => fetchMyPlaylists(), 'Loading your playlists...'),
+    () => handleRequest<SpotifyPlaylist[]>(() => fetchMyPlaylists(), 'Loading your playlists...'),
     [handleRequest],
   );
 

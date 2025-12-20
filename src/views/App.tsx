@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { getData } from '../services/fetchservice';
 
 // Components
 import About from './about/About';
@@ -21,6 +20,8 @@ import User from './user/User';
 import GlobalLoader from '../components/GlobalLoader';
 import { AuthProvider, useAuth } from '../contexts/AuthContext';
 import { LoadingProvider, useLoading } from '../contexts/LoadingContext';
+import { useSpotify } from '../hooks/useSpotify';
+import Redirect from './Redirect/Redirect';
 
 // Types
 interface UserProfile {
@@ -69,13 +70,14 @@ interface ProtectedRouteProps {
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const { isAuthenticated, isLoading: authLoading } = useAuth();
+  const { getProfile } = useSpotify();
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         if (isAuthenticated) {
-          const userData = await getData('me');
-          setProfile(userData);
+          const userData = await getProfile();
+          if (userData) setProfile(userData);
         }
       } catch (error) {
         console.error('Failed to fetch user data:', error);
@@ -83,7 +85,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     };
 
     fetchUser();
-  }, [isAuthenticated]);
+  }, [isAuthenticated, getProfile]);
 
   if (authLoading) {
     return (
@@ -119,6 +121,25 @@ const AnimatedRoute: React.FC<AnimatedRouteProps> = ({ children }) => (
 const AppContent: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const { isGlobalLoading, loadingMessage } = useLoading();
+  const { isAuthenticated } = useAuth();
+  const { getProfile } = useSpotify();
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (isAuthenticated) {
+        try {
+          const userData = await getProfile();
+          if (userData) setProfile(userData);
+        } catch (error) {
+          console.error('Failed to fetch user profile:', error);
+        }
+      } else {
+        setProfile(null);
+      }
+    };
+
+    fetchProfile();
+  }, [isAuthenticated, getProfile]);
 
   return (
     <>
@@ -144,11 +165,6 @@ const AppContent: React.FC = () => {
                     <SpotifyCallback />
                   </AnimatedRoute>
                 }
-              />
-              {/* Catch-all for oidc-client-ts redirects - redirect to proper callback */}
-              <Route
-                path="/oidc/callback/*"
-                element={<SpotifyCallback />}
               />
               <Route
                 path="/about"
@@ -236,6 +252,14 @@ const AppContent: React.FC = () => {
                       <Genres />
                     </AnimatedRoute>
                   </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/*"
+                element={
+                  <AnimatedRoute>
+                    <Redirect />
+                  </AnimatedRoute>
                 }
               />
             </Routes>

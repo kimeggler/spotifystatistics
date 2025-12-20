@@ -1,6 +1,5 @@
-import { Button } from '@heroui/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShowAt } from '..';
 import { close, menu_icon, user_icon } from '../../../assets';
@@ -14,6 +13,24 @@ const UserBadge: React.FC<UserBadgeProps> = () => {
   const context = useContext(UserContext);
   const { signOut } = useAuth();
   const [menuActive, setMenuActive] = useState<boolean>(false);
+  const [showLogout, setShowLogout] = useState<boolean>(false);
+  const badgeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (badgeRef.current && !badgeRef.current.contains(event.target as Node)) {
+        setShowLogout(false);
+      }
+    };
+
+    if (showLogout) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showLogout]);
 
   if (!context) {
     return null;
@@ -51,7 +68,6 @@ const UserBadge: React.FC<UserBadgeProps> = () => {
     { href: '/tracks', label: 'Tracks', path: 'tracks' },
     { href: '/analyze', label: 'Playlists', path: 'analyze' },
     { href: '/genres', label: 'Genres', path: 'genres' },
-    { href: '/feedback', label: 'Feedback', path: 'feedback' },
   ];
 
   const currentPath = window.location.pathname.split('/')[1];
@@ -133,36 +149,46 @@ const UserBadge: React.FC<UserBadgeProps> = () => {
       </ShowAt>
 
       <ShowAt breakpoint="1000AndAbove">
-        <motion.div
-          className="flex items-center space-x-3 p-3 rounded-2xl bg-white/5 backdrop-blur-md hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-statfy-purple-500/20"
-          whileHover={{ scale: 1.05 }}
-        >
-          <img
-            alt={profile.display_name}
-            src={profile.images?.[0]?.url || user_icon}
-            className="w-12 h-12 rounded-2xl object-cover border-2 border-statfy-purple-400 shadow-lg"
-          />
-          <div className="hidden lg:block">
-            <p className="text-white font-semibold text-sm truncate max-w-32">
-              {profile.display_name}
-            </p>
-            <Button
-              size="sm"
-              variant="light"
-              onClick={logout}
-              className="text-xs text-white/60 hover:text-red-400 transition-colors duration-300 p-0 h-auto min-w-0 rounded-xl hover:bg-red-500/10"
-            >
-              <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                />
-              </svg>
-              Logout
-            </Button>
-          </div>
+        <motion.div className="relative" ref={badgeRef}>
+          <motion.div
+            className="w-12 h-12 rounded-full overflow-hidden border-2 border-statfy-purple-400 shadow-lg cursor-pointer"
+            whileHover={{ borderColor: 'rgb(168, 85, 247)' }}
+            onClick={() => setShowLogout(!showLogout)}
+          >
+            <img
+              alt={profile.display_name}
+              src={profile.images?.[0]?.url || user_icon}
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+
+          {/* Logout button - shown on click */}
+          <AnimatePresence>
+            {showLogout && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="absolute top-full right-0 mt-2 z-50 cursor-pointer"
+              >
+                <button
+                  onClick={logout}
+                  className="flex items-center gap-2 px-4 py-2 bg-slate-900/95 hover:bg-red-500/20 border border-white/10 hover:border-red-500/50 rounded-lg backdrop-blur-sm text-white/80 hover:text-red-400 transition-all duration-200 text-sm font-medium shadow-xl"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                    />
+                  </svg>
+                  Logout
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </ShowAt>
     </Fragment>

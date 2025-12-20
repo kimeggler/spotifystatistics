@@ -10,16 +10,13 @@ const Overview: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
   const [topArtist, setTopArtist] = useState<SpotifyArtist | null>(null);
   const [topTrack, setTopTrack] = useState<SpotifyTrack | null>(null);
-  
+
   const { isLoading, error, getTopArtist, getTopTrack } = useSpotify();
 
   useEffect(() => {
     const loadData = async () => {
-      const [artist, track] = await Promise.all([
-        getTopArtist(timerange),
-        getTopTrack(timerange),
-      ]);
-      
+      const [artist, track] = await Promise.all([getTopArtist(timerange), getTopTrack(timerange)]);
+
       if (artist) setTopArtist(artist);
       if (track) setTopTrack(track);
     };

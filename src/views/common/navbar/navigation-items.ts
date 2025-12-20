@@ -24,10 +24,6 @@ const navigationItems: NavigationItem[] = [
     path: '/genres',
     label: 'Genres',
   },
-  {
-    path: '/feedback',
-    label: 'Feedback',
-  },
 ];
 
 export default navigationItems;

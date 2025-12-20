@@ -10,7 +10,7 @@ import { RangeOption } from '../../common/top-track/range-options';
 const Artists: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
   const [artists, setArtists] = useState<SpotifyArtist[] | null>(null);
-  
+
   const { isLoading, error, getArtists } = useSpotify();
 
   useEffect(() => {

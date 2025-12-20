@@ -32,45 +32,52 @@ const Track: React.FC<TrackProps> = ({ track, index }) => {
       variants={itemVariants}
       initial="hidden"
       animate="visible"
-      whileHover={{ scale: 1.02, y: -4 }}
-      transition={{ type: 'spring', stiffness: 300 }}
+      className="w-full max-w-sm"
     >
-      {/* TopTrack mobile style - full-width image with content overlay */}
-      <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden shadow-xl hover:shadow-statfy-purple-500/20 transition-all duration-300 group h-[140px] md:h-[160px]">
+      {/* Clean white aesthetic card */}
+      <div className="relative backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden transition-all duration-300 group aspect-square md:h-[320px] md:aspect-auto">
         {/* Dark background */}
         <div className="absolute inset-0 bg-statfy-dark-950"></div>
 
-        {/* Background Image - Full width like TopTrack mobile */}
+        {/* Background Image - Album art */}
         <div className="absolute inset-0 overflow-hidden">
           <div
             className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-all duration-700"
             style={{
-              backgroundImage: `url(${
-                track.album.images[1]?.url ||
-                track.album.images[0]?.url ||
-                '/api/placeholder/300/300'
-              })`,
+              backgroundImage: `url(${track.album.images[0]?.url || '/api/placeholder/300/300'})`,
             }}
           />
-          {/* Gradient overlay like TopTrack mobile */}
-          <div className="absolute inset-0 bg-gradient-to-t from-statfy-dark-950 via-statfy-dark-950/60 to-statfy-dark-950/20" />
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 group-hover:from-black/90 transition-all duration-500" />
         </div>
 
-        {/* Content Overlay - Like TopTrack mobile */}
-        <div className="relative z-10 p-4 md:p-6 h-full flex flex-col justify-center">
-          <div className="w-full">
-            {/* Rank Badge - Top left */}
-            <div className="absolute top-4 left-4">
-              <div className="bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 text-white font-bold text-sm md:text-base px-3 py-1 rounded-full shadow-lg min-w-[48px] text-center">
-                #{index + 1}
-              </div>
-            </div>
+        {/* Content Overlay */}
+        <div className="relative z-10 p-4 md:p-6 h-full flex flex-col justify-between">
+          {/* Top section - Rank and icon */}
+          <div className="flex justify-between items-start">
+            <span className="px-3 py-1 bg-white/20 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/30">
+              #{index + 1}
+            </span>
 
+            {/* Play Button - clean white style */}
+            <motion.div
+              className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20"
+              whileHover={{ scale: 1.1, rotate: 15 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
+              <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M6.5 5.5v9l7-4.5-7-4.5z" />
+              </svg>
+            </motion.div>
+          </div>
+
+          {/* Bottom section - Track info */}
+          <div className="space-y-3">
             {/* Track Info */}
-            <div className="space-y-2 md:space-y-3">
+            <div className="space-y-3 md:space-y-4">
               {/* Track Name */}
               <h3
-                className="text-white font-bold text-lg md:text-xl leading-tight truncate group-hover:text-statfy-purple-300 transition-colors duration-300 drop-shadow-lg"
+                className="text-white font-black text-xl md:text-2xl leading-tight line-clamp-2 group-hover:scale-105 transition-transform duration-300 drop-shadow-lg"
                 title={track.name}
               >
                 {track.name}
@@ -79,7 +86,7 @@ const Track: React.FC<TrackProps> = ({ track, index }) => {
               {/* Artist */}
               <div className="flex items-center gap-2">
                 <svg
-                  className="w-4 h-4 text-statfy-purple-400 flex-shrink-0"
+                  className="w-4 h-4 text-white/80 flex-shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -120,9 +127,9 @@ const Track: React.FC<TrackProps> = ({ track, index }) => {
               </div>
             </div>
 
-            {/* Track Stats - Bottom right */}
-            <div className="absolute bottom-4 right-4 flex flex-wrap gap-2 justify-end">
-              <span className="px-2 md:px-3 py-1 bg-gradient-to-r from-statfy-purple-500/30 to-statfy-purple-400/30 text-statfy-purple-200 text-xs font-medium rounded-full border border-statfy-purple-500/30 backdrop-blur-sm flex items-center gap-1">
+            {/* Track Stats - Clean white style */}
+            <div className="flex flex-wrap gap-2 mt-3 md:mt-4">
+              <span className="px-2 md:px-3 py-1 bg-white/20 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/30 flex items-center gap-1">
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
@@ -131,16 +138,12 @@ const Track: React.FC<TrackProps> = ({ track, index }) => {
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span className="md:hidden">{formatDuration(track.duration_ms)}</span>
-                <span className="hidden md:inline">
-                  {formatDuration(track.duration_ms)} duration
-                </span>
+                {formatDuration(track.duration_ms)}
               </span>
 
               {track.explicit && (
                 <span className="px-2 md:px-3 py-1 bg-red-500/30 text-red-300 text-xs font-medium rounded-full border border-red-500/30 backdrop-blur-sm">
-                  <span className="md:hidden">E</span>
-                  <span className="hidden md:inline">Explicit</span>
+                  E
                 </span>
               )}
 
@@ -149,23 +152,16 @@ const Track: React.FC<TrackProps> = ({ track, index }) => {
                   <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
-                  <span className="md:hidden">{track.popularity}%</span>
-                  <span className="hidden md:inline">{track.popularity}% popularity</span>
+                  {track.popularity}%
                 </span>
               )}
             </div>
-
-            {/* Play Button - Center of the card on hover */}
-            <motion.div
-              className="absolute top-1/2 right-6 transform -translate-y-1/2 w-12 h-12 bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 rounded-full flex items-center justify-center backdrop-blur-sm shadow-lg cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M6.5 5.5v9l7-4.5-7-4.5z" />
-              </svg>
-            </motion.div>
           </div>
+        </div>
+
+        {/* Hover glow effect - subtle white */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent" />
         </div>
       </div>
     </motion.div>

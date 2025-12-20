@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../../contexts/AuthContext';
 import { NavBar, UserBadge } from '..';
+import { useAuth } from '../../../contexts/AuthContext';
 
 const Header: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -25,13 +25,13 @@ const Header: React.FC = () => {
         </motion.div>
 
         {isAuthenticated && (
-          <>
+          <div className="flex items-center gap-8">
             <div className="hidden md:block">
               <NavBar />
             </div>
 
             <UserBadge />
-          </>
+          </div>
         )}
       </div>
     </motion.header>

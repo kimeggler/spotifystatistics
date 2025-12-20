@@ -4,18 +4,18 @@ import { AnimatePresence, motion } from 'framer-motion';
 import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react';
 
-import { useSpotify } from '../../../hooks/useSpotify';
 import useNotification from '../../../hooks/useNotification';
+import { useSpotify } from '../../../hooks/useSpotify';
 import { getData, postData } from '../../../services/fetchservice';
 import { SpotifyTrack } from '../../../types/spotify';
-import { UserContext } from '../../AppRouter';
+import { UserContext } from '../../App';
 import { DefaultErrorMessage, TimeRangeSelector, Track } from '../../common';
 import { RangeOption } from '../../common/top-track/range-options';
 
 const Tracks: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
   const [tracks, setTracks] = useState<SpotifyTrack[] | null>(null);
-  
+
   const { isLoading, error, getTracks } = useSpotify();
   const { notification, showNotification } = useNotification();
 
@@ -47,6 +47,10 @@ const Tracks: React.FC = () => {
       }
       const { profile } = context;
 
+      if (!profile) {
+        showNotification('error', 'User profile not available');
+        return;
+      }
       const playlists = await getData('me/playlists');
       const date = moment(new Date()).format('DD-MM-YYYY');
       const timeRange =
@@ -72,7 +76,7 @@ const Tracks: React.FC = () => {
           uris: mapTrackUris(),
         });
 
-        const createdPlaylist = await postData(`users/${profile.id}/playlists`, playlistData);
+        const createdPlaylist = await postData(`users/${profile?.id}/playlists`, playlistData);
         await postData(`playlists/${createdPlaylist.id}/tracks`, tracksData);
 
         showNotification('success', 'Playlist created successfully!');
@@ -232,13 +236,15 @@ const Tracks: React.FC = () => {
 
       {/* Content Container - Full width with max-width constraint */}
       <div className="w-full max-w-7xl mx-auto space-y-12">
-        {/* Tracks List */}
-        <motion.div variants={itemVariants} className="w-full max-w-4xl mx-auto space-y-3">
-          {tracks
-            .filter(track => track.name)
-            .map((track, index) => (
-              <Track key={track.id} track={track} index={index} />
-            ))}
+        {/* Tracks Grid */}
+        <motion.div variants={itemVariants} className="w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
+            {tracks
+              .filter(track => track.name)
+              .map((track, index) => (
+                <Track key={track.id} track={track} index={index} />
+              ))}
+          </div>
         </motion.div>
 
         {/* Stats Footer */}

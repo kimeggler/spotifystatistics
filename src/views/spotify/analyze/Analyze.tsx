@@ -14,7 +14,7 @@ const Analyze: React.FC = () => {
   const [activePlaylist, setActivePlaylist] = useState<string | null>(null);
   const [analyse, setAnalyse] = useState<AnalyseData[] | { empty: boolean } | null>(null);
   const [playlists, setPlaylists] = useState<SpotifyPlaylist[] | null>(null);
-  
+
   const { isLoading, error, getMyPlaylists } = useSpotify();
 
   useEffect(() => {
