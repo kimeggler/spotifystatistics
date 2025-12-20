@@ -55,7 +55,7 @@ const Artists: React.FC = () => {
       className="min-h-screen px-4 md:px-6 lg:px-8 py-12 w-full"
     >
       {/* Title */}
-      <motion.div variants={itemVariants} className="text-center mb-12 flex justify-center">
+      <motion.div variants={itemVariants} className="text-center flex justify-center">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-6 max-w-4xl">
           Your favourite{' '}
           <span className="text-transparent bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text">
@@ -65,7 +65,7 @@ const Artists: React.FC = () => {
       </motion.div>
 
       {/* Time Range Selector */}
-      <motion.div variants={itemVariants} className="w-full max-w-7xl mx-auto mb-12">
+      <motion.div variants={itemVariants} className="w-full max-w-7xl mx-auto mb-8">
         <TimeRangeSelector
           timerange={timerange}
           onTimerangeChange={setTimerange}
