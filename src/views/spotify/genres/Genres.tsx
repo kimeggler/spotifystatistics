@@ -74,7 +74,7 @@ const Genres: React.FC = () => {
       className="min-h-screen px-4 md:px-6 lg:px-8 py-12 w-full"
     >
       {/* Title */}
-      <motion.div variants={itemVariants} className="text-center mb-12 flex justify-center">
+      <motion.div variants={itemVariants} className="text-center flex justify-center">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-6 max-w-4xl">
           Your favourite{' '}
           <span className="text-transparent bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text">
@@ -94,49 +94,29 @@ const Genres: React.FC = () => {
       </motion.div>
 
       {/* Artist Ranking Toggle */}
-      <motion.div variants={itemVariants} className="w-full max-w-7xl mx-auto mb-12">
-        <Card className="bg-white/5 backdrop-blur-md border-white/10 rounded-2xl shadow-lg">
-          <CardBody className="p-6">
-            <div className="flex items-center justify-between space-x-6">
-              <div className="text-white flex-grow">
-                <div className="flex items-center gap-3 mb-2">
-                  <svg
-                    className="w-5 h-5 text-statfy-purple-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                    />
-                  </svg>
-                  <h3 className="font-semibold">Calculate based on artist ranking</h3>
-                </div>
-                <p className="text-white/70 text-sm">
-                  Weight genres by your top artists' positions
-                </p>
-              </div>
-              <div className="flex flex-col items-center gap-2">
-                <Switch
-                  isSelected={includeArtistRating}
-                  onValueChange={setIncludeArtistRating}
-                  color="secondary"
-                  size="lg"
-                  classNames={{
-                    wrapper:
-                      'group-data-[selected=true]:bg-gradient-to-r group-data-[selected=true]:from-statfy-purple-500 group-data-[selected=true]:to-statfy-purple-400',
-                  }}
-                />
-                <span className="text-white/70 text-xs font-medium">
-                  {includeArtistRating ? 'Weighted' : 'Simple count'}
-                </span>
-              </div>
+      <motion.div variants={itemVariants} className="w-full max-w-7xl mx-auto mb-8">
+        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex-grow">
+              <p className="text-white/70 text-sm">Weight genres by your top artists' positions</p>
             </div>
-          </CardBody>
-        </Card>
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <span className="text-white/60 text-xs font-medium whitespace-nowrap">
+                Simple count
+              </span>
+              <Switch
+                isSelected={includeArtistRating}
+                onValueChange={setIncludeArtistRating}
+                size="sm"
+                // classNames={{
+                //   wrapper: 'bg-white/10 group-data-[selected=true]:bg-white/30',
+                //   thumb: 'bg-white',
+                // }}
+              />
+              <span className="text-white/60 text-xs font-medium whitespace-nowrap">Weighted</span>
+            </div>
+          </div>
+        </div>
       </motion.div>
 
       {/* Content Container - Full width with max-width constraint */}

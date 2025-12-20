@@ -148,22 +148,25 @@ const Genre: React.FC<GenreProps> = ({ genre, index }) => {
 
           {/* Bottom section - Genre info */}
           <div className="space-y-3">
-            {/* Genre Name */}
-            <h3
-              className="text-white font-black text-2xl md:text-3xl leading-tight capitalize group-hover:scale-105 transition-transform duration-300 drop-shadow-lg"
-              title={genre.name}
-            >
-              {genre.name.replace(/-/g, ' ')}
-            </h3>
+            {/* Genre Info */}
+            <div className="space-y-3 md:space-y-4">
+              {/* Genre Name */}
+              <h3
+                className="text-white font-black text-xl md:text-2xl leading-tight line-clamp-2 capitalize group-hover:scale-105 transition-transform duration-300 drop-shadow-lg"
+                title={genre.name}
+              >
+                {genre.name.replace(/-/g, ' ')}
+              </h3>
 
-            {/* Track count */}
-            {genre.count && (
-              <div className="flex items-center gap-2">
-                <div className="px-3 py-1.5 bg-white/20 backdrop-blur-md rounded-full border border-white/30">
-                  <p className="text-white text-sm font-bold">{genre.count} tracks</p>
+              {/* Track count - pill style like Artist genre tags */}
+              {genre.count && (
+                <div className="flex items-center gap-2">
+                  <span className="px-2 md:px-3 py-1 bg-white/20 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/30 whitespace-nowrap flex-shrink-0">
+                    {genre.count} tracks
+                  </span>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
 

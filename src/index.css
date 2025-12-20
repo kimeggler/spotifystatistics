@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 @import './modern-styles.css';
+@plugin './hero.ts';
+
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 
 @theme {
   --color-statfy-purple-50: #f3e8ff;
