@@ -12,13 +12,13 @@ const Header: React.FC = () => {
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="sticky top-0 z-50 bg-statfy-dark-950/90 backdrop-blur-lg border-b border-white/10"
+      className="sticky top-0 z-50 bg-statfy-dark-950/80 backdrop-blur-xl border-b border-white/5"
     >
       <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
           <Link
             to="/"
-            className="text-3xl font-bold bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text text-transparent hover:from-statfy-purple-200 hover:to-statfy-purple-400 transition-all duration-300"
+            className="text-2xl font-bold text-white tracking-tight hover:text-white/80 transition-colors duration-200"
           >
             STATFY
           </Link>

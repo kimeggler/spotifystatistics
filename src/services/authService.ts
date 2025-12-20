@@ -43,7 +43,6 @@ class AuthService {
         authorization_endpoint: 'https://accounts.spotify.com/authorize',
         token_endpoint: 'https://accounts.spotify.com/api/token',
         userinfo_endpoint: 'https://api.spotify.com/v1/me',
-        end_session_endpoint: 'https://accounts.spotify.com/logout',
         code_challenge_methods_supported: ['S256'],
         response_types_supported: ['code'],
         grant_types_supported: ['authorization_code'],

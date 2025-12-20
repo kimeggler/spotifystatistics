@@ -41,7 +41,7 @@ const Genre: React.FC<GenreProps> = ({ genre, index }) => {
       'from-amber-500 via-orange-500 to-rose-500',
       'from-cyan-500 via-blue-500 to-indigo-500',
     ];
-    
+
     // Use genre name to consistently pick a gradient
     const hash = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
     return gradients[hash % gradients.length];
@@ -51,23 +51,39 @@ const Genre: React.FC<GenreProps> = ({ genre, index }) => {
   const getPattern = (): React.ReactElement => {
     const patterns = [
       // Circles
-      <svg key="pattern" className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100">
+      <svg
+        key="pattern"
+        className="absolute inset-0 w-full h-full opacity-20"
+        viewBox="0 0 100 100"
+      >
         <circle cx="20" cy="20" r="15" fill="white" />
         <circle cx="80" cy="80" r="20" fill="white" />
         <circle cx="70" cy="30" r="12" fill="white" />
       </svg>,
       // Waves
-      <svg key="pattern" className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100">
+      <svg
+        key="pattern"
+        className="absolute inset-0 w-full h-full opacity-20"
+        viewBox="0 0 100 100"
+      >
         <path d="M0,50 Q25,20 50,50 T100,50 L100,100 L0,100 Z" fill="white" />
       </svg>,
       // Diagonal lines
-      <svg key="pattern" className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100">
+      <svg
+        key="pattern"
+        className="absolute inset-0 w-full h-full opacity-20"
+        viewBox="0 0 100 100"
+      >
         <line x1="0" y1="0" x2="100" y2="100" stroke="white" strokeWidth="3" />
         <line x1="0" y1="50" x2="100" y2="150" stroke="white" strokeWidth="3" />
         <line x1="0" y1="-50" x2="100" y2="50" stroke="white" strokeWidth="3" />
       </svg>,
       // Dots
-      <svg key="pattern" className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100">
+      <svg
+        key="pattern"
+        className="absolute inset-0 w-full h-full opacity-20"
+        viewBox="0 0 100 100"
+      >
         {[...Array(25)].map((_, i) => (
           <circle
             key={i}
@@ -93,12 +109,10 @@ const Genre: React.FC<GenreProps> = ({ genre, index }) => {
       <div className="relative backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden transition-all duration-300 group aspect-square md:h-[320px] md:aspect-auto">
         {/* Dynamic gradient background */}
         <div className={`absolute inset-0 bg-gradient-to-br ${getGenreGradient(genre.name)}`}></div>
-        
+
         {/* Pattern overlay */}
-        <div className="absolute inset-0 overflow-hidden">
-          {getPattern()}
-        </div>
-        
+        <div className="absolute inset-0 overflow-hidden">{getPattern()}</div>
+
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 group-hover:from-black/90 transition-all duration-500" />
 
@@ -109,7 +123,7 @@ const Genre: React.FC<GenreProps> = ({ genre, index }) => {
             <span className="px-3 py-1 bg-white/20 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/30">
               #{index + 1}
             </span>
-            
+
             {/* Music note icon */}
             <motion.div
               className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20"
