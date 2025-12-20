@@ -3,15 +3,19 @@ import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { stars } from '../../assets';
+import { useAuth } from '../../contexts/AuthContext';
 import { handleSignInCallback } from '../../helper/authenticationhelper';
 
 const SpotifyCallback: React.FC = () => {
   const navigate = useNavigate();
+  const { checkAuth } = useAuth();
 
   useEffect(() => {
     const handleCallback = async (): Promise<void> => {
       try {
         await handleSignInCallback();
+        // Refresh auth state after successful callback
+        await checkAuth();
         navigate('/overview');
       } catch (error) {
         console.error('Error during authentication:', error);
@@ -20,7 +24,7 @@ const SpotifyCallback: React.FC = () => {
     };
 
     handleCallback();
-  }, [navigate]);
+  }, [navigate, checkAuth]);
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-statfy-dark-950 via-statfy-dark-900 to-statfy-purple-900">

@@ -1,20 +1,17 @@
 import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signIn, validateToken } from '../../helper/authenticationhelper';
+import { useAuth } from '../../contexts/AuthContext';
 
 const Landingpage: React.FC = () => {
   const navigate = useNavigate();
+  const { isAuthenticated, signIn } = useAuth();
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const isAuthenticated = await validateToken();
-      if (isAuthenticated) {
-        navigate('/overview');
-      }
-    };
-    checkAuth();
-  }, [navigate]);
+    if (isAuthenticated) {
+      navigate('/overview');
+    }
+  }, [navigate, isAuthenticated]);
 
   const containerVariants = {
     hidden: { opacity: 0 },

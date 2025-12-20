@@ -1,38 +1,33 @@
 import { motion } from 'framer-motion';
-import React, { useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import useGlobalDataHook from '../../../hooks/useGlobalDataHook';
-import { fetchMyTopArtist, fetchMyTopTrack } from '../../../services/spotifyservice';
+import { useSpotify } from '../../../hooks/useSpotify';
 import { SpotifyArtist, SpotifyTrack } from '../../../types/spotify';
 import { DefaultErrorMessage, TimeRangeSelector, TopArtist, TopTrack } from '../../common';
 import { RangeOption } from '../../common/top-track/range-options';
 
 const Overview: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
+  const [topArtist, setTopArtist] = useState<SpotifyArtist | null>(null);
+  const [topTrack, setTopTrack] = useState<SpotifyTrack | null>(null);
+  
+  const { isLoading, error, getTopArtist, getTopTrack } = useSpotify();
 
-  const artistRequest = useCallback(() => fetchMyTopArtist(timerange), [timerange]);
-  const trackRequest = useCallback(() => fetchMyTopTrack(timerange), [timerange]);
+  useEffect(() => {
+    const loadData = async () => {
+      const [artist, track] = await Promise.all([
+        getTopArtist(timerange),
+        getTopTrack(timerange),
+      ]);
+      
+      if (artist) setTopArtist(artist);
+      if (track) setTopTrack(track);
+    };
 
-  const {
-    data: topArtist,
-    isLoading: artistIsLoading,
-    hasError: artistError,
-  } = useGlobalDataHook<SpotifyArtist>(
-    artistRequest,
-    `Loading your top artist ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`,
-  );
-  const {
-    data: topTrack,
-    isLoading: trackIsLoading,
-    hasError: trackError,
-  } = useGlobalDataHook<SpotifyTrack>(
-    trackRequest,
-    `Loading your top track ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`,
-  );
+    loadData();
+  }, [timerange, getTopArtist, getTopTrack]);
 
-  const isLoading = Boolean(artistIsLoading || trackIsLoading);
-
-  if (artistError || trackError) return <DefaultErrorMessage />;
+  if (error) return <DefaultErrorMessage />;
   if (!topArtist || !topTrack || isLoading) return null; // Global loader will handle loading state
 
   const background = (imgUrl: string): React.CSSProperties => {

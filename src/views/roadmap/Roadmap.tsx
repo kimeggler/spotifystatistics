@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { stars } from '../../assets';
-import { validateToken } from '../../helper/authenticationhelper';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface RoadmapItem {
   title: string;
@@ -15,16 +15,13 @@ interface RoadmapItem {
 
 const Roadmap: React.FC = () => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const isAuthenticated = await validateToken();
-      if (isAuthenticated) {
-        navigate('/overview');
-      }
-    };
-    checkAuth();
-  }, [navigate]);
+    if (isAuthenticated) {
+      navigate('/overview');
+    }
+  }, [navigate, isAuthenticated]);
 
   const roadmapItems: RoadmapItem[] = [
     {

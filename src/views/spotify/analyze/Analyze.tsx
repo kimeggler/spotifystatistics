@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
-import React, { useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getAudioAnalysis } from '../../../helper/analysationhelper';
-import useGlobalDataHook from '../../../hooks/useGlobalDataHook';
-import { fetchMyPlaylists } from '../../../services/spotifyservice';
+import { useSpotify } from '../../../hooks/useSpotify';
 import { SpotifyPlaylist } from '../../../types/spotify';
 import { DefaultErrorMessage, Playlist } from '../../common';
 
@@ -14,19 +13,20 @@ interface AnalyseData {
 const Analyze: React.FC = () => {
   const [activePlaylist, setActivePlaylist] = useState<string | null>(null);
   const [analyse, setAnalyse] = useState<AnalyseData[] | { empty: boolean } | null>(null);
+  const [playlists, setPlaylists] = useState<SpotifyPlaylist[] | null>(null);
+  
+  const { isLoading, error, getMyPlaylists } = useSpotify();
 
-  // Simple data fetching like Artists/Tracks - no need for UserContext
-  const playlistsRequest = useCallback(() => fetchMyPlaylists(), []);
-  const {
-    data: playlists,
-    isLoading,
-    hasError,
-  } = useGlobalDataHook<SpotifyPlaylist[]>(
-    playlistsRequest,
-    'Loading your playlists for analysis...',
-  );
+  useEffect(() => {
+    const loadData = async () => {
+      const result = await getMyPlaylists();
+      if (result) setPlaylists(result);
+    };
 
-  if (hasError) return <DefaultErrorMessage />;
+    loadData();
+  }, [getMyPlaylists]);
+
+  if (error) return <DefaultErrorMessage />;
   if (isLoading) return null; // Global loader will handle loading state
   if (!playlists || playlists.length === 0) {
     return (

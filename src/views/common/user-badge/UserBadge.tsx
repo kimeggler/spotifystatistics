@@ -4,7 +4,7 @@ import React, { Fragment, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShowAt } from '..';
 import { close, menu_icon, user_icon } from '../../../assets';
-import { signOut } from '../../../helper/authenticationhelper';
+import { useAuth } from '../../../contexts/AuthContext';
 import { UserContext } from '../../App';
 
 interface UserBadgeProps {}
@@ -12,6 +12,7 @@ interface UserBadgeProps {}
 const UserBadge: React.FC<UserBadgeProps> = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
+  const { signOut } = useAuth();
   const [menuActive, setMenuActive] = useState<boolean>(false);
 
   if (!context) {

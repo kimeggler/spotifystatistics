@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { validateToken } from '../helper/authenticationhelper';
 import { getData } from '../services/fetchservice';
 
 // Components
@@ -20,13 +19,14 @@ import User from './user/User';
 
 // Context and Loading
 import GlobalLoader from '../components/GlobalLoader';
+import { AuthProvider, useAuth } from '../contexts/AuthContext';
 import { LoadingProvider, useLoading } from '../contexts/LoadingContext';
 
 // Types
 interface UserProfile {
   id: string;
   display_name: string;
-  email: string;
+  email?: string; // Optional since it requires user-read-email scope
   images: Array<{
     url: string;
     height: number;
@@ -68,12 +68,11 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const isAuthenticated = await validateToken();
         if (isAuthenticated) {
           const userData = await getData('me');
           setProfile(userData);
@@ -81,13 +80,12 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
       } catch (error) {
         console.error('Failed to fetch user data:', error);
       }
-      setIsLoading(false);
     };
 
     fetchUser();
-  }, []);
+  }, [isAuthenticated]);
 
-  if (isLoading) {
+  if (authLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-slate-900 to-purple-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-400"></div>
@@ -95,7 +93,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     );
   }
 
-  if (!profile) {
+  if (!isAuthenticated || !profile) {
     return <Landingpage />;
   }
 
@@ -146,6 +144,11 @@ const AppContent: React.FC = () => {
                     <SpotifyCallback />
                   </AnimatedRoute>
                 }
+              />
+              {/* Catch-all for oidc-client-ts redirects - redirect to proper callback */}
+              <Route
+                path="/oidc/callback/*"
+                element={<SpotifyCallback />}
               />
               <Route
                 path="/about"
@@ -246,9 +249,11 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <LoadingProvider>
-      <AppContent />
-    </LoadingProvider>
+    <AuthProvider>
+      <LoadingProvider>
+        <AppContent />
+      </LoadingProvider>
+    </AuthProvider>
   );
 };
 

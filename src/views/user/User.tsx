@@ -1,20 +1,24 @@
 import { Avatar, Card, CardBody, Chip } from '@heroui/react';
 import { motion } from 'framer-motion';
-import React, { useCallback } from 'react';
-import useGlobalDataHook from '../../hooks/useGlobalDataHook';
-import { fetchMyProfile } from '../../services/spotifyservice';
+import React, { useEffect, useState } from 'react';
+import { useSpotify } from '../../hooks/useSpotify';
 import { SpotifyUser } from '../../types/spotify';
 import { DefaultErrorMessage } from '../common';
 
 const User: React.FC = () => {
-  const userRequest = useCallback(() => fetchMyProfile(), []);
-  const {
-    data: user,
-    isLoading,
-    hasError,
-  } = useGlobalDataHook<SpotifyUser>(userRequest, 'Loading your profile information...');
+  const [user, setUser] = useState<SpotifyUser | null>(null);
+  const { isLoading, error, getProfile } = useSpotify();
 
-  if (hasError) return <DefaultErrorMessage />;
+  useEffect(() => {
+    const loadData = async () => {
+      const result = await getProfile();
+      if (result) setUser(result);
+    };
+
+    loadData();
+  }, [getProfile]);
+
+  if (error) return <DefaultErrorMessage />;
   if (!user || isLoading) return null; // Global loader will handle loading state
 
   const containerVariants = {

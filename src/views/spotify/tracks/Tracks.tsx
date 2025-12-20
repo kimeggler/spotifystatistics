@@ -2,12 +2,11 @@ import { Button, Card, CardBody } from '@heroui/react';
 import cx from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import moment from 'moment';
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
-import useGlobalDataHook from '../../../hooks/useGlobalDataHook';
+import { useSpotify } from '../../../hooks/useSpotify';
 import useNotification from '../../../hooks/useNotification';
 import { getData, postData } from '../../../services/fetchservice';
-import { fetchTracks } from '../../../services/spotifyservice';
 import { SpotifyTrack } from '../../../types/spotify';
 import { UserContext } from '../../AppRouter';
 import { DefaultErrorMessage, TimeRangeSelector, Track } from '../../common';
@@ -15,19 +14,21 @@ import { RangeOption } from '../../common/top-track/range-options';
 
 const Tracks: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
-
-  const tracksRequest = useCallback(() => fetchTracks(timerange), [timerange]);
-  const {
-    data: tracks,
-    isLoading,
-    hasError,
-  } = useGlobalDataHook<SpotifyTrack[]>(
-    tracksRequest,
-    `Loading your top tracks ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`,
-  );
+  const [tracks, setTracks] = useState<SpotifyTrack[] | null>(null);
+  
+  const { isLoading, error, getTracks } = useSpotify();
   const { notification, showNotification } = useNotification();
 
-  if (hasError) return <DefaultErrorMessage />;
+  useEffect(() => {
+    const loadData = async () => {
+      const result = await getTracks(timerange);
+      if (result) setTracks(result);
+    };
+
+    loadData();
+  }, [timerange, getTracks]);
+
+  if (error) return <DefaultErrorMessage />;
   if (!tracks || tracks.length === 0 || isLoading) return null; // Global loader will handle loading state
 
   const mapTrackUris = (): string[] => {

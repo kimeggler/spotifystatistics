@@ -1,10 +1,9 @@
 import { Card, CardBody, Switch } from '@heroui/react';
 import { motion } from 'framer-motion';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { calcTopGenres, calcTopGenresIncludingArtists } from '../../../helper/genrehelper';
-import useGlobalDataHook from '../../../hooks/useGlobalDataHook';
-import { fetchArtists } from '../../../services/spotifyservice';
+import { useSpotify } from '../../../hooks/useSpotify';
 import { SpotifyArtist } from '../../../types/spotify';
 import { DefaultErrorMessage, TimeRangeSelector } from '../../common';
 import Genre from '../../common/genre/Genre';
@@ -18,17 +17,19 @@ interface GenreData {
 const Genres: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
   const [includeArtistRating, setIncludeArtistRating] = useState<boolean>(false);
-
-  const artistsRequest = useCallback(() => fetchArtists(timerange), [timerange]);
-  const {
-    data: artists,
-    isLoading,
-    hasError,
-  } = useGlobalDataHook<SpotifyArtist[]>(
-    artistsRequest,
-    `Analyzing your music genres ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`,
-  );
+  const [artists, setArtists] = useState<SpotifyArtist[] | null>(null);
   const [topGenres, setTopGenres] = useState<GenreData[]>([]);
+  
+  const { isLoading, error, getArtists } = useSpotify();
+
+  useEffect(() => {
+    const loadData = async () => {
+      const result = await getArtists(timerange);
+      if (result) setArtists(result);
+    };
+
+    loadData();
+  }, [timerange, getArtists]);
 
   useEffect(() => {
     if (artists) {
@@ -39,7 +40,7 @@ const Genres: React.FC = () => {
     }
   }, [artists, includeArtistRating]);
 
-  if (hasError) return <DefaultErrorMessage />;
+  if (error) return <DefaultErrorMessage />;
   if (!artists || artists.length === 0 || isLoading) return null; // Global loader will handle loading state
 
   const containerVariants = {

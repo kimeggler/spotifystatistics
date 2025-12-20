@@ -1,44 +1,29 @@
 import { Card, CardBody } from '@heroui/react';
 import { motion } from 'framer-motion';
-import React, { useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import useGlobalDataHook from '../../../hooks/useGlobalDataHook';
-import { fetchArtists } from '../../../services/spotifyservice';
+import { useSpotify } from '../../../hooks/useSpotify';
 import { SpotifyArtist } from '../../../types/spotify';
 import { Artist, DefaultErrorMessage, TimeRangeSelector } from '../../common';
 import { RangeOption } from '../../common/top-track/range-options';
 
 const Artists: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
+  const [artists, setArtists] = useState<SpotifyArtist[] | null>(null);
+  
+  const { isLoading, error, getArtists } = useSpotify();
 
-  const artistsRequest = useCallback(() => fetchArtists(timerange), [timerange]);
-  const {
-    data: artists,
-    isLoading,
-    hasError,
-  } = useGlobalDataHook<SpotifyArtist[]>(
-    artistsRequest,
-    `Loading your top artists ${timerange === 'short_term' ? 'from the last month' : timerange === 'medium_term' ? 'from the last 6 months' : 'of all time'}...`,
-  );
+  useEffect(() => {
+    const loadData = async () => {
+      const result = await getArtists(timerange);
+      if (result) setArtists(result);
+    };
 
-  console.log(
-    `[Artists] Component state - isLoading: ${isLoading}, hasError: ${hasError}, artists:`,
-    artists,
-  );
+    loadData();
+  }, [timerange, getArtists]);
 
-  if (hasError) {
-    console.log(`[Artists] Returning error component`);
-    return <DefaultErrorMessage />;
-  }
-  if (!artists || artists.length === 0 || isLoading) {
-    console.log(
-      `[Artists] Returning null - isLoading: ${isLoading}, artists: ${!artists ? 'null' : artists.length}`,
-    );
-    return null; // Global loader will handle loading state
-  }
-
-  console.log(`[Artists] Rendering component with ${artists.length} artists`);
-
+  if (error) return <DefaultErrorMessage />;
+  if (!artists || artists.length === 0 || isLoading) return null; // Global loader will handle loading state
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

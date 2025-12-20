@@ -18,12 +18,10 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
   const [loadingMessage, setLoadingMessageState] = useState('Loading...');
 
   const setGlobalLoading = useCallback((loading: boolean) => {
-    console.log(`[LoadingContext] Setting global loading to: ${loading}`);
     setIsGlobalLoadingState(loading);
   }, []);
 
   const setLoadingMessage = useCallback((message: string) => {
-    console.log(`[LoadingContext] Setting loading message to: ${message}`);
     setLoadingMessageState(message);
   }, []);
 

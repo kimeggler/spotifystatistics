@@ -4,12 +4,35 @@ class AuthService {
   private userManager: UserManager;
 
   constructor() {
+    // Determine redirect URI based on environment
+    // For local development, MUST use 127.0.0.1 (Spotify doesn't allow localhost)
+    const getRedirectUri = (): string => {
+      // Check if we have an explicit redirect URI in env
+      if (import.meta.env.VITE_REDIRECT_URI) {
+        return import.meta.env.VITE_REDIRECT_URI;
+      }
+
+      // For local development (http:// or port 3000), use 127.0.0.1
+      const isLocal =
+        window.location.protocol === 'http:' ||
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.port === '3000';
+
+      if (isLocal) {
+        return 'http://127.0.0.1:3000/callback';
+      }
+
+      // For production, use the current origin
+      return `${window.location.origin}/callback`;
+    };
+
     const settings: UserManagerSettings = {
       authority: 'https://accounts.spotify.com',
       client_id: import.meta.env.VITE_CLIENT_ID,
-      redirect_uri: `${window.location.origin}/callback`,
+      redirect_uri: getRedirectUri(),
       scope:
-        'user-read-private user-top-read user-read-recently-played user-read-currently-playing playlist-modify-public playlist-modify-private playlist-read-collaborative user-read-play-history',
+        'user-read-private user-read-email user-top-read user-read-recently-played user-read-currently-playing playlist-modify-public playlist-modify-private playlist-read-collaborative user-read-play-history',
       response_type: 'code',
       automaticSilentRenew: false,
       includeIdTokenInSilentRenew: false,
@@ -30,21 +53,8 @@ class AuthService {
     this.userManager = new UserManager(settings);
 
     // Set up event handlers
-    this.userManager.events.addUserLoaded((user: User) => {
-      console.log('User loaded:', user);
-    });
-
-    this.userManager.events.addUserUnloaded(() => {
-      console.log('User unloaded');
-    });
-
     this.userManager.events.addAccessTokenExpired(() => {
-      console.log('Access token expired');
       this.signOut();
-    });
-
-    this.userManager.events.addUserSignedOut(() => {
-      console.log('User signed out');
     });
   }
 

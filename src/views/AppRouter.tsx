@@ -2,6 +2,9 @@ import { motion } from 'framer-motion';
 import React, { createContext, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import { useAuth } from '../contexts/AuthContext';
+import { getData } from '../services/fetchservice';
+import { SpotifyUser } from '../types/spotify';
 import { Footer, Header } from './common';
 import Landingpage from './landingpage/Landingpage';
 import Analyze from './spotify/analyze/Analyze';
@@ -11,10 +14,6 @@ import Overview from './spotify/overview/Overview';
 import Suggestions from './spotify/suggestions/Suggestions';
 import Tracks from './spotify/tracks/Tracks';
 import User from './user/User';
-
-import { validateToken } from '../helper/authenticationhelper';
-import { getData } from '../services/fetchservice';
-import { SpotifyUser } from '../types/spotify';
 
 interface UserContextType {
   profile: SpotifyUser;
@@ -28,28 +27,26 @@ export const UserContext = createContext<UserContextType | null>(null);
 
 const AppRouter: React.FC<AppRouterProps> = ({ isLoading = false }) => {
   const [profile, setProfile] = useState<SpotifyUser | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
 
   useEffect(() => {
-    const checkAuthAndFetchUser = async (): Promise<void> => {
+    const fetchUser = async (): Promise<void> => {
       try {
-        const authenticated = await validateToken();
-        setIsAuthenticated(authenticated);
-
-        if (authenticated) {
+        if (isAuthenticated) {
           const userData = await getData('me');
           setProfile(userData);
         }
       } catch (error) {
-        console.error('Error during authentication check or fetching user data:', error);
-        setIsAuthenticated(false);
+        console.error('Error fetching user data:', error);
       }
     };
 
-    checkAuthAndFetchUser();
-  }, []);
+    if (!authLoading) {
+      fetchUser();
+    }
+  }, [isAuthenticated, authLoading]);
 
-  if (isLoading || isAuthenticated === null || (isAuthenticated && !profile)) {
+  if (isLoading || authLoading || (isAuthenticated && !profile)) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-statfy-dark-950 via-statfy-dark-900 to-statfy-purple-900 flex items-center justify-center">
         <motion.div
