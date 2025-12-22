@@ -39,7 +39,7 @@
   }
 
   body {
-    @apply m-0 font-sans antialiased bg-statfy-dark-950 min-h-screen overflow-x-hidden text-white;
+    @apply m-0 font-sans antialiased min-h-screen overflow-x-hidden text-white;
   }
 
   h1 {

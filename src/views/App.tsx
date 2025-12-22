@@ -128,7 +128,11 @@ const AppContent: React.FC = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-slate-900 to-purple-900">
+      {/* Fixed background layer */}
+      <div className="fixed inset-0 bg-gradient-to-br from-purple-900 via-slate-900 to-purple-900 -z-10" />
+
+      {/* Content layer */}
+      <div className="relative min-h-screen">
         <UserContext.Provider value={{ profile, setProfile }}>
           <Header />
           <main className="relative">
