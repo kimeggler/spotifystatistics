@@ -54,7 +54,7 @@ const Landingpage: React.FC = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="min-h-screen px-4 md:px-6 lg:px-8 py-12 w-full bg-statfy-dark-950"
+      className="min-h-screen px-4 md:px-6 lg:px-8 py-12 w-full"
     >
       {/* Content */}
       <div className="flex items-center justify-center min-h-screen">
@@ -68,7 +68,7 @@ const Landingpage: React.FC = () => {
 
           {/* Tagline */}
           <motion.div variants={itemVariants} className="mb-6">
-            <p className="text-statfy-purple-300 text-sm font-semibold tracking-widest uppercase text-center">
+            <p className="text-white/60 text-sm font-semibold tracking-widest uppercase text-center">
               STATISTICS & FACTS
             </p>
           </motion.div>
@@ -85,8 +85,8 @@ const Landingpage: React.FC = () => {
 
           {/* Description */}
           <motion.div variants={itemVariants} className="mb-12">
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl max-w-2xl mx-auto p-8">
-              <p className="text-white/80 text-lg leading-relaxed text-center">
+            <div className="max-w-2xl mx-auto">
+              <p className="text-white/70 text-lg leading-relaxed text-center">
                 Discover your musical journey with detailed insights into your most listened artists
                 and tracks. Create personalized playlists and explore your unique music taste with
                 beautiful visualizations.
@@ -100,7 +100,7 @@ const Landingpage: React.FC = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
             <button
-              className="bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 text-white font-bold text-lg px-10 py-4 rounded-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-1 flex items-center gap-3"
+              className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-medium text-lg px-10 py-4 rounded-xl transition-all duration-300 flex items-center gap-3 border border-white/10"
               onClick={async () => {
                 try {
                   await signIn();
@@ -117,14 +117,14 @@ const Landingpage: React.FC = () => {
 
             <div className="flex gap-3">
               <button
-                className="border border-white/30 text-white/90 hover:bg-white/10 hover:text-white transition-all duration-300 rounded-xl px-6 py-3 hover:scale-105"
+                className="border border-white/20 text-white/80 hover:bg-white/10 hover:text-white transition-all duration-300 rounded-xl px-6 py-3"
                 onClick={() => navigate('/roadmap')}
               >
                 Development
               </button>
 
               <button
-                className="border border-white/30 text-white/90 hover:bg-white/10 hover:text-white transition-all duration-300 rounded-xl px-6 py-3 hover:scale-105"
+                className="border border-white/20 text-white/80 hover:bg-white/10 hover:text-white transition-all duration-300 rounded-xl px-6 py-3"
                 onClick={() => navigate('/about')}
               >
                 Learn more
@@ -141,7 +141,7 @@ const Landingpage: React.FC = () => {
               {
                 icon: (
                   <svg
-                    className="w-8 h-8 text-statfy-purple-400"
+                    className="w-8 h-8 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -160,7 +160,7 @@ const Landingpage: React.FC = () => {
               {
                 icon: (
                   <svg
-                    className="w-8 h-8 text-statfy-purple-400"
+                    className="w-8 h-8 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -185,7 +185,7 @@ const Landingpage: React.FC = () => {
               {
                 icon: (
                   <svg
-                    className="w-8 h-8 text-statfy-purple-400"
+                    className="w-8 h-8 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -204,10 +204,10 @@ const Landingpage: React.FC = () => {
             ].map((feature, index) => (
               <div
                 key={index}
-                className="bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 rounded-2xl hover:scale-105 hover:-translate-y-2"
+                className="bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 rounded-2xl"
               >
                 <div className="text-center p-8">
-                  <div className="flex justify-center mb-4 p-3 bg-statfy-purple-500/10 rounded-xl w-fit mx-auto">
+                  <div className="flex justify-center mb-4">
                     {feature.icon}
                   </div>
                   <h3 className="text-white font-bold text-xl mb-3">{feature.title}</h3>

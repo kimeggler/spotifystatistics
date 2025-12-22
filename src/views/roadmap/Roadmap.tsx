@@ -1,8 +1,6 @@
-import { Button, Card, CardBody, Chip } from '@heroui/react';
 import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { stars } from '../../assets';
 import { useAuth } from '../../contexts/AuthContext';
 
 interface RoadmapItem {
@@ -25,8 +23,16 @@ const Roadmap: React.FC = () => {
 
   const roadmapItems: RoadmapItem[] = [
     {
+      title: 'Technological Rework',
+      date: 'November 2025',
+      status: 'completed',
+      description:
+        'Complete migration from JavaScript to TypeScript with modern build tools (Vite), improved code quality, type safety, and developer experience.',
+      icon: '⚙️',
+    },
+    {
       title: 'Modern Redesign Complete',
-      date: 'OCTOBER 2025',
+      date: 'December 2025',
       status: 'completed',
       description:
         'Statfy has received a complete modern overhaul with Tailwind CSS, HeroUI components, and smooth animations for a better user experience.',
@@ -58,29 +64,29 @@ const Roadmap: React.FC = () => {
     },
   ];
 
-  const getStatusColor = (status: RoadmapItem['status']): 'success' | 'primary' | 'default' => {
+  const getStatusLabel = (status: RoadmapItem['status']): string => {
     switch (status) {
       case 'completed':
-        return 'success';
+        return 'Completed';
       case 'active':
-        return 'primary';
+        return 'In Progress';
       case 'planned':
-        return 'default';
+        return 'Planned';
       default:
-        return 'default';
+        return 'Unknown';
     }
   };
 
-  const getStatusIcon = (status: RoadmapItem['status']): string => {
+  const getStatusColor = (status: RoadmapItem['status']): string => {
     switch (status) {
       case 'completed':
-        return '✅';
+        return 'bg-green-500/20 text-green-400 border-green-500/30';
       case 'active':
-        return '🚀';
+        return 'bg-blue-500/20 text-blue-400 border-blue-500/30';
       case 'planned':
-        return '⏳';
+        return 'bg-white/10 text-white/60 border-white/20';
       default:
-        return '⏳';
+        return 'bg-white/10 text-white/60 border-white/20';
     }
   };
 
@@ -89,8 +95,8 @@ const Roadmap: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2,
+        delayChildren: 0.2,
+        staggerChildren: 0.1,
       },
     },
   };
@@ -102,140 +108,83 @@ const Roadmap: React.FC = () => {
       opacity: 1,
       transition: {
         type: 'spring' as const,
-        stiffness: 100,
+        stiffness: 80,
       },
     },
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-statfy-dark-950 via-statfy-dark-900 to-statfy-purple-900">
-      {/* Animated Background */}
-      <div
-        className="absolute inset-0 opacity-20 blur-sm"
-        style={{
-          backgroundImage: `url(${stars})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-statfy-dark-950/90 via-transparent to-statfy-purple-900/60" />
-
-      {/* Content */}
+    <div className="min-h-screen px-4 py-12 md:px-8 lg:px-12">
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 px-6 py-12"
+        className="max-w-7xl mx-auto"
       >
-        <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <motion.div variants={itemVariants}>
-              <Button
-                variant="light"
-                size="lg"
-                className="text-4xl font-bold bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text text-transparent mb-8"
-                onClick={() => navigate('/')}
+        {/* Header */}
+        <motion.div variants={itemVariants} className="text-center mb-8 flex flex-col items-center">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-6 max-w-4xl">
+            Development{' '}
+            <span className="text-transparent bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text">
+              Roadmap
+            </span>
+          </h1>
+          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+            Discover our exciting plans for the future of Statfy and see how we&apos;re continuously
+            improving your music analytics experience.
+          </p>
+        </motion.div>
+
+        {/* Roadmap Items */}
+        <div className="relative max-w-4xl mx-auto">
+          {/* Vertical timeline line */}
+          <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-400 via-pink-400 to-purple-400 opacity-30 hidden md:block" />
+
+          <div className="space-y-8">
+            {roadmapItems.map((item, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="relative flex items-start gap-6"
               >
-                STATFY
-              </Button>
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6">
-                <span className="text-white">DEVELOPMENT </span>
-                <span className="text-transparent bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text">
-                  ROADMAP
-                </span>
-              </h1>
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <Card className="bg-white/5 backdrop-blur-md border-white/10 max-w-2xl mx-auto">
-                <CardBody className="p-6">
-                  <p className="text-white/80 text-lg">
-                    Discover our exciting plans for the future of Statfy and see how we&apos;re
-                    continuously improving your music analytics experience.
-                  </p>
-                </CardBody>
-              </Card>
-            </motion.div>
-          </div>
-
-          {/* Roadmap Timeline */}
-          <motion.div variants={itemVariants} className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-statfy-purple-500 via-statfy-purple-400 to-statfy-purple-300 transform md:-translate-x-1/2"></div>
-
-            <div className="space-y-12">
-              {roadmapItems.map((item, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className={`relative flex items-center ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  } flex-col md:gap-8`}
-                >
-                  {/* Timeline Node */}
-                  <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 rounded-full transform md:-translate-x-1/2 z-10 shadow-lg shadow-statfy-purple-500/50"></div>
-
-                  {/* Content Card */}
-                  <div
-                    className={`w-full md:w-5/12 ml-12 md:ml-0 ${
-                      index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'
-                    }`}
-                  >
-                    <Card className="bg-white/5 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all duration-300">
-                      <CardBody className="p-6">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex items-center gap-3">
-                            <span className="text-2xl">{item.icon}</span>
-                            <div>
-                              <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                              <p className="text-statfy-purple-300 font-semibold text-sm">
-                                {item.date}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <span>{getStatusIcon(item.status)}</span>
-                            <Chip
-                              color={getStatusColor(item.status)}
-                              size="sm"
-                              className="capitalize font-semibold"
-                            >
-                              {item.status}
-                            </Chip>
-                          </div>
-                        </div>
-                        <p className="text-white/70 leading-relaxed">{item.description}</p>
-                      </CardBody>
-                    </Card>
+                {/* Timeline node */}
+                <div className="relative z-10 flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-white/10 border-2 border-white/20 flex items-center justify-center text-2xl backdrop-blur-sm">
+                    {item.icon}
                   </div>
+                </div>
 
-                  {/* Spacer for alternating layout */}
-                  <div className="hidden md:block w-5/12"></div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Action Buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-16"
-          >
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-statfy-purple-500 to-statfy-purple-400 text-white font-bold px-8 py-6"
-              onClick={() => navigate('/')}
-            >
-              Back to Home
-            </Button>
-          </motion.div>
+                {/* Content card */}
+                <div className="flex-1 bg-white/10 border border-white/20 rounded-lg p-6 hover:bg-white/[0.15] transition-all duration-300">
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-start justify-between gap-4 mb-2">
+                        <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-semibold border whitespace-nowrap ${getStatusColor(item.status)}`}
+                        >
+                          {getStatusLabel(item.status)}
+                        </span>
+                      </div>
+                      <p className="text-white/40 text-sm font-medium mb-3">{item.date}</p>
+                      <p className="text-white/70 leading-relaxed">{item.description}</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
+
+        {/* Back button */}
+        <motion.div variants={itemVariants} className="flex justify-center mt-12">
+          <button
+            onClick={() => navigate('/')}
+            className="px-8 py-3 bg-white/10 border border-white/20 text-white rounded-lg font-semibold hover:bg-white/20 transition-all duration-300"
+          >
+            Back to Home
+          </button>
+        </motion.div>
       </motion.div>
     </div>
   );

@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 // Components
 import About from './about/About';
 import SpotifyCallback from './auth/SpotifyCallback';
-import { Footer, Header } from './common';
+import { Header } from './common';
 import Landingpage from './landingpage/Landingpage';
 import Roadmap from './roadmap/Roadmap';
 import Analyze from './spotify/analyze/Analyze';
@@ -17,9 +17,8 @@ import Tracks from './spotify/tracks/Tracks';
 import User from './user/User';
 
 // Context and Loading
-import GlobalLoader from '../components/GlobalLoader';
 import { AuthProvider, useAuth } from '../contexts/AuthContext';
-import { LoadingProvider, useLoading } from '../contexts/LoadingContext';
+import { LoadingProvider } from '../contexts/LoadingContext';
 import { useSpotify } from '../hooks/useSpotify';
 import Redirect from './Redirect/Redirect';
 
@@ -68,24 +67,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const [profile, setProfile] = useState<UserProfile | null>(null);
   const { isAuthenticated, isLoading: authLoading } = useAuth();
-  const { getProfile } = useSpotify();
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        if (isAuthenticated) {
-          const userData = await getProfile();
-          if (userData) setProfile(userData);
-        }
-      } catch (error) {
-        console.error('Failed to fetch user data:', error);
-      }
-    };
-
-    fetchUser();
-  }, [isAuthenticated, getProfile]);
 
   if (authLoading) {
     return (
@@ -95,11 +77,15 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     );
   }
 
-  if (!isAuthenticated || !profile) {
-    return <Landingpage />;
+  if (!isAuthenticated) {
+    return <Navigate to="/" replace />;
   }
 
-  return <UserContext.Provider value={{ profile, setProfile }}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ profile: null, setProfile: () => {} }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 interface AnimatedRouteProps {
@@ -120,7 +106,6 @@ const AnimatedRoute: React.FC<AnimatedRouteProps> = ({ children }) => (
 
 const AppContent: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const { isGlobalLoading, loadingMessage } = useLoading();
   const { isAuthenticated } = useAuth();
   const { getProfile } = useSpotify();
 
@@ -143,7 +128,6 @@ const AppContent: React.FC = () => {
 
   return (
     <>
-      <GlobalLoader isLoading={isGlobalLoading} message={loadingMessage} />
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-slate-900 to-purple-900">
         <UserContext.Provider value={{ profile, setProfile }}>
           <Header />
@@ -255,7 +239,8 @@ const AppContent: React.FC = () => {
                 }
               />
               <Route
-                path="/*"
+                path="*"
+                index
                 element={
                   <AnimatedRoute>
                     <Redirect />
@@ -264,7 +249,6 @@ const AppContent: React.FC = () => {
               />
             </Routes>
           </main>
-          {!isGlobalLoading && <Footer />}
         </UserContext.Provider>
       </div>
     </>
