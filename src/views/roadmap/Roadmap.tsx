@@ -24,7 +24,7 @@ const Roadmap: React.FC = () => {
   const roadmapItems: RoadmapItem[] = [
     {
       title: 'Technological Rework',
-      date: 'November 2025',
+      date: 'December 2025',
       status: 'completed',
       description:
         'Complete migration from JavaScript to TypeScript with modern build tools (Vite), improved code quality, type safety, and developer experience.',
@@ -32,7 +32,7 @@ const Roadmap: React.FC = () => {
     },
     {
       title: 'Modern Redesign Complete',
-      date: 'December 2025',
+      date: 'January 2025',
       status: 'completed',
       description:
         'Statfy has received a complete modern overhaul with Tailwind CSS, HeroUI components, and smooth animations for a better user experience.',
@@ -40,27 +40,19 @@ const Roadmap: React.FC = () => {
     },
     {
       title: 'Enhanced Analytics',
-      date: 'Q4 2025',
+      date: 'Q1 2026',
       status: 'active',
       description:
         'Advanced listening statistics with beautiful visualizations, genre analysis, and personalized music insights.',
       icon: '📊',
     },
     {
-      title: 'Social Features',
-      date: 'Q1 2026',
-      status: 'planned',
-      description:
-        'Share your music statistics with friends, compare listening habits, and discover new music through social connections.',
-      icon: '👥',
-    },
-    {
-      title: 'Mobile App',
+      title: 'Further improvements',
       date: 'Q2 2026',
       status: 'planned',
       description:
-        'Native mobile applications for iOS and Android with all the features of the web app and more.',
-      icon: '📱',
+        'General improvements and new features to enhance user experience and functionality.',
+      icon: '👥',
     },
   ];
 

@@ -54,16 +54,73 @@ const Landingpage: React.FC = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="min-h-screen px-4 md:px-6 lg:px-8 py-12 w-full"
+      className="h-screen px-4 md:px-6 lg:px-8 py-12 w-full relative overflow-hidden"
     >
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Gradient Orbs */}
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            x: [0, 100, 0],
+            y: [0, 50, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute top-0 left-1/4 w-96 h-96 bg-statfy-purple-500/20 rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, -100, 0],
+            y: [0, -50, 0],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute bottom-0 right-1/4 w-96 h-96 bg-statfy-purple-300/20 rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            x: [0, 50, 0],
+            y: [0, -30, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute top-1/2 left-1/2 w-72 h-72 bg-spotify-green/10 rounded-full blur-3xl"
+        />
+      </div>
+
       {/* Content */}
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center h-full relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Logo */}
           <motion.div variants={itemVariants} className="mb-8">
-            <h3 className="text-6xl font-bold bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text text-transparent text-center">
+            <motion.h3
+              animate={{
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+              className="text-6xl font-bold bg-gradient-to-r from-statfy-purple-300 via-statfy-purple-500 to-statfy-purple-300 bg-clip-text text-transparent text-center bg-[length:200%_auto]"
+              style={{
+                textShadow: '0 0 30px rgba(211, 0, 255, 0.3)',
+              }}
+            >
               STATFY
-            </h3>
+            </motion.h3>
           </motion.div>
 
           {/* Tagline */}
@@ -76,10 +133,36 @@ const Landingpage: React.FC = () => {
           {/* Main Title */}
           <motion.div variants={titleVariants} className="mb-8 flex justify-center">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight text-center">
-              <span className="text-white">SPOTIFY </span>
-              <span className="text-transparent bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text">
+              <motion.span
+                animate={{
+                  textShadow: [
+                    '0 0 20px rgba(255, 255, 255, 0.3)',
+                    '0 0 30px rgba(255, 255, 255, 0.5)',
+                    '0 0 20px rgba(255, 255, 255, 0.3)',
+                  ],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+                className="text-white"
+              >
+                SPOTIFY{' '}
+              </motion.span>
+              <motion.span
+                animate={{
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+                className="text-transparent bg-gradient-to-r from-statfy-purple-300 via-statfy-purple-500 to-statfy-purple-300 bg-clip-text bg-[length:200%_auto]"
+              >
                 STATISTICS
-              </span>
+              </motion.span>
             </h1>
           </motion.div>
 
@@ -99,8 +182,10 @@ const Landingpage: React.FC = () => {
             variants={itemVariants}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
-            <button
-              className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-medium text-lg px-10 py-4 rounded-xl transition-all duration-300 flex items-center gap-3 border border-white/10"
+            <motion.button
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+              whileTap={{ scale: 0.95 }}
+              className="border border-white/20 text-white/80 hover:text-white font-medium text-lg px-10 py-4 rounded-xl transition-all duration-300 flex items-center gap-3 backdrop-blur-sm"
               onClick={async () => {
                 try {
                   await signIn();
@@ -109,26 +194,27 @@ const Landingpage: React.FC = () => {
                 }
               }}
             >
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.062 14.615c-.156.375-.5.625-.906.625-.125 0-.25-.031-.375-.094-1.281-.781-2.906-1.156-4.781-1.156-1.406 0-2.719.25-3.906.75-.469.188-.969-.094-1.156-.563s.094-.969.563-1.156c1.406-.594 2.938-.906 4.5-.906 2.156 0 4.094.469 5.656 1.375.437.25.594.812.406 1.125zm1.281-2.875c-.188.438-.625.719-1.094.719-.156 0-.313-.031-.469-.125-1.531-.906-3.656-1.375-6.281-1.375-1.781 0-3.406.313-4.781.906-.563.25-1.219-.031-1.469-.594s.031-1.219.594-1.469c1.656-.719 3.625-1.094 5.656-1.094 3.031 0 5.5.531 7.313 1.594.531.281.75.969.531 1.438zm1.125-3.125c-.219.531-.75.875-1.313.875-.188 0-.375-.031-.563-.125-1.781-1.063-4.5-1.625-7.781-1.625-2.125 0-4.125.375-5.906 1.094-.688.281-1.469-.031-1.75-.719s.031-1.469.719-1.75c2.063-.844 4.375-1.281 6.938-1.281 3.781 0 7 .656 9.25 1.906.594.313.844 1.063.406 1.625z" />
-              </svg>
-              Connect with Spotify
-            </button>
+              <span>Connect with Spotify</span>
+            </motion.button>
 
             <div className="flex gap-3">
-              <button
-                className="border border-white/20 text-white/80 hover:bg-white/10 hover:text-white transition-all duration-300 rounded-xl px-6 py-3"
+              <motion.button
+                whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+                whileTap={{ scale: 0.95 }}
+                className="border border-white/20 text-white/80 hover:text-white transition-all duration-300 rounded-xl px-6 py-3 backdrop-blur-sm"
                 onClick={() => navigate('/roadmap')}
               >
                 Development
-              </button>
+              </motion.button>
 
-              <button
-                className="border border-white/20 text-white/80 hover:bg-white/10 hover:text-white transition-all duration-300 rounded-xl px-6 py-3"
+              <motion.button
+                whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+                whileTap={{ scale: 0.95 }}
+                className="border border-white/20 text-white/80 hover:text-white transition-all duration-300 rounded-xl px-6 py-3 backdrop-blur-sm"
                 onClick={() => navigate('/about')}
               >
                 Learn more
-              </button>
+              </motion.button>
             </div>
           </motion.div>
 
@@ -202,18 +288,37 @@ const Landingpage: React.FC = () => {
                 desc: 'Create and analyze custom playlists based on your unique taste',
               },
             ].map((feature, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 rounded-2xl"
+                whileHover={{
+                  scale: 1.05,
+                  y: -10,
+                  boxShadow: '0 20px 40px rgba(211, 0, 255, 0.2)',
+                }}
+                transition={{ type: 'spring', stiffness: 300 }}
+                className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/10 hover:border-white/20 transition-all duration-300 rounded-2xl group relative overflow-hidden"
               >
-                <div className="text-center p-8">
-                  <div className="flex justify-center mb-4">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-white font-bold text-xl mb-3">{feature.title}</h3>
-                  <p className="text-white/70 text-base leading-relaxed">{feature.desc}</p>
+                {/* Animated gradient overlay on hover */}
+                <motion.div className="absolute inset-0 bg-gradient-to-br from-statfy-purple-500/0 to-statfy-purple-300/0 group-hover:from-statfy-purple-500/10 group-hover:to-statfy-purple-300/10 transition-all duration-500" />
+
+                <div className="text-center p-8 relative z-10">
+                  <motion.div
+                    className="flex justify-center mb-4"
+                    whileHover={{ rotate: 360, scale: 1.2 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <div className="p-3 bg-gradient-to-br from-statfy-purple-500/20 to-statfy-purple-300/20 rounded-xl group-hover:from-statfy-purple-500/30 group-hover:to-statfy-purple-300/30 transition-all duration-300">
+                      {feature.icon}
+                    </div>
+                  </motion.div>
+                  <h3 className="text-white font-bold text-xl mb-3 group-hover:text-statfy-purple-300 transition-colors duration-300">
+                    {feature.title}
+                  </h3>
+                  <p className="text-white/70 text-base leading-relaxed group-hover:text-white/90 transition-colors duration-300">
+                    {feature.desc}
+                  </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>
