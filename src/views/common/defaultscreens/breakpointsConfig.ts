@@ -35,6 +35,14 @@ const breakpointsConfig: BreakpointsConfig = {
       breakpoint: '(min-width: 700px)',
     },
     {
+      name: '768AndBelow',
+      breakpoint: '(max-width: 767px)',
+    },
+    {
+      name: '768AndAbove',
+      breakpoint: '(min-width: 768px)',
+    },
+    {
       name: '800AndBelow',
       breakpoint: '(max-width: 799px)',
     },

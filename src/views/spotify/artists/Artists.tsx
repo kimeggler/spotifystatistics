@@ -23,7 +23,8 @@ const Artists: React.FC = () => {
   }, [timerange, getArtists]);
 
   if (error) return <DefaultErrorMessage />;
-  if (!artists || artists.length === 0 || isLoading) return null; // Global loader will handle loading state
+  if (!artists || artists.length === 0) return null;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -77,16 +78,16 @@ const Artists: React.FC = () => {
       {/* Content Container - Full width with max-width constraint */}
       <div className="w-full max-w-7xl mx-auto space-y-12">
         {/* Artists Grid */}
-        <motion.div variants={itemVariants} className="w-full">
+        <div className="w-full">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
             {artists.map((artist: SpotifyArtist, index: number) => (
               <Artist key={artist.id} artist={artist} index={index} />
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Stats Footer */}
-        <motion.div variants={itemVariants} className="flex justify-center">
+        <div className="flex justify-center">
           <Card className="bg-gradient-to-r from-white/5 to-white/10 backdrop-blur-md border-white/10 rounded-2xl shadow-lg">
             <CardBody className="p-6">
               <div className="flex items-center justify-center gap-3">
@@ -112,7 +113,7 @@ const Artists: React.FC = () => {
               </div>
             </CardBody>
           </Card>
-        </motion.div>
+        </div>
       </div>
     </motion.div>
   );

@@ -78,7 +78,7 @@ const UserBadge: React.FC<UserBadgeProps> = () => {
 
   return (
     <Fragment>
-      <ShowAt breakpoint="1000AndBelow">
+      <ShowAt breakpoint="768AndBelow">
         {!menuActive && (
           <motion.div className="cursor-pointer" whileTap={{ scale: 0.95 }} onClick={toggleMenu}>
             <img
@@ -152,7 +152,7 @@ const UserBadge: React.FC<UserBadgeProps> = () => {
         </AnimatePresence>
       </ShowAt>
 
-      <ShowAt breakpoint="1000AndAbove">
+      <ShowAt breakpoint="768AndAbove">
         <motion.div className="relative" ref={badgeRef}>
           <motion.div
             className="w-12 h-12 rounded-full overflow-hidden border-2 border-statfy-purple-400 shadow-lg cursor-pointer"

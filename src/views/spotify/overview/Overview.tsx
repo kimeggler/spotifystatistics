@@ -25,7 +25,7 @@ const Overview: React.FC = () => {
   }, [timerange, getTopArtist, getTopTrack]);
 
   if (error) return <DefaultErrorMessage />;
-  if (!topArtist || !topTrack || isLoading) return null; // Global loader will handle loading state
+  if (!topArtist || !topTrack) return null;
 
   const background = (imgUrl: string): React.CSSProperties => {
     return {
@@ -86,20 +86,20 @@ const Overview: React.FC = () => {
       {/* Content Container - Full width with max-width constraint */}
       <div className="w-full max-w-7xl mx-auto space-y-12">
         {/* Top Artist */}
-        <motion.div variants={itemVariants} className="w-full">
+        <div className="w-full">
           <TopArtist
             background={background(topArtist.images[0]?.url || '')}
             topArtist={topArtist}
           />
-        </motion.div>
+        </div>
 
         {/* Top Track */}
-        <motion.div variants={itemVariants} className="w-full">
+        <div className="w-full">
           <TopTrack
             background={background(topTrack.album.images[0]?.url || '')}
             topTrack={topTrack}
           />
-        </motion.div>
+        </div>
       </div>
     </motion.div>
   );
