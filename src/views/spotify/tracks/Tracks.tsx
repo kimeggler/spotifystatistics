@@ -204,7 +204,7 @@ const Tracks: React.FC = () => {
         </h1>
 
         <button
-          className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-medium px-6 py-3 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="cursor-pointer bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-medium px-6 py-3 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={createPlaylist}
           disabled={notification.status === 'loading'}
         >

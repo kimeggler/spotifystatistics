@@ -185,7 +185,7 @@ const Landingpage: React.FC = () => {
             <motion.button
               whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
               whileTap={{ scale: 0.95 }}
-              className="border border-white/20 text-white/80 hover:text-white font-medium text-lg px-10 py-4 rounded-xl transition-all duration-300 flex items-center gap-3 backdrop-blur-sm"
+              className="cursor-pointer border border-white/20 text-white/80 hover:text-white font-medium text-lg px-10 py-4 rounded-xl transition-all duration-300 flex items-center gap-3 backdrop-blur-sm"
               onClick={async () => {
                 try {
                   await signIn();
@@ -201,7 +201,7 @@ const Landingpage: React.FC = () => {
               <motion.button
                 whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
                 whileTap={{ scale: 0.95 }}
-                className="border border-white/20 text-white/80 hover:text-white transition-all duration-300 rounded-xl px-6 py-3 backdrop-blur-sm"
+                className="cursor-pointer border border-white/20 text-white/80 hover:text-white transition-all duration-300 rounded-xl px-6 py-3 backdrop-blur-sm"
                 onClick={() => navigate('/roadmap')}
               >
                 Development
@@ -210,7 +210,7 @@ const Landingpage: React.FC = () => {
               <motion.button
                 whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
                 whileTap={{ scale: 0.95 }}
-                className="border border-white/20 text-white/80 hover:text-white transition-all duration-300 rounded-xl px-6 py-3 backdrop-blur-sm"
+                className="cursor-pointer border border-white/20 text-white/80 hover:text-white transition-all duration-300 rounded-xl px-6 py-3 backdrop-blur-sm"
                 onClick={() => navigate('/about')}
               >
                 Learn more

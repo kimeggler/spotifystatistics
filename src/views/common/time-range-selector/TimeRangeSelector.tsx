@@ -24,7 +24,7 @@ const TimeRangeSelector: React.FC<TimeRangeSelectorProps> = ({
             onClick={() => !isLoading && onTimerangeChange(option.value)}
             disabled={Boolean(isLoading)}
             className={cx(
-              'flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200',
+              'flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer',
               option.value === timerange
                 ? 'bg-white/10 text-white'
                 : 'text-white/60 hover:text-white hover:bg-white/5',

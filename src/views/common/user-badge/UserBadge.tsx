@@ -178,7 +178,7 @@ const UserBadge: React.FC<UserBadgeProps> = () => {
               >
                 <button
                   onClick={logout}
-                  className="flex items-center gap-2 px-4 py-2 bg-slate-900/95 hover:bg-red-500/20 border border-white/10 hover:border-red-500/50 rounded-lg backdrop-blur-sm text-white/80 hover:text-red-400 transition-all duration-200 text-sm font-medium shadow-xl"
+                  className="cursor-pointer flex items-center gap-2 px-4 py-2 bg-slate-900/95 hover:bg-red-500/20 border border-white/10 hover:border-red-500/50 rounded-lg backdrop-blur-sm text-white/80 hover:text-red-400 transition-all duration-200 text-sm font-medium shadow-xl"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path

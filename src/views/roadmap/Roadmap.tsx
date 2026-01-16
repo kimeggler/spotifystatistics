@@ -172,7 +172,7 @@ const Roadmap: React.FC = () => {
         <motion.div variants={itemVariants} className="flex justify-center mt-12">
           <button
             onClick={() => navigate('/')}
-            className="px-8 py-3 bg-white/10 border border-white/20 text-white rounded-lg font-semibold hover:bg-white/20 transition-all duration-300"
+            className="cursor-pointer px-8 py-3 bg-white/10 border border-white/20 text-white rounded-lg font-semibold hover:bg-white/20 transition-all duration-300"
           >
             Back to Home
           </button>
