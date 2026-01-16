@@ -54,7 +54,7 @@ const Landingpage: React.FC = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="h-screen px-4 md:px-6 lg:px-8 py-12 w-full relative overflow-hidden"
+      className="min-h-screen px-4 md:px-6 lg:px-8 py-12 w-full relative overflow-hidden"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -302,15 +302,11 @@ const Landingpage: React.FC = () => {
                 <motion.div className="absolute inset-0 bg-gradient-to-br from-statfy-purple-500/0 to-statfy-purple-300/0 group-hover:from-statfy-purple-500/10 group-hover:to-statfy-purple-300/10 transition-all duration-500" />
 
                 <div className="text-center p-8 relative z-10">
-                  <motion.div
-                    className="flex justify-center mb-4"
-                    whileHover={{ rotate: 360, scale: 1.2 }}
-                    transition={{ duration: 0.6 }}
-                  >
+                  <div className="flex justify-center mb-4">
                     <div className="p-3 bg-gradient-to-br from-statfy-purple-500/20 to-statfy-purple-300/20 rounded-xl group-hover:from-statfy-purple-500/30 group-hover:to-statfy-purple-300/30 transition-all duration-300">
                       {feature.icon}
                     </div>
-                  </motion.div>
+                  </div>
                   <h3 className="text-white font-bold text-xl mb-3 group-hover:text-statfy-purple-300 transition-colors duration-300">
                     {feature.title}
                   </h3>
