@@ -54,7 +54,7 @@ const Landingpage: React.FC = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="h-screen px-4 md:px-6 lg:px-8 py-12 w-full relative overflow-hidden"
+      className="min-h-screen px-4 md:px-6 lg:px-8 py-12 w-full relative overflow-hidden"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
