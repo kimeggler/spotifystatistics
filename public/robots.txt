@@ -1,3 +1,12 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /user
+Disallow: /overview
+Disallow: /artists
+Disallow: /tracks
+Disallow: /suggestions
+Disallow: /analyze
+Disallow: /genres
+Disallow: /callback
+
+Sitemap: https://statfy.app/sitemaps.xml
