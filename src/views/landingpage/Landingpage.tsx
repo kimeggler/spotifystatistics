@@ -148,7 +148,7 @@ const Landingpage: React.FC = () => {
                 }}
                 className="text-white"
               >
-                SPOTIFY{' '}
+                FREE SPOTIFY{' '}
               </motion.span>
               <motion.span
                 animate={{
@@ -161,7 +161,7 @@ const Landingpage: React.FC = () => {
                 }}
                 className="text-transparent bg-gradient-to-r from-statfy-purple-300 via-statfy-purple-500 to-statfy-purple-300 bg-clip-text bg-[length:200%_auto]"
               >
-                STATISTICS
+                STATISTICS & ANALYTICS
               </motion.span>
             </h1>
           </motion.div>
@@ -169,10 +169,17 @@ const Landingpage: React.FC = () => {
           {/* Description */}
           <motion.div variants={itemVariants} className="mb-12">
             <div className="max-w-2xl mx-auto">
-              <p className="text-white/70 text-lg leading-relaxed text-center">
-                Discover your musical journey with detailed insights into your most listened artists
-                and tracks. Create personalized playlists and explore your unique music taste with
-                beautiful visualizations.
+              <h2 className="text-white/90 text-xl md:text-2xl font-semibold mb-4 text-center">
+                Unlock Your Spotify Listening History
+              </h2>
+              <p className="text-white/70 text-lg leading-relaxed text-center mb-4">
+                Get detailed analytics of your top artists, most played tracks, and favorite genres.
+                Track your music taste over time with powerful insights and beautiful data
+                visualizations — completely free.
+              </p>
+              <p className="text-white/60 text-base leading-relaxed text-center">
+                Create custom playlists, analyze your listening habits, and discover patterns in
+                your Spotify data like never before.
               </p>
             </div>
           </motion.div>
@@ -240,8 +247,8 @@ const Landingpage: React.FC = () => {
                     />
                   </svg>
                 ),
-                title: 'Smart Analytics',
-                desc: 'Deep insights into your listening patterns and musical preferences',
+                title: 'Top Artists & Tracks Stats',
+                desc: 'View your most listened artists and songs with detailed streaming analytics across different time periods',
               },
               {
                 icon: (
@@ -265,8 +272,8 @@ const Landingpage: React.FC = () => {
                     />
                   </svg>
                 ),
-                title: 'Beautiful Visuals',
-                desc: 'Stunning charts and graphs that bring your music data to life',
+                title: 'Genre Analysis & Insights',
+                desc: 'Discover your music taste through genre breakdowns and listening pattern visualizations',
               },
               {
                 icon: (
@@ -284,26 +291,23 @@ const Landingpage: React.FC = () => {
                     />
                   </svg>
                 ),
-                title: 'Playlist Magic',
-                desc: 'Create and analyze custom playlists based on your unique taste',
+                title: 'Personalized Playlists',
+                desc: 'Generate custom playlists based on your listening history and music preferences',
               },
             ].map((feature, index) => (
               <motion.div
                 key={index}
                 whileHover={{
-                  scale: 1.05,
-                  y: -10,
-                  boxShadow: '0 20px 40px rgba(211, 0, 255, 0.2)',
+                  scale: 1.03,
                 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-                className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/10 hover:border-white/20 transition-all duration-300 rounded-2xl group relative overflow-hidden"
+                className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/10 hover:border-statfy-purple-500/30 transition-all duration-300 rounded-2xl group relative overflow-hidden"
               >
                 {/* Animated gradient overlay on hover */}
-                <motion.div className="absolute inset-0 bg-gradient-to-br from-statfy-purple-500/0 to-statfy-purple-300/0 group-hover:from-statfy-purple-500/10 group-hover:to-statfy-purple-300/10 transition-all duration-500" />
+                <motion.div className="absolute inset-0 bg-gradient-to-br from-statfy-purple-500/0 to-statfy-purple-300/0 transition-all duration-500" />
 
                 <div className="text-center p-8 relative z-10">
                   <div className="flex justify-center mb-4">
-                    <div className="p-3 bg-gradient-to-br from-statfy-purple-500/20 to-statfy-purple-300/20 rounded-xl group-hover:from-statfy-purple-500/30 group-hover:to-statfy-purple-300/30 transition-all duration-300">
+                    <div className="p-3 bg-gradient-to-br from-statfy-purple-500/20 to-statfy-purple-300/20 rounded-xl transition-all duration-300">
                       {feature.icon}
                     </div>
                   </div>
@@ -316,6 +320,153 @@ const Landingpage: React.FC = () => {
                 </div>
               </motion.div>
             ))}
+          </motion.div>
+
+          {/* How It Works Section */}
+          <motion.div variants={itemVariants} className="mt-24 max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-center">
+              How to View Your Spotify Statistics
+            </h2>
+            <p className="text-white/60 text-center mb-12 max-w-2xl mx-auto">
+              Getting your Spotify analytics is simple and takes less than a minute
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  step: '1',
+                  title: 'Connect Your Account',
+                  desc: 'Securely link your Spotify account using official OAuth authentication. Your login credentials are never stored.',
+                },
+                {
+                  step: '2',
+                  title: 'Explore Your Stats',
+                  desc: 'View your top artists, favorite tracks, genre distribution, and listening habits across multiple time ranges.',
+                },
+                {
+                  step: '3',
+                  title: 'Create & Share',
+                  desc: 'Generate personalized playlists from your data and discover new insights about your music taste.',
+                },
+              ].map((step, index) => (
+                <motion.div key={index} whileHover={{ y: -5 }} className="relative">
+                  <div className="text-center">
+                    <div className="flex justify-center mb-6">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-statfy-purple-500 to-statfy-purple-300 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-statfy-purple-500/50">
+                        {step.step}
+                      </div>
+                    </div>
+                    <h3 className="text-white font-bold text-xl mb-3">{step.title}</h3>
+                    <p className="text-white/70 leading-relaxed">{step.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Why Choose Section */}
+          <motion.div variants={itemVariants} className="mt-24 max-w-5xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-center">
+              Why Choose STATFY for Spotify Analytics?
+            </h2>
+            <p className="text-white/60 text-center mb-12 max-w-2xl mx-auto">
+              The most comprehensive and user-friendly Spotify statistics tool available
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[
+                {
+                  title: '100% Free',
+                  desc: 'No subscriptions, no premium tiers, no hidden fees. All features are completely free for everyone.',
+                },
+                {
+                  title: 'Real-Time Data',
+                  desc: "Get up-to-date statistics directly from Spotify's official API. Your data is always current and accurate.",
+                },
+                {
+                  title: 'Beautiful Visualizations',
+                  desc: 'Enjoy stunning charts and graphs that make your music data easy to understand and fun to explore.',
+                },
+                {
+                  title: 'Privacy Focused',
+                  desc: "Your data stays between you and Spotify. We don't collect, sell or share your information with third parties.",
+                },
+                {
+                  title: 'Multiple Time Ranges',
+                  desc: 'Analyze your listening habits over the last 4 weeks, 6 months, or all time to see how your taste evolves.',
+                },
+                {
+                  title: 'No Installation Required',
+                  desc: 'Access your stats instantly from any web browser. Works perfectly on desktop, tablet, and mobile devices.',
+                },
+              ].map((benefit, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.03 }}
+                  className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/10 hover:border-statfy-purple-500/30 transition-all duration-300 rounded-xl p-6 group"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex-1">
+                      <h3 className="text-white font-bold text-lg mb-2 group-hover:text-statfy-purple-300 transition-colors duration-300">
+                        {benefit.title}
+                      </h3>
+                      <p className="text-white/70 leading-relaxed text-sm">{benefit.desc}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Stats Info Section */}
+          <motion.div variants={itemVariants} className="mt-24 max-w-4xl mx-auto">
+            <div className="bg-gradient-to-br from-statfy-purple-500/10 to-statfy-purple-300/10 backdrop-blur-md border border-statfy-purple-500/20 rounded-2xl p-8 md:p-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 text-center">
+                What Spotify Data Can You Analyze?
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-white/80">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <span className="text-statfy-purple-300 text-xl">✓</span>
+                    <span>Top 50 most played artists by time period</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-statfy-purple-300 text-xl">✓</span>
+                    <span>Top 50 most streamed tracks and songs</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-statfy-purple-300 text-xl">✓</span>
+                    <span>Comprehensive genre analysis and breakdown</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-statfy-purple-300 text-xl">✓</span>
+                    <span>Listening history patterns and trends</span>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <span className="text-statfy-purple-300 text-xl">✓</span>
+                    <span>Audio features and track characteristics</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-statfy-purple-300 text-xl">✓</span>
+                    <span>Personalized music recommendations</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-statfy-purple-300 text-xl">✓</span>
+                    <span>Custom playlist generation tools</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-statfy-purple-300 text-xl">✓</span>
+                    <span>User profile statistics and metrics</span>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-8 text-center">
+                <p className="text-white/60 text-sm">
+                  All data is pulled directly from Spotify's official Web API to ensure accuracy and
+                  reliability
+                </p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
