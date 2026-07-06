@@ -28,30 +28,7 @@ const Landingpage: React.FC = () => {
 
   return (
     <div className="bg-paper-bg text-paper-fg font-display min-h-screen">
-      {/* NAV */}
-      <div className="flex items-center justify-between px-6 md:px-10 py-[22px] border-b border-paper-border">
-        <div className="font-mono font-bold text-[22px] tracking-[-0.5px]">
-          STAT<span className="font-serif italic font-normal">fy</span>
-        </div>
-
-        <div className="hidden md:flex items-center gap-9">
-          {navigationItems.map(item => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className="font-mono text-xs tracking-[0.08em] uppercase text-paper-muted hover:text-paper-fg transition-colors"
-            >
-              {item.label}
-            </Link>
-          ))}
-          <button
-            onClick={connect}
-            className="border border-paper-fg px-[18px] py-[9px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
-          >
-            Log in
-          </button>
-        </div>
-      </div>
+      <PaperNav />
 
       {/* HERO */}
       <motion.div

@@ -1,208 +1,148 @@
 import { motion } from 'framer-motion';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Footer from '../common/footer/Footer';
+import PaperNav from '../common/papernav/PaperNav';
+
+interface Feature {
+  num: string;
+  title: string;
+  desc: string;
+}
+
+const features: Feature[] = [
+  {
+    num: '01',
+    title: 'Privacy First',
+    desc: 'No data from your Spotify profile is stored on our servers. Your privacy is our priority.',
+  },
+  {
+    num: '02',
+    title: 'Fast & Modern',
+    desc: 'Built with modern React 18, Tailwind CSS, and HeroUI for optimal performance.',
+  },
+  {
+    num: '03',
+    title: 'Rich Analytics',
+    desc: 'Detailed insights into your listening habits with beautiful visualizations.',
+  },
+  {
+    num: '04',
+    title: 'Beautiful Design',
+    desc: 'Modern, responsive design with smooth animations and an intuitive user experience.',
+  },
+];
+
+const technologies = ['React 18', 'TypeScript', 'Tailwind CSS', 'HeroUI', 'Framer Motion', 'Vite'];
 
 const About: React.FC = () => {
-  const navigate = useNavigate();
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.2,
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 80,
-      },
-    },
-  };
-
   return (
-    <div className="min-h-screen px-4 py-12 md:px-8 lg:px-12">
+    <div className="bg-paper-bg text-paper-fg font-display min-h-screen">
+      <PaperNav />
+
+      {/* HERO */}
       <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="max-w-4xl mx-auto"
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="max-w-[1120px] mx-auto px-6 md:px-10 pt-16 md:pt-24 pb-16 md:pb-[90px] text-center"
       >
-        {/* Header */}
-        <motion.div variants={itemVariants} className="text-center mb-8 flex flex-col items-center">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-6 max-w-4xl">
-            About{' '}
-            <span className="text-transparent bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text">
-              statfy
-            </span>
-          </h1>
-          <p className="text-white/60 text-lg">Your music, analyzed beautifully</p>
-        </motion.div>
+        <div className="flex items-center justify-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-7">
+          <span className="w-2 h-2 bg-paper-accent inline-block" />
+          About
+        </div>
 
-        {/* Main Content */}
-        <motion.div variants={itemVariants} className="mb-8">
-          <div className="bg-white/10 border border-white/20 rounded-lg p-8">
-            <p className="text-white/80 text-lg leading-relaxed mb-6">
-              Statfy is a modern web application built with React 18 that provides detailed insights
-              into your Spotify listening habits. Originally developed as an educational project, it
-              has evolved into a comprehensive music analytics platform.
-            </p>
+        <h1 className="text-4xl md:text-[56px] font-extrabold tracking-[-0.02em] mb-9 max-w-[760px] mx-auto">
+          About <span className="font-serif italic font-normal text-paper-accent">statfy</span>.
+        </h1>
+
+        <p className="text-lg md:text-xl leading-[1.55] max-w-[640px] mx-auto text-paper-muted">
+          Statfy is a modern web application built with React 18 that provides detailed insights
+          into your Spotify listening habits. Originally developed as an educational project, it has
+          evolved into a comprehensive music analytics platform.
+        </p>
+      </motion.div>
+
+      {/* FEATURES */}
+      <div className="border-t border-paper-border">
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10 pt-16 pb-0">
+          <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-[10px]">
+            What it's built on
           </div>
-        </motion.div>
+          <h2 className="text-3xl md:text-[38px] font-extrabold tracking-[-0.02em] mb-2 max-w-[640px]">
+            Four principles behind every screen.
+          </h2>
+          <p className="font-mono text-xs text-paper-muted mb-2">
+            Every screen in Statfy is built around these four ideas.
+          </p>
+        </div>
 
-        {/* Features Grid */}
-        <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          {[
-            {
-              icon: (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                  />
-                </svg>
-              ),
-              title: 'Privacy First',
-              description:
-                'No data from your Spotify profile is stored on our servers. Your privacy is our priority.',
-            },
-            {
-              icon: (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  />
-                </svg>
-              ),
-              title: 'Fast & Modern',
-              description:
-                'Built with modern React 18, Tailwind CSS, and HeroUI for optimal performance.',
-            },
-            {
-              icon: (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                  />
-                </svg>
-              ),
-              title: 'Rich Analytics',
-              description:
-                'Detailed insights into your listening habits with beautiful visualizations.',
-            },
-            {
-              icon: (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h4"
-                  />
-                </svg>
-              ),
-              title: 'Beautiful Design',
-              description:
-                'Modern, responsive design with smooth animations and intuitive user experience.',
-            },
-          ].map((feature, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-paper-border mt-10">
+          {features.map((feature, i) => (
             <div
-              key={index}
-              className="bg-white/10 border border-white/20 rounded-lg p-6 hover:bg-white/[0.15] transition-all duration-300"
+              key={feature.num}
+              className={`px-7 py-9 min-h-[230px] flex flex-col justify-between border-paper-border ${
+                i !== features.length - 1 ? 'border-r' : ''
+              } border-b sm:border-b-0`}
             >
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 text-white/80">{feature.icon}</div>
-                <div>
-                  <h3 className="text-white font-bold text-lg mb-2">{feature.title}</h3>
-                  <p className="text-white/70 leading-relaxed">{feature.description}</p>
+              <div className="w-[34px] h-[34px] bg-paper-accent text-paper-bg flex items-center justify-center font-mono text-[13px] font-bold -rotate-3">
+                {feature.num}
+              </div>
+              <div>
+                <div className="text-[22px] font-extrabold tracking-[-0.01em] mb-[10px]">
+                  {feature.title}
                 </div>
+                <div className="text-sm leading-[1.5] text-paper-muted">{feature.desc}</div>
               </div>
             </div>
           ))}
-        </motion.div>
+        </div>
+      </div>
 
-        {/* Warning Box */}
-        <motion.div variants={itemVariants} className="mb-8">
-          <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-6">
-            <div className="flex items-start gap-3">
-              <svg
-                className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
-                />
-              </svg>
-              <div>
-                <p className="text-amber-300 font-semibold mb-1">Independent Project</p>
-                <p className="text-amber-200/80 text-sm">
-                  This application is not affiliated with or endorsed by Spotify AB.
-                </p>
-              </div>
+      {/* INDEPENDENT PROJECT NOTICE */}
+      <div className="border-t border-paper-border">
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10 py-16 md:py-20">
+          <div className="border border-paper-accent p-9">
+            <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-accent mb-3">
+              Independent project
             </div>
-          </div>
-        </motion.div>
-
-        {/* Technologies */}
-        <motion.div variants={itemVariants} className="mb-8">
-          <div className="bg-white/10 border border-white/20 rounded-lg p-6">
-            <p className="text-white/80 text-center mb-4">
-              Built with passion using modern technologies
+            <p className="text-[15px] leading-[1.6] text-paper-muted max-w-[560px]">
+              This application is not affiliated with or endorsed by Spotify AB.
             </p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {['React 18', 'TypeScript', 'Tailwind CSS', 'HeroUI', 'Framer Motion', 'Vite'].map(
-                (tech, index) => (
-                  <span
-                    key={index}
-                    className="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white/70 text-sm"
-                  >
-                    {tech}
-                  </span>
-                ),
-              )}
-            </div>
           </div>
-        </motion.div>
+        </div>
+      </div>
 
-        {/* Back Button */}
-        <motion.div variants={itemVariants} className="flex justify-center">
-          <button
-            onClick={() => navigate('/')}
-            className="cursor-pointer px-8 py-3 bg-white/10 border border-white/20 text-white rounded-lg font-semibold hover:bg-white/20 transition-all duration-300 flex items-center gap-2"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
-            Back to Home
-          </button>
-        </motion.div>
-      </motion.div>
+      {/* TECHNOLOGIES */}
+      <div className="border-t border-paper-border">
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10 py-16 md:py-20 text-center">
+          <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-7">
+            Built with
+          </div>
+          <div className="flex flex-wrap justify-center gap-[10px]">
+            {technologies.map(tech => (
+              <span
+                key={tech}
+                className="font-mono text-xs tracking-[0.03em] uppercase border border-paper-border px-4 py-[10px] text-paper-muted"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* BACK TO HOME */}
+      <div className="border-t border-paper-border px-6 md:px-10 py-20 md:py-[110px] text-center">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-3 border border-paper-fg px-9 py-[18px] font-mono font-bold text-[13px] tracking-[0.06em] uppercase"
+        >
+          ← Back to Home
+        </Link>
+      </div>
+
+      <Footer />
     </div>
   );
 };

@@ -16,8 +16,8 @@ const PaperNav: React.FC = () => {
 
   return (
     <div className="flex items-center justify-between px-6 md:px-10 py-[22px] border-b border-paper-border">
-      <Link to="/" className="font-mono font-bold text-[22px] tracking-[-0.5px]">
-        STAT<span className="font-serif italic font-normal">fy</span>
+      <Link to="/" className="font-serif italic font-normal text-2xl text-paper-accent">
+        statfy
       </Link>
 
       <div className="hidden md:flex items-center gap-9">

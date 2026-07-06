@@ -104,12 +104,16 @@ const AnimatedRoute: React.FC<AnimatedRouteProps> = ({ children }) => (
   </motion.div>
 );
 
+// Routes rebuilt in the new Paper/brutalist design — these render their own PaperNav + Footer,
+// so the legacy purple-gradient background and Header are skipped for them.
+const PAPER_THEME_ROUTES = ['/', '/about'];
+
 const AppContent: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const { isAuthenticated } = useAuth();
   const { getProfile } = useSpotify();
   const location = useLocation();
-  const isLandingRoute = location.pathname === '/';
+  const isPaperThemeRoute = PAPER_THEME_ROUTES.includes(location.pathname);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -130,15 +134,15 @@ const AppContent: React.FC = () => {
 
   return (
     <>
-      {/* Fixed background layer — the landing page renders its own full-page Paper theme background */}
-      {!isLandingRoute && (
+      {/* Fixed background layer — Paper-theme routes render their own full-page background */}
+      {!isPaperThemeRoute && (
         <div className="fixed inset-0 bg-gradient-to-br from-purple-900 via-slate-900 to-purple-900 -z-10" />
       )}
 
       {/* Content layer */}
       <div className="relative min-h-screen">
         <UserContext.Provider value={{ profile, setProfile }}>
-          {!isLandingRoute && <Header />}
+          {!isPaperThemeRoute && <Header />}
           <main className="relative">
             <Routes>
               {/* Public routes */}
