@@ -31,6 +31,17 @@
   --color-spotify-green: #1db954;
 
   --font-family-sans: 'Poppins', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+
+  /* Paper theme — editorial/brutalist tokens used by the landing page */
+  --color-paper-bg: #f2efe9;
+  --color-paper-fg: #141210;
+  --color-paper-muted: rgba(20, 18, 16, 0.55);
+  --color-paper-border: rgba(20, 18, 16, 0.16);
+  --color-paper-accent: #c23b1f;
+
+  --font-family-mono: 'Space Mono', monospace;
+  --font-family-display: 'Archivo', sans-serif;
+  --font-family-serif: 'Instrument Serif', serif;
 }
 
 @layer base {
