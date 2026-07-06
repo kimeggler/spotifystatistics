@@ -106,7 +106,7 @@ const AnimatedRoute: React.FC<AnimatedRouteProps> = ({ children }) => (
 
 // Routes rebuilt in the new Paper/brutalist design — these render their own PaperNav + Footer,
 // so the legacy purple-gradient background and Header are skipped for them.
-const PAPER_THEME_ROUTES = ['/', '/about'];
+const PAPER_THEME_ROUTES = ['/', '/about', '/roadmap', '/overview', '/artists'];
 
 const AppContent: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);

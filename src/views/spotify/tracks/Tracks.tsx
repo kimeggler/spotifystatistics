@@ -75,8 +75,8 @@ const Tracks: React.FC = () => {
           uris: mapTrackUris(),
         });
 
-        const createdPlaylist = await postData(`users/${profile?.id}/playlists`, playlistData);
-        await postData(`playlists/${createdPlaylist.id}/tracks`, tracksData);
+        const createdPlaylist = await postData(`me/playlists`, playlistData);
+        await postData(`playlists/${createdPlaylist.id}/items`, tracksData);
 
         showNotification('success', 'Playlist created successfully!');
       } else {

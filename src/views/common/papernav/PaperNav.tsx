@@ -1,16 +1,47 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
+import { UserContext } from '../../App';
 import navigationItems from '../navbar/navigation-items';
 
 const PaperNav: React.FC = () => {
-  const { signIn } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { isAuthenticated, signIn, signOut } = useAuth();
+  const { profile } = useContext(UserContext);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+
+    if (menuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [menuOpen]);
 
   const connect = async (): Promise<void> => {
     try {
       await signIn();
     } catch (error) {
       console.error('Failed to initiate sign in:', error);
+    }
+  };
+
+  const logout = async (): Promise<void> => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.error('Error during logout:', error);
+    } finally {
+      setMenuOpen(false);
+      navigate('/');
     }
   };
 
@@ -21,21 +52,54 @@ const PaperNav: React.FC = () => {
       </Link>
 
       <div className="hidden md:flex items-center gap-9">
-        {navigationItems.map(item => (
-          <Link
-            key={item.path}
-            to={item.path}
-            className="font-mono text-xs tracking-[0.08em] uppercase text-paper-muted hover:text-paper-fg transition-colors"
+        {navigationItems.map(item => {
+          const isActive = location.pathname === item.path;
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`font-mono text-xs tracking-[0.08em] uppercase pb-1 transition-colors ${
+                isActive
+                  ? 'text-paper-fg border-b-2 border-paper-accent'
+                  : 'text-paper-muted hover:text-paper-fg'
+              }`}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
+
+        {isAuthenticated ? (
+          <div className="relative" ref={menuRef}>
+            <button
+              onClick={() => setMenuOpen(open => !open)}
+              aria-label="Account menu"
+              className="w-[38px] h-[38px] border border-paper-fg bg-paper-border bg-cover bg-center cursor-pointer"
+              style={
+                profile?.images?.[0]?.url
+                  ? { backgroundImage: `url(${profile.images[0].url})` }
+                  : undefined
+              }
+            />
+            {menuOpen && (
+              <div className="absolute top-full right-0 mt-2 min-w-[140px] border border-paper-border bg-paper-bg z-50">
+                <button
+                  onClick={logout}
+                  className="w-full text-left px-4 py-3 font-mono text-xs tracking-[0.06em] uppercase text-paper-muted hover:text-paper-fg cursor-pointer"
+                >
+                  Log out
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <button
+            onClick={connect}
+            className="border border-paper-fg px-[18px] py-[9px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
           >
-            {item.label}
-          </Link>
-        ))}
-        <button
-          onClick={connect}
-          className="border border-paper-fg px-[18px] py-[9px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
-        >
-          Log in
-        </button>
+            Log in
+          </button>
+        )}
       </div>
     </div>
   );
