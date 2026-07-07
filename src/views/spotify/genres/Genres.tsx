@@ -1,24 +1,30 @@
-import { Card, CardBody, Switch } from '@heroui/react';
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
-
 import { calcTopGenres, calcTopGenresIncludingArtists } from '../../../helper/genrehelper';
 import { useSpotify } from '../../../hooks/useSpotify';
 import { SpotifyArtist } from '../../../types/spotify';
-import { DefaultErrorMessage, TimeRangeSelector } from '../../common';
-import Genre from '../../common/genre/Genre';
-import { RangeOption } from '../../common/top-track/range-options';
+import { DefaultErrorMessage } from '../../common';
+import Footer from '../../common/footer/Footer';
+import PaperNav from '../../common/papernav/PaperNav';
+import rangeOptions, { RangeOption } from '../../common/top-track/range-options';
 
-interface GenreData {
-  name: string;
-  count?: number;
-}
+type Weighting = 'frequency' | 'artist';
+
+const weightingOptions: { key: Weighting; label: string }[] = [
+  { key: 'frequency', label: 'Play Frequency' },
+  { key: 'artist', label: 'Top Artist Rank' },
+];
+
+const nameFontSize = (index: number): string => {
+  if (index === 0) return 'text-[30px]';
+  if (index < 3) return 'text-[22px]';
+  return 'text-[18px]';
+};
 
 const Genres: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
-  const [includeArtistRating, setIncludeArtistRating] = useState<boolean>(false);
+  const [weighting, setWeighting] = useState<Weighting>('frequency');
   const [artists, setArtists] = useState<SpotifyArtist[] | null>(null);
-  const [topGenres, setTopGenres] = useState<GenreData[]>([]);
 
   const { isLoading, error, getArtists } = useSpotify();
 
@@ -31,133 +37,110 @@ const Genres: React.FC = () => {
     loadData();
   }, [timerange, getArtists]);
 
-  useEffect(() => {
-    if (artists) {
-      const genres = includeArtistRating
-        ? calcTopGenresIncludingArtists(artists)
-        : calcTopGenres(artists);
-      setTopGenres(genres);
-    }
-  }, [artists, includeArtistRating]);
-
   if (error) return <DefaultErrorMessage />;
-  if (!artists || artists.length === 0) return null;
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.2,
-        staggerChildren: 0.05,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 100,
-      },
-    },
-  };
+  const rawGenres = artists
+    ? weighting === 'artist'
+      ? calcTopGenresIncludingArtists(artists)
+      : calcTopGenres(artists)
+    : [];
+  const totalCount = rawGenres.reduce((sum, genre) => sum + genre.count, 0);
+  const genres = rawGenres.slice(0, 10).map(genre => ({
+    name: genre.name,
+    pct: totalCount > 0 ? Math.round((genre.count / totalCount) * 100) : 0,
+  }));
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="min-h-screen px-4 md:px-6 lg:px-8 py-12 w-full"
-    >
-      {/* Title */}
-      <motion.div variants={itemVariants} className="text-center flex justify-center">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-6 max-w-4xl">
-          Your favourite{' '}
-          <span className="text-transparent bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text">
-            genres
-          </span>
-        </h1>
-      </motion.div>
+    <div className="bg-paper-bg text-paper-fg font-display min-h-screen">
+      <PaperNav />
 
-      {/* Time Range Selector */}
-      <motion.div variants={itemVariants} className="w-full max-w-7xl mx-auto mb-8">
-        <TimeRangeSelector
-          timerange={timerange}
-          onTimerangeChange={setTimerange}
-          isLoading={isLoading}
-          className="max-w-none mx-0"
-        />
-      </motion.div>
-
-      {/* Artist Ranking Toggle */}
-      <motion.div variants={itemVariants} className="w-full max-w-7xl mx-auto mb-8">
-        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4">
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex-grow">
-              <p className="text-white/70 text-sm">Weight genres by your top artists' positions</p>
-            </div>
-            <div className="flex items-center gap-3 flex-shrink-0">
-              <span className="text-white/60 text-xs font-medium whitespace-nowrap">
-                Simple count
-              </span>
-              <Switch
-                isSelected={includeArtistRating}
-                onValueChange={setIncludeArtistRating}
-                size="sm"
-                classNames={{
-                  wrapper: 'bg-white/10 group-data-[selected=true]:bg-white/30',
-                  thumb: 'bg-white',
-                }}
-              />
-              <span className="text-white/60 text-xs font-medium whitespace-nowrap">Weighted</span>
-            </div>
-          </div>
+      {/* HEADER */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="max-w-[1200px] mx-auto px-6 md:px-10 pt-14 md:pt-[70px] pb-10 text-center"
+      >
+        <div className="flex items-center justify-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-5">
+          <span className="w-2 h-2 bg-paper-accent inline-block" />
+          Top Genres
         </div>
-      </motion.div>
+        <h1 className="text-4xl md:text-[56px] leading-[1.02] font-extrabold tracking-[-0.02em] mb-9 mx-auto max-w-[760px]">
+          The sound of{' '}
+          <span className="font-serif italic font-normal text-paper-accent">your ear.</span>
+        </h1>
+        <div className="inline-flex border border-paper-border">
+          {rangeOptions.map(option => (
+            <button
+              key={option.value}
+              onClick={() => !isLoading && setTimerange(option.value)}
+              disabled={isLoading}
+              className={`px-[18px] py-[10px] font-mono text-[11px] tracking-[0.06em] uppercase cursor-pointer disabled:cursor-not-allowed ${
+                timerange === option.value ? 'bg-paper-fg text-paper-bg' : 'text-paper-muted'
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
 
-      {/* Content Container - Full width with max-width constraint */}
-      <div className="w-full max-w-7xl mx-auto space-y-12">
-        {/* Genres Grid */}
-        <div className="w-full">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
-            {topGenres.map((genre, index) => (
-              <Genre key={`${genre.name}-${index}`} genre={genre} index={index} />
+        <div className="flex items-center justify-center gap-3 mt-7 flex-wrap">
+          <div className="font-mono text-[11px] tracking-[0.1em] uppercase text-paper-muted">
+            Ranked by
+          </div>
+          <div className="inline-flex border border-paper-border">
+            {weightingOptions.map(option => (
+              <button
+                key={option.key}
+                onClick={() => setWeighting(option.key)}
+                className={`px-[18px] py-[10px] font-mono text-[11px] tracking-[0.06em] uppercase cursor-pointer ${
+                  weighting === option.key ? 'bg-paper-fg text-paper-bg' : 'text-paper-muted'
+                }`}
+              >
+                {option.label}
+              </button>
             ))}
           </div>
         </div>
+      </motion.div>
 
-        {/* Stats Footer */}
-        <div className="flex justify-center">
-          <Card className="bg-gradient-to-r from-white/5 to-white/10 backdrop-blur-md border-white/10 rounded-2xl shadow-lg">
-            <CardBody className="p-6">
-              <div className="flex items-center justify-center gap-3">
-                <svg
-                  className="w-5 h-5 text-statfy-purple-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
-                  />
-                </svg>
-                <p className="text-white/80 text-center font-medium">
-                  Showing your top {topGenres.length} genres{' '}
-                  {includeArtistRating ? 'weighted by artist ranking' : 'by track count'}
-                </p>
+      {/* GENRE RANKED LIST */}
+      {genres.length > 0 && (
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pb-24">
+          {genres.map((genre, i) => (
+            <div
+              key={genre.name}
+              className="grid grid-cols-[45px_1fr_60px] sm:grid-cols-[70px_1fr_90px] items-center gap-4 sm:gap-6 py-[22px] border-b border-paper-border"
+            >
+              <div
+                className={`font-mono text-[15px] font-bold ${
+                  i === 0 ? 'text-paper-accent' : 'text-paper-muted'
+                }`}
+              >
+                {String(i + 1).padStart(2, '0')}
               </div>
-            </CardBody>
-          </Card>
+              <div>
+                <div className={`font-extrabold tracking-[-0.01em] mb-[10px] ${nameFontSize(i)}`}>
+                  {genre.name}
+                </div>
+                <div className="w-full h-2 bg-paper-border relative">
+                  <div
+                    className="absolute left-0 top-0 h-full"
+                    style={{
+                      width: `${genre.pct}%`,
+                      background: i === 0 ? 'var(--paper-accent)' : 'var(--paper-fg)',
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="font-mono text-sm text-paper-muted text-right">{genre.pct}%</div>
+            </div>
+          ))}
         </div>
-      </div>
-    </motion.div>
+      )}
+
+      <Footer />
+    </div>
   );
 };
 

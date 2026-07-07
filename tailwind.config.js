@@ -33,6 +33,14 @@ module.exports = {
           950: '#0b001b',
         },
         'spotify-green': '#1db954',
+        paper: {
+          bg: '#f2efe9',
+          fg: '#141210',
+          muted: 'rgba(20,18,16,0.55)',
+          border: 'rgba(20,18,16,0.16)',
+          accent: '#c23b1f',
+          'accent-soft': 'rgba(194,59,31,0.07)',
+        },
       },
       backgroundImage: {
         'gradient-purple': 'linear-gradient(-35deg, #d300ff, #8300ff)',
@@ -42,6 +50,9 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Poppins', 'Roboto', 'Oxygen', 'Ubuntu', 'sans-serif'],
+        mono: ['Space Mono', 'monospace'],
+        display: ['Archivo', 'sans-serif'],
+        serif: ['Instrument Serif', 'serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

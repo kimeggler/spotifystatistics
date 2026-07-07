@@ -1,21 +1,18 @@
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
-import { getAudioAnalysis } from '../../../helper/analysationhelper';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSpotify } from '../../../hooks/useSpotify';
 import { SpotifyPlaylist } from '../../../types/spotify';
-import { DefaultErrorMessage, Playlist } from '../../common';
-
-interface AnalyseData {
-  name: string;
-  value: number;
-}
+import { DefaultErrorMessage } from '../../common';
+import Footer from '../../common/footer/Footer';
+import MarqueeText from '../../common/marqueetext/MarqueeText';
+import PaperNav from '../../common/papernav/PaperNav';
 
 const Analyze: React.FC = () => {
-  const [activePlaylist, setActivePlaylist] = useState<string | null>(null);
-  const [analyse, setAnalyse] = useState<AnalyseData[] | { empty: boolean } | null>(null);
   const [playlists, setPlaylists] = useState<SpotifyPlaylist[] | null>(null);
+  const navigate = useNavigate();
 
-  const { isLoading, error, getMyPlaylists } = useSpotify();
+  const { error, getMyPlaylists } = useSpotify();
 
   useEffect(() => {
     const loadData = async () => {
@@ -27,118 +24,90 @@ const Analyze: React.FC = () => {
   }, [getMyPlaylists]);
 
   if (error) return <DefaultErrorMessage />;
-  if (isLoading) return null; // Global loader will handle loading state
-  if (!playlists || playlists.length === 0) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen text-center">
-        <h1 className="text-3xl font-bold text-white mb-4">No Playlists Found</h1>
-        <p className="text-white/70">You don't have any playlists to analyze.</p>
-      </div>
-    );
-  }
-
-  const fetchAnalyse = async (playlist_id: string): Promise<void> => {
-    if (!playlist_id) return;
-    try {
-      const analyseResponse = await getAudioAnalysis(playlist_id);
-      setAnalyse(analyseResponse);
-    } catch (error) {
-      console.error('Error fetching analysis:', error);
-      setAnalyse({ empty: true });
-    }
-  };
-
-  if (!playlists) return null;
-
-  const closePlaylist = (): void => {
-    setAnalyse(null);
-    setActivePlaylist(null);
-    toggleScroll();
-  };
-
-  const changePlaylist = (id: string): void => {
-    setActivePlaylist(id);
-    fetchAnalyse(id);
-    toggleScroll();
-  };
-
-  const toggleScroll = (): void => {
-    if (document.body.classList.contains('no-scroll')) {
-      document.body.classList.remove('no-scroll');
-    } else {
-      document.body.classList.add('no-scroll');
-    }
-  };
-
-  const renderPlaylists = () => {
-    return playlists.map((playlist: SpotifyPlaylist) => (
-      <Playlist
-        key={playlist.id}
-        playlist={playlist}
-        activePlaylist={activePlaylist}
-        changePlaylist={changePlaylist}
-        analyse={activePlaylist === playlist.id ? analyse || { empty: true } : { empty: true }}
-        closePlaylist={closePlaylist}
-      />
-    ));
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.2,
-        staggerChildren: 0.05,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 100,
-      },
-    },
-  };
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="min-h-screen px-4 md:px-6 lg:px-8 py-12 w-full"
-    >
-      {/* Header */}
-      <motion.div variants={itemVariants} className="text-center mb-8 flex flex-col items-center">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-6 max-w-4xl">
-          How funky are your{' '}
-          <span className="text-transparent bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text">
-            playlists?
-          </span>
+    <div className="bg-paper-bg text-paper-fg font-display min-h-screen">
+      <PaperNav />
+
+      {/* HEADER */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="max-w-[1200px] mx-auto px-6 md:px-10 pt-14 md:pt-[70px] pb-10 text-center"
+      >
+        <div className="flex items-center justify-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-5">
+          <span className="w-2 h-2 bg-paper-accent inline-block" />
+          Your Library
+        </div>
+        <h1 className="text-4xl md:text-[56px] leading-[1.02] font-extrabold tracking-[-0.02em] mb-2 mx-auto max-w-[760px]">
+          Playlists,{' '}
+          <span className="font-serif italic font-normal text-paper-accent">analyzed.</span>
         </h1>
+        <p className="text-[15px] text-paper-muted max-w-[520px] mx-auto">
+          Every playlist in your library, broken down by the genres that shape it.
+        </p>
       </motion.div>
 
-      {/* Content Container - Full width with max-width constraint */}
-      <div className="w-full max-w-7xl mx-auto space-y-12">
-        {/* Playlists Grid */}
-        <motion.div variants={itemVariants} className="w-full">
-          <div
-            className="grid gap-6 justify-items-center"
-            style={{
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gridAutoRows: '1fr',
-            }}
-          >
-            {renderPlaylists()}
+      {/* GENERATE HINT */}
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pb-5">
+        <Link
+          to="/tracks"
+          className="border border-paper-border px-7 py-5 flex justify-between items-center flex-wrap gap-4"
+        >
+          <div className="font-mono text-xs text-paper-muted">
+            Want a playlist made from your most-played tracks? Head to{' '}
+            <span className="text-paper-fg underline">Top 50 Tracks</span> to generate one.
           </div>
-        </motion.div>
+          <div className="font-mono text-xs text-paper-accent whitespace-nowrap">
+            Go to Tracks →
+          </div>
+        </Link>
       </div>
-    </motion.div>
+
+      {/* PLAYLIST GRID */}
+      {playlists && playlists.length > 0 && (
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-10 pb-24">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-paper-border">
+            {playlists.map(playlist => (
+              <div
+                key={playlist.id}
+                className="group border-r border-b border-paper-border p-5 flex flex-col gap-[14px]"
+              >
+                <div
+                  className="w-full aspect-square bg-paper-border bg-cover bg-center"
+                  style={
+                    playlist.images[0]?.url
+                      ? { backgroundImage: `url(${playlist.images[0].url})` }
+                      : undefined
+                  }
+                />
+                <div>
+                  <MarqueeText
+                    text={playlist.name}
+                    className="text-[17px] font-extrabold mb-[6px]"
+                  />
+                  <div className="font-mono text-xs text-paper-muted mb-[14px]">
+                    {playlist.tracks.total} tracks
+                  </div>
+                  <button
+                    onClick={() => navigate(`/analyze/${playlist.id}`, { state: { playlist } })}
+                    className="w-full flex justify-between items-center border border-paper-border px-3 py-2 cursor-pointer"
+                  >
+                    <span className="font-mono text-[10px] tracking-[0.04em] uppercase text-paper-muted">
+                      View Analysis
+                    </span>
+                    <span className="font-mono text-[11px] text-paper-accent">→</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <Footer />
+    </div>
   );
 };
 
