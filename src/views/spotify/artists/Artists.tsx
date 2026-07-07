@@ -39,13 +39,13 @@ const Artists: React.FC = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="max-w-[1200px] mx-auto px-6 md:px-10 pt-14 md:pt-[70px] pb-10 text-center"
+        className="max-w-300 mx-auto px-6 md:px-10 pt-14 md:pt-[70px] pb-10 text-center"
       >
         <div className="flex items-center justify-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-5">
           <span className="w-2 h-2 bg-paper-accent inline-block" />
           Top 50
         </div>
-        <h1 className="text-4xl md:text-[56px] leading-[1.02] font-extrabold tracking-[-0.02em] mb-9 mx-auto max-w-[760px]">
+        <h1 className="text-4xl md:text-[56px] leading-[1.02] font-extrabold tracking-[-0.02em] mb-9 mx-auto max-w-190">
           Your favourite{' '}
           <span className="font-serif italic font-normal text-paper-accent">artists.</span>
         </h1>
@@ -67,7 +67,7 @@ const Artists: React.FC = () => {
 
       {/* ARTIST GRID */}
       {artists && artists.length > 0 && (
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pb-24">
+        <div className="max-w-300 mx-auto px-6 md:px-10 pb-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-paper-border">
             {artists.map((artist, i) => {
               const isFirst = i === 0;
@@ -96,7 +96,7 @@ const Artists: React.FC = () => {
                   <div>
                     <div className="text-[17px] font-extrabold mb-2">{artist.name}</div>
                     {artist.genres.length > 0 && (
-                      <div className="flex flex-wrap gap-[6px] mb-[10px]">
+                      <div className="flex flex-wrap gap-[6px] mb-2.5">
                         {artist.genres.slice(0, 2).map(genre => (
                           <span
                             key={genre}

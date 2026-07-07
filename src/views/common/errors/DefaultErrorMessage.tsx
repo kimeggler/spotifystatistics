@@ -1,4 +1,3 @@
-import { Button, Card, CardBody } from '@heroui/react';
 import { motion } from 'framer-motion';
 import React from 'react';
 
@@ -11,10 +10,10 @@ const DefaultErrorMessage: React.FC = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex items-center justify-center min-h-[400px] px-6"
+      className="flex items-center justify-center min-h-100 px-6"
     >
-      <Card className="bg-red-500/10 border-red-500/20 max-w-md w-full rounded-3xl shadow-2xl backdrop-blur-md">
-        <CardBody className="text-center p-10">
+      <div className="bg-red-500/10 border border-red-500/20 max-w-md w-full rounded-3xl shadow-2xl backdrop-blur-md">
+        <div className="text-center p-10">
           <div className="w-20 h-20 mx-auto mb-6 bg-red-500/20 rounded-3xl flex items-center justify-center">
             <svg
               className="w-10 h-10 text-red-400"
@@ -36,11 +35,9 @@ const DefaultErrorMessage: React.FC = () => {
             connection.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              color="danger"
-              variant="bordered"
+            <button
               onClick={handleRefresh}
-              className="border-red-500/30 text-red-300 hover:bg-red-500/10 rounded-2xl px-6 py-3 font-semibold"
+              className="inline-flex items-center justify-center cursor-pointer border border-red-500/30 text-red-300 hover:bg-red-500/10 rounded-2xl px-6 py-3 font-semibold"
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -51,11 +48,10 @@ const DefaultErrorMessage: React.FC = () => {
                 />
               </svg>
               Refresh Page
-            </Button>
-            <Button
-              variant="light"
+            </button>
+            <button
               onClick={() => window.history.back()}
-              className="text-white/70 hover:text-white rounded-2xl px-6 py-3 font-medium"
+              className="inline-flex items-center justify-center cursor-pointer text-white/70 hover:text-white rounded-2xl px-6 py-3 font-medium"
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -66,10 +62,10 @@ const DefaultErrorMessage: React.FC = () => {
                 />
               </svg>
               Go Back
-            </Button>
+            </button>
           </div>
-        </CardBody>
-      </Card>
+        </div>
+      </div>
     </motion.div>
   );
 };

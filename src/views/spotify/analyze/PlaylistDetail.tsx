@@ -39,7 +39,7 @@ const PlaylistDetail: React.FC = () => {
     <div className="bg-paper-bg text-paper-fg font-display min-h-screen">
       <PaperNav />
 
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-7">
+      <div className="max-w-300 mx-auto px-6 md:px-10 pt-7">
         <Link
           to="/analyze"
           className="font-mono text-xs tracking-[0.06em] uppercase text-paper-muted hover:text-paper-fg"
@@ -53,10 +53,10 @@ const PlaylistDetail: React.FC = () => {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="max-w-[1200px] mx-auto px-6 md:px-10 pt-9 pb-[50px] grid grid-cols-1 sm:grid-cols-[220px_1fr] gap-11 items-end"
+          className="max-w-300 mx-auto px-6 md:px-10 pt-9 pb-[50px] grid grid-cols-1 sm:grid-cols-[220px_1fr] gap-11 items-end"
         >
           <div
-            className="w-full sm:w-[220px] aspect-square bg-paper-border bg-cover bg-center border border-paper-border shrink-0"
+            className="w-full sm:w-55 aspect-square bg-paper-border bg-cover bg-center border border-paper-border shrink-0"
             style={
               playlist.images[0]?.url
                 ? { backgroundImage: `url(${playlist.images[0].url})` }
@@ -68,7 +68,7 @@ const PlaylistDetail: React.FC = () => {
               <span className="w-2 h-2 bg-paper-accent inline-block" />
               Playlist Analysis
             </div>
-            <h1 className="text-4xl sm:text-[52px] leading-none font-extrabold tracking-[-0.02em] mb-[14px]">
+            <h1 className="text-4xl sm:text-[52px] leading-none font-extrabold tracking-[-0.02em] mb-3.5">
               {playlist.name}
             </h1>
             <div className="font-mono text-[13px] text-paper-muted">
@@ -80,14 +80,14 @@ const PlaylistDetail: React.FC = () => {
       )}
 
       {analysis === undefined && (
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-16">
+        <div className="max-w-300 mx-auto px-6 md:px-10 py-16">
           <div className="font-mono text-xs text-paper-muted">Analyzing playlist…</div>
         </div>
       )}
 
       {analysis === null && (
         <div className="border-t border-paper-border">
-          <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-16">
+          <div className="max-w-300 mx-auto px-6 md:px-10 py-16">
             <div className="font-mono text-xs text-paper-muted">
               Not enough data to analyze this playlist.
             </div>
@@ -100,7 +100,7 @@ const PlaylistDetail: React.FC = () => {
           {/* TOP GENRES */}
           {analysis.topGenres.length > 0 && (
             <div className="border-t border-paper-border">
-              <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-12">
+              <div className="max-w-300 mx-auto px-6 md:px-10 py-12">
                 <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-7">
                   Top 3 Genres
                 </div>
@@ -116,8 +116,8 @@ const PlaylistDetail: React.FC = () => {
                           isFirst ? 'bg-paper-accent text-paper-bg' : ''
                         }`}
                       >
-                        <div className="font-mono text-[13px] font-bold mb-[14px]">0{i + 1}</div>
-                        <div className="text-[30px] font-extrabold tracking-[-0.01em] mb-[10px]">
+                        <div className="font-mono text-[13px] font-bold mb-3.5">0{i + 1}</div>
+                        <div className="text-[30px] font-extrabold tracking-[-0.01em] mb-2.5">
                           {genre.name}
                         </div>
                         <div
@@ -135,7 +135,7 @@ const PlaylistDetail: React.FC = () => {
 
           {/* MOOD CALLOUT */}
           <div className="border-t border-paper-border">
-            <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-14 text-center">
+            <div className="max-w-300 mx-auto px-6 md:px-10 py-14 text-center">
               <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-5">
                 Overall Mood
               </div>
@@ -144,7 +144,7 @@ const PlaylistDetail: React.FC = () => {
                   {analysis.mood}
                 </span>
               </div>
-              <div className="font-mono text-[13px] text-paper-muted mt-[14px]">
+              <div className="font-mono text-[13px] text-paper-muted mt-3.5">
                 Based on valence, energy & danceability across all tracks
               </div>
             </div>
@@ -152,7 +152,7 @@ const PlaylistDetail: React.FC = () => {
 
           {/* SONIC PROFILE */}
           <div className="border-t border-paper-border">
-            <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-14">
+            <div className="max-w-300 mx-auto px-6 md:px-10 py-14">
               <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-8">
                 Sonic Profile
               </div>
@@ -165,7 +165,7 @@ const PlaylistDetail: React.FC = () => {
                     <div className="font-mono text-xs uppercase tracking-[0.05em] text-paper-muted truncate">
                       {feature.name}
                     </div>
-                    <div className="h-[14px] bg-paper-border relative">
+                    <div className="h-3.5 bg-paper-border relative">
                       <div
                         className="absolute left-0 top-0 h-full"
                         style={{
@@ -187,7 +187,7 @@ const PlaylistDetail: React.FC = () => {
 
           {/* SPEC SHEET */}
           <div className="border-t border-paper-border">
-            <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-14 pb-24">
+            <div className="max-w-300 mx-auto px-6 md:px-10 py-14 pb-24">
               <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-8">
                 Track Data
               </div>

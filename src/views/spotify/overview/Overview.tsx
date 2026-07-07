@@ -57,7 +57,7 @@ const Overview: React.FC = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 md:pt-20 pb-9 text-center"
+        className="max-w-300 mx-auto px-6 md:px-10 pt-16 md:pt-20 pb-9 text-center"
       >
         <div className="flex items-center justify-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-6">
           <span className="w-2 h-2 bg-paper-accent inline-block" />
@@ -84,11 +84,11 @@ const Overview: React.FC = () => {
       </motion.div>
 
       {topArtist && (
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pb-7">
-          <div className="border border-paper-border grid grid-cols-1 md:grid-cols-2 min-h-[420px]">
+        <div className="max-w-300 mx-auto px-6 md:px-10 pb-7">
+          <div className="border border-paper-border grid grid-cols-1 md:grid-cols-2 min-h-105">
             <div className="p-9 md:p-11 flex flex-col justify-center gap-[18px]">
               <div className="flex items-center gap-[10px]">
-                <div className="w-[30px] h-[30px] bg-paper-accent text-paper-bg flex items-center justify-center font-mono text-xs font-bold -rotate-3">
+                <div className="w-7.5 h-7.5 bg-paper-accent text-paper-bg flex items-center justify-center font-mono text-xs font-bold -rotate-3">
                   01
                 </div>
                 <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted">
@@ -115,7 +115,7 @@ const Overview: React.FC = () => {
               )}
             </div>
             <div
-              className="border-t md:border-t-0 md:border-l border-paper-border bg-cover bg-center min-h-[240px] md:min-h-0"
+              className="border-t md:border-t-0 md:border-l border-paper-border bg-cover bg-center min-h-60 md:min-h-0"
               style={
                 topArtist.images[0]?.url
                   ? { backgroundImage: `url(${topArtist.images[0].url})` }
@@ -127,10 +127,10 @@ const Overview: React.FC = () => {
       )}
 
       {topTrack && (
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pb-16 md:pb-20">
-          <div className="border border-paper-border grid grid-cols-1 md:grid-cols-2 min-h-[420px]">
+        <div className="max-w-300 mx-auto px-6 md:px-10 pb-16 md:pb-20">
+          <div className="border border-paper-border grid grid-cols-1 md:grid-cols-2 min-h-105">
             <div
-              className="order-2 md:order-1 border-t md:border-t-0 md:border-r border-paper-border bg-cover bg-center min-h-[240px] md:min-h-0"
+              className="order-2 md:order-1 border-t md:border-t-0 md:border-r border-paper-border bg-cover bg-center min-h-60 md:min-h-0"
               style={
                 topTrack.album.images[0]?.url
                   ? { backgroundImage: `url(${topTrack.album.images[0].url})` }
@@ -139,7 +139,7 @@ const Overview: React.FC = () => {
             />
             <div className="order-1 md:order-2 p-9 md:p-11 flex flex-col justify-center gap-[18px]">
               <div className="flex items-center gap-[10px]">
-                <div className="w-[30px] h-[30px] bg-paper-fg text-paper-bg flex items-center justify-center font-mono text-xs font-bold rotate-3">
+                <div className="w-7.5 h-7.5 bg-paper-fg text-paper-bg flex items-center justify-center font-mono text-xs font-bold rotate-3">
                   01
                 </div>
                 <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted">
@@ -165,7 +165,7 @@ const Overview: React.FC = () => {
 
       {/* CONTINUE EXPLORING */}
       <div className="border-t border-paper-border">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-14">
+        <div className="max-w-300 mx-auto px-6 md:px-10 py-14">
           <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-9">
             Continue exploring
           </div>

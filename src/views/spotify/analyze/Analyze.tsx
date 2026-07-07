@@ -34,23 +34,23 @@ const Analyze: React.FC = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="max-w-[1200px] mx-auto px-6 md:px-10 pt-14 md:pt-[70px] pb-10 text-center"
+        className="max-w-300 mx-auto px-6 md:px-10 pt-14 md:pt-[70px] pb-10 text-center"
       >
         <div className="flex items-center justify-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-5">
           <span className="w-2 h-2 bg-paper-accent inline-block" />
           Your Library
         </div>
-        <h1 className="text-4xl md:text-[56px] leading-[1.02] font-extrabold tracking-[-0.02em] mb-2 mx-auto max-w-[760px]">
+        <h1 className="text-4xl md:text-[56px] leading-[1.02] font-extrabold tracking-[-0.02em] mb-2 mx-auto max-w-190">
           Playlists,{' '}
           <span className="font-serif italic font-normal text-paper-accent">analyzed.</span>
         </h1>
-        <p className="text-[15px] text-paper-muted max-w-[520px] mx-auto">
+        <p className="text-[15px] text-paper-muted max-w-130 mx-auto">
           Every playlist in your library, broken down by the genres that shape it.
         </p>
       </motion.div>
 
       {/* GENERATE HINT */}
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pb-5">
+      <div className="max-w-300 mx-auto px-6 md:px-10 pb-5">
         <Link
           to="/tracks"
           className="border border-paper-border px-7 py-5 flex justify-between items-center flex-wrap gap-4"
@@ -67,7 +67,7 @@ const Analyze: React.FC = () => {
 
       {/* PLAYLIST GRID */}
       {playlists && playlists.length > 0 && (
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-10 pb-24">
+        <div className="max-w-300 mx-auto px-6 md:px-10 pt-10 pb-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-paper-border">
             {playlists.map(playlist => (
               <div
@@ -83,11 +83,8 @@ const Analyze: React.FC = () => {
                   }
                 />
                 <div>
-                  <MarqueeText
-                    text={playlist.name}
-                    className="text-[17px] font-extrabold mb-[6px]"
-                  />
-                  <div className="font-mono text-xs text-paper-muted mb-[14px]">
+                  <MarqueeText text={playlist.name} className="text-[17px] font-extrabold mb-1.5" />
+                  <div className="font-mono text-xs text-paper-muted mb-3.5">
                     {playlist.tracks.total} tracks
                   </div>
                   <button

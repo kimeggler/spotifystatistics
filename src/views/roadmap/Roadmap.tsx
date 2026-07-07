@@ -75,19 +75,19 @@ const Roadmap: React.FC = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="max-w-[1120px] mx-auto px-6 md:px-10 pt-16 md:pt-24 pb-16 md:pb-[90px] text-center"
+        className="max-w-280 mx-auto px-6 md:px-10 pt-16 md:pt-24 pb-16 md:pb-[90px] text-center"
       >
         <div className="flex items-center justify-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-7">
           <span className="w-2 h-2 bg-paper-accent inline-block" />
           Roadmap
         </div>
 
-        <h1 className="text-4xl md:text-[56px] font-extrabold tracking-[-0.02em] mb-9 max-w-[760px] mx-auto">
+        <h1 className="text-4xl md:text-[56px] font-extrabold tracking-[-0.02em] mb-9 max-w-190 mx-auto">
           Development{' '}
           <span className="font-serif italic font-normal text-paper-accent">roadmap</span>.
         </h1>
 
-        <p className="text-lg md:text-xl leading-[1.55] max-w-[640px] mx-auto text-paper-muted">
+        <p className="text-lg md:text-xl leading-[1.55] max-w-160 mx-auto text-paper-muted">
           Discover our plans for the future of Statfy and see how we're continuously improving your
           music analytics experience.
         </p>
@@ -95,7 +95,7 @@ const Roadmap: React.FC = () => {
 
       {/* ROADMAP ITEMS */}
       <div className="border-t border-paper-border">
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10 py-16 md:py-20">
+        <div className="max-w-280 mx-auto px-6 md:px-10 py-16 md:py-20">
           <div className="border border-paper-border">
             {roadmapItems.map((item, i) => {
               const isActive = item.status === 'active';
@@ -107,7 +107,7 @@ const Roadmap: React.FC = () => {
                   }`}
                 >
                   <div
-                    className={`w-[34px] h-[34px] flex items-center justify-center font-mono text-[13px] font-bold -rotate-3 shrink-0 ${
+                    className={`w-8.5 h-8.5 flex items-center justify-center font-mono text-[13px] font-bold -rotate-3 shrink-0 ${
                       isActive ? 'bg-paper-accent text-paper-bg' : 'bg-paper-fg text-paper-bg'
                     }`}
                   >
@@ -129,7 +129,7 @@ const Roadmap: React.FC = () => {
                       </span>
                     </div>
                     <div className="font-mono text-xs text-paper-muted mb-3">{item.date}</div>
-                    <p className="text-sm leading-[1.5] text-paper-muted max-w-[640px]">
+                    <p className="text-sm leading-normal text-paper-muted max-w-160">
                       {item.description}
                     </p>
                   </div>

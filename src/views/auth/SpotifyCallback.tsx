@@ -1,4 +1,3 @@
-import { Card, CardBody, Spinner } from '@heroui/react';
 import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -47,8 +46,8 @@ const SpotifyCallback: React.FC = () => {
         animate={{ opacity: 1, scale: 1 }}
         className="relative z-10 flex items-center justify-center min-h-screen px-6"
       >
-        <Card className="bg-white/5 backdrop-blur-md border-white/10 max-w-md w-full">
-          <CardBody className="text-center p-8">
+        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl max-w-md w-full">
+          <div className="text-center p-8">
             {/* Logo */}
             <motion.div
               initial={{ scale: 0.8 }}
@@ -66,16 +65,9 @@ const SpotifyCallback: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="mb-6"
+              className="mb-6 flex justify-center"
             >
-              <Spinner
-                size="lg"
-                color="secondary"
-                classNames={{
-                  circle1: 'border-b-statfy-purple-500',
-                  circle2: 'border-b-statfy-purple-400',
-                }}
-              />
+              <div className="w-12 h-12 rounded-full border-4 border-statfy-purple-400/30 border-t-statfy-purple-500 animate-spin" />
             </motion.div>
 
             {/* Loading Text */}
@@ -113,8 +105,8 @@ const SpotifyCallback: React.FC = () => {
                 />
               ))}
             </motion.div>
-          </CardBody>
-        </Card>
+          </div>
+        </div>
       </motion.div>
     </div>
   );
