@@ -104,7 +104,7 @@ const Tracks: React.FC = () => {
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
-            className="fixed top-[90px] right-6 z-50 border border-paper-fg bg-paper-bg px-5 py-4 max-w-xs shadow-[6px_6px_0_#141210]"
+            className="fixed top-[90px] right-6 z-50 border border-paper-fg bg-paper-bg px-5 py-4 max-w-xs shadow-[6px_6px_0_var(--paper-fg)]"
           >
             <div className="font-mono text-[11px] tracking-[0.06em] uppercase text-paper-accent mb-1">
               {notification.status}
@@ -182,8 +182,8 @@ const Tracks: React.FC = () => {
                     <div
                       className="absolute top-[14px] left-[14px] font-mono text-xs font-bold px-2 py-[3px] z-10"
                       style={{
-                        background: isFirst ? '#c23b1f' : '#141210',
-                        color: '#f2efe9',
+                        background: isFirst ? 'var(--paper-accent)' : 'var(--paper-fg)',
+                        color: 'var(--paper-bg)',
                       }}
                     >
                       #{String(i + 1).padStart(2, '0')}

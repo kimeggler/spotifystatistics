@@ -32,17 +32,37 @@
 
   --font-family-sans: 'Poppins', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
 
-  /* Paper theme — editorial/brutalist tokens used by the landing page */
-  --color-paper-bg: #f2efe9;
-  --color-paper-fg: #141210;
-  --color-paper-muted: rgba(20, 18, 16, 0.55);
-  --color-paper-border: rgba(20, 18, 16, 0.16);
-  --color-paper-accent: #c23b1f;
-  --color-paper-accent-soft: rgba(194, 59, 31, 0.07);
+  /* Paper theme — editorial/brutalist tokens used by the landing page.
+     Values point at the semantic custom properties below so they can be
+     swapped per color scheme (see :root / .dark). */
+  --color-paper-bg: var(--paper-bg);
+  --color-paper-fg: var(--paper-fg);
+  --color-paper-muted: var(--paper-muted);
+  --color-paper-border: var(--paper-border);
+  --color-paper-accent: var(--paper-accent);
+  --color-paper-accent-soft: var(--paper-accent-soft);
 
   --font-family-mono: 'Space Mono', monospace;
   --font-family-display: 'Archivo', sans-serif;
   --font-family-serif: 'Instrument Serif', serif;
+}
+
+:root {
+  --paper-bg: #f2efe9;
+  --paper-fg: #141210;
+  --paper-muted: rgba(20, 18, 16, 0.55);
+  --paper-border: rgba(20, 18, 16, 0.16);
+  --paper-accent: #c23b1f;
+  --paper-accent-soft: rgba(194, 59, 31, 0.07);
+}
+
+.dark {
+  --paper-bg: #0d0c0a;
+  --paper-fg: #f2efe9;
+  --paper-muted: rgba(242, 239, 233, 0.55);
+  --paper-border: rgba(242, 239, 233, 0.14);
+  --paper-accent: #ff5a3c;
+  --paper-accent-soft: rgba(255, 90, 60, 0.12);
 }
 
 @layer base {

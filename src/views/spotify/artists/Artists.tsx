@@ -79,8 +79,8 @@ const Artists: React.FC = () => {
                   <div
                     className="absolute top-[14px] left-[14px] font-mono text-xs font-bold px-2 py-[3px] z-10"
                     style={{
-                      background: isFirst ? '#c23b1f' : '#141210',
-                      color: '#f2efe9',
+                      background: isFirst ? 'var(--paper-accent)' : 'var(--paper-fg)',
+                      color: 'var(--paper-bg)',
                     }}
                   >
                     #{i + 1}

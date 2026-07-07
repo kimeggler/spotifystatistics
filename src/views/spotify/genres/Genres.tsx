@@ -128,7 +128,7 @@ const Genres: React.FC = () => {
                     className="absolute left-0 top-0 h-full"
                     style={{
                       width: `${genre.pct}%`,
-                      background: i === 0 ? '#c23b1f' : '#141210',
+                      background: i === 0 ? 'var(--paper-accent)' : 'var(--paper-fg)',
                     }}
                   />
                 </div>

@@ -170,7 +170,9 @@ const PlaylistDetail: React.FC = () => {
                         className="absolute left-0 top-0 h-full"
                         style={{
                           width: `${feature.pct}%`,
-                          background: feature.isDominant ? '#c23b1f' : '#141210',
+                          background: feature.isDominant
+                            ? 'var(--paper-accent)'
+                            : 'var(--paper-fg)',
                         }}
                       />
                     </div>

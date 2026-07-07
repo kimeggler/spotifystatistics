@@ -48,7 +48,7 @@ const Landingpage: React.FC = () => {
           laid{' '}
           <span
             className="font-serif italic font-normal inline-block px-4 pt-[2px] pb-[6px] -rotate-[1.5deg] bg-paper-accent text-paper-bg"
-            style={{ boxShadow: '6px 6px 0 #141210' }}
+            style={{ boxShadow: '6px 6px 0 var(--paper-fg)' }}
           >
             bare.
           </span>
@@ -138,7 +138,7 @@ const Landingpage: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 border border-paper-border">
             {artistPreviews.map((artist, i) => {
               const isFirst = i === 0;
-              const stripeColor = isFirst ? '#c23b1f' : '#141210';
+              const stripeColor = isFirst ? 'var(--paper-accent)' : 'var(--paper-fg)';
               return (
                 <div
                   key={artist.rank}
@@ -149,8 +149,8 @@ const Landingpage: React.FC = () => {
                   <div
                     className="absolute top-[14px] left-[14px] font-mono text-xs font-bold px-2 py-[3px] z-10"
                     style={{
-                      background: isFirst ? '#c23b1f' : '#141210',
-                      color: '#f2efe9',
+                      background: isFirst ? 'var(--paper-accent)' : 'var(--paper-fg)',
+                      color: 'var(--paper-bg)',
                     }}
                   >
                     {artist.rank}
@@ -158,7 +158,7 @@ const Landingpage: React.FC = () => {
                   <div
                     className="w-full aspect-square"
                     style={{
-                      background: `repeating-linear-gradient(${artist.angle}deg, ${stripeColor} 0, ${stripeColor} 8px, transparent 8px, transparent 16px), rgba(20,18,16,0.16)`,
+                      background: `repeating-linear-gradient(${artist.angle}deg, ${stripeColor} 0, ${stripeColor} 8px, transparent 8px, transparent 16px), var(--paper-border)`,
                     }}
                   />
                   <div>

@@ -17,6 +17,7 @@ import Tracks from './spotify/tracks/Tracks';
 // Context and Loading
 import { AuthProvider, useAuth } from '../contexts/AuthContext';
 import { LoadingProvider } from '../contexts/LoadingContext';
+import { ThemeProvider } from '../contexts/ThemeContext';
 import { useSpotify } from '../hooks/useSpotify';
 import Redirect from './Redirect/Redirect';
 
@@ -238,11 +239,13 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <AuthProvider>
-      <LoadingProvider>
-        <AppContent />
-      </LoadingProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <LoadingProvider>
+          <AppContent />
+        </LoadingProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 };
 

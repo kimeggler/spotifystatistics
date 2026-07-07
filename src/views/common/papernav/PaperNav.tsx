@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
+import { useTheme } from '../../../contexts/ThemeContext';
 import { UserContext } from '../../App';
 import navigationItems from '../navbar/navigation-items';
 
@@ -8,6 +9,7 @@ const PaperNav: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { isAuthenticated, signIn, signOut } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const { profile } = useContext(UserContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -77,8 +79,16 @@ const PaperNav: React.FC = () => {
               );
             })}
 
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="w-[38px] h-[38px] flex items-center justify-center border border-paper-fg font-mono text-[10px] tracking-[0.04em] uppercase cursor-pointer text-paper-fg"
+          >
+            {theme === 'dark' ? 'Lt' : 'Dk'}
+          </button>
+
           {isAuthenticated ? (
-            <div className="relative" ref={menuRef}>
+            <div className="relative flex" ref={menuRef}>
               <button
                 onClick={() => setMenuOpen(open => !open)}
                 aria-label="Account menu"
@@ -103,7 +113,7 @@ const PaperNav: React.FC = () => {
           ) : (
             <button
               onClick={connect}
-              className="border border-paper-fg px-[18px] py-[9px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
+              className="h-[38px] flex items-center border border-paper-fg px-[18px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
             >
               Log in
             </button>
@@ -137,22 +147,29 @@ const PaperNav: React.FC = () => {
                 </Link>
               );
             })}
-          <div className="px-6 py-5">
+          <div className="px-6 py-5 flex items-center gap-3">
             {isAuthenticated ? (
               <button
                 onClick={logout}
-                className="w-full border border-paper-fg px-[18px] py-[9px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
+                className="flex-1 h-[38px] flex items-center justify-center border border-paper-fg px-[18px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
               >
                 Log out
               </button>
             ) : (
               <button
                 onClick={connect}
-                className="w-full border border-paper-fg px-[18px] py-[9px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
+                className="flex-1 h-[38px] flex items-center justify-center border border-paper-fg px-[18px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
               >
                 Log in
               </button>
             )}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="w-[38px] h-[38px] shrink-0 flex items-center justify-center border border-paper-fg font-mono text-[10px] tracking-[0.04em] uppercase cursor-pointer text-paper-fg"
+            >
+              {theme === 'dark' ? 'Lt' : 'Dk'}
+            </button>
           </div>
         </div>
       )}
