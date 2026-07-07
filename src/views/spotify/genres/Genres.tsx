@@ -59,7 +59,7 @@ const Genres: React.FC = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="max-w-[1100px] mx-auto px-6 md:px-10 pt-14 md:pt-[70px] pb-10"
+        className="max-w-[1200px] mx-auto px-6 md:px-10 pt-14 md:pt-[70px] pb-10"
       >
         <div className="flex justify-between items-end flex-wrap gap-6">
           <div>
@@ -110,7 +110,7 @@ const Genres: React.FC = () => {
 
       {/* GENRE RANKED LIST */}
       {genres.length > 0 && (
-        <div className="max-w-[1100px] mx-auto px-6 md:px-10 pb-24">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pb-24">
           {genres.map((genre, i) => (
             <div
               key={genre.name}

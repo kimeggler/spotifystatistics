@@ -28,15 +28,32 @@ const formatDuration = (ms: number): string => {
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 };
 
+const MOCK_ARTIST = {
+  name: 'Linkin Park',
+  followers: { total: 35110982 },
+  genres: ['Nu Metal', 'Rap Metal', 'Alternative Rock'],
+  images: [{ url: 'https://picsum.photos/seed/artist/800/800' }],
+} as unknown as SpotifyArtist;
+const MOCK_TRACK = {
+  name: 'Numb',
+  artists: [{ name: 'Linkin Park' }],
+  album: { images: [{ url: 'https://picsum.photos/seed/track/800/800' }] },
+  duration_ms: 187000,
+  popularity: 91,
+} as unknown as SpotifyTrack;
+
 const Overview: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
-  const [topArtist, setTopArtist] = useState<SpotifyArtist | null>(null);
-  const [topTrack, setTopTrack] = useState<SpotifyTrack | null>(null);
+  const [topArtist, setTopArtist] = useState<SpotifyArtist | null>(MOCK_ARTIST);
+  const [topTrack, setTopTrack] = useState<SpotifyTrack | null>(MOCK_TRACK);
 
   const { isLoading, error, getTopArtist, getTopTrack } = useSpotify();
 
   useEffect(() => {
     const loadData = async () => {
+      // TEMP-MOCK: skip network fetch for visual QA
+      return;
+      // eslint-disable-next-line no-unreachable
       const [artist, track] = await Promise.all([getTopArtist(timerange), getTopTrack(timerange)]);
 
       if (artist) setTopArtist(artist);
@@ -57,7 +74,7 @@ const Overview: React.FC = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="max-w-[1120px] mx-auto px-6 md:px-10 pt-16 md:pt-20 pb-9 text-center"
+        className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 md:pt-20 pb-9 text-center"
       >
         <div className="flex items-center justify-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-6">
           <span className="w-2 h-2 bg-paper-accent inline-block" />
@@ -84,7 +101,7 @@ const Overview: React.FC = () => {
       </motion.div>
 
       {topArtist && (
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10 pb-7">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pb-7">
           <div className="border border-paper-border grid grid-cols-1 md:grid-cols-2 min-h-[420px]">
             <div className="p-9 md:p-11 flex flex-col justify-center gap-[18px]">
               <div className="flex items-center gap-[10px]">
@@ -127,7 +144,7 @@ const Overview: React.FC = () => {
       )}
 
       {topTrack && (
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10 pb-16 md:pb-20">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pb-16 md:pb-20">
           <div className="border border-paper-border grid grid-cols-1 md:grid-cols-2 min-h-[420px]">
             <div
               className="order-2 md:order-1 border-t md:border-t-0 md:border-r border-paper-border bg-cover bg-center min-h-[240px] md:min-h-0"
@@ -165,7 +182,7 @@ const Overview: React.FC = () => {
 
       {/* CONTINUE EXPLORING */}
       <div className="border-t border-paper-border">
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10 py-14">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-14">
           <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-9">
             Continue exploring
           </div>

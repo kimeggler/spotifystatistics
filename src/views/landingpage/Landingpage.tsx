@@ -35,7 +35,7 @@ const Landingpage: React.FC = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="max-w-[1120px] mx-auto px-6 md:px-10 pt-16 md:pt-24 lg:pt-[120px] pb-16 md:pb-[90px]"
+        className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 md:pt-24 lg:pt-[120px] pb-16 md:pb-[90px]"
       >
         <div className="flex items-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-7">
           <span className="w-2 h-2 bg-paper-accent inline-block" />
@@ -75,7 +75,7 @@ const Landingpage: React.FC = () => {
 
       {/* WHAT YOU GET */}
       <div className="border-t border-paper-border">
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10 pt-16 pb-0">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 pb-0">
           <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-[10px]">
             What you get
           </div>
@@ -111,7 +111,7 @@ const Landingpage: React.FC = () => {
 
       {/* TOP ARTISTS PREVIEW */}
       <div className="border-t border-paper-border">
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10 pt-[70px] pb-[90px]">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-[70px] pb-[90px]">
           <div className="flex justify-between items-end flex-wrap gap-5 mb-9">
             <div>
               <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-[10px]">
@@ -186,7 +186,7 @@ const Landingpage: React.FC = () => {
 
       {/* PLAYLISTS */}
       <div className="border-t border-paper-border">
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10 py-16 md:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-16 md:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
             <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-4">
               Playlists

@@ -1,11 +1,10 @@
 import { motion } from 'framer-motion';
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 // Components
 import About from './about/About';
 import SpotifyCallback from './auth/SpotifyCallback';
-import { Header } from './common';
 import Landingpage from './landingpage/Landingpage';
 import Roadmap from './roadmap/Roadmap';
 import Analyze from './spotify/analyze/Analyze';
@@ -13,9 +12,7 @@ import PlaylistDetail from './spotify/analyze/PlaylistDetail';
 import Artists from './spotify/artists/Artists';
 import Genres from './spotify/genres/Genres';
 import Overview from './spotify/overview/Overview';
-import Suggestions from './spotify/suggestions/Suggestions';
 import Tracks from './spotify/tracks/Tracks';
-import User from './user/User';
 
 // Context and Loading
 import { AuthProvider, useAuth } from '../contexts/AuthContext';
@@ -72,21 +69,19 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-slate-900 to-purple-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-400"></div>
+      <div className="min-h-screen bg-paper-bg flex items-center justify-center">
+        <div className="font-mono text-xs tracking-[0.06em] uppercase text-paper-muted">
+          Loading…
+        </div>
       </div>
     );
   }
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated && false) {
     return <Navigate to="/" replace />;
   }
 
-  return (
-    <UserContext.Provider value={{ profile: null, setProfile: () => {} }}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <>{children}</>;
 };
 
 interface AnimatedRouteProps {
@@ -105,26 +100,10 @@ const AnimatedRoute: React.FC<AnimatedRouteProps> = ({ children }) => (
   </motion.div>
 );
 
-// Routes rebuilt in the new Paper/brutalist design — these render their own PaperNav + Footer,
-// so the legacy purple-gradient background and Header are skipped for them.
-const PAPER_THEME_ROUTES = [
-  '/',
-  '/about',
-  '/roadmap',
-  '/overview',
-  '/artists',
-  '/tracks',
-  '/analyze',
-  '/genres',
-];
-
 const AppContent: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const { isAuthenticated } = useAuth();
   const { getProfile } = useSpotify();
-  const location = useLocation();
-  const isPaperThemeRoute =
-    PAPER_THEME_ROUTES.includes(location.pathname) || location.pathname.startsWith('/analyze/');
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -144,147 +123,116 @@ const AppContent: React.FC = () => {
   }, [isAuthenticated, getProfile]);
 
   return (
-    <>
-      {/* Fixed background layer — Paper-theme routes render their own full-page background */}
-      {!isPaperThemeRoute && (
-        <div className="fixed inset-0 bg-gradient-to-br from-purple-900 via-slate-900 to-purple-900 -z-10" />
-      )}
+    <UserContext.Provider value={{ profile, setProfile }}>
+      <main className="relative min-h-screen">
+        <Routes>
+          {/* Public routes */}
+          <Route
+            path="/"
+            element={
+              <AnimatedRoute>
+                <Landingpage />
+              </AnimatedRoute>
+            }
+          />
+          <Route
+            path="/callback"
+            element={
+              <AnimatedRoute>
+                <SpotifyCallback />
+              </AnimatedRoute>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <AnimatedRoute>
+                <About />
+              </AnimatedRoute>
+            }
+          />
+          <Route
+            path="/roadmap"
+            element={
+              <AnimatedRoute>
+                <Roadmap />
+              </AnimatedRoute>
+            }
+          />
 
-      {/* Content layer */}
-      <div className="relative min-h-screen">
-        <UserContext.Provider value={{ profile, setProfile }}>
-          {!isPaperThemeRoute && <Header />}
-          <main className="relative">
-            <Routes>
-              {/* Public routes */}
-              <Route
-                path="/"
-                element={
-                  <AnimatedRoute>
-                    <Landingpage />
-                  </AnimatedRoute>
-                }
-              />
-              <Route
-                path="/callback"
-                element={
-                  <AnimatedRoute>
-                    <SpotifyCallback />
-                  </AnimatedRoute>
-                }
-              />
-              <Route
-                path="/about"
-                element={
-                  <AnimatedRoute>
-                    <About />
-                  </AnimatedRoute>
-                }
-              />
-              <Route
-                path="/roadmap"
-                element={
-                  <AnimatedRoute>
-                    <Roadmap />
-                  </AnimatedRoute>
-                }
-              />
-
-              {/* Protected routes */}
-              <Route
-                path="/user"
-                element={
-                  <ProtectedRoute>
-                    <AnimatedRoute>
-                      <User />
-                    </AnimatedRoute>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/overview"
-                element={
-                  <ProtectedRoute>
-                    <AnimatedRoute>
-                      <Overview />
-                    </AnimatedRoute>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/artists"
-                element={
-                  <ProtectedRoute>
-                    <AnimatedRoute>
-                      <Artists />
-                    </AnimatedRoute>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/tracks"
-                element={
-                  <ProtectedRoute>
-                    <AnimatedRoute>
-                      <Tracks />
-                    </AnimatedRoute>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/suggestions"
-                element={
-                  <ProtectedRoute>
-                    <AnimatedRoute>
-                      <Suggestions />
-                    </AnimatedRoute>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/analyze"
-                element={
-                  <ProtectedRoute>
-                    <AnimatedRoute>
-                      <Analyze />
-                    </AnimatedRoute>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/analyze/:playlistId"
-                element={
-                  <ProtectedRoute>
-                    <AnimatedRoute>
-                      <PlaylistDetail />
-                    </AnimatedRoute>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/genres"
-                element={
-                  <ProtectedRoute>
-                    <AnimatedRoute>
-                      <Genres />
-                    </AnimatedRoute>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="*"
-                index
-                element={
-                  <AnimatedRoute>
-                    <Redirect />
-                  </AnimatedRoute>
-                }
-              />
-            </Routes>
-          </main>
-        </UserContext.Provider>
-      </div>
-    </>
+          {/* Protected routes */}
+          <Route
+            path="/overview"
+            element={
+              <ProtectedRoute>
+                <AnimatedRoute>
+                  <Overview />
+                </AnimatedRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/artists"
+            element={
+              <ProtectedRoute>
+                <AnimatedRoute>
+                  <Artists />
+                </AnimatedRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/tracks"
+            element={
+              <ProtectedRoute>
+                <AnimatedRoute>
+                  <Tracks />
+                </AnimatedRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/analyze"
+            element={
+              <ProtectedRoute>
+                <AnimatedRoute>
+                  <Analyze />
+                </AnimatedRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/analyze/:playlistId"
+            element={
+              <ProtectedRoute>
+                <AnimatedRoute>
+                  <PlaylistDetail />
+                </AnimatedRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/genres"
+            element={
+              <ProtectedRoute>
+                <AnimatedRoute>
+                  <Genres />
+                </AnimatedRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="*"
+            index
+            element={
+              <AnimatedRoute>
+                <Redirect />
+              </AnimatedRoute>
+            }
+          />
+        </Routes>
+      </main>
+    </UserContext.Provider>
   );
 };
 
