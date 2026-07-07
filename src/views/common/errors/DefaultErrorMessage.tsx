@@ -11,7 +11,7 @@ const DefaultErrorMessage: React.FC = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex items-center justify-center min-h-[400px] px-6"
+      className="flex items-center justify-center min-h-100 px-6"
     >
       <Card className="bg-red-500/10 border-red-500/20 max-w-md w-full rounded-3xl shadow-2xl backdrop-blur-md">
         <CardBody className="text-center p-10">

@@ -30,6 +30,7 @@ const PaperNav: React.FC = () => {
   }, [menuOpen]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- closes the mobile menu on route change
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
@@ -82,7 +83,7 @@ const PaperNav: React.FC = () => {
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="w-[38px] h-[38px] flex items-center justify-center border border-paper-fg font-mono text-[10px] tracking-[0.04em] uppercase cursor-pointer text-paper-fg"
+            className="w-9.5 h-9.5 flex items-center justify-center border border-paper-fg font-mono text-[10px] tracking-[0.04em] uppercase cursor-pointer text-paper-fg"
           >
             {theme === 'dark' ? 'Lt' : 'Dk'}
           </button>
@@ -92,7 +93,7 @@ const PaperNav: React.FC = () => {
               <button
                 onClick={() => setMenuOpen(open => !open)}
                 aria-label="Account menu"
-                className="w-[38px] h-[38px] border border-paper-fg bg-paper-border bg-cover bg-center cursor-pointer"
+                className="w-9.5 h-9.5 border border-paper-fg bg-paper-border bg-cover bg-center cursor-pointer"
                 style={
                   profile?.images?.[0]?.url
                     ? { backgroundImage: `url(${profile.images[0].url})` }
@@ -100,7 +101,7 @@ const PaperNav: React.FC = () => {
                 }
               />
               {menuOpen && (
-                <div className="absolute top-full right-0 mt-2 min-w-[140px] border border-paper-border bg-paper-bg z-50">
+                <div className="absolute top-full right-0 mt-2 min-w-35 border border-paper-border bg-paper-bg z-50">
                   <button
                     onClick={logout}
                     className="w-full text-left px-4 py-3 font-mono text-xs tracking-[0.06em] uppercase text-paper-muted hover:text-paper-fg cursor-pointer"
@@ -113,7 +114,7 @@ const PaperNav: React.FC = () => {
           ) : (
             <button
               onClick={connect}
-              className="h-[38px] flex items-center border border-paper-fg px-[18px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
+              className="h-9.5 flex items-center border border-paper-fg px-[18px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
             >
               Log in
             </button>
@@ -151,14 +152,14 @@ const PaperNav: React.FC = () => {
             {isAuthenticated ? (
               <button
                 onClick={logout}
-                className="flex-1 h-[38px] flex items-center justify-center border border-paper-fg px-[18px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
+                className="flex-1 h-9.5 flex items-center justify-center border border-paper-fg px-[18px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
               >
                 Log out
               </button>
             ) : (
               <button
                 onClick={connect}
-                className="flex-1 h-[38px] flex items-center justify-center border border-paper-fg px-[18px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
+                className="flex-1 h-9.5 flex items-center justify-center border border-paper-fg px-[18px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
               >
                 Log in
               </button>
@@ -166,7 +167,7 @@ const PaperNav: React.FC = () => {
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className="w-[38px] h-[38px] shrink-0 flex items-center justify-center border border-paper-fg font-mono text-[10px] tracking-[0.04em] uppercase cursor-pointer text-paper-fg"
+              className="w-9.5 h-9.5 shrink-0 flex items-center justify-center border border-paper-fg font-mono text-[10px] tracking-[0.04em] uppercase cursor-pointer text-paper-fg"
             >
               {theme === 'dark' ? 'Lt' : 'Dk'}
             </button>

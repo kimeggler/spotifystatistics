@@ -19,7 +19,7 @@ const features: Feature[] = [
   {
     num: '02',
     title: 'Fast & Modern',
-    desc: 'Built with modern React 18, Tailwind CSS, and HeroUI for optimal performance.',
+    desc: 'Built with modern React and Tailwind CSS for optimal performance.',
   },
   {
     num: '03',
@@ -33,7 +33,7 @@ const features: Feature[] = [
   },
 ];
 
-const technologies = ['React 18', 'TypeScript', 'Tailwind CSS', 'HeroUI', 'Framer Motion', 'Vite'];
+const technologies = ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vite'];
 
 const About: React.FC = () => {
   return (
@@ -45,31 +45,31 @@ const About: React.FC = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="max-w-[1120px] mx-auto px-6 md:px-10 pt-16 md:pt-24 pb-16 md:pb-[90px] text-center"
+        className="max-w-280 mx-auto px-6 md:px-10 pt-16 md:pt-24 pb-16 md:pb-[90px] text-center"
       >
         <div className="flex items-center justify-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-7">
           <span className="w-2 h-2 bg-paper-accent inline-block" />
           About
         </div>
 
-        <h1 className="text-4xl md:text-[56px] font-extrabold tracking-[-0.02em] mb-9 max-w-[760px] mx-auto">
+        <h1 className="text-4xl md:text-[56px] font-extrabold tracking-[-0.02em] mb-9 max-w-190 mx-auto">
           About <span className="font-serif italic font-normal text-paper-accent">statfy</span>.
         </h1>
 
-        <p className="text-lg md:text-xl leading-[1.55] max-w-[640px] mx-auto text-paper-muted">
-          Statfy is a modern web application built with React 18 that provides detailed insights
-          into your Spotify listening habits. Originally developed as an educational project, it has
-          evolved into a comprehensive music analytics platform.
+        <p className="text-lg md:text-xl leading-[1.55] max-w-160 mx-auto text-paper-muted">
+          Statfy is a modern web application built with React and Tailwind CSS that provides
+          detailed insights into your Spotify listening habits. Originally developed as an
+          educational project, it has evolved into a comprehensive music analytics platform.
         </p>
       </motion.div>
 
       {/* FEATURES */}
       <div className="border-t border-paper-border">
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10 pt-16 pb-0">
-          <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-[10px]">
+        <div className="max-w-280 mx-auto px-6 md:px-10 pt-16 pb-0">
+          <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-2.5">
             What it's built on
           </div>
-          <h2 className="text-3xl md:text-[38px] font-extrabold tracking-[-0.02em] mb-2 max-w-[640px]">
+          <h2 className="text-3xl md:text-[38px] font-extrabold tracking-[-0.02em] mb-2 max-w-160">
             Four principles behind every screen.
           </h2>
           <p className="font-mono text-xs text-paper-muted mb-2">
@@ -81,18 +81,18 @@ const About: React.FC = () => {
           {features.map((feature, i) => (
             <div
               key={feature.num}
-              className={`px-7 py-9 min-h-[230px] flex flex-col justify-between border-paper-border ${
+              className={`px-7 py-9 min-h-57.5 flex flex-col justify-between border-paper-border ${
                 i !== features.length - 1 ? 'border-r' : ''
               } border-b sm:border-b-0`}
             >
-              <div className="w-[34px] h-[34px] bg-paper-accent text-paper-bg flex items-center justify-center font-mono text-[13px] font-bold -rotate-3">
+              <div className="w-8.5 h-8.5 bg-paper-accent text-paper-bg flex items-center justify-center font-mono text-[13px] font-bold -rotate-3">
                 {feature.num}
               </div>
               <div>
-                <div className="text-[22px] font-extrabold tracking-[-0.01em] mb-[10px]">
+                <div className="text-[22px] font-extrabold tracking-[-0.01em] mb-2.5">
                   {feature.title}
                 </div>
-                <div className="text-sm leading-[1.5] text-paper-muted">{feature.desc}</div>
+                <div className="text-sm leading-normal text-paper-muted">{feature.desc}</div>
               </div>
             </div>
           ))}
@@ -101,12 +101,12 @@ const About: React.FC = () => {
 
       {/* INDEPENDENT PROJECT NOTICE */}
       <div className="border-t border-paper-border">
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10 py-16 md:py-20">
+        <div className="max-w-280 mx-auto px-6 md:px-10 py-16 md:py-20">
           <div className="border border-paper-accent p-9">
             <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-accent mb-3">
               Independent project
             </div>
-            <p className="text-[15px] leading-[1.6] text-paper-muted max-w-[560px]">
+            <p className="text-[15px] leading-[1.6] text-paper-muted max-w-140">
               This application is not affiliated with or endorsed by Spotify AB.
             </p>
           </div>
@@ -115,7 +115,7 @@ const About: React.FC = () => {
 
       {/* TECHNOLOGIES */}
       <div className="border-t border-paper-border">
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10 py-16 md:py-20 text-center">
+        <div className="max-w-280 mx-auto px-6 md:px-10 py-16 md:py-20 text-center">
           <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-7">
             Built with
           </div>

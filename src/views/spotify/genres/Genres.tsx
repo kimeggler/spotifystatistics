@@ -59,13 +59,13 @@ const Genres: React.FC = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="max-w-[1200px] mx-auto px-6 md:px-10 pt-14 md:pt-[70px] pb-10 text-center"
+        className="max-w-300 mx-auto px-6 md:px-10 pt-14 md:pt-[70px] pb-10 text-center"
       >
         <div className="flex items-center justify-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-5">
           <span className="w-2 h-2 bg-paper-accent inline-block" />
           Top Genres
         </div>
-        <h1 className="text-4xl md:text-[56px] leading-[1.02] font-extrabold tracking-[-0.02em] mb-9 mx-auto max-w-[760px]">
+        <h1 className="text-4xl md:text-[56px] leading-[1.02] font-extrabold tracking-[-0.02em] mb-9 mx-auto max-w-190">
           The sound of{' '}
           <span className="font-serif italic font-normal text-paper-accent">your ear.</span>
         </h1>
@@ -106,7 +106,7 @@ const Genres: React.FC = () => {
 
       {/* GENRE RANKED LIST */}
       {genres.length > 0 && (
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pb-24">
+        <div className="max-w-300 mx-auto px-6 md:px-10 pb-24">
           {genres.map((genre, i) => (
             <div
               key={genre.name}
@@ -120,7 +120,7 @@ const Genres: React.FC = () => {
                 {String(i + 1).padStart(2, '0')}
               </div>
               <div>
-                <div className={`font-extrabold tracking-[-0.01em] mb-[10px] ${nameFontSize(i)}`}>
+                <div className={`font-extrabold tracking-[-0.01em] mb-2.5 ${nameFontSize(i)}`}>
                   {genre.name}
                 </div>
                 <div className="w-full h-2 bg-paper-border relative">

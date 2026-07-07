@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import useNotification from '../../../hooks/useNotification';
 import { useSpotify } from '../../../hooks/useSpotify';
 import { getData, postData } from '../../../services/fetchservice';
-import { SpotifyTrack } from '../../../types/spotify';
+import { SpotifyPlaylist, SpotifyTrack } from '../../../types/spotify';
 import { UserContext } from '../../App';
 import { DefaultErrorMessage } from '../../common';
 import Footer from '../../common/footer/Footer';
@@ -55,7 +55,7 @@ const Tracks: React.FC = () => {
         return;
       }
 
-      const playlists = await getData('me/playlists');
+      const playlists = await getData<{ items: SpotifyPlaylist[] }>('me/playlists');
       const date = moment(new Date()).format('DD-MM-YYYY');
       const timeRange =
         timerange === 'long_term'
@@ -65,8 +65,8 @@ const Tracks: React.FC = () => {
             : 'Last month';
       const playlistName = `${timeRange} favorites - ${date}`;
 
-      const filteredPlaylists = playlists.items.filter(
-        (playlist: any) => playlist.name === playlistName,
+      const filteredPlaylists = (playlists?.items ?? []).filter(
+        playlist => playlist.name === playlistName,
       );
 
       if (filteredPlaylists.length === 0) {
@@ -80,7 +80,11 @@ const Tracks: React.FC = () => {
           uris: mapTrackUris(),
         });
 
-        const createdPlaylist = await postData(`me/playlists`, playlistData);
+        const createdPlaylist = await postData<SpotifyPlaylist>(`me/playlists`, playlistData);
+        if (!createdPlaylist) {
+          showNotification('error', 'Failed to create playlist');
+          return;
+        }
         await postData(`playlists/${createdPlaylist.id}/items`, tracksData);
 
         showNotification('success', 'Playlist created successfully!');
@@ -119,13 +123,13 @@ const Tracks: React.FC = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="max-w-[1200px] mx-auto px-6 md:px-10 pt-14 md:pt-[70px] pb-10 text-center"
+        className="max-w-300 mx-auto px-6 md:px-10 pt-14 md:pt-[70px] pb-10 text-center"
       >
         <div className="flex items-center justify-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-5">
           <span className="w-2 h-2 bg-paper-accent inline-block" />
           Top 50
         </div>
-        <h1 className="text-4xl md:text-[56px] leading-[1.02] font-extrabold tracking-[-0.02em] mb-9 mx-auto max-w-[760px]">
+        <h1 className="text-4xl md:text-[56px] leading-[1.02] font-extrabold tracking-[-0.02em] mb-9 mx-auto max-w-190">
           Your favourite{' '}
           <span className="font-serif italic font-normal text-paper-accent">tracks.</span>
         </h1>
@@ -146,7 +150,7 @@ const Tracks: React.FC = () => {
       </motion.div>
 
       {/* GENERATE CTA */}
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pb-10">
+      <div className="max-w-300 mx-auto px-6 md:px-10 pb-10">
         <div className="border border-paper-fg bg-paper-accent-soft px-9 py-8 flex justify-between items-center flex-wrap gap-6">
           <div>
             <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-paper-muted mb-2">
@@ -168,7 +172,7 @@ const Tracks: React.FC = () => {
 
       {/* TRACK GRID */}
       {tracks && tracks.length > 0 && (
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pb-24">
+        <div className="max-w-300 mx-auto px-6 md:px-10 pb-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-paper-border">
             {tracks
               .filter(track => track.name)
@@ -197,8 +201,8 @@ const Tracks: React.FC = () => {
                       }
                     />
                     <div>
-                      <div className="text-[17px] font-extrabold mb-[6px]">{track.name}</div>
-                      <div className="text-[13px] text-paper-muted mb-[10px]">
+                      <div className="text-[17px] font-extrabold mb-1.5">{track.name}</div>
+                      <div className="text-[13px] text-paper-muted mb-2.5">
                         {track.artists[0].name}
                       </div>
                       <div className="flex items-center justify-between gap-2">

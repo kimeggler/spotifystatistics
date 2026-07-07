@@ -41,7 +41,7 @@ export const calcTopGenresIncludingArtists = (topArtists: SpotifyArtist[]): Genr
     .map((artist, index) => {
       const multiplier = Math.abs(Math.ceil((index + 1) / (topArtists.length / 5)) - 6);
       const genres = artist.genres || [];
-      let arrayToReturn: string[] = [];
+      const arrayToReturn: string[] = [];
 
       for (let i = 0; i < multiplier; i++) {
         arrayToReturn.push(...genres);

@@ -20,7 +20,7 @@ const getDefaultHeaders = async (): Promise<DefaultHeaders> => {
   };
 };
 
-const getData = async <T = any>(
+const getData = async <T = unknown>(
   path: string,
   headers: RequestHeaders = {},
   queryParams: string = '',
@@ -50,7 +50,7 @@ const getData = async <T = any>(
   return response.json();
 };
 
-const postData = async <T = any>(
+const postData = async <T = unknown>(
   path: string,
   data: string | FormData | null = null,
   headers: RequestHeaders = {},

@@ -28,7 +28,7 @@ interface FeedbackPayload {
   timestamp?: Date;
   rating?: number;
   type?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 // Your web app's Firebase configuration
@@ -58,7 +58,7 @@ const saveFeedback = async (payload: FeedbackPayload): Promise<void> => {
     console.log('Feedback saved successfully');
   } catch (error) {
     console.error('Error saving feedback:', error);
-    throw new Error('Failed to save feedback');
+    throw new Error('Failed to save feedback', { cause: error });
   }
 };
 

@@ -12,6 +12,7 @@ const useDataHook = <T>(request: () => Promise<T>): UseDataHookResult<T> => {
   const [hasError, setHasError] = useState<boolean>(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- resets loading/error state before starting the request
     setIsLoading(true);
     setHasError(false);
 
