@@ -180,5 +180,5 @@ const formatData = (
   return getPercentageandCrop(playlist_analysis);
 };
 
-export { getAudioAnalysis };
+export { getAudioAnalysis, getSongFeatures, getSongs };
 export type { AccumulatedAudioFeatures, AnalysisResult, EmptyAnalysisResult };

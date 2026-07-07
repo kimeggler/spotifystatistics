@@ -1,16 +1,27 @@
-import { Card, CardBody } from '@heroui/react';
-import cx from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react';
-
 import useNotification from '../../../hooks/useNotification';
 import { useSpotify } from '../../../hooks/useSpotify';
 import { getData, postData } from '../../../services/fetchservice';
 import { SpotifyTrack } from '../../../types/spotify';
 import { UserContext } from '../../App';
-import { DefaultErrorMessage, TimeRangeSelector, Track } from '../../common';
-import { RangeOption } from '../../common/top-track/range-options';
+import { DefaultErrorMessage } from '../../common';
+import Footer from '../../common/footer/Footer';
+import PaperNav from '../../common/papernav/PaperNav';
+import rangeOptions, { RangeOption } from '../../common/top-track/range-options';
+
+const formatDuration = (ms: number): string => {
+  const minutes = Math.floor(ms / 60000);
+  const seconds = Math.floor((ms % 60000) / 1000);
+  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+};
+
+const rangeLabels: Record<RangeOption['value'], string> = {
+  short_term: '1 Month',
+  medium_term: '6 Months',
+  long_term: 'All Time',
+};
 
 const Tracks: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
@@ -39,17 +50,11 @@ const Tracks: React.FC = () => {
     try {
       showNotification('loading', 'Creating playlist...');
 
-      // Get user profile from context
-      if (!context) {
+      if (!context?.profile) {
         showNotification('error', 'User profile not available');
         return;
       }
-      const { profile } = context;
 
-      if (!profile) {
-        showNotification('error', 'User profile not available');
-        return;
-      }
       const playlists = await getData('me/playlists');
       const date = moment(new Date()).format('DD-MM-YYYY');
       const timeRange =
@@ -88,190 +93,142 @@ const Tracks: React.FC = () => {
     }
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.2,
-        staggerChildren: 0.05,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 100,
-      },
-    },
-  };
-
-  const getTimeRangeLabel = (): string => {
-    switch (timerange) {
-      case 'short_term':
-        return 'from the last month';
-      case 'medium_term':
-        return 'from the last 6 months';
-      case 'long_term':
-        return 'of all time';
-      default:
-        return '';
-    }
-  };
-
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="min-h-screen px-4 md:px-6 lg:px-8 py-12 w-full"
-    >
-      {/* Notification */}
+    <div className="bg-paper-bg text-paper-fg font-display min-h-screen">
+      <PaperNav />
+
+      {/* NOTIFICATION */}
       <AnimatePresence>
         {notification.status !== 'idle' && (
           <motion.div
-            initial={{ opacity: 0, y: -50 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
-            className="fixed top-4 right-4 z-50"
+            exit={{ opacity: 0, y: -12 }}
+            className="fixed top-[90px] right-6 z-50 border border-paper-fg bg-paper-bg px-5 py-4 max-w-xs shadow-[6px_6px_0_#141210]"
           >
-            <Card
-              className={cx(
-                'border-0 shadow-2xl rounded-2xl backdrop-blur-md',
-                notification.status === 'success' &&
-                  'bg-green-500/90 text-white border border-green-400/30',
-                notification.status === 'error' &&
-                  'bg-red-500/90 text-white border border-red-400/30',
-                notification.status === 'loading' &&
-                  'bg-statfy-purple-500/90 text-white border border-statfy-purple-400/30',
-              )}
-            >
-              <CardBody className="p-6">
-                <div className="flex items-center space-x-3">
-                  {notification.status === 'loading' && (
-                    <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
-                  )}
-                  {notification.status === 'success' && (
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  )}
-                  {notification.status === 'error' && (
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  )}
-                  <span className="font-semibold">{notification.message}</span>
-                </div>
-              </CardBody>
-            </Card>
+            <div className="font-mono text-[11px] tracking-[0.06em] uppercase text-paper-accent mb-1">
+              {notification.status}
+            </div>
+            <div className="text-sm">{notification.message}</div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Header with Create Playlist Button */}
-      <motion.div variants={itemVariants} className="text-center mb-8 flex flex-col items-center">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-6 max-w-4xl">
-          Your favourite{' '}
-          <span className="text-transparent bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text">
-            tracks
-          </span>
-        </h1>
-
-        <button
-          className="cursor-pointer bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-medium px-6 py-3 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-          onClick={createPlaylist}
-          disabled={notification.status === 'loading'}
-        >
-          <span className="flex items-center gap-2">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
-              />
-            </svg>
-            Create Playlist
-          </span>
-        </button>
-      </motion.div>
-
-      {/* Time Range Selector */}
-      <motion.div variants={itemVariants} className="w-full max-w-7xl mx-auto mb-8">
-        <TimeRangeSelector
-          timerange={timerange}
-          onTimerangeChange={setTimerange}
-          isLoading={isLoading}
-          className="max-w-none mx-0"
-        />
-      </motion.div>
-
-      {/* Content Container - Full width with max-width constraint */}
-      <div className="w-full max-w-7xl mx-auto space-y-12">
-        {/* Tracks Grid */}
-        <motion.div variants={itemVariants} className="w-full">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
-            {tracks
-              ?.filter(track => track.name)
-              .map((track, index) => (
-                <Track key={track.id} track={track} index={index} />
-              ))}
+      {/* HEADER */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="max-w-[1200px] mx-auto px-6 md:px-10 pt-14 md:pt-[70px] pb-10"
+      >
+        <div className="flex justify-between items-end flex-wrap gap-6">
+          <div>
+            <div className="flex items-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-5">
+              <span className="w-2 h-2 bg-paper-accent inline-block" />
+              Top 50
+            </div>
+            <h1 className="text-4xl md:text-[56px] leading-[1.02] font-extrabold tracking-[-0.02em]">
+              Your favourite{' '}
+              <span className="font-serif italic font-normal text-paper-accent">tracks.</span>
+            </h1>
           </div>
-        </motion.div>
+          <div className="inline-flex border border-paper-border">
+            {rangeOptions.map(option => (
+              <button
+                key={option.value}
+                onClick={() => !isLoading && setTimerange(option.value)}
+                disabled={isLoading}
+                className={`px-[18px] py-[10px] font-mono text-[11px] tracking-[0.06em] uppercase cursor-pointer disabled:cursor-not-allowed ${
+                  timerange === option.value ? 'bg-paper-fg text-paper-bg' : 'text-paper-muted'
+                }`}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </motion.div>
 
-        {/* Stats Footer */}
-        <motion.div variants={itemVariants} className="flex justify-center">
-          <Card className="bg-gradient-to-r from-white/5 to-white/10 backdrop-blur-md border-white/10 rounded-2xl shadow-lg">
-            <CardBody className="p-6">
-              <div className="flex items-center justify-center gap-3">
-                <svg
-                  className="w-5 h-5 text-statfy-purple-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
-                  />
-                </svg>
-                <p className="text-white/80 text-center font-medium">
-                  Showing your top {tracks?.length} tracks {getTimeRangeLabel()}
-                </p>
-              </div>
-            </CardBody>
-          </Card>
-        </motion.div>
+      {/* GENERATE CTA */}
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pb-10">
+        <div className="border border-paper-fg bg-paper-accent-soft px-9 py-8 flex justify-between items-center flex-wrap gap-6">
+          <div>
+            <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-paper-muted mb-2">
+              From this Top 50 — {rangeLabels[timerange]}
+            </div>
+            <div className="text-2xl font-extrabold tracking-[-0.01em]">
+              Turn these tracks into a playlist.
+            </div>
+          </div>
+          <button
+            onClick={createPlaylist}
+            disabled={notification.status === 'loading'}
+            className="bg-paper-fg text-paper-bg px-[30px] py-4 font-mono font-bold text-[13px] tracking-[0.06em] uppercase cursor-pointer whitespace-nowrap disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            Generate Playlist →
+          </button>
+        </div>
       </div>
-    </motion.div>
+
+      {/* TRACK GRID */}
+      {tracks && tracks.length > 0 && (
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pb-24">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-paper-border">
+            {tracks
+              .filter(track => track.name)
+              .map((track, i) => {
+                const isFirst = i === 0;
+                return (
+                  <div
+                    key={track.id}
+                    className="border-r border-b border-paper-border p-5 flex flex-col gap-[14px] relative"
+                  >
+                    <div
+                      className="absolute top-[14px] left-[14px] font-mono text-xs font-bold px-2 py-[3px] z-10"
+                      style={{
+                        background: isFirst ? '#c23b1f' : '#141210',
+                        color: '#f2efe9',
+                      }}
+                    >
+                      #{String(i + 1).padStart(2, '0')}
+                    </div>
+                    <div
+                      className="w-full aspect-square bg-paper-border bg-cover bg-center"
+                      style={
+                        track.album.images[0]?.url
+                          ? { backgroundImage: `url(${track.album.images[0].url})` }
+                          : undefined
+                      }
+                    />
+                    <div>
+                      <div className="text-[17px] font-extrabold mb-[6px]">{track.name}</div>
+                      <div className="text-[13px] text-paper-muted mb-[10px]">
+                        {track.artists[0].name}
+                      </div>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-mono text-[11px] text-paper-muted">
+                          {formatDuration(track.duration_ms)}
+                        </span>
+                        <span
+                          className={`font-mono text-[10px] tracking-[0.03em] px-2 py-[3px] border ${
+                            isFirst
+                              ? 'border-paper-accent text-paper-accent'
+                              : 'border-paper-border text-paper-muted'
+                          }`}
+                        >
+                          {track.popularity}%
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+      )}
+
+      <Footer />
+    </div>
   );
 };
 

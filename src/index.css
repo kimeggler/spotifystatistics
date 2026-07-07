@@ -38,6 +38,7 @@
   --color-paper-muted: rgba(20, 18, 16, 0.55);
   --color-paper-border: rgba(20, 18, 16, 0.16);
   --color-paper-accent: #c23b1f;
+  --color-paper-accent-soft: rgba(194, 59, 31, 0.07);
 
   --font-family-mono: 'Space Mono', monospace;
   --font-family-display: 'Archivo', sans-serif;

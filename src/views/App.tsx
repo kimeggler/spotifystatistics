@@ -9,6 +9,7 @@ import { Header } from './common';
 import Landingpage from './landingpage/Landingpage';
 import Roadmap from './roadmap/Roadmap';
 import Analyze from './spotify/analyze/Analyze';
+import PlaylistDetail from './spotify/analyze/PlaylistDetail';
 import Artists from './spotify/artists/Artists';
 import Genres from './spotify/genres/Genres';
 import Overview from './spotify/overview/Overview';
@@ -106,14 +107,23 @@ const AnimatedRoute: React.FC<AnimatedRouteProps> = ({ children }) => (
 
 // Routes rebuilt in the new Paper/brutalist design — these render their own PaperNav + Footer,
 // so the legacy purple-gradient background and Header are skipped for them.
-const PAPER_THEME_ROUTES = ['/', '/about', '/roadmap', '/overview', '/artists'];
+const PAPER_THEME_ROUTES = [
+  '/',
+  '/about',
+  '/roadmap',
+  '/overview',
+  '/artists',
+  '/tracks',
+  '/analyze',
+];
 
 const AppContent: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const { isAuthenticated } = useAuth();
   const { getProfile } = useSpotify();
   const location = useLocation();
-  const isPaperThemeRoute = PAPER_THEME_ROUTES.includes(location.pathname);
+  const isPaperThemeRoute =
+    PAPER_THEME_ROUTES.includes(location.pathname) || location.pathname.startsWith('/analyze/');
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -236,6 +246,16 @@ const AppContent: React.FC = () => {
                   <ProtectedRoute>
                     <AnimatedRoute>
                       <Analyze />
+                    </AnimatedRoute>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/analyze/:playlistId"
+                element={
+                  <ProtectedRoute>
+                    <AnimatedRoute>
+                      <PlaylistDetail />
                     </AnimatedRoute>
                   </ProtectedRoute>
                 }

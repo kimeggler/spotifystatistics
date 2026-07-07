@@ -39,6 +39,7 @@ module.exports = {
           muted: 'rgba(20,18,16,0.55)',
           border: 'rgba(20,18,16,0.16)',
           accent: '#c23b1f',
+          'accent-soft': 'rgba(194,59,31,0.07)',
         },
       },
       backgroundImage: {
