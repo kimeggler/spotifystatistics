@@ -83,10 +83,7 @@ const Analyze: React.FC = () => {
                   }
                 />
                 <div>
-                  <MarqueeText
-                    text={playlist.name}
-                    className="text-[17px] font-extrabold mb-1.5"
-                  />
+                  <MarqueeText text={playlist.name} className="text-[17px] font-extrabold mb-1.5" />
                   <div className="font-mono text-xs text-paper-muted mb-3.5">
                     {playlist.tracks.total} tracks
                   </div>

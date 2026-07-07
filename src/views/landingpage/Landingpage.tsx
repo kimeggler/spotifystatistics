@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import Footer from '../common/footer/Footer';
 import PaperNav from '../common/papernav/PaperNav';
-import { artistPreviews, capabilities, playlistPreviews, timeRanges } from './landing-data';
 import type { TimeRangeKey } from './landing-data';
+import { artistPreviews, capabilities, playlistPreviews, timeRanges } from './landing-data';
 
 const Landingpage: React.FC = () => {
   const navigate = useNavigate();
