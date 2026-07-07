@@ -28,32 +28,15 @@ const formatDuration = (ms: number): string => {
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 };
 
-const MOCK_ARTIST = {
-  name: 'Linkin Park',
-  followers: { total: 35110982 },
-  genres: ['Nu Metal', 'Rap Metal', 'Alternative Rock'],
-  images: [{ url: 'https://picsum.photos/seed/artist/800/800' }],
-} as unknown as SpotifyArtist;
-const MOCK_TRACK = {
-  name: 'Numb',
-  artists: [{ name: 'Linkin Park' }],
-  album: { images: [{ url: 'https://picsum.photos/seed/track/800/800' }] },
-  duration_ms: 187000,
-  popularity: 91,
-} as unknown as SpotifyTrack;
-
 const Overview: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
-  const [topArtist, setTopArtist] = useState<SpotifyArtist | null>(MOCK_ARTIST);
-  const [topTrack, setTopTrack] = useState<SpotifyTrack | null>(MOCK_TRACK);
+  const [topArtist, setTopArtist] = useState<SpotifyArtist | null>(null);
+  const [topTrack, setTopTrack] = useState<SpotifyTrack | null>(null);
 
   const { isLoading, error, getTopArtist, getTopTrack } = useSpotify();
 
   useEffect(() => {
     const loadData = async () => {
-      // TEMP-MOCK: skip network fetch for visual QA
-      return;
-      // eslint-disable-next-line no-unreachable
       const [artist, track] = await Promise.all([getTopArtist(timerange), getTopTrack(timerange)]);
 
       if (artist) setTopArtist(artist);
