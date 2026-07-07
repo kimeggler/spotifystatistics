@@ -59,36 +59,32 @@ const Genres: React.FC = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="max-w-[1200px] mx-auto px-6 md:px-10 pt-14 md:pt-[70px] pb-10"
+        className="max-w-[1200px] mx-auto px-6 md:px-10 pt-14 md:pt-[70px] pb-10 text-center"
       >
-        <div className="flex justify-between items-end flex-wrap gap-6">
-          <div>
-            <div className="flex items-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-5">
-              <span className="w-2 h-2 bg-paper-accent inline-block" />
-              Top Genres
-            </div>
-            <h1 className="text-4xl md:text-[56px] leading-[1.02] font-extrabold tracking-[-0.02em]">
-              The sound of{' '}
-              <span className="font-serif italic font-normal text-paper-accent">your ear.</span>
-            </h1>
-          </div>
-          <div className="inline-flex border border-paper-border">
-            {rangeOptions.map(option => (
-              <button
-                key={option.value}
-                onClick={() => !isLoading && setTimerange(option.value)}
-                disabled={isLoading}
-                className={`px-[18px] py-[10px] font-mono text-[11px] tracking-[0.06em] uppercase cursor-pointer disabled:cursor-not-allowed ${
-                  timerange === option.value ? 'bg-paper-fg text-paper-bg' : 'text-paper-muted'
-                }`}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
+        <div className="flex items-center justify-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-5">
+          <span className="w-2 h-2 bg-paper-accent inline-block" />
+          Top Genres
+        </div>
+        <h1 className="text-4xl md:text-[56px] leading-[1.02] font-extrabold tracking-[-0.02em] mb-9 mx-auto max-w-[760px]">
+          The sound of{' '}
+          <span className="font-serif italic font-normal text-paper-accent">your ear.</span>
+        </h1>
+        <div className="inline-flex border border-paper-border">
+          {rangeOptions.map(option => (
+            <button
+              key={option.value}
+              onClick={() => !isLoading && setTimerange(option.value)}
+              disabled={isLoading}
+              className={`px-[18px] py-[10px] font-mono text-[11px] tracking-[0.06em] uppercase cursor-pointer disabled:cursor-not-allowed ${
+                timerange === option.value ? 'bg-paper-fg text-paper-bg' : 'text-paper-muted'
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
         </div>
 
-        <div className="flex items-center gap-3 mt-7 flex-wrap">
+        <div className="flex items-center justify-center gap-3 mt-7 flex-wrap">
           <div className="font-mono text-[11px] tracking-[0.1em] uppercase text-paper-muted">
             Ranked by
           </div>

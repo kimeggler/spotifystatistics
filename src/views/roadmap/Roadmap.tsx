@@ -28,18 +28,18 @@ const roadmapItems: RoadmapItem[] = [
       'Statfy has received a complete modern overhaul with Tailwind CSS, HeroUI components, and smooth animations for a better user experience.',
   },
   {
-    title: 'Editorial Redesign',
-    date: 'Q3 2026',
-    status: 'active',
-    description:
-      'A brutalist, editorial-inspired visual overhaul — paper backgrounds, hairline borders, mono/serif typography, and a single deliberate accent color. Landing, About, and Roadmap are live; the rest of the app is next.',
-  },
-  {
     title: 'Enhanced Analytics',
-    date: 'Q1 2026',
-    status: 'active',
+    date: 'June 2026',
+    status: 'completed',
     description:
       'Advanced listening statistics with beautiful visualizations, genre analysis, and personalized music insights. Results vary depending on what the Spotify API makes available.',
+  },
+  {
+    title: 'Editorial Redesign',
+    date: 'July 2026',
+    status: 'completed',
+    description:
+      'A brutalist, editorial-inspired visual overhaul — paper backgrounds, hairline borders, mono/serif typography, and a single deliberate accent color, applied across the entire app.',
   },
   {
     title: 'Further Improvements',

@@ -10,6 +10,7 @@ const PaperNav: React.FC = () => {
   const { isAuthenticated, signIn, signOut } = useAuth();
   const { profile } = useContext(UserContext);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,6 +27,10 @@ const PaperNav: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [menuOpen]);
 
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const connect = async (): Promise<void> => {
     try {
       await signIn();
@@ -41,66 +46,116 @@ const PaperNav: React.FC = () => {
       console.error('Error during logout:', error);
     } finally {
       setMenuOpen(false);
+      setMobileMenuOpen(false);
       navigate('/');
     }
   };
 
   return (
-    <div className="flex items-center justify-between px-6 md:px-10 py-[22px] border-b border-paper-border">
-      <Link to="/" className="font-serif italic font-normal text-2xl text-paper-accent">
-        statfy
-      </Link>
+    <div className="relative border-b border-paper-border">
+      <div className="flex items-center justify-between px-6 md:px-10 py-[22px]">
+        <Link to="/" className="font-serif italic font-normal text-2xl text-paper-accent">
+          statfy
+        </Link>
 
-      <div className="hidden md:flex items-center gap-9">
-        {navigationItems.map(item => {
-          const isActive = location.pathname === item.path;
-          return (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`font-mono text-xs tracking-[0.08em] uppercase pb-1 transition-colors ${
-                isActive
-                  ? 'text-paper-fg border-b-2 border-paper-accent'
-                  : 'text-paper-muted hover:text-paper-fg'
-              }`}
-            >
-              {item.label}
-            </Link>
-          );
-        })}
-
-        {isAuthenticated ? (
-          <div className="relative" ref={menuRef}>
-            <button
-              onClick={() => setMenuOpen(open => !open)}
-              aria-label="Account menu"
-              className="w-[38px] h-[38px] border border-paper-fg bg-paper-border bg-cover bg-center cursor-pointer"
-              style={
-                profile?.images?.[0]?.url
-                  ? { backgroundImage: `url(${profile.images[0].url})` }
-                  : undefined
-              }
-            />
-            {menuOpen && (
-              <div className="absolute top-full right-0 mt-2 min-w-[140px] border border-paper-border bg-paper-bg z-50">
-                <button
-                  onClick={logout}
-                  className="w-full text-left px-4 py-3 font-mono text-xs tracking-[0.06em] uppercase text-paper-muted hover:text-paper-fg cursor-pointer"
+        <div className="hidden md:flex items-center gap-9">
+          {isAuthenticated &&
+            navigationItems.map(item => {
+              const isActive = location.pathname === item.path;
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`font-mono text-xs tracking-[0.08em] uppercase pb-1 transition-colors ${
+                    isActive
+                      ? 'text-paper-fg border-b-2 border-paper-accent'
+                      : 'text-paper-muted hover:text-paper-fg'
+                  }`}
                 >
-                  Log out
-                </button>
-              </div>
+                  {item.label}
+                </Link>
+              );
+            })}
+
+          {isAuthenticated ? (
+            <div className="relative" ref={menuRef}>
+              <button
+                onClick={() => setMenuOpen(open => !open)}
+                aria-label="Account menu"
+                className="w-[38px] h-[38px] border border-paper-fg bg-paper-border bg-cover bg-center cursor-pointer"
+                style={
+                  profile?.images?.[0]?.url
+                    ? { backgroundImage: `url(${profile.images[0].url})` }
+                    : undefined
+                }
+              />
+              {menuOpen && (
+                <div className="absolute top-full right-0 mt-2 min-w-[140px] border border-paper-border bg-paper-bg z-50">
+                  <button
+                    onClick={logout}
+                    className="w-full text-left px-4 py-3 font-mono text-xs tracking-[0.06em] uppercase text-paper-muted hover:text-paper-fg cursor-pointer"
+                  >
+                    Log out
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <button
+              onClick={connect}
+              className="border border-paper-fg px-[18px] py-[9px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
+            >
+              Log in
+            </button>
+          )}
+        </div>
+
+        <button
+          onClick={() => setMobileMenuOpen(open => !open)}
+          aria-label="Menu"
+          aria-expanded={mobileMenuOpen}
+          className="md:hidden border border-paper-fg px-[14px] py-[9px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
+        >
+          {mobileMenuOpen ? 'Close' : 'Menu'}
+        </button>
+      </div>
+
+      {mobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-paper-bg border-t border-paper-border z-50">
+          {isAuthenticated &&
+            navigationItems.map(item => {
+              const isActive = location.pathname === item.path;
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`block px-6 py-4 border-b border-paper-border font-mono text-xs tracking-[0.08em] uppercase ${
+                    isActive ? 'text-paper-fg' : 'text-paper-muted'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          <div className="px-6 py-5">
+            {isAuthenticated ? (
+              <button
+                onClick={logout}
+                className="w-full border border-paper-fg px-[18px] py-[9px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
+              >
+                Log out
+              </button>
+            ) : (
+              <button
+                onClick={connect}
+                className="w-full border border-paper-fg px-[18px] py-[9px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
+              >
+                Log in
+              </button>
             )}
           </div>
-        ) : (
-          <button
-            onClick={connect}
-            className="border border-paper-fg px-[18px] py-[9px] font-mono text-xs tracking-[0.06em] uppercase cursor-pointer"
-          >
-            Log in
-          </button>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
