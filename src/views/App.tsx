@@ -115,6 +115,7 @@ const PAPER_THEME_ROUTES = [
   '/artists',
   '/tracks',
   '/analyze',
+  '/genres',
 ];
 
 const AppContent: React.FC = () => {
