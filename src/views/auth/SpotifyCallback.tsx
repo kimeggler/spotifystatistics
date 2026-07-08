@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { stars } from '../../assets';
 import { useAuth } from '../../contexts/AuthContext';
 import { handleSignInCallback } from '../../helper/authenticationhelper';
 
@@ -26,87 +25,26 @@ const SpotifyCallback: React.FC = () => {
   }, [navigate, checkAuth]);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-statfy-dark-950 via-statfy-dark-900 to-statfy-purple-900">
-      {/* Animated Background */}
-      <div
-        className="absolute inset-0 opacity-20 blur-sm"
-        style={{
-          backgroundImage: `url(${stars})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-statfy-dark-950/90 via-transparent to-statfy-purple-900/60" />
-
-      {/* Content */}
+    <div className="bg-paper-bg text-paper-fg font-display min-h-screen flex items-center justify-center px-6">
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="relative z-10 flex items-center justify-center min-h-screen px-6"
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="max-w-md w-full border border-paper-border p-10 text-center"
       >
-        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl max-w-md w-full">
-          <div className="text-center p-8">
-            {/* Logo */}
-            <motion.div
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: 'spring', stiffness: 100 }}
-              className="mb-6"
-            >
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-statfy-purple-300 to-statfy-purple-500 bg-clip-text text-transparent">
-                STATFY
-              </h1>
-            </motion.div>
-
-            {/* Spinner */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="mb-6 flex justify-center"
-            >
-              <div className="w-12 h-12 rounded-full border-4 border-statfy-purple-400/30 border-t-statfy-purple-500 animate-spin" />
-            </motion.div>
-
-            {/* Loading Text */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-            >
-              <h2 className="text-white text-xl font-semibold mb-2">Logging you in...</h2>
-              <p className="text-white/70">
-                We're connecting to your Spotify account and preparing your music stats.
-              </p>
-            </motion.div>
-
-            {/* Animated dots */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-              className="flex justify-center space-x-1 mt-6"
-            >
-              {[0, 1, 2].map(i => (
-                <motion.div
-                  key={i}
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.5, 1, 0.5],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    delay: i * 0.2,
-                  }}
-                  className="w-2 h-2 rounded-full bg-statfy-purple-400"
-                />
-              ))}
-            </motion.div>
-          </div>
+        <div className="font-serif italic font-normal text-2xl text-paper-accent mb-9">
+          statfy
         </div>
+
+        <div
+          aria-hidden
+          className="w-10 h-10 mx-auto mb-7 rounded-full border-2 border-paper-border border-t-paper-accent animate-spin"
+        />
+
+        <h1 className="text-xl font-extrabold tracking-[-0.01em] mb-2">Logging you in…</h1>
+        <p className="text-[13px] text-paper-muted">
+          Connecting to your Spotify account and preparing your stats.
+        </p>
       </motion.div>
     </div>
   );

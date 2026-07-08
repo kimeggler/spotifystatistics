@@ -26,6 +26,9 @@
   --color-statfy-dark-950: #0b001b;
 
   --color-spotify-green: #1db954;
+  --color-spotify-green-bright: #1ed760;
+  --color-deezer-accent: #a238ff;
+  --color-deezer-accent-soft: color-mix(in srgb, #a238ff 10%, transparent);
 
   --font-family-sans: 'Poppins', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
 
@@ -49,8 +52,8 @@
   --paper-fg: #141210;
   --paper-muted: rgba(20, 18, 16, 0.55);
   --paper-border: rgba(20, 18, 16, 0.16);
-  --paper-accent: #c23b1f;
-  --paper-accent-soft: rgba(194, 59, 31, 0.07);
+  --paper-accent: var(--color-spotify-green);
+  --paper-accent-soft: color-mix(in srgb, var(--color-spotify-green) 8%, transparent);
 }
 
 .dark {
@@ -58,8 +61,8 @@
   --paper-fg: #f2efe9;
   --paper-muted: rgba(242, 239, 233, 0.55);
   --paper-border: rgba(242, 239, 233, 0.14);
-  --paper-accent: #ff5a3c;
-  --paper-accent-soft: rgba(255, 90, 60, 0.12);
+  --paper-accent: var(--color-spotify-green-bright);
+  --paper-accent-soft: color-mix(in srgb, var(--color-spotify-green-bright) 12%, transparent);
 }
 
 @layer base {

@@ -20,6 +20,14 @@ const Footer: React.FC = () => {
         >
           Roadmap
         </Link>
+        <a
+          href="https://deezer.statfy.xyz"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-[11px] tracking-[0.04em] uppercase text-paper-muted hover:text-paper-fg transition-colors"
+        >
+          Statfy for Deezer ↗
+        </a>
       </div>
       <div className="font-mono text-[11px] tracking-[0.04em] text-paper-muted">
         NOT AFFILIATED WITH SPOTIFY

@@ -231,6 +231,52 @@ const Landingpage: React.FC = () => {
         </div>
       </div>
 
+      {/* STATFY FOR DEEZER */}
+      <div className="border-t border-paper-border">
+        <div className="max-w-300 mx-auto px-6 md:px-10 py-16 md:py-20">
+          <div
+            className="border p-9 md:p-12 flex flex-col lg:flex-row lg:items-center justify-between gap-9"
+            style={{
+              borderColor: 'var(--color-deezer-accent)',
+              background: 'var(--color-deezer-accent-soft)',
+            }}
+          >
+            <div>
+              <div className="flex items-center gap-[10px] font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-4">
+                <span
+                  className="w-2 h-2 inline-block"
+                  style={{ background: 'var(--color-deezer-accent)' }}
+                />
+                New Platform
+              </div>
+              <h2 className="text-3xl md:text-[38px] font-extrabold tracking-[-0.02em] mb-5 max-w-140">
+                Same honest record, now for{' '}
+                <span
+                  className="font-serif italic font-normal"
+                  style={{ color: 'var(--color-deezer-accent)' }}
+                >
+                  Deezer.
+                </span>
+              </h2>
+              <p className="text-[15px] leading-[1.6] text-paper-muted max-w-125">
+                We built a sister site for Deezer listeners — same plain, honest breakdown of your
+                top artists, tracks and playlists. No clutter. No filler. Just the data.
+              </p>
+            </div>
+
+            <a
+              href="https://deezer.statfy.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 inline-flex items-center justify-center px-[30px] py-4 font-mono font-bold text-[13px] tracking-[0.06em] uppercase whitespace-nowrap"
+              style={{ background: 'var(--color-deezer-accent)', color: 'var(--paper-bg)' }}
+            >
+              Visit Statfy for Deezer →
+            </a>
+          </div>
+        </div>
+      </div>
+
       {/* CLOSING CTA */}
       <div className="border-t border-paper-border px-6 md:px-10 py-20 md:py-[110px] text-center">
         <h2 className="text-4xl md:text-[56px] font-extrabold tracking-[-0.02em] mb-9 max-w-190 mx-auto">
