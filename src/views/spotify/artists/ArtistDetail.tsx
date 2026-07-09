@@ -74,7 +74,7 @@ const ArtistDetail: React.FC = () => {
             className="max-w-300 mx-auto px-6 md:px-10 pt-9 pb-[50px] grid grid-cols-1 sm:grid-cols-[220px_1fr] gap-11 items-end"
           >
             <div
-              className="w-full sm:w-55 aspect-square bg-paper-border bg-cover bg-center border border-paper-border shrink-0"
+              className="w-full sm:w-55 aspect-square bg-paper-border bg-cover bg-center bg-no-repeat border border-paper-border shrink-0"
               style={
                 detail.artist.images[0]?.url
                   ? { backgroundImage: `url(${detail.artist.images[0].url})` }
@@ -137,7 +137,7 @@ const ArtistDetail: React.FC = () => {
                         {String(i + 1).padStart(2, '0')}
                       </div>
                       <div
-                        className="hidden sm:block w-10 h-10 bg-paper-border bg-cover bg-center shrink-0"
+                        className="hidden sm:block w-10 h-10 bg-paper-border bg-cover bg-center bg-no-repeat shrink-0"
                         style={
                           track.album.images[0]?.url
                             ? { backgroundImage: `url(${track.album.images[0].url})` }
@@ -174,7 +174,7 @@ const ArtistDetail: React.FC = () => {
                       className="border-r border-b border-paper-border p-5 flex flex-col gap-[14px]"
                     >
                       <div
-                        className="w-full aspect-square bg-paper-border bg-cover bg-center"
+                        className="w-full aspect-square bg-paper-border bg-cover bg-center bg-no-repeat"
                         style={
                           album.images[0]?.url
                             ? { backgroundImage: `url(${album.images[0].url})` }
@@ -210,7 +210,7 @@ const ArtistDetail: React.FC = () => {
                       className="flex items-center gap-3 border border-paper-border px-3 py-2 hover:border-paper-fg transition-colors"
                     >
                       <div
-                        className="w-9 h-9 bg-paper-border bg-cover bg-center shrink-0"
+                        className="w-9 h-9 bg-paper-border bg-cover bg-center bg-no-repeat shrink-0"
                         style={
                           collaborator.images[0]?.url
                             ? { backgroundImage: `url(${collaborator.images[0].url})` }
@@ -241,7 +241,7 @@ const ArtistDetail: React.FC = () => {
                       className="border-r border-b border-paper-border p-5 flex flex-col gap-[14px] hover:bg-paper-border/20 transition-colors"
                     >
                       <div
-                        className="w-full aspect-square bg-paper-border bg-cover bg-center"
+                        className="w-full aspect-square bg-paper-border bg-cover bg-center bg-no-repeat"
                         style={
                           related.images[0]?.url
                             ? { backgroundImage: `url(${related.images[0].url})` }

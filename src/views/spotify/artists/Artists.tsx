@@ -89,7 +89,7 @@ const Artists: React.FC = () => {
                     #{i + 1}
                   </div>
                   <div
-                    className="w-full aspect-square bg-paper-border bg-cover bg-center"
+                    className="w-full aspect-square bg-paper-border bg-cover bg-center bg-no-repeat"
                     style={
                       artist.images[0]?.url
                         ? { backgroundImage: `url(${artist.images[0].url})` }

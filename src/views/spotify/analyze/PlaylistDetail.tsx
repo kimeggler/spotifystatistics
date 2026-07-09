@@ -57,7 +57,7 @@ const PlaylistDetail: React.FC = () => {
           className="max-w-300 mx-auto px-6 md:px-10 pt-9 pb-[50px] grid grid-cols-1 sm:grid-cols-[220px_1fr] gap-11 items-end"
         >
           <div
-            className="w-full sm:w-55 aspect-square bg-paper-border bg-cover bg-center border border-paper-border shrink-0"
+            className="w-full sm:w-55 aspect-square bg-paper-border bg-cover bg-center bg-no-repeat border border-paper-border shrink-0"
             style={
               playlist.images[0]?.url
                 ? { backgroundImage: `url(${playlist.images[0].url})` }

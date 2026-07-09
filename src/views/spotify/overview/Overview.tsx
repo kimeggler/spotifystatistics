@@ -124,7 +124,7 @@ const Overview: React.FC = () => {
               </Link>
             </div>
             <div
-              className="border-t md:border-t-0 md:border-l border-paper-border bg-cover bg-center min-h-60 md:min-h-0"
+              className="border-t md:border-t-0 md:border-l border-paper-border bg-cover bg-center bg-no-repeat min-h-80 md:min-h-0"
               style={
                 topArtist.images[0]?.url
                   ? { backgroundImage: `url(${topArtist.images[0].url})` }
@@ -139,7 +139,7 @@ const Overview: React.FC = () => {
         <div className="max-w-300 mx-auto px-6 md:px-10 pb-16 md:pb-20">
           <div className="border border-paper-border grid grid-cols-1 md:grid-cols-2 min-h-105">
             <div
-              className="order-2 md:order-1 border-t md:border-t-0 md:border-r border-paper-border bg-cover bg-center min-h-60 md:min-h-0"
+              className="order-2 md:order-1 border-t md:border-t-0 md:border-r border-paper-border bg-cover bg-center bg-no-repeat min-h-80 md:min-h-0"
               style={
                 topTrack.album.images[0]?.url
                   ? { backgroundImage: `url(${topTrack.album.images[0].url})` }
@@ -167,6 +167,13 @@ const Overview: React.FC = () => {
                   {topTrack.popularity}% popularity
                 </span>
               </div>
+              <Link
+                to={`/tracks/${topTrack.id}`}
+                state={{ track: topTrack }}
+                className="font-mono text-xs tracking-[0.06em] uppercase text-paper-accent w-fit"
+              >
+                View Track →
+              </Link>
             </div>
           </div>
         </div>

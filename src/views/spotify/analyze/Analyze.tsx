@@ -76,7 +76,7 @@ const Analyze: React.FC = () => {
                 className="group border-r border-b border-paper-border p-5 flex flex-col gap-[14px]"
               >
                 <div
-                  className="w-full aspect-square bg-paper-border bg-cover bg-center"
+                  className="w-full aspect-square bg-paper-border bg-cover bg-center bg-no-repeat"
                   style={
                     playlist.images[0]?.url
                       ? { backgroundImage: `url(${playlist.images[0].url})` }

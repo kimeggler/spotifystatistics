@@ -13,6 +13,7 @@ import ArtistDetail from './spotify/artists/ArtistDetail';
 import Artists from './spotify/artists/Artists';
 import Genres from './spotify/genres/Genres';
 import Overview from './spotify/overview/Overview';
+import TrackDetail from './spotify/tracks/TrackDetail';
 import Tracks from './spotify/tracks/Tracks';
 
 // Context and Loading
@@ -199,6 +200,16 @@ const AppContent: React.FC = () => {
               <ProtectedRoute>
                 <AnimatedRoute>
                   <Tracks />
+                </AnimatedRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/tracks/:trackId"
+            element={
+              <ProtectedRoute>
+                <AnimatedRoute>
+                  <TrackDetail />
                 </AnimatedRoute>
               </ProtectedRoute>
             }

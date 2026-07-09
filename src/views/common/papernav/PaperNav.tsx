@@ -93,7 +93,7 @@ const PaperNav: React.FC = () => {
               <button
                 onClick={() => setMenuOpen(open => !open)}
                 aria-label="Account menu"
-                className="w-9.5 h-9.5 border border-paper-fg bg-paper-border bg-cover bg-center cursor-pointer"
+                className="w-9.5 h-9.5 border border-paper-fg bg-paper-border bg-cover bg-center bg-no-repeat cursor-pointer"
                 style={
                   profile?.images?.[0]?.url
                     ? { backgroundImage: `url(${profile.images[0].url})` }

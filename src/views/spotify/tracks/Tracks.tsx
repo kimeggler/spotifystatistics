@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useNotification from '../../../hooks/useNotification';
 import { useSpotify } from '../../../hooks/useSpotify';
 import { getData, postData } from '../../../services/fetchservice';
@@ -26,6 +27,7 @@ const rangeLabels: Record<RangeOption['value'], string> = {
 const Tracks: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
   const [tracks, setTracks] = useState<SpotifyTrack[] | null>(null);
+  const navigate = useNavigate();
 
   const { isLoading, error, getTracks } = useSpotify();
   const { notification, showNotification } = useNotification();
@@ -194,32 +196,43 @@ const Tracks: React.FC = () => {
                       #{String(i + 1).padStart(2, '0')}
                     </div>
                     <div
-                      className="w-full aspect-square bg-paper-border bg-cover bg-center"
+                      className="w-full aspect-square bg-paper-border bg-cover bg-center bg-no-repeat"
                       style={
                         track.album.images[0]?.url
                           ? { backgroundImage: `url(${track.album.images[0].url})` }
                           : undefined
                       }
                     />
-                    <div>
-                      <div className="text-[17px] font-extrabold mb-1.5">{track.name}</div>
-                      <div className="text-[13px] text-paper-muted mb-2.5">
-                        {track.artists[0].name}
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="text-[17px] font-extrabold mb-1.5">{track.name}</div>
+                        <div className="text-[13px] text-paper-muted mb-2.5">
+                          {track.artists[0].name}
+                        </div>
+                        <div className="flex items-center justify-between gap-2 mb-3.5">
+                          <span className="font-mono text-[11px] text-paper-muted">
+                            {formatDuration(track.duration_ms)}
+                          </span>
+                          <span
+                            className={`font-mono text-[10px] tracking-[0.03em] px-2 py-[3px] border ${
+                              isFirst
+                                ? 'border-paper-accent text-paper-accent'
+                                : 'border-paper-border text-paper-muted'
+                            }`}
+                          >
+                            {track.popularity}%
+                          </span>
+                        </div>
                       </div>
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="font-mono text-[11px] text-paper-muted">
-                          {formatDuration(track.duration_ms)}
+                      <button
+                        onClick={() => navigate(`/tracks/${track.id}`, { state: { track } })}
+                        className="w-full flex justify-between items-center border border-paper-border px-3 py-2 cursor-pointer"
+                      >
+                        <span className="font-mono text-[10px] tracking-[0.04em] uppercase text-paper-muted">
+                          View Track
                         </span>
-                        <span
-                          className={`font-mono text-[10px] tracking-[0.03em] px-2 py-[3px] border ${
-                            isFirst
-                              ? 'border-paper-accent text-paper-accent'
-                              : 'border-paper-border text-paper-muted'
-                          }`}
-                        >
-                          {track.popularity}%
-                        </span>
-                      </div>
+                        <span className="font-mono text-[11px] text-paper-accent">→</span>
+                      </button>
                     </div>
                   </div>
                 );
