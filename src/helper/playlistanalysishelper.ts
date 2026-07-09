@@ -1,4 +1,5 @@
-import { getSongFeatures, getSongs } from './analysationhelper';
+import { getPlaylistTrackDetails, getSongFeatures, PlaylistTrackDetail } from './analysationhelper';
+import { buildGrill, PlaylistGrill } from './playlistgrillhelper';
 import { getPlaylistTopGenres, PlaylistGenreBreakdown } from './playlistgenrehelper';
 import { SpotifyAudioFeatures } from '../types/spotify';
 
@@ -15,6 +16,7 @@ interface PlaylistAnalysis {
   features: FeatureBar[];
   specs: { label: string; value: string }[];
   totalDuration: string;
+  grill: PlaylistGrill;
 }
 
 const FEATURE_NAMES: { key: keyof SpotifyAudioFeatures; name: string }[] = [
@@ -51,15 +53,61 @@ const formatTrackDuration = (ms: number): string => {
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 };
 
+const getDecade = (releaseDate: string): number | null => {
+  const year = parseInt(releaseDate.slice(0, 4), 10);
+  return Number.isNaN(year) ? null : Math.floor(year / 10) * 10;
+};
+
+const getTopArtist = (
+  tracks: PlaylistTrackDetail[],
+): { name: string; pct: number; uniqueCount: number } => {
+  const counts = new Map<string, { name: string; count: number }>();
+
+  tracks.forEach(track => {
+    track.artists.forEach(artist => {
+      const existing = counts.get(artist.id);
+      counts.set(artist.id, { name: artist.name, count: (existing?.count || 0) + 1 });
+    });
+  });
+
+  const sorted = Array.from(counts.values()).sort((a, b) => b.count - a.count);
+  const top = sorted[0];
+
+  return {
+    name: top?.name ?? 'Unknown',
+    pct: top ? Math.round((top.count / tracks.length) * 100) : 0,
+    uniqueCount: counts.size,
+  };
+};
+
+const getTopDecade = (tracks: PlaylistTrackDetail[]): { decade: string; pct: number } => {
+  const decades = tracks.map(track => getDecade(track.releaseDate)).filter((d): d is number => d !== null);
+
+  if (decades.length === 0) return { decade: 'Unknown', pct: 0 };
+
+  const counts = new Map<number, number>();
+  decades.forEach(decade => counts.set(decade, (counts.get(decade) || 0) + 1));
+
+  const [decade, count] = Array.from(counts.entries()).sort((a, b) => b[1] - a[1])[0];
+  return { decade: `${decade}s`, pct: Math.round((count / decades.length) * 100) };
+};
+
 const getPlaylistAnalysis = async (playlistId: string): Promise<PlaylistAnalysis | null> => {
-  const [topGenres, songIds] = await Promise.all([
-    getPlaylistTopGenres(playlistId),
-    getSongs(playlistId),
+  const trackDetails = await getPlaylistTrackDetails(playlistId);
+
+  if (trackDetails.length === 0) return null;
+
+  const songIds = trackDetails.map(track => track.id);
+  const artistIds = Array.from(new Set(trackDetails.flatMap(track => track.artists.map(a => a.id)))).slice(
+    0,
+    50,
+  );
+
+  const [rawFeatures, topGenres] = await Promise.all([
+    getSongFeatures(songIds),
+    getPlaylistTopGenres(artistIds),
   ]);
 
-  if (songIds.length === 0) return null;
-
-  const rawFeatures = await getSongFeatures(songIds);
   const validFeatures = rawFeatures.filter(
     (feature): feature is SpotifyAudioFeatures => feature !== null,
   );
@@ -91,6 +139,15 @@ const getPlaylistAnalysis = async (playlistId: string): Promise<PlaylistAnalysis
   const modeMajority = majority(validFeatures.map(f => f.mode));
   const timeSignatureMajority = majority(validFeatures.map(f => f.time_signature));
 
+  const avgPopularity = Math.round(
+    trackDetails.reduce((sum, track) => sum + (track.popularity || 0), 0) / trackDetails.length,
+  );
+  const explicitPct = Math.round(
+    (trackDetails.filter(track => track.explicit).length / trackDetails.length) * 100,
+  );
+  const topArtist = getTopArtist(trackDetails);
+  const topDecade = getTopDecade(trackDetails);
+
   const specs = [
     { label: 'Avg. Tempo', value: `${Math.round(average(validFeatures, 'tempo'))} BPM` },
     { label: 'Avg. Loudness', value: `${average(validFeatures, 'loudness').toFixed(1)} dB` },
@@ -103,13 +160,30 @@ const getPlaylistAnalysis = async (playlistId: string): Promise<PlaylistAnalysis
       value: `${modeMajority.value === 1 ? 'Major' : 'Minor'} · ${modeMajority.pct}%`,
     },
     { label: 'Time Signature', value: `${timeSignatureMajority.value}/4` },
+    { label: 'Avg. Popularity', value: `${avgPopularity}/100` },
+    { label: 'Explicit Tracks', value: `${explicitPct}%` },
+    { label: 'Unique Artists', value: `${topArtist.uniqueCount}` },
+    { label: 'Most Featured', value: topArtist.name },
+    { label: 'Dominant Era', value: topDecade.decade },
   ];
 
   const totalDuration = formatTotalDuration(
-    validFeatures.reduce((sum, feature) => sum + feature.duration_ms, 0),
+    trackDetails.reduce((sum, track) => sum + track.duration_ms, 0),
   );
 
-  return { topGenres, mood, features, specs, totalDuration };
+  const grill = buildGrill({
+    avgPopularity,
+    explicitPct,
+    topArtistName: topArtist.name,
+    topArtistPct: topArtist.pct,
+    uniqueArtistCount: topArtist.uniqueCount,
+    totalTracks: trackDetails.length,
+    topDecade: topDecade.decade,
+    topDecadePct: topDecade.pct,
+    mood,
+  });
+
+  return { topGenres, mood, features, specs, totalDuration, grill };
 };
 
 export { getPlaylistAnalysis };

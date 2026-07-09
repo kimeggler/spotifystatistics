@@ -187,7 +187,7 @@ const PlaylistDetail: React.FC = () => {
 
           {/* SPEC SHEET */}
           <div className="border-t border-paper-border">
-            <div className="max-w-300 mx-auto px-6 md:px-10 py-14 pb-24">
+            <div className="max-w-300 mx-auto px-6 md:px-10 py-14">
               <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-8">
                 Track Data
               </div>
@@ -203,6 +203,32 @@ const PlaylistDetail: React.FC = () => {
                     <div className="text-2xl font-extrabold tracking-[-0.01em]">{spec.value}</div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+
+          {/* GRILL MY PLAYLIST */}
+          <div className="border-t border-paper-border">
+            <div className="max-w-300 mx-auto px-6 md:px-10 py-14 pb-24">
+              <div className="font-mono text-xs tracking-[0.18em] uppercase text-paper-muted mb-7">
+                Grill My Playlist
+              </div>
+              <div className="border border-paper-border p-9 md:p-12">
+                <div className="text-3xl sm:text-[40px] font-extrabold tracking-[-0.02em] mb-8 max-w-160">
+                  <span className="font-serif italic font-normal text-paper-accent">
+                    {analysis.grill.headline}
+                  </span>
+                </div>
+                <div className="flex flex-col gap-5 max-w-160">
+                  {analysis.grill.lines.map((line, i) => (
+                    <div key={line} className="flex gap-4 items-start">
+                      <span className="font-mono text-xs font-bold text-paper-muted shrink-0 pt-[2px]">
+                        0{i + 1}
+                      </span>
+                      <p className="text-[15px] leading-[1.6] text-paper-fg">{line}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

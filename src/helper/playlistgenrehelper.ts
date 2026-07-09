@@ -6,10 +6,6 @@ interface PlaylistGenreBreakdown {
   pct: number;
 }
 
-interface PlaylistTracksArtistsResponse {
-  items: { track: { artists: { id: string }[] } | null }[];
-}
-
 interface ArtistsBatchResponse {
   artists: (SpotifyArtist | null)[];
 }
@@ -28,22 +24,7 @@ const countGenres = (artists: SpotifyArtist[]): { name: string; count: number }[
     .sort((a, b) => b.count - a.count);
 };
 
-const getPlaylistTopGenres = async (playlistId: string): Promise<PlaylistGenreBreakdown[]> => {
-  const tracksResponse = await getData<PlaylistTracksArtistsResponse>(
-    `playlists/${playlistId}/tracks`,
-    {},
-    '?fields=items(track(artists(id)))&limit=100',
-  );
-
-  const artistIds = Array.from(
-    new Set(
-      (tracksResponse?.items || [])
-        .flatMap(item => item.track?.artists || [])
-        .map(artist => artist.id)
-        .filter(Boolean),
-    ),
-  ).slice(0, 50);
-
+const getPlaylistTopGenres = async (artistIds: string[]): Promise<PlaylistGenreBreakdown[]> => {
   if (artistIds.length === 0) return [];
 
   const artistsResponse = await getData<ArtistsBatchResponse>(
