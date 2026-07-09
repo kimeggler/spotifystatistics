@@ -47,6 +47,7 @@ export interface SpotifyArtist {
 
 export interface SpotifyAlbum {
   album_type: string;
+  album_group?: string;
   total_tracks: number;
   available_markets: string[];
   external_urls: SpotifyExternalUrls;

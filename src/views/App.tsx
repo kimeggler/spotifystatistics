@@ -9,6 +9,7 @@ import Landingpage from './landingpage/Landingpage';
 import Roadmap from './roadmap/Roadmap';
 import Analyze from './spotify/analyze/Analyze';
 import PlaylistDetail from './spotify/analyze/PlaylistDetail';
+import ArtistDetail from './spotify/artists/ArtistDetail';
 import Artists from './spotify/artists/Artists';
 import Genres from './spotify/genres/Genres';
 import Overview from './spotify/overview/Overview';
@@ -178,6 +179,16 @@ const AppContent: React.FC = () => {
               <ProtectedRoute>
                 <AnimatedRoute>
                   <Artists />
+                </AnimatedRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/artists/:artistId"
+            element={
+              <ProtectedRoute>
+                <AnimatedRoute>
+                  <ArtistDetail />
                 </AnimatedRoute>
               </ProtectedRoute>
             }

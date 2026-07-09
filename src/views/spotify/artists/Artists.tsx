@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSpotify } from '../../../hooks/useSpotify';
 import { SpotifyArtist } from '../../../types/spotify';
 import { DefaultErrorMessage, PageLoader } from '../../common';
@@ -16,6 +17,7 @@ const formatFollowers = (count: number): string => {
 const Artists: React.FC = () => {
   const [timerange, setTimerange] = useState<RangeOption['value']>('medium_term');
   const [artists, setArtists] = useState<SpotifyArtist[] | null>(null);
+  const navigate = useNavigate();
 
   const { isLoading, error, getArtists } = useSpotify();
 
@@ -108,9 +110,18 @@ const Artists: React.FC = () => {
                         ))}
                       </div>
                     )}
-                    <div className="font-mono text-xs text-paper-muted">
+                    <div className="font-mono text-xs text-paper-muted mb-3.5">
                       {formatFollowers(artist.followers.total)} followers
                     </div>
+                    <button
+                      onClick={() => navigate(`/artists/${artist.id}`, { state: { artist } })}
+                      className="w-full flex justify-between items-center border border-paper-border px-3 py-2 cursor-pointer"
+                    >
+                      <span className="font-mono text-[10px] tracking-[0.04em] uppercase text-paper-muted">
+                        View Artist
+                      </span>
+                      <span className="font-mono text-[11px] text-paper-accent">→</span>
+                    </button>
                   </div>
                 </div>
               );

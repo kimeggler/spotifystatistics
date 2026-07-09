@@ -115,6 +115,13 @@ const Overview: React.FC = () => {
                   ))}
                 </div>
               )}
+              <Link
+                to={`/artists/${topArtist.id}`}
+                state={{ artist: topArtist }}
+                className="font-mono text-xs tracking-[0.06em] uppercase text-paper-accent w-fit"
+              >
+                View Artist →
+              </Link>
             </div>
             <div
               className="border-t md:border-t-0 md:border-l border-paper-border bg-cover bg-center min-h-60 md:min-h-0"
