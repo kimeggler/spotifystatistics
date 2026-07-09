@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { calcTopGenres, calcTopGenresIncludingArtists } from '../../../helper/genrehelper';
 import { useSpotify } from '../../../hooks/useSpotify';
 import { SpotifyArtist } from '../../../types/spotify';
-import { DefaultErrorMessage } from '../../common';
+import { DefaultErrorMessage, PageLoader } from '../../common';
 import Footer from '../../common/footer/Footer';
 import PaperNav from '../../common/papernav/PaperNav';
 import rangeOptions, { RangeOption } from '../../common/top-track/range-options';
@@ -105,6 +105,7 @@ const Genres: React.FC = () => {
       </motion.div>
 
       {/* GENRE RANKED LIST */}
+      {artists === null && <PageLoader />}
       {genres.length > 0 && (
         <div className="max-w-300 mx-auto px-6 md:px-10 pb-24">
           {genres.map((genre, i) => (

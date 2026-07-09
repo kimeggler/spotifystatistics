@@ -6,7 +6,7 @@ import { useSpotify } from '../../../hooks/useSpotify';
 import { getData, postData } from '../../../services/fetchservice';
 import { SpotifyPlaylist, SpotifyTrack } from '../../../types/spotify';
 import { UserContext } from '../../App';
-import { DefaultErrorMessage } from '../../common';
+import { DefaultErrorMessage, PageLoader } from '../../common';
 import Footer from '../../common/footer/Footer';
 import PaperNav from '../../common/papernav/PaperNav';
 import rangeOptions, { RangeOption } from '../../common/top-track/range-options';
@@ -171,6 +171,7 @@ const Tracks: React.FC = () => {
       </div>
 
       {/* TRACK GRID */}
+      {tracks === null && <PageLoader />}
       {tracks && tracks.length > 0 && (
         <div className="max-w-300 mx-auto px-6 md:px-10 pb-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-paper-border">

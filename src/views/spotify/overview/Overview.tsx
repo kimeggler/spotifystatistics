@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSpotify } from '../../../hooks/useSpotify';
 import { SpotifyArtist, SpotifyTrack } from '../../../types/spotify';
-import { DefaultErrorMessage } from '../../common';
+import { DefaultErrorMessage, PageLoader } from '../../common';
 import Footer from '../../common/footer/Footer';
 import FormattedNumber from '../../common/formattednumber/FormattedNumber';
 import PaperNav from '../../common/papernav/PaperNav';
@@ -82,6 +82,8 @@ const Overview: React.FC = () => {
           ))}
         </div>
       </motion.div>
+
+      {!topArtist && !topTrack && <PageLoader />}
 
       {topArtist && (
         <div className="max-w-300 mx-auto px-6 md:px-10 pb-7">

@@ -5,6 +5,7 @@ import { getPlaylistAnalysis, PlaylistAnalysis } from '../../../helper/playlista
 import { getData } from '../../../services/fetchservice';
 import { SpotifyPlaylist } from '../../../types/spotify';
 import Footer from '../../common/footer/Footer';
+import PageLoader from '../../common/loader/PageLoader';
 import PaperNav from '../../common/papernav/PaperNav';
 
 const PlaylistDetail: React.FC = () => {
@@ -79,11 +80,7 @@ const PlaylistDetail: React.FC = () => {
         </motion.div>
       )}
 
-      {analysis === undefined && (
-        <div className="max-w-300 mx-auto px-6 md:px-10 py-16">
-          <div className="font-mono text-xs text-paper-muted">Analyzing playlist…</div>
-        </div>
-      )}
+      {analysis === undefined && <PageLoader label="Analyzing playlist…" />}
 
       {analysis === null && (
         <div className="border-t border-paper-border">
