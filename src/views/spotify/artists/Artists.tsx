@@ -96,22 +96,24 @@ const Artists: React.FC = () => {
                         : undefined
                     }
                   />
-                  <div>
-                    <div className="text-[17px] font-extrabold mb-2">{artist.name}</div>
-                    {artist.genres.length > 0 && (
-                      <div className="flex flex-wrap gap-[6px] mb-2.5">
-                        {artist.genres.slice(0, 2).map(genre => (
-                          <span
-                            key={genre}
-                            className="font-mono text-[10px] tracking-[0.03em] uppercase border border-paper-border px-2 py-[3px] text-paper-muted"
-                          >
-                            {genre}
-                          </span>
-                        ))}
+                  <div className="flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="text-[17px] font-extrabold mb-2">{artist.name}</div>
+                      {artist.genres.length > 0 && (
+                        <div className="flex flex-wrap gap-[6px] mb-2.5">
+                          {artist.genres.slice(0, 2).map(genre => (
+                            <span
+                              key={genre}
+                              className="font-mono text-[10px] tracking-[0.03em] uppercase border border-paper-border px-2 py-[3px] text-paper-muted"
+                            >
+                              {genre}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      <div className="font-mono text-xs text-paper-muted mb-3.5">
+                        {formatFollowers(artist.followers.total)} followers
                       </div>
-                    )}
-                    <div className="font-mono text-xs text-paper-muted mb-3.5">
-                      {formatFollowers(artist.followers.total)} followers
                     </div>
                     <button
                       onClick={() => navigate(`/artists/${artist.id}`, { state: { artist } })}
