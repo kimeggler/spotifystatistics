@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
           href="https://deezer.statfy.xyz"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-mono text-[11px] tracking-[0.04em] uppercase text-paper-muted hover:text-paper-fg transition-colors"
+          className="font-mono text-[11px] tracking-[0.04em] uppercase text-deezer-accent hover:opacity-80 transition-opacity"
         >
           Statfy for Deezer ↗
         </a>
