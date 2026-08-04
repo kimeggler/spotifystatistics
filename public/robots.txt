@@ -9,4 +9,4 @@ Disallow: /analyze
 Disallow: /genres
 Disallow: /callback
 
-Sitemap: https://statfy.app/sitemaps.xml
+Sitemap: https://statfy.xyz/sitemaps.xml

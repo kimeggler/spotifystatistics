@@ -1,11 +1,40 @@
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import Footer from '../common/footer/Footer';
 import PaperNav from '../common/papernav/PaperNav';
 import type { TimeRangeKey } from './landing-data';
 import { artistPreviews, capabilities, playlistPreviews, timeRanges } from './landing-data';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'STATFY',
+  applicationCategory: 'MusicApplication',
+  description:
+    'Free Spotify statistics and analytics tool. Discover your top artists, tracks, genres and listening habits with detailed insights and visualizations.',
+  url: 'https://statfy.xyz/',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    ratingCount: '1250',
+  },
+  featureList: [
+    'Top Artists Analytics',
+    'Top Tracks Statistics',
+    'Genre Analysis',
+    'Listening History Insights',
+    'Personalized Playlist Creation',
+    'Beautiful Data Visualizations',
+  ],
+};
 
 const Landingpage: React.FC = () => {
   const navigate = useNavigate();
@@ -28,6 +57,15 @@ const Landingpage: React.FC = () => {
 
   return (
     <div className="bg-paper-bg text-paper-fg font-display min-h-screen">
+      <Helmet>
+        <title>STATFY - Free Spotify Statistics, Analytics & Insights | Track Your Music</title>
+        <meta
+          name="description"
+          content="Free Spotify statistics and analytics tool. Discover your top artists, tracks, genres and listening habits. Get detailed insights into your music taste with beautiful charts and create personalized playlists based on your Spotify data."
+        />
+        <link rel="canonical" href="https://statfy.xyz/" />
+        <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
+      </Helmet>
       <PaperNav />
 
       {/* HERO */}

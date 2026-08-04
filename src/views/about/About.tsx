@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Footer from '../common/footer/Footer';
 import PaperNav from '../common/papernav/PaperNav';
@@ -38,6 +39,14 @@ const technologies = ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'V
 const About: React.FC = () => {
   return (
     <div className="bg-paper-bg text-paper-fg font-display min-h-screen">
+      <Helmet>
+        <title>About Statfy - Free Spotify Statistics & Analytics Tool</title>
+        <meta
+          name="description"
+          content="Learn about Statfy, a free, privacy-first Spotify analytics tool built with React and Tailwind CSS. See the principles and technology behind it."
+        />
+        <link rel="canonical" href="https://statfy.xyz/about" />
+      </Helmet>
       <PaperNav />
 
       {/* HERO */}

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import Footer from '../common/footer/Footer';
@@ -68,6 +69,14 @@ const Roadmap: React.FC = () => {
 
   return (
     <div className="bg-paper-bg text-paper-fg font-display min-h-screen">
+      <Helmet>
+        <title>Roadmap - Statfy Spotify Statistics</title>
+        <meta
+          name="description"
+          content="See what's shipped and what's next for Statfy - free Spotify statistics and analytics, including recent redesigns and upcoming features."
+        />
+        <link rel="canonical" href="https://statfy.xyz/roadmap" />
+      </Helmet>
       <PaperNav />
 
       {/* HERO */}
